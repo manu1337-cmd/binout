@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -eu
+
+[ -d ".git" ]
+[ -n "${GENSHIN_DATA_REPO-}" ]
+[ -d "${GENSHIN_DATA_REPO}/.git" ]
+
+NAME="$1"
+COMMIT="$2"
+OUT="$PWD/$NAME"
+
+git -C "$GENSHIN_DATA_REPO" worktree add --detach --no-checkout -- "$OUT" "$COMMIT"
+mv -- "$OUT/.git" "$OUT/.git.tmp"
+
+for pathspec in \
+	BinOutput/Ability/Temp/AvatarAbilities \
+	BinOutput/Ability/Temp/ConfigAbility_Element.json \
+	BinOutput/Ability/Temp/EquipAbilities \
+	BinOutput/Avatar \
+	BinOutput/Gadget \
+	BinOutput/Talent; do
+	git -C "$OUT" --git-dir ".git.tmp" checkout HEAD -- "$pathspec"
+	git add -v -- "$NAME/$pathspec" > /dev/null
+done
+
+mv -- "$OUT/.git.tmp" "$OUT/.git"
+git -C "$GENSHIN_DATA_REPO" worktree remove --force -- "$OUT"
+
+git checkout -- "$NAME"
+# shellcheck disable=SC2016
+git ls-files -z -- "$NAME" | xargs -0 -L1 sh -c 'set -eu; echo "fmt $0"; jq . -- "$0" > /dev/null; jq . -- "$0" | sponge -- "$0"'
+git ls-files -z -- "$NAME" | xargs -0 git add -v --

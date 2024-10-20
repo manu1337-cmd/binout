@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -eu
+
+[ -d ".git" ]
+
+TRANSLATE_DM="$HOME/git/translate-dm"
+(
+	cd -- "$TRANSLATE_DM"
+	go build
+)
+
+for dir in v*; do
+	[ -d "$dir" ] || continue
+
+	printf '%s\n' "$dir"
+	hash="$(git log -1 --pretty='format:%H' --grep "^Add ${dir}$")"
+	[ -n "$hash" ] || continue
+
+	git checkout "$hash" -- "$dir"
+	rm -v -- "$dir/info" 2> /dev/null || :
+	"$TRANSLATE_DM/translate-dm" \
+		--genshin-data "$dir" \
+		--queries "$TRANSLATE_DM/queries.yml" \
+		--output "${dir}/translate.sed" |
+		tee -- "$dir/info"
+
+	if [ ! -s "$dir/translate.sed" ]; then
+		printf 'E: translation failed at %s\n' "$dir"
+		exit 1
+	fi
+
+	fdfind -g '*.json' "$dir" -x sed -i -f "$dir/translate.sed" --
+	rm -- "$dir/translate.sed"
+
+	git add -- "$dir/BinOutput"
+	if [ -z "$(git status --porcelain -- "$dir/BinOutput")" ]; then
+		git checkout master -- "$dir/info"
+	fi
+done

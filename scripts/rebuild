@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -eu
+
+[ -d ".git" ]
+
+BRANCH=master
+git switch --orphan live
+
+for dir in $(git ls-tree --name-only "$BRANCH"); do
+	case "$dir" in
+		v*) ;;
+		*) continue ;;
+	esac
+
+	printf '%s\n' "$dir"
+	git rm -r BinOutput > /dev/null 2>&1 || :
+	git checkout "$BRANCH" -- "$dir"
+	git rm -f -- "$dir/info" || :
+	git mv -- "$dir/BinOutput" BinOutput
+	rm -d -- "$dir"
+
+	git commit -m "$dir" -- BinOutput
+done
+
+git switch -- "$BRANCH"
