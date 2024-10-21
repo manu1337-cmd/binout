@@ -30,7 +30,7 @@
           "skillID": 10771,
           "chargeTime": 0.11999999731779099,
           "secondChargeTime": 0.20000000298023224,
-          "OnBeginUncharged": [
+          "onBeginUncharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "DoSkill"
@@ -39,46 +39,46 @@
               "$type": "SetAnimatorInt",
               "predicates": [
                 {
-                  "$type": "PCGEEHLBIKD",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "ODHHOPGKIJL",
+                      "$type": "ByAnimatorInt",
                       "logic": "Equal",
-                      "ratio": 0,
+                      "value": 0,
                       "parameter": "ComboCount"
                     },
                     {
-                      "$type": "ODHHOPGKIJL",
+                      "$type": "ByAnimatorInt",
                       "logic": "Equal",
-                      "ratio": 4,
+                      "value": 4,
                       "parameter": "ComboCount"
                     }
                   ]
                 }
               ],
               "intID": "SkillID",
-              "ratio": 99.0
+              "value": 99.0
             },
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
             }
           ],
-          "OnReleaseUncharged": [
+          "onReleaseUncharged": [
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
-          "OnBeginCharged": [
+          "onBeginCharged": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging",
-              "ratio": true
+              "value": true
             }
           ],
-          "OnReleaseCharged": [
+          "onReleaseCharged": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
@@ -86,17 +86,17 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
-          "OnBeginSecondCharged": [
+          "onBeginSecondCharged": [
             {
               "$type": "SetAnimatorTrigger",
               "predicates": [
                 {
-                  "$type": "JBHMMMFDLGB",
+                  "$type": "ByLocalAvatarStamina",
                   "logic": "GreaterOrEqual",
-                  "OLEDMOJGGJG": [
+                  "stamina": [
                     "ExtraAttack_Pole_Stamina_Cost",
                     "Flexible_Stamina",
                     "ADD"
@@ -109,9 +109,9 @@
               "$type": "SetAnimatorInt",
               "predicates": [
                 {
-                  "$type": "JBHMMMFDLGB",
+                  "$type": "ByLocalAvatarStamina",
                   "logic": "GreaterOrEqual",
-                  "OLEDMOJGGJG": [
+                  "stamina": [
                     "ExtraAttack_Pole_Stamina_Cost",
                     "Flexible_Stamina",
                     "ADD"
@@ -119,7 +119,7 @@
                 }
               ],
               "intID": "SkillID",
-              "ratio": 6.0
+              "value": 6.0
             },
             {
               "$type": "SetAnimatorBool",
@@ -148,29 +148,29 @@
       "modifiers": {
         "ExtraAttack_StaminaCost": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 10002,
-              "amount": 1.0,
-              "costStaminaDelta": "ExtraAttack_Pole_Stamina_Cost"
+              "cdRatio": 1.0,
+              "costStaminaRatio": "ExtraAttack_Pole_Stamina_Cost"
             }
           ]
         },
         "ExtraAttack_FX": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ExtraAttack",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ExtraAttack",
               "born": {
-                "$type": "OIONBKCKNFC",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": -0.30000001192092896,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.0,
+                  "y": -0.30000001192092896,
+                  "z": 0.0
                 }
               },
               "effectTempleteID": -1.0
@@ -179,17 +179,17 @@
         },
         "ExtraAttack_BS_FX": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ExtraAttack_BS",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ExtraAttack_BS",
               "born": {
-                "$type": "OIONBKCKNFC",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": -0.30000001192092896,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.0,
+                  "y": -0.30000001192092896,
+                  "z": 0.0
                 }
               },
               "effectTempleteID": -1.0
@@ -198,33 +198,33 @@
         },
         "ExtraAttack_CloseCollider": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerSetPassThrough",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "passThrough": true
             },
             {
               "$type": "EnableHDMesh",
-              "CJNEAAJEPIK": "Default"
+              "hdMeshKey": "Default"
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerSetPassThrough",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true
             },
             {
               "$type": "EnableHDMesh",
               "canBeHandledOnRecover": true,
               "enable": true,
-              "CJNEAAJEPIK": "Default"
+              "hdMeshKey": "Default"
             },
             {
               "$type": "KillGadget",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "gadgetInfo": {
                 "configID": 41077001
               }
@@ -259,7 +259,7 @@
           "target": "Target",
           "targetPredicates": [
             {
-              "$type": "OCBHACLGALE",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "MonsterEquip"
               ]
@@ -274,9 +274,9 @@
                 "attenuationTag": "ExtraAttack",
                 "attenuationGroup": "Avatar_Pole_ExtraAttack",
                 "attackProperty": {
-                  "GNBHKEABDNL": "ExtraAttack",
-                  "JKNJLKBGFJK": 0.0,
-                  "bonusCriticalHurt": 25.0,
+                  "damagePercentage": "ExtraAttack",
+                  "damagePercentageRatio": 0.0,
+                  "elementDurability": 25.0,
                   "overrideByWeapon": true,
                   "strikeType": "Spear",
                   "enBreak": 120.0,
@@ -307,26 +307,26 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "HLHLJAHKGKI",
+                    "$type": "ConfigBornByCollisionPoint",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
                   },
-                  "HAJLEKLDOMG": 0.800000011920929
+                  "radius": 0.800000011920929
                 },
                 "attackInfo": {
                   "attackTag": "ExtraAttack",
                   "attenuationTag": "ExtraAttack",
                   "attenuationGroup": "Avatar_Pole_ExtraAttack",
                   "attackProperty": {
-                    "GNBHKEABDNL": "ExtraAttack",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "ExtraAttack",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 25.0,
                     "overrideByWeapon": true,
                     "strikeType": "Spear",
                     "enBreak": 120.0,
@@ -395,7 +395,7 @@
         },
         {
           "$type": "AttachToMultiNormalizedTimeMixin",
-          "ODIGJEDDOHM": [
+          "normalizedStateIDList": [
             {
               "stateID": "Yaoyao_ElementalArt_BS"
             },
@@ -420,7 +420,7 @@
       "modifiers": {
         "Focus": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarEnterFocus",
@@ -450,7 +450,7 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
+              "value": 2.0,
               "key": "_ABILITY_Yaoyao_ElementalArt_ClickOrHold",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -463,7 +463,7 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Yaoyao_ElementalArt_ClickOrHold",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -472,54 +472,54 @@
         },
         "Rabbit_OnHand": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_HoldupStandby",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_HoldupStandby",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Charge_FX": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Aim_Line",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Aim_Line",
               "effectTempleteID": -1.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalPos",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "key": "_ABILITY_Yaoyao_ElementalArt_Rabiit_Throw_Pos",
               "born": {
-                "$type": "JIKCNOBCHGH",
+                "$type": "ConfigBornByAttachPoint",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "IEDBIKLIONM": true,
+                "useRotation": true,
                 "attachPointName": "WeaponR"
               },
               "setTarget": false
             },
             {
               "$type": "SetGlobalDir",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "key": "_ABILITY_Yaoyao_ElementalArt_Rabiit_Throw_Dir",
               "born": {
                 "$type": "JNPLPMFFCCB",
-                "INILOPENDHK": {
+                "direction": {
                   "$type": "GIOACNMDBHA",
-                  "GCNLPNIOLDK": {
-                    "EJNNCBMCPOB": -40.0,
-                    "OIODIHMNJPJ": 5.0,
-                    "CFFEIADEGNK": 0.0
+                  "angleOffset": {
+                    "x": -40.0,
+                    "y": 5.0,
+                    "z": 0.0
                   },
                   "PAFBKFELPKE": true
                 }
@@ -531,15 +531,15 @@
         "Avatar_Yaoyao_ElementalArt_CreateRabbit": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Yaoyao_ElementalArt_ClickOrHold",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "successActions": [
@@ -547,21 +547,21 @@
                   "$type": "TriggerBullet",
                   "bulletID": 41077010,
                   "born": {
-                    "$type": "JIKCNOBCHGH",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "INILOPENDHK": {
-                      "$type": "FNGFFMFIDIM",
-                      "GCNLPNIOLDK": {
-                        "EJNNCBMCPOB": 0.0,
-                        "OIODIHMNJPJ": 0.0,
-                        "CFFEIADEGNK": 0.0
+                    "direction": {
+                      "$type": "ConfigDirectionByEntity",
+                      "angleOffset": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
                     },
-                    "IEDBIKLIONM": true,
+                    "useRotation": true,
                     "attachPointName": "WeaponR"
                   }
                 }
@@ -571,7 +571,7 @@
                   "$type": "TriggerBullet",
                   "bulletID": 41077005,
                   "born": {
-                    "$type": "NHIAENEEFCC",
+                    "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_ABILITY_Yaoyao_ElementalArt_Rabiit_Throw_Pos",
                     "directionKey": "_ABILITY_Yaoyao_ElementalArt_Rabiit_Throw_Dir"
                   }
@@ -582,12 +582,12 @@
         },
         "ClickOrHold_Mark_Initializer": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onReconnect": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Yaoyao_ElementalArt_ClickOrHold",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -598,46 +598,46 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 1.0,
+          "value": 1.0,
           "key": "_ABILITY_Yaoyao_ElementalArt_ClickOrHold",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Fishing_Aim_Length",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalPos",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "key": "_ABILITY_Yaoyao_ElementalArt_Rabiit_Throw_Pos",
           "born": {
-            "$type": "JIKCNOBCHGH",
+            "$type": "ConfigBornByAttachPoint",
             "offset": {
-              "EJNNCBMCPOB": 0.0,
-              "OIODIHMNJPJ": 0.0,
-              "CFFEIADEGNK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
-            "IEDBIKLIONM": true,
+            "useRotation": true,
             "attachPointName": "WeaponR"
           },
           "setTarget": false
         },
         {
           "$type": "SetGlobalDir",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "key": "_ABILITY_Yaoyao_ElementalArt_Rabiit_Throw_Dir",
           "born": {
             "$type": "JNPLPMFFCCB",
-            "INILOPENDHK": {
+            "direction": {
               "$type": "GIOACNMDBHA",
-              "GCNLPNIOLDK": {
-                "EJNNCBMCPOB": -40.0,
-                "OIODIHMNJPJ": 5.0,
-                "CFFEIADEGNK": 0.0
+              "angleOffset": {
+                "x": -40.0,
+                "y": 5.0,
+                "z": 0.0
               },
               "PAFBKFELPKE": true
             }
@@ -653,8 +653,8 @@
         {
           "$type": "AvatarSkillStart",
           "skillID": 10772,
-          "amount": 1.0,
-          "costStaminaDelta": 1.0
+          "cdRatio": 1.0,
+          "costStaminaRatio": 1.0
         },
         {
           "$type": "ApplyModifier",
@@ -674,16 +674,16 @@
       "onAbilityStart": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Yayao_Rabbit_Dir_1",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "CreateGadget",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "born": {
-            "$type": "NHIAENEEFCC",
+            "$type": "ConfigBornByGlobalValue",
             "positionKey": "_ABILITY_Yayao_Rabbit_Pos",
             "directionKey": "_ABILITY_Yayao_Rabbit_Dir"
           },
@@ -742,7 +742,7 @@
         "ElementalBurst_Protection": {
           "modifierName": "",
           "duration": 2.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
@@ -752,8 +752,8 @@
             {
               "$type": "AvatarSkillStart",
               "skillID": 10775,
-              "amount": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             }
           ]
         },
@@ -765,7 +765,7 @@
             1.0,
             "ADD"
           ],
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 1.0,
           "modifierMixins": [
             {
@@ -790,20 +790,20 @@
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalBurst_Avatar_State",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalBurst_Avatar_State",
               "effectTempleteID": -1.0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Yaoyao_Is_ElementalBurst",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 3.0,
+              "doOffStage": true,
+              "value": 3.0,
               "key": "_ABILITY_Yaoyao_Throw_Rabbit_Conut",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -812,22 +812,22 @@
           "onRemoved": [
             {
               "$type": "KillGadget",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "gadgetInfo": {
                 "configID": 41077007
               }
             },
             {
               "$type": "KillGadget",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "gadgetInfo": {
                 "configID": 41077009
               }
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Yaoyao_Is_ElementalBurst",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -839,38 +839,38 @@
               "target": "Other",
               "targetPredicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "Yaoyao_Constellation_2"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Yaoyao_Constellation_2"
                 },
                 {
-                  "$type": "MAOJMGFBDKD",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Burst"
                   ]
                 },
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Yaoyao_Constellation_2_CD",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "PCNDFOGECKL",
+                  "$type": "ByHitEnBreak",
                   "logic": "Equal",
-                  "KPBJHGOLKAJ": 15.0
+                  "enBreak": 15.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Yaoyao_Constellation_2_CD"
                 }
               ]
@@ -888,36 +888,36 @@
         "Yaoyao_ElementalBurst_GreateGadget_Handler": {
           "modifierName": "",
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "CreateGadget",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Yaoyao_Throw_Rabbit_Conut",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "MoreThan"
+                  "value": 0.0,
+                  "compareType": "MoreThan"
                 }
               ],
               "born": {
-                "$type": "JIKCNOBCHGH",
+                "$type": "ConfigBornByAttachPoint",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "INILOPENDHK": {
-                  "$type": "FNGFFMFIDIM",
-                  "GCNLPNIOLDK": {
-                    "EJNNCBMCPOB": 0.0,
-                    "OIODIHMNJPJ": 0.0,
-                    "CFFEIADEGNK": 0.0
+                "direction": {
+                  "$type": "ConfigDirectionByEntity",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
                   },
                   "PAFBKFELPKE": true
                 },
-                "IEDBIKLIONM": true,
+                "useRotation": true,
                 "attachPointName": "PRIVATE_Back"
               },
               "gadgetID": 41077009
@@ -926,19 +926,19 @@
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Yaoyao_Throw_Rabbit_Conut",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "MoreThan"
+                  "value": 0.0,
+                  "compareType": "MoreThan"
                 }
               ],
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalBurst_Rabbit_Appear",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalBurst_Rabbit_Appear",
               "effectTempleteID": -1.0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": -1.0,
+              "value": -1.0,
               "key": "_ABILITY_Yaoyao_Throw_Rabbit_Conut",
               "useLimitRange": true,
               "maxValue": 3.0,
@@ -952,12 +952,12 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Yaoyao_Constellation_2_CD",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Yaoyao_Constellation_2_CD",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -965,15 +965,15 @@
             },
             {
               "$type": "ReviveElemEnergy",
-              "PositionDampTime": true,
-              "ratio": "Yaoyao_Constellation_2_ReviveEnergy_Ratio"
+              "doOffStage": true,
+              "value": "Yaoyao_Constellation_2_ReviveEnergy_Ratio"
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "value": -1.0,
               "key": "_ABILITY_Yaoyao_Constellation_2_CD",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -983,62 +983,62 @@
         },
         "Yaoyao_ElementalBurst_Sprint_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalBurst_Sprint",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalBurst_Sprint",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Yaoyao_ElementalBurst_Sprint_Loop_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalBurst_Sprint_Loop",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalBurst_Sprint_Loop",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Avatar_Yaoyao_ElementalBurst_Strike": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalBurst_Attack",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalBurst_Attack",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -1.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": -1.0,
+                      "z": 0.0
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "height": 3.0,
-                  "HAJLEKLDOMG": 3.0
+                  "radius": 3.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Elemental_Burst_Damage",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "Elemental_Burst_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Grass",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 50.0,
                     "attackType": "Range",
@@ -1059,7 +1059,7 @@
         },
         "SetAnimatorTrigger": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
@@ -1069,7 +1069,7 @@
         },
         "Yaoyao_ElementalBurst_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "TriggerWeatherMixin",
@@ -1088,7 +1088,7 @@
           "onRemoved": [
             {
               "$type": "AvatarCameraParam",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "cameraParam": {
                 "forceRadius": 6.0,
                 "forceRadiusDuration": 0.0,
@@ -1097,18 +1097,18 @@
             },
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             },
             {
               "$type": "EnableHeadControl",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "enable": true
             }
           ],
           "onAvatarOut": [
             {
               "$type": "AvatarCameraParam",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "cameraParam": {
                 "forceRadius": 6.0,
                 "forceRadiusDuration": 0.0,
@@ -1117,13 +1117,13 @@
             },
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ]
         },
         "Yaoyao_ElementalBurst_Camera_RadialBlur": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ActCameraRadialBlur",
@@ -1149,7 +1149,7 @@
       "onAvatarOut": [
         {
           "$type": "RemoveModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "Yaoyao_ElementalBurst_Sate"
         }
       ]
@@ -1164,9 +1164,9 @@
           "$type": "CreateGadget",
           "ownerIs": "OriginOwner",
           "born": {
-            "$type": "NHIAENEEFCC",
-            "EFLKPFAOPCH": true,
-            "OJLGGEEIHCH": 4.0,
+            "$type": "ConfigBornByGlobalValue",
+            "onGround": true,
+            "onGroundRaycastUpDist": 4.0,
             "positionKey": "_ABILITY_Yaoyao_ElementalBurst_Rabbit_Pos",
             "directionKey": "_ABILITY_Yaoyao_ElementalBurst_Rabbit_Dir"
           },
@@ -1199,7 +1199,7 @@
       "modifiers": {
         "HideWeapon": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachActionToModifierMixin",
@@ -1217,7 +1217,7 @@
               "onRemoved": [
                 {
                   "$type": "TriggerHideWeapon",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "canBeHandledOnRecover": true,
                   "visible": true,
                   "partNames": [
@@ -1243,40 +1243,40 @@
           "animEventNames": [
             "ATK01"
           ],
-          "GNBHKEABDNL": "Attack_01",
-          "JKNJLKBGFJK": 0.0
+          "damagePercentage": "Attack_01",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK02"
           ],
-          "GNBHKEABDNL": "Attack_02",
-          "JKNJLKBGFJK": 0.0
+          "damagePercentage": "Attack_02",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK03_1"
           ],
-          "GNBHKEABDNL": "Attack_03_1",
-          "JKNJLKBGFJK": 0.0
+          "damagePercentage": "Attack_03_1",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK03_2"
           ],
-          "GNBHKEABDNL": "Attack_03_02",
-          "JKNJLKBGFJK": 0.0
+          "damagePercentage": "Attack_03_02",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK04"
           ],
-          "GNBHKEABDNL": "Attack_04",
-          "JKNJLKBGFJK": 0.0
+          "damagePercentage": "Attack_04",
+          "damagePercentageRatio": 0.0
         }
       ],
       "abilitySpecials": {
@@ -1392,11 +1392,11 @@
         "FallingAnthem_BS_Material": {
           "modifierName": "",
           "duration": 0.5299999713897705,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Pole_FallingAnthem_BS_Normal",
+              "effectPattern": "Eff_Avatar_Pole_FallingAnthem_BS_Normal",
               "effectTempleteID": -1.0
             }
           ],
@@ -1413,7 +1413,7 @@
         },
         "FallingAnthem_BS_VelocityForce_Initialize": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -2.0
           },
@@ -1428,34 +1428,34 @@
         },
         "FallingAnthem_LoopDamage": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
-                  "HAJLEKLDOMG": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "FallingAnthem_Normal_Loop_Damage",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 0.0,
+                    "damagePercentage": "FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 0.0,
                     "overrideByWeapon": true,
                     "strikeType": "Slash",
                     "enBreak": 25.0,
@@ -1477,27 +1477,27 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
-                  "HAJLEKLDOMG": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "FallingAnthem_Normal_Loop_Damage",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 0.0,
+                    "damagePercentage": "FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 0.0,
                     "overrideByWeapon": true,
                     "strikeType": "Spear",
                     "enBreak": 25.0,
@@ -1517,7 +1517,7 @@
         },
         "FallingAnthem_FallingDamageImmune_01": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ClearGlobalValue",
@@ -1527,12 +1527,12 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv0",
+              "value": "FallingAnthem_FallingDamageRatio_Lv0",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
@@ -1542,16 +1542,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "value": "FallingAnthem_Altitude_Lv1"
                 },
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv1",
+              "value": "FallingAnthem_FallingDamageRatio_Lv1",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
@@ -1561,16 +1561,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "value": "FallingAnthem_Altitude_Lv2"
                 },
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv1"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv2",
+              "value": "FallingAnthem_FallingDamageRatio_Lv2",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
@@ -1580,16 +1580,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "value": "FallingAnthem_Altitude_Lv3"
                 },
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv2"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv3",
+              "value": "FallingAnthem_FallingDamageRatio_Lv3",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
@@ -1599,11 +1599,11 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv3"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv4",
+              "value": "FallingAnthem_FallingDamageRatio_Lv4",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
@@ -1617,7 +1617,7 @@
         },
         "FallingAnthem_FallingDamageImmune_02": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -1632,19 +1632,19 @@
         },
         "FallingAnthem_FallingDamageImmune_03": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
           }
         },
         "FallingAnthem_Loop_Normal": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_FallingAnthem_UseCamera",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -1.0,
                 0.5,
@@ -1659,29 +1659,29 @@
         },
         "FallingAnthem_Loop_Normal_Rank_1": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Pole_FallingAnthem_Loop_01_Normal",
+              "effectPattern": "Eff_Avatar_Pole_FallingAnthem_Loop_01_Normal",
               "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_Loop_Normal_Rank_2": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Pole_FallingAnthem_Loop_02_Normal",
+              "effectPattern": "Eff_Avatar_Pole_FallingAnthem_Loop_02_Normal",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Inertia": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ApplyInertiaVelocityMixin",
@@ -1692,18 +1692,18 @@
         },
         "FallingAnthem_Height_Detect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -1713,11 +1713,11 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
-              "ratio": 5.0,
+              "value": 5.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -1727,35 +1727,35 @@
               "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -1765,15 +1765,15 @@
         },
         "FallingAnthem_OverHead_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "NOPHJIEDHCB",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -1787,25 +1787,25 @@
         },
         "FallingAnthem_OverHead_Camera_Remover": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ]
         },
         "FallingAnthem_Landed_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "NOPHJIEDHCB",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -1819,7 +1819,7 @@
         },
         "FallingAnthem_ClearVelocityForce": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "RemoveVelocityForce",
@@ -1836,36 +1836,36 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "DLFHFMCJICH": true,
-              "NHIKJLNOOBG": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MKKIHKBAOOD",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "OIONBKCKNFC",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": -0.5,
-                  "CFFEIADEGNK": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "HAJLEKLDOMG": 3.0
+              "radius": 3.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "GNBHKEABDNL": "FallingAnthem_Normal_Rank_1_Damage",
-                "JKNJLKBGFJK": 0.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_1_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "overrideByWeapon": true,
                 "strikeType": "Blunt",
                 "enBreak": 100.0,
@@ -1900,35 +1900,35 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "DLFHFMCJICH": true
+              "value": 1.0,
+              "forceByCaster": true
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MKKIHKBAOOD",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "OIONBKCKNFC",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": -0.5,
-                  "CFFEIADEGNK": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "HAJLEKLDOMG": 5.0
+              "radius": 5.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "GNBHKEABDNL": "FallingAnthem_Normal_Rank_2_Damage",
-                "JKNJLKBGFJK": 0.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_2_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "overrideByWeapon": true,
                 "strikeType": "Blunt",
                 "enBreak": 150.0,
@@ -1964,27 +1964,27 @@
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "DLFHFMCJICH": true,
-              "NHIKJLNOOBG": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             }
           ],
-          "shieldHP": "Eff_Avatar_Pole_FallingAnthem_Strike_01_Normal",
+          "effectPattern": "Eff_Avatar_Pole_FallingAnthem_Strike_01_Normal",
           "effectTempleteID": -1.0
         },
         {
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "DLFHFMCJICH": true
+              "value": 1.0,
+              "forceByCaster": true
             }
           ],
-          "shieldHP": "Eff_Avatar_Pole_FallingAnthem_Strike_02_Normal",
+          "effectPattern": "Eff_Avatar_Pole_FallingAnthem_Strike_02_Normal",
           "effectTempleteID": -1.0
         }
       ]
@@ -2015,7 +2015,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Yaoyao_Constellation_1_Duration",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_GrassAddHurtDelta": "Yaoyao_Constellation_1_AddHurtDelta"
           },
@@ -2023,7 +2023,7 @@
           "onAdded": [
             {
               "$type": "ApplyModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Yaoyao_Constellation_1_ReviveStamina_CD"
             }
           ],
@@ -2035,39 +2035,39 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Yaoyao_Constellation_1_ReviveStamina_CD",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ReviveStamina",
-              "PositionDampTime": true,
-              "ratio": "Yaoyao_Constellation_1_ReviveStamina"
+              "doOffStage": true,
+              "value": "Yaoyao_Constellation_1_ReviveStamina"
             }
           ]
         },
         "Timer": {
           "modifierName": "",
           "duration": "RandomTimeRatio",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "AngularVelocityUp": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_BulletMoveAngularVelocityRatio": "VelocityRatio"
           }
         },
         "Bullet_FX": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Turnip_Throw",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Turnip_Throw",
               "effectTempleteID": -1.0
             },
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Turnip_Bullet",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Turnip_Bullet",
               "effectTempleteID": -1.0
             }
           ]
@@ -2076,29 +2076,29 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "DamageByAttackValue",
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "IEDBIKLIONM": true
+                "useRotation": true
               },
               "attackInfo": {
                 "attackTag": "PermanentSkill_2",
                 "attenuationTag": "",
                 "attenuationGroup": "default",
                 "attackProperty": {
-                  "GNBHKEABDNL": 0.0,
-                  "JKNJLKBGFJK": 0.0,
+                  "damagePercentage": 0.0,
+                  "damagePercentageRatio": 0.0,
                   "elementType": "AntiFire",
                   "elementRank": 1.5,
-                  "bonusCriticalHurt": 0.0,
+                  "elementDurability": 0.0,
                   "strikeType": "Default",
                   "enBreak": 0.0,
                   "damagePercentage": 0.0
@@ -2129,7 +2129,7 @@
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Turnip_Is_ElementalBurst",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -2145,8 +2145,8 @@
           "target": "Owner",
           "key": "_ABILITY_Yaoyao_Rabbit_GenerateElemBall_CustomPos",
           "born": {
-            "$type": "CINPPKLNADH",
-            "IEDBIKLIONM": true
+            "$type": "ConfigBornBySelf",
+            "useRotation": true
           }
         },
         {
@@ -2154,16 +2154,16 @@
           "target": "OriginOwner",
           "targetPredicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "target": "OriginOwner",
               "key": "_ABILITY_Yaoyao_Is_ElementalBurst",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "successActions": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Turnip_Is_ElementalBurst",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2175,7 +2175,7 @@
           "target": "Target",
           "targetPredicates": [
             {
-              "$type": "OCBHACLGALE",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Avatar",
                 "Monster",
@@ -2189,10 +2189,10 @@
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Turnip_Is_ElementalBurst",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "successActions": [
@@ -2200,23 +2200,23 @@
                   "$type": "TriggerAttackEvent",
                   "attackEvent": {
                     "attackPattern": {
-                      "$type": "KOIKBLJAOOD",
+                      "$type": "ConfigAttackSphere",
                       "triggerType": "TriggerNoRepeat",
                       "born": {
-                        "$type": "HLHLJAHKGKI"
+                        "$type": "ConfigBornByCollisionPoint"
                       },
-                      "HAJLEKLDOMG": 2.0
+                      "radius": 2.0
                     },
                     "attackInfo": {
                       "attackTag": "Elemental_Burst",
                       "attenuationTag": "Elemental_Burst",
                       "attenuationGroup": "Yaoyao_ElementalBurst",
                       "attackProperty": {
-                        "GNBHKEABDNL": "Yaoyao_Turnip_ElementalBurst_Damage",
-                        "JKNJLKBGFJK": 0.0,
+                        "damagePercentage": "Yaoyao_Turnip_ElementalBurst_Damage",
+                        "damagePercentageRatio": 0.0,
                         "elementType": "Grass",
                         "elementRank": 1.5,
-                        "bonusCriticalHurt": 25.0,
+                        "elementDurability": 25.0,
                         "enBreak": 15.0,
                         "damagePercentage": 0.0
                       },
@@ -2232,9 +2232,9 @@
                 },
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Turnip_Explode",
+                  "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Turnip_Explode",
                   "born": {
-                    "$type": "HLHLJAHKGKI"
+                    "$type": "ConfigBornByCollisionPoint"
                   },
                   "effectTempleteID": -1.0
                 },
@@ -2243,19 +2243,19 @@
                   "target": "AllPlayerAvatars",
                   "predicates": [
                     {
-                      "$type": "OCBHACLGALE",
+                      "$type": "ByEntityTypes",
                       "entityTypes": [
                         "Avatar"
                       ]
                     },
                     {
-                      "$type": "AFILDNGEOAA",
+                      "$type": "ByTargetPositionToSelfPosition",
                       "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "value": 40.0
                     }
                   ],
-                  "cdRatio": "Yaoyao_Turnip_ElementalBurst_HealHp_Amount",
-                  "amountByTargetCurrentHPRatio": "Yaoyao_Turnip_ElementalBurst_HealHp_Ratio"
+                  "amount": "Yaoyao_Turnip_ElementalBurst_HealHp_Amount",
+                  "amountByCasterMaxHPRatio": "Yaoyao_Turnip_ElementalBurst_HealHp_Ratio"
                 }
               ],
               "failActions": [
@@ -2263,23 +2263,23 @@
                   "$type": "TriggerAttackEvent",
                   "attackEvent": {
                     "attackPattern": {
-                      "$type": "KOIKBLJAOOD",
+                      "$type": "ConfigAttackSphere",
                       "triggerType": "TriggerNoRepeat",
                       "born": {
-                        "$type": "HLHLJAHKGKI"
+                        "$type": "ConfigBornByCollisionPoint"
                       },
-                      "HAJLEKLDOMG": 2.0
+                      "radius": 2.0
                     },
                     "attackInfo": {
                       "attackTag": "Elemental_Art",
                       "attenuationTag": "Elemental_Art",
                       "attenuationGroup": "Yaoyao_GrassAttack",
                       "attackProperty": {
-                        "GNBHKEABDNL": "Yaoyao_Turnip_ElementalArt_Damage",
-                        "JKNJLKBGFJK": 0.0,
+                        "damagePercentage": "Yaoyao_Turnip_ElementalArt_Damage",
+                        "damagePercentageRatio": 0.0,
                         "elementType": "Grass",
                         "elementRank": 1.5,
-                        "bonusCriticalHurt": 25.0,
+                        "elementDurability": 25.0,
                         "enBreak": 15.0,
                         "damagePercentage": 0.0
                       },
@@ -2295,51 +2295,51 @@
                 },
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Turnip_Explode",
+                  "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Turnip_Explode",
                   "born": {
-                    "$type": "HLHLJAHKGKI"
+                    "$type": "ConfigBornByCollisionPoint"
                   },
                   "effectTempleteID": -1.0
                 },
                 {
                   "$type": "HealHP",
                   "otherTargets": {
-                    "$type": "LHFNEJIPKPO",
+                    "$type": "SelectTargetsByShape",
                     "shapeName": "CircleR2H10",
                     "campTargetType": "Alliance",
-                    "GCBPANBPBHC": 1.0
+                    "sizeRatio": 1.0
                   },
                   "predicates": [
                     {
-                      "$type": "OCBHACLGALE",
+                      "$type": "ByEntityTypes",
                       "entityTypes": [
                         "Avatar"
                       ]
                     }
                   ],
-                  "cdRatio": "Yaoyao_Turnip_ElementalArt_HealHp_Amount",
-                  "amountByTargetCurrentHPRatio": "Yaoyao_Turnip_ElementalArt_HealHp_Ratio"
+                  "amount": "Yaoyao_Turnip_ElementalArt_HealHp_Amount",
+                  "amountByCasterMaxHPRatio": "Yaoyao_Turnip_ElementalArt_HealHp_Ratio"
                 }
               ]
             },
             {
               "$type": "RemoveUniqueModifier",
               "otherTargets": {
-                "$type": "LHFNEJIPKPO",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR2H10",
                 "campTargetType": "Alliance",
-                "GCBPANBPBHC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
                 },
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "Yaoyao_Constellation_1"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Yaoyao_Constellation_1"
                 }
               ],
               "modifierName": "UNIQUE_Yaoyao_Constellation_1"
@@ -2347,21 +2347,21 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "LHFNEJIPKPO",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR2H10",
                 "campTargetType": "Alliance",
-                "GCBPANBPBHC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
                 },
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "Yaoyao_Constellation_1"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Yaoyao_Constellation_1"
                 }
               ],
               "modifierName": "UNIQUE_Yaoyao_Constellation_1"
@@ -2369,14 +2369,14 @@
             {
               "$type": "RemoveUniqueModifier",
               "otherTargets": {
-                "$type": "LHFNEJIPKPO",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR2H10",
                 "campTargetType": "Alliance",
-                "GCBPANBPBHC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
@@ -2387,14 +2387,14 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "LHFNEJIPKPO",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR2H10",
                 "campTargetType": "Alliance",
-                "GCBPANBPBHC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
@@ -2407,15 +2407,15 @@
             {
               "$type": "CreateGadget",
               "born": {
-                "$type": "HLHLJAHKGKI",
+                "$type": "ConfigBornByCollisionPoint",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "EFLKPFAOPCH": true,
-                "INILOPENDHK": {
-                  "$type": "MOFCOPHNHGC",
+                "onGround": true,
+                "direction": {
+                  "$type": "ConfigDirectionByWorld",
                   "eularAngles": {
                     "x": 0.10000000149011612,
                     "y": 0.10000000149011612,
@@ -2454,7 +2454,7 @@
         "Life_Timer": {
           "modifierName": "",
           "duration": "TurnipLifeTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "KillSelf"
@@ -2464,7 +2464,7 @@
         "Check_Timer": {
           "modifierName": "",
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "EnableBulletCollisionPluginTrigger",
@@ -2474,7 +2474,7 @@
         },
         "CheckAlliance": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.25,
           "onAttackLanded": [
             {
@@ -2482,7 +2482,7 @@
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "MAOJMGFBDKD",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Yaoyao_CheckAlliance"
                   ]
@@ -2500,38 +2500,38 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
-                  "OJLJBLMMGMC": true,
+                  "ignoreMassive": true,
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "INILOPENDHK": {
-                      "$type": "MOFCOPHNHGC",
+                    "direction": {
+                      "$type": "ConfigDirectionByWorld",
                       "eularAngles": {
                         "x": 0.10000000149011612,
                         "y": 0.10000000149011612,
                         "z": 0.10000000149011612
                       }
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
-                  "HAJLEKLDOMG": 1.5
+                  "radius": 1.5
                 },
                 "attackInfo": {
                   "attackTag": "Yaoyao_CheckAlliance",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": 0.0,
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": 0.0,
+                    "damagePercentageRatio": 0.0,
                     "elementType": "AntiFire",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 0.0,
+                    "elementDurability": 0.0,
                     "strikeType": "Default",
                     "enBreak": 0.0,
                     "damagePercentage": 0.0
@@ -2551,19 +2551,19 @@
         },
         "Turnip_FX": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Turnip_Born",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Turnip_Born",
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": -3.0,
-                  "CFFEIADEGNK": -0.20000000298023224
+                  "x": 0.0,
+                  "y": -3.0,
+                  "z": -0.20000000298023224
                 },
-                "IEDBIKLIONM": true
+                "useRotation": true
               },
               "effectTempleteID": -1.0
             }
@@ -2573,7 +2573,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Yaoyao_Constellation_1_Duration",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_GrassAddHurtDelta": "Yaoyao_Constellation_1_AddHurtDelta"
           },
@@ -2581,7 +2581,7 @@
           "onAdded": [
             {
               "$type": "ApplyModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Yaoyao_Constellation_1_ReviveStamina_CD"
             }
           ],
@@ -2593,12 +2593,12 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Yaoyao_Constellation_1_ReviveStamina_CD",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ReviveStamina",
-              "PositionDampTime": true,
-              "ratio": "Yaoyao_Constellation_1_ReviveStamina"
+              "doOffStage": true,
+              "value": "Yaoyao_Constellation_1_ReviveStamina"
             }
           ]
         },
@@ -2606,29 +2606,29 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "DamageByAttackValue",
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "IEDBIKLIONM": true
+                "useRotation": true
               },
               "attackInfo": {
                 "attackTag": "PermanentSkill_2",
                 "attenuationTag": "",
                 "attenuationGroup": "default",
                 "attackProperty": {
-                  "GNBHKEABDNL": 0.0,
-                  "JKNJLKBGFJK": 0.0,
+                  "damagePercentage": 0.0,
+                  "damagePercentageRatio": 0.0,
                   "elementType": "AntiFire",
                   "elementRank": 1.5,
-                  "bonusCriticalHurt": 0.0,
+                  "elementDurability": 0.0,
                   "strikeType": "Default",
                   "enBreak": 0.0,
                   "damagePercentage": 0.0
@@ -2645,7 +2645,7 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Turnip_Is_ElementalBurst",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -2685,15 +2685,15 @@
       "onKill": [
         {
           "$type": "FireEffect",
-          "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Turnip_Explode_Ground",
+          "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Turnip_Explode_Ground",
           "born": {
-            "$type": "CINPPKLNADH",
+            "$type": "ConfigBornBySelf",
             "offset": {
-              "EJNNCBMCPOB": 0.0,
-              "OIODIHMNJPJ": 0.44999998807907104,
-              "CFFEIADEGNK": 0.0
+              "x": 0.0,
+              "y": 0.44999998807907104,
+              "z": 0.0
             },
-            "IEDBIKLIONM": true
+            "useRotation": true
           },
           "effectTempleteID": -1.0
         },
@@ -2704,14 +2704,14 @@
         {
           "$type": "RemoveUniqueModifier",
           "otherTargets": {
-            "$type": "LHFNEJIPKPO",
+            "$type": "SelectTargetsByShape",
             "shapeName": "CircleR2H10",
             "campTargetType": "Alliance",
-            "GCBPANBPBHC": 1.0
+            "sizeRatio": 1.0
           },
           "predicates": [
             {
-              "$type": "OCBHACLGALE",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Avatar"
               ]
@@ -2722,14 +2722,14 @@
         {
           "$type": "ApplyModifier",
           "otherTargets": {
-            "$type": "LHFNEJIPKPO",
+            "$type": "SelectTargetsByShape",
             "shapeName": "CircleR2H10",
             "campTargetType": "Alliance",
-            "GCBPANBPBHC": 1.0
+            "sizeRatio": 1.0
           },
           "predicates": [
             {
-              "$type": "OCBHACLGALE",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Avatar"
               ]
@@ -2742,16 +2742,16 @@
           "target": "OriginOwner",
           "targetPredicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "target": "OriginOwner",
               "key": "_ABILITY_Yaoyao_Is_ElementalBurst",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "successActions": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Turnip_Is_ElementalBurst",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2762,10 +2762,10 @@
           "$type": "Predicated",
           "targetPredicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "target": "Self",
               "key": "_ABILITY_Turnip_Is_ElementalBurst",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "successActions": [
@@ -2773,29 +2773,29 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.800000011920929,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 0.800000011920929,
+                      "z": 0.0
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
-                  "HAJLEKLDOMG": 2.0
+                  "radius": 2.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "Elemental_Burst",
                   "attenuationGroup": "Yaoyao_ElementalBurst",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Yaoyao_Turnip_ElementalBurst_Damage",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "Yaoyao_Turnip_ElementalBurst_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Grass",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "enBreak": 15.0,
                     "damagePercentage": 0.0
                   },
@@ -2814,19 +2814,19 @@
               "target": "AllPlayerAvatars",
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
                 },
                 {
-                  "$type": "AFILDNGEOAA",
+                  "$type": "ByTargetPositionToSelfPosition",
                   "logic": "LesserOrEqual",
-                  "ratio": 40.0
+                  "value": 40.0
                 }
               ],
-              "cdRatio": "Yaoyao_Turnip_ElementalBurst_HealHp_Amount",
-              "amountByTargetCurrentHPRatio": "Yaoyao_Turnip_ElementalBurst_HealHp_Ratio"
+              "amount": "Yaoyao_Turnip_ElementalBurst_HealHp_Amount",
+              "amountByCasterMaxHPRatio": "Yaoyao_Turnip_ElementalBurst_HealHp_Ratio"
             }
           ],
           "failActions": [
@@ -2834,29 +2834,29 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.800000011920929,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 0.800000011920929,
+                      "z": 0.0
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
-                  "HAJLEKLDOMG": 2.0
+                  "radius": 2.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "Yaoyao_GrassAttack",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Yaoyao_Turnip_ElementalArt_Damage",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "Yaoyao_Turnip_ElementalArt_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Grass",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "enBreak": 15.0,
                     "damagePercentage": 0.0
                   },
@@ -2873,42 +2873,42 @@
             {
               "$type": "HealHP",
               "otherTargets": {
-                "$type": "LHFNEJIPKPO",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR2H10",
                 "campTargetType": "Alliance",
-                "GCBPANBPBHC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
                 }
               ],
-              "cdRatio": "Yaoyao_Turnip_ElementalArt_HealHp_Amount",
-              "amountByTargetCurrentHPRatio": "Yaoyao_Turnip_ElementalArt_HealHp_Ratio"
+              "amount": "Yaoyao_Turnip_ElementalArt_HealHp_Amount",
+              "amountByCasterMaxHPRatio": "Yaoyao_Turnip_ElementalArt_HealHp_Ratio"
             }
           ]
         },
         {
           "$type": "RemoveUniqueModifier",
           "otherTargets": {
-            "$type": "LHFNEJIPKPO",
+            "$type": "SelectTargetsByShape",
             "shapeName": "CircleR2H10",
             "campTargetType": "Alliance",
-            "GCBPANBPBHC": 1.0
+            "sizeRatio": 1.0
           },
           "predicates": [
             {
-              "$type": "OCBHACLGALE",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Avatar"
               ]
             },
             {
-              "$type": "BAECCAACHHE",
-              "DMDCKNEEKBN": "Yaoyao_Constellation_1"
+              "$type": "ByUnlockTalentParam",
+              "talentParam": "Yaoyao_Constellation_1"
             }
           ],
           "modifierName": "UNIQUE_Yaoyao_Constellation_1"
@@ -2916,21 +2916,21 @@
         {
           "$type": "ApplyModifier",
           "otherTargets": {
-            "$type": "LHFNEJIPKPO",
+            "$type": "SelectTargetsByShape",
             "shapeName": "CircleR2H10",
             "campTargetType": "Alliance",
-            "GCBPANBPBHC": 1.0
+            "sizeRatio": 1.0
           },
           "predicates": [
             {
-              "$type": "OCBHACLGALE",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Avatar"
               ]
             },
             {
-              "$type": "BAECCAACHHE",
-              "DMDCKNEEKBN": "Yaoyao_Constellation_1"
+              "$type": "ByUnlockTalentParam",
+              "talentParam": "Yaoyao_Constellation_1"
             }
           ],
           "modifierName": "UNIQUE_Yaoyao_Constellation_1"
@@ -2952,27 +2952,27 @@
         "Timer": {
           "modifierName": "",
           "duration": "RandomTimeRatio",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "AngularVelocityUp": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_BulletMoveAngularVelocityRatio": "VelocityRatio"
           }
         },
         "Bullet_FX": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_Gloden_Turnip_Throw",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_Gloden_Turnip_Throw",
               "effectTempleteID": -1.0
             },
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_Gloden_Turnip_Trail",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_Gloden_Turnip_Trail",
               "effectTempleteID": -1.0
             }
           ]
@@ -3004,7 +3004,7 @@
           "target": "Target",
           "targetPredicates": [
             {
-              "$type": "OCBHACLGALE",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Avatar",
                 "Monster",
@@ -3018,23 +3018,23 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "HLHLJAHKGKI"
+                    "$type": "ConfigBornByCollisionPoint"
                   },
-                  "HAJLEKLDOMG": 4.0
+                  "radius": 4.0
                 },
                 "attackInfo": {
                   "attackTag": "Yaoyao_Constellation_6",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Yaoyao_Constellation_6_Damage",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "Yaoyao_Constellation_6_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Grass",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "damagePercentage": 0.0
                   },
                   "hitPattern": {
@@ -3050,26 +3050,26 @@
             {
               "$type": "HealHP",
               "otherTargets": {
-                "$type": "LHFNEJIPKPO",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR4H6",
                 "campTargetType": "Alliance",
-                "GCBPANBPBHC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
                 }
               ],
-              "amountByTargetCurrentHPRatio": "Yaoyao_Constellation_6_HealHp_Ratio"
+              "amountByCasterMaxHPRatio": "Yaoyao_Constellation_6_HealHp_Ratio"
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_Gloden_Turnip_Explode",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_Gloden_Turnip_Explode",
               "born": {
-                "$type": "HLHLJAHKGKI"
+                "$type": "ConfigBornByCollisionPoint"
               },
               "effectTempleteID": -1.0
             }
@@ -3078,15 +3078,15 @@
             {
               "$type": "CreateGadget",
               "born": {
-                "$type": "HLHLJAHKGKI",
+                "$type": "ConfigBornByCollisionPoint",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "EFLKPFAOPCH": true,
-                "INILOPENDHK": {
-                  "$type": "MOFCOPHNHGC",
+                "onGround": true,
+                "direction": {
+                  "$type": "ConfigDirectionByWorld",
                   "eularAngles": {
                     "x": 0.10000000149011612,
                     "y": 0.10000000149011612,
@@ -3116,7 +3116,7 @@
         "Life_Timer": {
           "modifierName": "",
           "duration": "MineLifeTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "KillSelf"
@@ -3126,7 +3126,7 @@
         "Check_Timer": {
           "modifierName": "",
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "EnableBulletCollisionPluginTrigger",
@@ -3136,7 +3136,7 @@
         },
         "CheckAlliance": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.25,
           "onAttackLanded": [
             {
@@ -3144,7 +3144,7 @@
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "MAOJMGFBDKD",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Yaoyao_CheckAlliance"
                   ]
@@ -3162,38 +3162,38 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
-                  "OJLJBLMMGMC": true,
+                  "ignoreMassive": true,
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "INILOPENDHK": {
-                      "$type": "MOFCOPHNHGC",
+                    "direction": {
+                      "$type": "ConfigDirectionByWorld",
                       "eularAngles": {
                         "x": 0.10000000149011612,
                         "y": 0.10000000149011612,
                         "z": 0.10000000149011612
                       }
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
-                  "HAJLEKLDOMG": 1.5
+                  "radius": 1.5
                 },
                 "attackInfo": {
                   "attackTag": "Yaoyao_CheckAlliance",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": 0.0,
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": 0.0,
+                    "damagePercentageRatio": 0.0,
                     "elementType": "AntiFire",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 0.0,
+                    "elementDurability": 0.0,
                     "strikeType": "Default",
                     "enBreak": 0.0,
                     "damagePercentage": 0.0
@@ -3213,11 +3213,11 @@
         },
         "Turnip_FX": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_Gloden_Turnip_Born",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_Gloden_Turnip_Born",
               "effectTempleteID": -1.0
             }
           ]
@@ -3253,15 +3253,15 @@
       "onKill": [
         {
           "$type": "FireEffect",
-          "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_Golden_Turnip_Explode_Ground",
+          "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_Golden_Turnip_Explode_Ground",
           "born": {
-            "$type": "CINPPKLNADH",
+            "$type": "ConfigBornBySelf",
             "offset": {
-              "EJNNCBMCPOB": 0.0,
-              "OIODIHMNJPJ": 0.699999988079071,
-              "CFFEIADEGNK": 0.0
+              "x": 0.0,
+              "y": 0.699999988079071,
+              "z": 0.0
             },
-            "IEDBIKLIONM": true
+            "useRotation": true
           },
           "effectTempleteID": -1.0
         },
@@ -3273,29 +3273,29 @@
           "$type": "TriggerAttackEvent",
           "attackEvent": {
             "attackPattern": {
-              "$type": "KOIKBLJAOOD",
+              "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 1.0,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 0.0
                 },
-                "IEDBIKLIONM": true
+                "useRotation": true
               },
-              "HAJLEKLDOMG": 4.0
+              "radius": 4.0
             },
             "attackInfo": {
               "attackTag": "Yaoyao_Constellation_6",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "GNBHKEABDNL": "Yaoyao_Constellation_6_Damage",
-                "JKNJLKBGFJK": 0.0,
+                "damagePercentage": "Yaoyao_Constellation_6_Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Grass",
                 "elementRank": 1.5,
-                "bonusCriticalHurt": 25.0,
+                "elementDurability": 25.0,
                 "damagePercentage": 0.0
               },
               "hitPattern": {
@@ -3311,20 +3311,20 @@
         {
           "$type": "HealHP",
           "otherTargets": {
-            "$type": "LHFNEJIPKPO",
+            "$type": "SelectTargetsByShape",
             "shapeName": "CircleR4H6",
             "campTargetType": "Alliance",
-            "GCBPANBPBHC": 1.0
+            "sizeRatio": 1.0
           },
           "predicates": [
             {
-              "$type": "OCBHACLGALE",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Avatar"
               ]
             }
           ],
-          "amountByTargetCurrentHPRatio": "Yaoyao_Constellation_6_HealHp_Ratio"
+          "amountByCasterMaxHPRatio": "Yaoyao_Constellation_6_HealHp_Ratio"
         }
       ]
     }
@@ -3354,15 +3354,15 @@
       "modifiers": {
         "TriggerBullet_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "Rabbit_Attack": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_Attack",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_Attack",
               "effectTempleteID": -1.0
             }
           ]
@@ -3370,7 +3370,7 @@
         "Life_Timer": {
           "modifierName": "",
           "duration": "Rabbit_LifeTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "KillSelf"
@@ -3379,30 +3379,30 @@
         },
         "Rabbit_GenerateElementBall_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "MAOJMGFBDKD",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art",
                     "Elemental_Burst"
                   ]
                 },
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -3418,21 +3418,21 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 1.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "GenerateElemBall",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "configID": 2019,
               "born": {
-                "$type": "NHIAENEEFCC",
-                "EFLKPFAOPCH": true,
+                "$type": "ConfigBornByGlobalValue",
+                "onGround": true,
                 "HAMPFHGCBNL": true,
-                "OJLGGEEIHCH": 3.0,
+                "onGroundRaycastUpDist": 3.0,
                 "positionKey": "_ABILITY_Yaoyao_Rabbit_GenerateElemBall_CustomPos",
                 "directionKey": ""
               },
-              "value": 1.0,
+              "ratio": 1.0,
               "baseEnergy": 3.0
             }
           ]
@@ -3445,13 +3445,13 @@
         },
         {
           "$type": "FireEffect",
-          "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_Born_Ground",
+          "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_Born_Ground",
           "effectTempleteID": -1.0
         },
         {
           "$type": "AddGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 2.0,
+          "doOffStage": true,
+          "value": 2.0,
           "key": "_ABILITY_Yaoyao_Golden_Turnip_Count",
           "useLimitRange": true,
           "maxValue": 2.0,
@@ -3467,7 +3467,7 @@
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_Attack_Count",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -3476,8 +3476,8 @@
       "onAbilityStart": [
         {
           "$type": "AddGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 1.0,
+          "doOffStage": true,
+          "value": 1.0,
           "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_Attack_Count",
           "useLimitRange": true,
           "maxValue": 10.0,
@@ -3485,7 +3485,7 @@
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 3.0,
+          "value": 3.0,
           "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_RandomValue",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -3493,7 +3493,7 @@
         {
           "$type": "Predicated",
           "otherTargets": {
-            "$type": "LHFNEJIPKPO",
+            "$type": "SelectTargetsByShape",
             "topLimit": 1,
             "entityTypePriority": [
               "Avatar"
@@ -3501,20 +3501,20 @@
             "sortType": "LowHpRatio",
             "shapeName": "CircleR8H10",
             "campTargetType": "SelfCamp",
-            "GCBPANBPBHC": 1.0
+            "sizeRatio": 1.0
           },
           "targetPredicates": [
             {
-              "$type": "JGAKMAOIFND",
-              "PIOAFIFGFGM": 0.699999988079071
+              "$type": "ByTargetHPRatio",
+              "HPRatio": 0.699999988079071
             },
             {
-              "$type": "DMKIHIEKBCM",
+              "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "JGAKMAOIFND",
+                  "$type": "ByTargetHPRatio",
                   "logic": "Equal",
-                  "PIOAFIFGFGM": 1.0
+                  "HPRatio": 1.0
                 }
               ]
             }
@@ -3522,7 +3522,7 @@
           "successActions": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
+              "value": 2.0,
               "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_RandomValue",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -3532,30 +3532,30 @@
         {
           "$type": "Predicated",
           "otherTargets": {
-            "$type": "LHFNEJIPKPO",
+            "$type": "SelectTargetsByShape",
             "shapeName": "CircleR8H10",
             "campTargetType": "Enemy",
-            "GCBPANBPBHC": 1.0
+            "sizeRatio": 1.0
           },
           "targetPredicates": [
             {
-              "$type": "OCBHACLGALE",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Monster",
                 "Gadget"
               ]
             },
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ANIMAL_ENTITY_TYPE",
-              "ratio": 0.0,
-              "NHIKJLNOOBG": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             }
           ],
           "successActions": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_RandomValue",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -3565,7 +3565,7 @@
         {
           "$type": "Predicated",
           "otherTargets": {
-            "$type": "LHFNEJIPKPO",
+            "$type": "SelectTargetsByShape",
             "topLimit": 1,
             "entityTypePriority": [
               "Avatar"
@@ -3573,19 +3573,19 @@
             "sortType": "LowHpRatio",
             "shapeName": "CircleR8H10",
             "campTargetType": "SelfCamp",
-            "GCBPANBPBHC": 1.0
+            "sizeRatio": 1.0
           },
           "targetPredicates": [
             {
-              "$type": "JGAKMAOIFND",
+              "$type": "ByTargetHPRatio",
               "logic": "LesserOrEqual",
-              "PIOAFIFGFGM": 0.699999988079071
+              "HPRatio": 0.699999988079071
             }
           ],
           "successActions": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
+              "value": 2.0,
               "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_RandomValue",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -3596,16 +3596,16 @@
           "$type": "Predicated",
           "targetPredicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_RandomValue",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "successActions": [
             {
               "$type": "SetSelfAttackTarget",
               "otherTargets": {
-                "$type": "LHFNEJIPKPO",
+                "$type": "SelectTargetsByShape",
                 "topLimit": 1,
                 "entityTypePriority": [
                   "Monster",
@@ -3614,21 +3614,21 @@
                 "sortType": "Random",
                 "shapeName": "CircleR8H10",
                 "campTargetType": "Enemy",
-                "GCBPANBPBHC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster",
                     "Gadget"
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ]
             },
@@ -3643,17 +3643,17 @@
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "PCGEEHLBIKD",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "HDDHHAGMLJK",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_Attack_Count",
-                      "ratio": 3.0
+                      "value": 3.0
                     },
                     {
-                      "$type": "HDDHHAGMLJK",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_Attack_Count",
-                      "ratio": 6.0
+                      "value": 6.0
                     }
                   ]
                 }
@@ -3663,21 +3663,21 @@
                   "$type": "TriggerBullet",
                   "bulletID": 41077003,
                   "born": {
-                    "$type": "JIKCNOBCHGH",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "INILOPENDHK": {
-                      "$type": "FNGFFMFIDIM",
-                      "GCNLPNIOLDK": {
-                        "EJNNCBMCPOB": 0.0,
-                        "OIODIHMNJPJ": 0.0,
-                        "CFFEIADEGNK": 0.0
+                    "direction": {
+                      "$type": "ConfigDirectionByEntity",
+                      "angleOffset": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
                     },
-                    "IEDBIKLIONM": true,
+                    "useRotation": true,
                     "attachPointName": "Bullet"
                   }
                 },
@@ -3685,52 +3685,52 @@
                   "$type": "TriggerBullet",
                   "predicates": [
                     {
-                      "$type": "HDDHHAGMLJK",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Yaoyao_Golden_Turnip_Count",
-                      "ratio": 1.0,
-                      "NHIKJLNOOBG": "MoreThanAndEqual"
+                      "value": 1.0,
+                      "compareType": "MoreThanAndEqual"
                     },
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "Yaoyao_Constellation_6"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "Yaoyao_Constellation_6"
                     }
                   ],
                   "bulletID": 41077011,
                   "born": {
-                    "$type": "JIKCNOBCHGH",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "INILOPENDHK": {
-                      "$type": "FNGFFMFIDIM",
-                      "GCNLPNIOLDK": {
-                        "EJNNCBMCPOB": 0.0,
-                        "OIODIHMNJPJ": 0.0,
-                        "CFFEIADEGNK": 0.0
+                    "direction": {
+                      "$type": "ConfigDirectionByEntity",
+                      "angleOffset": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
                     },
-                    "IEDBIKLIONM": true,
+                    "useRotation": true,
                     "attachPointName": "Bullet"
                   }
                 },
                 {
                   "$type": "AddGlobalValue",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "predicates": [
                     {
-                      "$type": "HDDHHAGMLJK",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Yaoyao_Golden_Turnip_Count",
-                      "ratio": 1.0,
-                      "NHIKJLNOOBG": "MoreThanAndEqual"
+                      "value": 1.0,
+                      "compareType": "MoreThanAndEqual"
                     },
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "Yaoyao_Constellation_6"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "Yaoyao_Constellation_6"
                     }
                   ],
-                  "ratio": -1.0,
+                  "value": -1.0,
                   "key": "_ABILITY_Yaoyao_Golden_Turnip_Count",
                   "useLimitRange": true,
                   "maxValue": 2.0,
@@ -3742,21 +3742,21 @@
                   "$type": "TriggerBullet",
                   "bulletID": 41077003,
                   "born": {
-                    "$type": "JIKCNOBCHGH",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "INILOPENDHK": {
-                      "$type": "FNGFFMFIDIM",
-                      "GCNLPNIOLDK": {
-                        "EJNNCBMCPOB": 0.0,
-                        "OIODIHMNJPJ": 0.0,
-                        "CFFEIADEGNK": 0.0
+                    "direction": {
+                      "$type": "ConfigDirectionByEntity",
+                      "angleOffset": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
                     },
-                    "IEDBIKLIONM": true,
+                    "useRotation": true,
                     "attachPointName": "Bullet"
                   }
                 }
@@ -3768,16 +3768,16 @@
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_RandomValue",
-                  "ratio": 2.0
+                  "value": 2.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "SetSelfAttackTarget",
                   "otherTargets": {
-                    "$type": "LHFNEJIPKPO",
+                    "$type": "SelectTargetsByShape",
                     "topLimit": 1,
                     "entityTypePriority": [
                       "Avatar"
@@ -3785,11 +3785,11 @@
                     "sortType": "LowHpRatio",
                     "shapeName": "CircleR8H10",
                     "campTargetType": "SelfCamp",
-                    "GCBPANBPBHC": 1.0
+                    "sizeRatio": 1.0
                   },
                   "predicates": [
                     {
-                      "$type": "OCBHACLGALE",
+                      "$type": "ByEntityTypes",
                       "entityTypes": [
                         "Avatar"
                       ]
@@ -3802,17 +3802,17 @@
                   "$type": "Predicated",
                   "targetPredicates": [
                     {
-                      "$type": "PCGEEHLBIKD",
+                      "$type": "ByAny",
                       "predicates": [
                         {
-                          "$type": "HDDHHAGMLJK",
+                          "$type": "ByTargetGlobalValue",
                           "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_Attack_Count",
-                          "ratio": 3.0
+                          "value": 3.0
                         },
                         {
-                          "$type": "HDDHHAGMLJK",
+                          "$type": "ByTargetGlobalValue",
                           "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_Attack_Count",
-                          "ratio": 6.0
+                          "value": 6.0
                         }
                       ]
                     }
@@ -3822,21 +3822,21 @@
                       "$type": "TriggerBullet",
                       "bulletID": 41077003,
                       "born": {
-                        "$type": "JIKCNOBCHGH",
+                        "$type": "ConfigBornByAttachPoint",
                         "offset": {
-                          "EJNNCBMCPOB": 0.0,
-                          "OIODIHMNJPJ": 0.0,
-                          "CFFEIADEGNK": 0.0
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": 0.0
                         },
-                        "INILOPENDHK": {
-                          "$type": "FNGFFMFIDIM",
-                          "GCNLPNIOLDK": {
-                            "EJNNCBMCPOB": 0.0,
-                            "OIODIHMNJPJ": 0.0,
-                            "CFFEIADEGNK": 0.0
+                        "direction": {
+                          "$type": "ConfigDirectionByEntity",
+                          "angleOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
                           }
                         },
-                        "IEDBIKLIONM": true,
+                        "useRotation": true,
                         "attachPointName": "Bullet"
                       },
                       "trackTarget": "SelfAttackActiveTarget"
@@ -3845,53 +3845,53 @@
                       "$type": "TriggerBullet",
                       "predicates": [
                         {
-                          "$type": "HDDHHAGMLJK",
+                          "$type": "ByTargetGlobalValue",
                           "key": "_ABILITY_Yaoyao_Golden_Turnip_Count",
-                          "ratio": 1.0,
-                          "NHIKJLNOOBG": "MoreThanAndEqual"
+                          "value": 1.0,
+                          "compareType": "MoreThanAndEqual"
                         },
                         {
-                          "$type": "BAECCAACHHE",
-                          "DMDCKNEEKBN": "Yaoyao_Constellation_6"
+                          "$type": "ByUnlockTalentParam",
+                          "talentParam": "Yaoyao_Constellation_6"
                         }
                       ],
                       "bulletID": 41077011,
                       "born": {
-                        "$type": "JIKCNOBCHGH",
+                        "$type": "ConfigBornByAttachPoint",
                         "offset": {
-                          "EJNNCBMCPOB": 0.0,
-                          "OIODIHMNJPJ": 0.0,
-                          "CFFEIADEGNK": 0.0
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": 0.0
                         },
-                        "INILOPENDHK": {
-                          "$type": "FNGFFMFIDIM",
-                          "GCNLPNIOLDK": {
-                            "EJNNCBMCPOB": 0.0,
-                            "OIODIHMNJPJ": 0.0,
-                            "CFFEIADEGNK": 0.0
+                        "direction": {
+                          "$type": "ConfigDirectionByEntity",
+                          "angleOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
                           }
                         },
-                        "IEDBIKLIONM": true,
+                        "useRotation": true,
                         "attachPointName": "Bullet"
                       },
                       "trackTarget": "SelfAttackActiveTarget"
                     },
                     {
                       "$type": "AddGlobalValue",
-                      "PositionDampTime": true,
+                      "doOffStage": true,
                       "predicates": [
                         {
-                          "$type": "HDDHHAGMLJK",
+                          "$type": "ByTargetGlobalValue",
                           "key": "_ABILITY_Yaoyao_Golden_Turnip_Count",
-                          "ratio": 1.0,
-                          "NHIKJLNOOBG": "MoreThanAndEqual"
+                          "value": 1.0,
+                          "compareType": "MoreThanAndEqual"
                         },
                         {
-                          "$type": "BAECCAACHHE",
-                          "DMDCKNEEKBN": "Yaoyao_Constellation_6"
+                          "$type": "ByUnlockTalentParam",
+                          "talentParam": "Yaoyao_Constellation_6"
                         }
                       ],
-                      "ratio": -1.0,
+                      "value": -1.0,
                       "key": "_ABILITY_Yaoyao_Golden_Turnip_Count",
                       "useLimitRange": true,
                       "maxValue": 2.0,
@@ -3903,21 +3903,21 @@
                       "$type": "TriggerBullet",
                       "bulletID": 41077003,
                       "born": {
-                        "$type": "JIKCNOBCHGH",
+                        "$type": "ConfigBornByAttachPoint",
                         "offset": {
-                          "EJNNCBMCPOB": 0.0,
-                          "OIODIHMNJPJ": 0.0,
-                          "CFFEIADEGNK": 0.0
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": 0.0
                         },
-                        "INILOPENDHK": {
-                          "$type": "FNGFFMFIDIM",
-                          "GCNLPNIOLDK": {
-                            "EJNNCBMCPOB": 0.0,
-                            "OIODIHMNJPJ": 0.0,
-                            "CFFEIADEGNK": 0.0
+                        "direction": {
+                          "$type": "ConfigDirectionByEntity",
+                          "angleOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
                           }
                         },
-                        "IEDBIKLIONM": true,
+                        "useRotation": true,
                         "attachPointName": "Bullet"
                       },
                       "trackTarget": "SelfAttackActiveTarget"
@@ -3934,24 +3934,24 @@
                   "$type": "SetGlobalPos",
                   "key": "_ABILITY_Yaoyao_Rabbit_Random_ThrowPos",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 3.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 3.0
                     },
-                    "GKMEIIBAKPF": {
-                      "$type": "EJANLOLDHJD",
-                      "IGCGGBOLFLB": 2.0,
-                      "OMJPLAAKNDB": 4.0
+                    "bornRandom": {
+                      "$type": "BornRandomFromCenter",
+                      "minRandomRange": 2.0,
+                      "maxRandomRange": 4.0
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   }
                 },
                 {
                   "$type": "TurnDirectionToPos",
                   "toPos": {
-                    "$type": "NHIAENEEFCC",
+                    "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_ABILITY_Yaoyao_Rabbit_Random_ThrowPos",
                     "directionKey": ""
                   }
@@ -3960,17 +3960,17 @@
                   "$type": "Predicated",
                   "targetPredicates": [
                     {
-                      "$type": "PCGEEHLBIKD",
+                      "$type": "ByAny",
                       "predicates": [
                         {
-                          "$type": "HDDHHAGMLJK",
+                          "$type": "ByTargetGlobalValue",
                           "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_Attack_Count",
-                          "ratio": 3.0
+                          "value": 3.0
                         },
                         {
-                          "$type": "HDDHHAGMLJK",
+                          "$type": "ByTargetGlobalValue",
                           "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_Attack_Count",
-                          "ratio": 6.0
+                          "value": 6.0
                         }
                       ]
                     }
@@ -3980,21 +3980,21 @@
                       "$type": "TriggerBullet",
                       "bulletID": 41077003,
                       "born": {
-                        "$type": "JIKCNOBCHGH",
+                        "$type": "ConfigBornByAttachPoint",
                         "offset": {
-                          "EJNNCBMCPOB": 0.0,
-                          "OIODIHMNJPJ": 0.0,
-                          "CFFEIADEGNK": 0.0
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": 0.0
                         },
-                        "INILOPENDHK": {
-                          "$type": "FNGFFMFIDIM",
-                          "GCNLPNIOLDK": {
-                            "EJNNCBMCPOB": 0.0,
-                            "OIODIHMNJPJ": 0.0,
-                            "CFFEIADEGNK": 0.0
+                        "direction": {
+                          "$type": "ConfigDirectionByEntity",
+                          "angleOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
                           }
                         },
-                        "IEDBIKLIONM": true,
+                        "useRotation": true,
                         "attachPointName": "Bullet"
                       }
                     },
@@ -4002,52 +4002,52 @@
                       "$type": "TriggerBullet",
                       "predicates": [
                         {
-                          "$type": "HDDHHAGMLJK",
+                          "$type": "ByTargetGlobalValue",
                           "key": "_ABILITY_Yaoyao_Golden_Turnip_Count",
-                          "ratio": 1.0,
-                          "NHIKJLNOOBG": "MoreThanAndEqual"
+                          "value": 1.0,
+                          "compareType": "MoreThanAndEqual"
                         },
                         {
-                          "$type": "BAECCAACHHE",
-                          "DMDCKNEEKBN": "Yaoyao_Constellation_6"
+                          "$type": "ByUnlockTalentParam",
+                          "talentParam": "Yaoyao_Constellation_6"
                         }
                       ],
                       "bulletID": 41077011,
                       "born": {
-                        "$type": "JIKCNOBCHGH",
+                        "$type": "ConfigBornByAttachPoint",
                         "offset": {
-                          "EJNNCBMCPOB": 0.0,
-                          "OIODIHMNJPJ": 0.0,
-                          "CFFEIADEGNK": 0.0
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": 0.0
                         },
-                        "INILOPENDHK": {
-                          "$type": "FNGFFMFIDIM",
-                          "GCNLPNIOLDK": {
-                            "EJNNCBMCPOB": 0.0,
-                            "OIODIHMNJPJ": 0.0,
-                            "CFFEIADEGNK": 0.0
+                        "direction": {
+                          "$type": "ConfigDirectionByEntity",
+                          "angleOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
                           }
                         },
-                        "IEDBIKLIONM": true,
+                        "useRotation": true,
                         "attachPointName": "Bullet"
                       }
                     },
                     {
                       "$type": "AddGlobalValue",
-                      "PositionDampTime": true,
+                      "doOffStage": true,
                       "predicates": [
                         {
-                          "$type": "HDDHHAGMLJK",
+                          "$type": "ByTargetGlobalValue",
                           "key": "_ABILITY_Yaoyao_Golden_Turnip_Count",
-                          "ratio": 1.0,
-                          "NHIKJLNOOBG": "MoreThanAndEqual"
+                          "value": 1.0,
+                          "compareType": "MoreThanAndEqual"
                         },
                         {
-                          "$type": "BAECCAACHHE",
-                          "DMDCKNEEKBN": "Yaoyao_Constellation_6"
+                          "$type": "ByUnlockTalentParam",
+                          "talentParam": "Yaoyao_Constellation_6"
                         }
                       ],
-                      "ratio": -1.0,
+                      "value": -1.0,
                       "key": "_ABILITY_Yaoyao_Golden_Turnip_Count",
                       "useLimitRange": true,
                       "maxValue": 2.0,
@@ -4063,24 +4063,24 @@
                       "$type": "SetGlobalPos",
                       "key": "_ABILITY_Yaoyao_Rabbit_Random_ThrowPos",
                       "born": {
-                        "$type": "CINPPKLNADH",
+                        "$type": "ConfigBornBySelf",
                         "offset": {
-                          "EJNNCBMCPOB": 0.0,
-                          "OIODIHMNJPJ": 0.0,
-                          "CFFEIADEGNK": 3.0
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": 3.0
                         },
-                        "GKMEIIBAKPF": {
-                          "$type": "EJANLOLDHJD",
-                          "IGCGGBOLFLB": 2.0,
-                          "OMJPLAAKNDB": 4.0
+                        "bornRandom": {
+                          "$type": "BornRandomFromCenter",
+                          "minRandomRange": 2.0,
+                          "maxRandomRange": 4.0
                         },
-                        "IEDBIKLIONM": true
+                        "useRotation": true
                       }
                     },
                     {
                       "$type": "TurnDirectionToPos",
                       "toPos": {
-                        "$type": "NHIAENEEFCC",
+                        "$type": "ConfigBornByGlobalValue",
                         "positionKey": "_ABILITY_Yaoyao_Rabbit_Random_ThrowPos",
                         "directionKey": ""
                       }
@@ -4089,21 +4089,21 @@
                       "$type": "TriggerBullet",
                       "bulletID": 41077003,
                       "born": {
-                        "$type": "JIKCNOBCHGH",
+                        "$type": "ConfigBornByAttachPoint",
                         "offset": {
-                          "EJNNCBMCPOB": 0.0,
-                          "OIODIHMNJPJ": 0.0,
-                          "CFFEIADEGNK": 0.0
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": 0.0
                         },
-                        "INILOPENDHK": {
-                          "$type": "FNGFFMFIDIM",
-                          "GCNLPNIOLDK": {
-                            "EJNNCBMCPOB": 0.0,
-                            "OIODIHMNJPJ": 0.0,
-                            "CFFEIADEGNK": 0.0
+                        "direction": {
+                          "$type": "ConfigDirectionByEntity",
+                          "angleOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
                           }
                         },
-                        "IEDBIKLIONM": true,
+                        "useRotation": true,
                         "attachPointName": "Bullet"
                       }
                     }
@@ -4117,7 +4117,7 @@
       "onKill": [
         {
           "$type": "FireEffect",
-          "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_Disappear",
+          "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_Disappear",
           "effectTempleteID": -1.0
         }
       ]
@@ -4130,16 +4130,16 @@
       "modifiers": {
         "Bullet_FX": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_Throw",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_Throw",
               "effectTempleteID": -1.0
             },
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_Bullet",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_Bullet",
               "effectTempleteID": -1.0
             }
           ]
@@ -4161,7 +4161,7 @@
           "target": "OriginOwner",
           "key": "_ABILITY_Yayao_Rabbit_Pos",
           "born": {
-            "$type": "HLHLJAHKGKI"
+            "$type": "ConfigBornByCollisionPoint"
           }
         },
         {
@@ -4169,12 +4169,12 @@
           "target": "OriginOwner",
           "key": "_ABILITY_Yayao_Rabbit_Dir",
           "born": {
-            "$type": "HLHLJAHKGKI"
+            "$type": "ConfigBornByCollisionPoint"
           }
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Yayao_Rabbit_Dir_1",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -4182,7 +4182,7 @@
         {
           "$type": "TriggerAbility",
           "target": "OriginOwner",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "abilityName": "Avatar_Yaoyao_ElementalArt_CreateGadget"
         },
         {
@@ -4207,7 +4207,7 @@
       "modifiers": {
         "SpeedUP": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Animator_OverallSpeedRatio": "RabbitThrowSpeedUp"
           }
@@ -4233,11 +4233,11 @@
       "modifiers": {
         "Rabbit_Attack": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_Attack",
+              "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_Attack",
               "effectTempleteID": -1.0
             }
           ]
@@ -4245,7 +4245,7 @@
         "Life_Timer": {
           "modifierName": "",
           "duration": "Rabbit_LifeTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "KillSelf"
@@ -4262,11 +4262,11 @@
           "$type": "KillSelf",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "target": "OriginOwner",
               "key": "_ABILITY_Yaoyao_Is_ElementalBurst",
-              "ratio": 0.0,
-              "NHIKJLNOOBG": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             }
           ]
         }
@@ -4274,7 +4274,7 @@
       "onAbilityStart": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 3.0,
+          "value": 3.0,
           "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_RandomValue",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -4282,7 +4282,7 @@
         {
           "$type": "Predicated",
           "otherTargets": {
-            "$type": "LHFNEJIPKPO",
+            "$type": "SelectTargetsByShape",
             "topLimit": 1,
             "entityTypePriority": [
               "Avatar"
@@ -4290,20 +4290,20 @@
             "sortType": "LowHpRatio",
             "shapeName": "CircleR8H10",
             "campTargetType": "SelfCamp",
-            "GCBPANBPBHC": 1.0
+            "sizeRatio": 1.0
           },
           "targetPredicates": [
             {
-              "$type": "JGAKMAOIFND",
-              "PIOAFIFGFGM": 0.699999988079071
+              "$type": "ByTargetHPRatio",
+              "HPRatio": 0.699999988079071
             },
             {
-              "$type": "DMKIHIEKBCM",
+              "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "JGAKMAOIFND",
+                  "$type": "ByTargetHPRatio",
                   "logic": "Equal",
-                  "PIOAFIFGFGM": 1.0
+                  "HPRatio": 1.0
                 }
               ]
             }
@@ -4311,7 +4311,7 @@
           "successActions": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
+              "value": 2.0,
               "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_RandomValue",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -4321,30 +4321,30 @@
         {
           "$type": "Predicated",
           "otherTargets": {
-            "$type": "LHFNEJIPKPO",
+            "$type": "SelectTargetsByShape",
             "shapeName": "CircleR8H10",
             "campTargetType": "Enemy",
-            "GCBPANBPBHC": 1.0
+            "sizeRatio": 1.0
           },
           "targetPredicates": [
             {
-              "$type": "OCBHACLGALE",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Monster",
                 "Gadget"
               ]
             },
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ANIMAL_ENTITY_TYPE",
-              "ratio": 0.0,
-              "NHIKJLNOOBG": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             }
           ],
           "successActions": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_RandomValue",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -4354,7 +4354,7 @@
         {
           "$type": "Predicated",
           "otherTargets": {
-            "$type": "LHFNEJIPKPO",
+            "$type": "SelectTargetsByShape",
             "topLimit": 1,
             "entityTypePriority": [
               "Avatar"
@@ -4362,19 +4362,19 @@
             "sortType": "LowHpRatio",
             "shapeName": "CircleR8H10",
             "campTargetType": "SelfCamp",
-            "GCBPANBPBHC": 1.0
+            "sizeRatio": 1.0
           },
           "targetPredicates": [
             {
-              "$type": "JGAKMAOIFND",
+              "$type": "ByTargetHPRatio",
               "logic": "LesserOrEqual",
-              "PIOAFIFGFGM": 0.699999988079071
+              "HPRatio": 0.699999988079071
             }
           ],
           "successActions": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
+              "value": 2.0,
               "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_RandomValue",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -4385,16 +4385,16 @@
           "$type": "Predicated",
           "targetPredicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_RandomValue",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "successActions": [
             {
               "$type": "SetSelfAttackTarget",
               "otherTargets": {
-                "$type": "LHFNEJIPKPO",
+                "$type": "SelectTargetsByShape",
                 "topLimit": 1,
                 "entityTypePriority": [
                   "Monster",
@@ -4403,21 +4403,21 @@
                 "sortType": "Random",
                 "shapeName": "CircleR8H10",
                 "campTargetType": "Enemy",
-                "GCBPANBPBHC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster",
                     "Gadget"
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ]
             },
@@ -4432,21 +4432,21 @@
               "$type": "TriggerBullet",
               "bulletID": 41077003,
               "born": {
-                "$type": "JIKCNOBCHGH",
+                "$type": "ConfigBornByAttachPoint",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "INILOPENDHK": {
-                  "$type": "FNGFFMFIDIM",
-                  "GCNLPNIOLDK": {
-                    "EJNNCBMCPOB": 0.0,
-                    "OIODIHMNJPJ": 0.0,
-                    "CFFEIADEGNK": 0.0
+                "direction": {
+                  "$type": "ConfigDirectionByEntity",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
                   }
                 },
-                "IEDBIKLIONM": true,
+                "useRotation": true,
                 "attachPointName": "Bullet"
               }
             }
@@ -4456,16 +4456,16 @@
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Yaoyao_ElementalArt_Rabbit_RandomValue",
-                  "ratio": 2.0
+                  "value": 2.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "SetSelfAttackTarget",
                   "otherTargets": {
-                    "$type": "LHFNEJIPKPO",
+                    "$type": "SelectTargetsByShape",
                     "topLimit": 1,
                     "entityTypePriority": [
                       "Avatar"
@@ -4473,11 +4473,11 @@
                     "sortType": "LowHpRatio",
                     "shapeName": "CircleR8H10",
                     "campTargetType": "SelfCamp",
-                    "GCBPANBPBHC": 1.0
+                    "sizeRatio": 1.0
                   },
                   "predicates": [
                     {
-                      "$type": "OCBHACLGALE",
+                      "$type": "ByEntityTypes",
                       "entityTypes": [
                         "Avatar"
                       ]
@@ -4490,21 +4490,21 @@
                   "$type": "TriggerBullet",
                   "bulletID": 41077003,
                   "born": {
-                    "$type": "JIKCNOBCHGH",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "INILOPENDHK": {
-                      "$type": "FNGFFMFIDIM",
-                      "GCNLPNIOLDK": {
-                        "EJNNCBMCPOB": 0.0,
-                        "OIODIHMNJPJ": 0.0,
-                        "CFFEIADEGNK": 0.0
+                    "direction": {
+                      "$type": "ConfigDirectionByEntity",
+                      "angleOffset": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
                     },
-                    "IEDBIKLIONM": true,
+                    "useRotation": true,
                     "attachPointName": "Bullet"
                   },
                   "trackTarget": "SelfAttackActiveTarget"
@@ -4519,21 +4519,21 @@
                   "$type": "TriggerBullet",
                   "bulletID": 41077003,
                   "born": {
-                    "$type": "JIKCNOBCHGH",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "INILOPENDHK": {
-                      "$type": "FNGFFMFIDIM",
-                      "GCNLPNIOLDK": {
-                        "EJNNCBMCPOB": 0.0,
-                        "OIODIHMNJPJ": 0.0,
-                        "CFFEIADEGNK": 0.0
+                    "direction": {
+                      "$type": "ConfigDirectionByEntity",
+                      "angleOffset": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
                     },
-                    "IEDBIKLIONM": true,
+                    "useRotation": true,
                     "attachPointName": "Bullet"
                   }
                 }
@@ -4545,7 +4545,7 @@
       "onKill": [
         {
           "$type": "FireEffect",
-          "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_Disappear",
+          "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_Disappear",
           "effectTempleteID": -1.0
         }
       ]
@@ -4559,7 +4559,7 @@
         "Life_Timer": {
           "modifierName": "",
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -2.0
           },
@@ -4583,17 +4583,17 @@
           "$type": "TriggerBullet",
           "bulletID": 41077013,
           "born": {
-            "$type": "JIKCNOBCHGH",
+            "$type": "ConfigBornByAttachPoint",
             "offset": {
-              "EJNNCBMCPOB": 0.0,
-              "OIODIHMNJPJ": 0.0,
-              "CFFEIADEGNK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
-            "INILOPENDHK": {
-              "$type": "FNGFFMFIDIM",
+            "direction": {
+              "$type": "ConfigDirectionByEntity",
               "PAFBKFELPKE": true
             },
-            "IEDBIKLIONM": true,
+            "useRotation": true,
             "attachPointName": "BulletTrigger"
           },
           "trackTarget": "Self"
@@ -4617,7 +4617,7 @@
         "Life_Timer": {
           "modifierName": "",
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "KillSelf"
@@ -4637,7 +4637,7 @@
           "target": "OriginOwner",
           "key": "_ABILITY_Yaoyao_ElementalBurst_Rabbit_Pos",
           "born": {
-            "$type": "HLHLJAHKGKI"
+            "$type": "ConfigBornByCollisionPoint"
           }
         },
         {
@@ -4645,25 +4645,25 @@
           "target": "OriginOwner",
           "key": "_ABILITY_Yaoyao_ElementalBurst_Rabbit_Dir",
           "born": {
-            "$type": "CINPPKLNADH",
-            "INILOPENDHK": {
-              "$type": "FNGFFMFIDIM",
-              "GCNLPNIOLDK": {
-                "EJNNCBMCPOB": 0.0,
-                "OIODIHMNJPJ": 180.0,
-                "CFFEIADEGNK": 0.0
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "$type": "ConfigDirectionByEntity",
+              "angleOffset": {
+                "x": 0.0,
+                "y": 180.0,
+                "z": 0.0
               }
             },
-            "IEDBIKLIONM": true
+            "useRotation": true
           }
         },
         {
           "$type": "FireEffect",
-          "shieldHP": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_Born_Ground",
+          "effectPattern": "Eff_Avatar_Loli_Pole_Yaoyao_ElementalArt_Rabbit_Born_Ground",
           "born": {
-            "$type": "NHIAENEEFCC",
-            "EFLKPFAOPCH": true,
-            "OJLGGEEIHCH": 4.0,
+            "$type": "ConfigBornByGlobalValue",
+            "onGround": true,
+            "onGroundRaycastUpDist": 4.0,
             "positionKey": "_ABILITY_Yaoyao_ElementalBurst_Rabbit_Pos",
             "directionKey": "_ABILITY_Yaoyao_ElementalBurst_Rabbit_Dir"
           },
@@ -4672,7 +4672,7 @@
         {
           "$type": "TriggerAbility",
           "target": "OriginOwner",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "abilityName": "Avatar_Yaoyao_ElementalBurst_CreateGadget"
         },
         {
@@ -4689,15 +4689,15 @@
         {
           "$type": "CreateGadget",
           "born": {
-            "$type": "HLHLJAHKGKI",
+            "$type": "ConfigBornByCollisionPoint",
             "offset": {
-              "EJNNCBMCPOB": 0.0,
-              "OIODIHMNJPJ": 0.0,
-              "CFFEIADEGNK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
-            "EFLKPFAOPCH": true,
-            "INILOPENDHK": {
-              "$type": "MOFCOPHNHGC",
+            "onGround": true,
+            "direction": {
+              "$type": "ConfigDirectionByWorld",
               "eularAngles": {
                 "x": 0.10000000149011612,
                 "y": 0.10000000149011612,
@@ -4736,7 +4736,7 @@
         "Yaoyao_PermanentSkill_1_Handler": {
           "modifierName": "",
           "duration": 8.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.6000000238418579,
           "modifierMixins": [
             {
@@ -4753,7 +4753,7 @@
             {
               "$type": "SetSelfAttackTarget",
               "otherTargets": {
-                "$type": "LHFNEJIPKPO",
+                "$type": "SelectTargetsByShape",
                 "topLimit": 1,
                 "entityTypePriority": [
                   "Monster",
@@ -4762,27 +4762,27 @@
                 "sortType": "Random",
                 "shapeName": "CircleR8H10",
                 "campTargetType": "Enemy",
-                "GCBPANBPBHC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster",
                     "Gadget"
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Yaoyao_PermanentSkill_1_Mark",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ]
             },
@@ -4790,35 +4790,35 @@
               "$type": "TriggerBullet",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Yaoyao_PermanentSkill_1_Mark",
-                  "ratio": 1.0
+                  "value": 1.0
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Yaoyao_Is_ElementalBurst",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "bulletID": 41077003,
               "born": {
-                "$type": "JIKCNOBCHGH",
+                "$type": "ConfigBornByAttachPoint",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "INILOPENDHK": {
-                  "$type": "FNGFFMFIDIM",
-                  "GCNLPNIOLDK": {
-                    "EJNNCBMCPOB": 0.0,
-                    "OIODIHMNJPJ": 0.0,
-                    "CFFEIADEGNK": 0.0
+                "direction": {
+                  "$type": "ConfigDirectionByEntity",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
                   }
                 },
-                "IEDBIKLIONM": true,
+                "useRotation": true,
                 "attachPointName": "PRIVATE_Back"
               }
             }
@@ -4826,12 +4826,12 @@
         },
         "Yaoyao_PermanentSkill_1_Mark": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Yaoyao_PermanentSkill_1_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -4840,8 +4840,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Yaoyao_PermanentSkill_1_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -4852,8 +4852,8 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Yaoyao_PermanentSkill_1_Mark",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -4873,21 +4873,21 @@
       "modifiers": {
         "Yaoyao_PermanentSkill_2_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Other",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "MAOJMGFBDKD",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "PermanentSkill_2"
                   ]
                 },
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
@@ -4897,13 +4897,13 @@
                 {
                   "$type": "RemoveUniqueModifier",
                   "target": "Target",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Yaoyao_PermanentSkill_2_Hot"
                 },
                 {
                   "$type": "ApplyModifier",
                   "target": "Target",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Yaoyao_PermanentSkill_2_Hot"
                 }
               ]
@@ -4918,13 +4918,13 @@
             0.5,
             "ADD"
           ],
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 1.0,
           "onThinkInterval": [
             {
               "$type": "HealHP",
-              "PositionDampTime": true,
-              "amountByTargetCurrentHPRatio": "Yaoyao_PermanentSkill_2_Hot_Ratio"
+              "doOffStage": true,
+              "amountByCasterMaxHPRatio": "Yaoyao_PermanentSkill_2_Hot_Ratio"
             }
           ],
           "onThinkIntervalIsFixedUpdate": true
@@ -4949,14 +4949,14 @@
           "onTriggerSkill": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Yaoyao_Constellation_4_Cache",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": [
+              "value": [
                 "FIGHT_PROP_MAX_HP",
                 "Yaoyao_Constellation_4_Ratio",
                 "MUL"
@@ -4987,14 +4987,14 @@
           "onTriggerUltimateSkill": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Yaoyao_Constellation_4_Cache",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": [
+              "value": [
                 "FIGHT_PROP_MAX_HP",
                 "Yaoyao_Constellation_4_Ratio",
                 "MUL"
@@ -5040,7 +5040,7 @@
             0.800000011920929,
             "ADD"
           ],
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_ElemMasteryExtraDelta": "Yaoyao_ElemMasteryExtraDelta"
           },
@@ -5051,7 +5051,7 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Yaoyao_Constellation_4_Cache",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -5067,13 +5067,13 @@
       "modifiers": {
         "Stealth_Animal_Misc_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 5.0,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
               "target": "CurTeamAvatars",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Stealth_Animal_Misc"
             }
           ]
@@ -5081,7 +5081,7 @@
         "UNIQUE_Stealth_Animal_Misc": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AIPerceptionMixin",
@@ -5097,12 +5097,12 @@
         {
           "$type": "AttachModifier",
           "target": "CurTeamAvatars",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_Stealth_Animal_Misc"
         },
         {
           "$type": "AttachModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "Stealth_Animal_Misc_Handler"
         }
       ],

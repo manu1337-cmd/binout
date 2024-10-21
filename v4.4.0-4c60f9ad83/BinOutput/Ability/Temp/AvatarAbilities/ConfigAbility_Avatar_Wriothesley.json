@@ -9,7 +9,7 @@
           "skillID": 10861,
           "chargeTime": 0.11999999731779099,
           "secondChargeTime": 0.20000000298023224,
-          "OnBeginUncharged": [
+          "onBeginUncharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "DoSkill"
@@ -17,7 +17,7 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1.0
             },
             {
               "$type": "SetAnimatorBool",
@@ -25,25 +25,25 @@
             },
             {
               "$type": "RemoveModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "Avatar_Wrio_ExtraAttackTrigger_HighTickFrequency"
             }
           ],
-          "OnReleaseUncharged": [
+          "onReleaseUncharged": [
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
-          "OnBeginCharged": [
+          "onBeginCharged": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging",
-              "ratio": true
+              "value": true
             }
           ],
-          "OnReleaseCharged": [
+          "onReleaseCharged": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
@@ -51,10 +51,10 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
-          "OnBeginSecondCharged": [
+          "onBeginSecondCharged": [
             {
               "$type": "AttachModifier",
               "modifierName": "Avatar_Wrio_ExtraAttackTrigger_HighTickFrequency"
@@ -67,7 +67,7 @@
           "OnReleaseSecondCharged": [
             {
               "$type": "RemoveModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "Avatar_Wrio_ExtraAttackTrigger_HighTickFrequency"
             }
           ],
@@ -112,28 +112,28 @@
         "Avatar_Wrio_ExtraAttackTrigger_HighTickFrequency": {
           "modifierName": "",
           "duration": 5.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.029999999329447746,
           "onThinkInterval": [
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "GANAKOPLMGI",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "CDIPLFJLMNO",
+                      "$type": "ByLocalAvatarStamina",
                       "logic": "GreaterOrEqual",
-                      "EHMLCAAGIMF": [
+                      "stamina": [
                         "Wriothesley_ExtraAttack_Stamina_Cost",
                         "Flexible_Stamina",
                         "ADD"
                       ]
                     },
                     {
-                      "$type": "BMLGBKCIOIN",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Wriothesley_ExtraAttack_Buff_Flag",
-                      "ratio": 1.0
+                      "value": 1.0
                     }
                   ]
                 }
@@ -146,7 +146,7 @@
                 {
                   "$type": "SetAnimatorInt",
                   "intID": "SkillID",
-                  "ratio": 6.0
+                  "value": 6.0
                 }
               ]
             }
@@ -154,7 +154,7 @@
         },
         "ExtraAttack_ClearTrigger": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "RemoveModifier",
@@ -164,56 +164,56 @@
         },
         "ExtraAttack_StaminaCost": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Wriothesley_ExtraAttack_Buff_Flag",
-                  "ratio": 0.0,
-                  "CHDEOOKOFDK": true,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "forceByCaster": true,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "skillID": 10003,
-              "amountByCasterMaxHPRatio": 1.0,
-              "costStaminaDelta": "Wriothesley_ExtraAttack_Stamina_Cost"
+              "cdRatio": 1.0,
+              "costStaminaRatio": "Wriothesley_ExtraAttack_Stamina_Cost"
             },
             {
               "$type": "AvatarSkillStart",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Wriothesley_ExtraAttack_Buff_Flag",
-                  "ratio": 1.0,
-                  "CHDEOOKOFDK": true
+                  "value": 1.0,
+                  "forceByCaster": true
                 }
               ],
               "skillID": 10003,
-              "amountByCasterMaxHPRatio": 1.0,
-              "costStaminaDelta": 0.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 0.0
             }
           ]
         },
         "Sprint_KeepComboCount": {
           "modifierName": "",
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.10000000149011612,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "predicates": [
                 {
-                  "$type": "BNBCAPKFNNP",
+                  "$type": "ByAnimatorInt",
                   "logic": "Equal",
-                  "ratio": 1,
+                  "value": 1,
                   "parameter": "ComboCount"
                 }
               ],
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Wriothesley_NormalAttack_Combo",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -222,13 +222,13 @@
               "$type": "SetGlobalValue",
               "predicates": [
                 {
-                  "$type": "BNBCAPKFNNP",
+                  "$type": "ByAnimatorInt",
                   "logic": "Equal",
-                  "ratio": 2,
+                  "value": 2,
                   "parameter": "ComboCount"
                 }
               ],
-              "ratio": 2.0,
+              "value": 2.0,
               "key": "_ABILITY_Wriothesley_NormalAttack_Combo",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -237,13 +237,13 @@
               "$type": "SetGlobalValue",
               "predicates": [
                 {
-                  "$type": "BNBCAPKFNNP",
+                  "$type": "ByAnimatorInt",
                   "logic": "Equal",
-                  "ratio": 3,
+                  "value": 3,
                   "parameter": "ComboCount"
                 }
               ],
-              "ratio": 3.0,
+              "value": 3.0,
               "key": "_ABILITY_Wriothesley_NormalAttack_Combo",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -252,13 +252,13 @@
               "$type": "SetGlobalValue",
               "predicates": [
                 {
-                  "$type": "BNBCAPKFNNP",
+                  "$type": "ByAnimatorInt",
                   "logic": "Equal",
-                  "ratio": 4,
+                  "value": 4,
                   "parameter": "ComboCount"
                 }
               ],
-              "ratio": 4.0,
+              "value": 4.0,
               "key": "_ABILITY_Wriothesley_NormalAttack_Combo",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -267,13 +267,13 @@
               "$type": "SetGlobalValue",
               "predicates": [
                 {
-                  "$type": "BNBCAPKFNNP",
+                  "$type": "ByAnimatorInt",
                   "logic": "GreaterOrEqual",
-                  "ratio": 5,
+                  "value": 5,
                   "parameter": "ComboCount"
                 }
               ],
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Wriothesley_NormalAttack_Combo",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -287,14 +287,14 @@
           "onRemoved": [
             {
               "$type": "SetAnimatorInt",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "intID": "ComboCount",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Wriothesley_NormalAttack_Combo",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -304,7 +304,7 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "ComboCount",
-              "ratio": "Combo_Count"
+              "value": "Combo_Count"
             }
           ]
         }
@@ -312,7 +312,7 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Wriothesley_NormalAttack_Combo",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -335,10 +335,10 @@
           "$type": "Predicated",
           "targetPredicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Wriothesley_ExtraAttack_Buff_Flag",
-              "ratio": 1.0,
-              "CHDEOOKOFDK": true
+              "value": 1.0,
+              "forceByCaster": true
             }
           ],
           "successActions": [
@@ -346,35 +346,35 @@
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "Wriothesley_Constellation_6"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Wriothesley_Constellation_6"
                 }
               ],
               "successActions": [
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_ExtraAttack_Cast_ElementalArt",
+                  "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_ExtraAttack_Cast_ElementalArt",
                   "effectTempleteID": -1.0
                 },
                 {
                   "$type": "TriggerAttackEvent",
                   "attackEvent": {
                     "attackPattern": {
-                      "$type": "BOIOFIPLBNK",
+                      "$type": "ConfigAttackBox",
                       "triggerType": "TriggerNoRepeat",
                       "born": {
-                        "$type": "AJCFIBNMGKO",
+                        "$type": "ConfigBornBySelf",
                         "offset": {
-                          "EMBMLEBGFOI": 0.0,
-                          "NABPJFNICAE": 1.399999976158142,
-                          "MLOLIKEJCKB": -0.800000011920929
+                          "x": 0.0,
+                          "y": 1.399999976158142,
+                          "z": -0.800000011920929
                         },
-                        "NLBFCDKCPAH": true
+                        "useRotation": true
                       },
                       "size": {
-                        "EMBMLEBGFOI": 4.0,
-                        "NABPJFNICAE": 4.0,
-                        "MLOLIKEJCKB": 5.0
+                        "x": 4.0,
+                        "y": 4.0,
+                        "z": 5.0
                       }
                     },
                     "attackInfo": {
@@ -382,15 +382,15 @@
                       "attenuationTag": "",
                       "attenuationGroup": "default",
                       "attackProperty": {
-                        "ACKCDHKEGCK": "Wriothesley_ExtraAttack_Damage_AtkRatio",
-                        "JIICGJODDDM": 0.0,
+                        "damagePercentage": "Wriothesley_ExtraAttack_Damage_AtkRatio",
+                        "damagePercentageRatio": 0.0,
                         "elementType": "Ice",
-                        "bonusCriticalHurt": 25.0,
+                        "elementDurability": 25.0,
                         "strikeType": "Blunt",
                         "enBreak": 110.0,
                         "attackType": "Melee",
                         "bonusCritical": "Wriothesley_ExtraAttack_Constellation_6_CritRate",
-                        "CBNLJFOGCDH": "Wriothesley_ExtraAttack_Constellation_6_CritHurt",
+                        "bonusCriticalHurt": "Wriothesley_ExtraAttack_Constellation_6_CritHurt",
                         "damagePercentage": 0.0
                       },
                       "hitPattern": {
@@ -398,7 +398,7 @@
                         "hitImpulseType": "LV7",
                         "overrideHitImpulse": {
                           "hitLevel": "Air",
-                          "LPIJAJONFHC": 0.0,
+                          "hitImpulseX": 0.0,
                           "hitImpulseY": 420.0
                         },
                         "retreatType": "ByAttackerForward",
@@ -420,28 +420,28 @@
                 },
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_ExtraAttack_Cast_Ultra",
+                  "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_ExtraAttack_Cast_Ultra",
                   "effectTempleteID": -1.0
                 },
                 {
                   "$type": "TriggerAttackEvent",
                   "attackEvent": {
                     "attackPattern": {
-                      "$type": "BOIOFIPLBNK",
+                      "$type": "ConfigAttackBox",
                       "triggerType": "TriggerNoRepeat",
                       "born": {
-                        "$type": "AJCFIBNMGKO",
+                        "$type": "ConfigBornBySelf",
                         "offset": {
-                          "EMBMLEBGFOI": 0.0,
-                          "NABPJFNICAE": 1.399999976158142,
-                          "MLOLIKEJCKB": -0.800000011920929
+                          "x": 0.0,
+                          "y": 1.399999976158142,
+                          "z": -0.800000011920929
                         },
-                        "NLBFCDKCPAH": true
+                        "useRotation": true
                       },
                       "size": {
-                        "EMBMLEBGFOI": 4.0,
-                        "NABPJFNICAE": 4.0,
-                        "MLOLIKEJCKB": 5.0
+                        "x": 4.0,
+                        "y": 4.0,
+                        "z": 5.0
                       }
                     },
                     "attackInfo": {
@@ -449,19 +449,19 @@
                       "attenuationTag": "",
                       "attenuationGroup": "default",
                       "attackProperty": {
-                        "ACKCDHKEGCK": [
+                        "damagePercentage": [
                           "Wriothesley_ExtraAttack_Damage_AtkRatio",
                           "Wriothesley_ExtraAttack_Constellation_6_Ratio",
                           "MUL"
                         ],
-                        "JIICGJODDDM": 0.0,
+                        "damagePercentageRatio": 0.0,
                         "elementType": "Ice",
-                        "bonusCriticalHurt": 25.0,
+                        "elementDurability": 25.0,
                         "strikeType": "Default",
                         "enBreak": 50.0,
                         "attackType": "Melee",
                         "bonusCritical": "Wriothesley_ExtraAttack_Constellation_6_CritRate",
-                        "CBNLJFOGCDH": "Wriothesley_ExtraAttack_Constellation_6_CritHurt",
+                        "bonusCriticalHurt": "Wriothesley_ExtraAttack_Constellation_6_CritHurt",
                         "damagePercentage": 0.0
                       },
                       "hitPattern": {
@@ -488,28 +488,28 @@
               "failActions": [
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_ExtraAttack_Cast_ElementalArt",
+                  "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_ExtraAttack_Cast_ElementalArt",
                   "effectTempleteID": -1.0
                 },
                 {
                   "$type": "TriggerAttackEvent",
                   "attackEvent": {
                     "attackPattern": {
-                      "$type": "BOIOFIPLBNK",
+                      "$type": "ConfigAttackBox",
                       "triggerType": "TriggerNoRepeat",
                       "born": {
-                        "$type": "AJCFIBNMGKO",
+                        "$type": "ConfigBornBySelf",
                         "offset": {
-                          "EMBMLEBGFOI": 0.0,
-                          "NABPJFNICAE": 1.399999976158142,
-                          "MLOLIKEJCKB": -0.800000011920929
+                          "x": 0.0,
+                          "y": 1.399999976158142,
+                          "z": -0.800000011920929
                         },
-                        "NLBFCDKCPAH": true
+                        "useRotation": true
                       },
                       "size": {
-                        "EMBMLEBGFOI": 4.0,
-                        "NABPJFNICAE": 4.0,
-                        "MLOLIKEJCKB": 5.0
+                        "x": 4.0,
+                        "y": 4.0,
+                        "z": 5.0
                       }
                     },
                     "attackInfo": {
@@ -517,10 +517,10 @@
                       "attenuationTag": "",
                       "attenuationGroup": "default",
                       "attackProperty": {
-                        "ACKCDHKEGCK": "Wriothesley_ExtraAttack_Damage_AtkRatio",
-                        "JIICGJODDDM": 0.0,
+                        "damagePercentage": "Wriothesley_ExtraAttack_Damage_AtkRatio",
+                        "damagePercentageRatio": 0.0,
                         "elementType": "Ice",
-                        "bonusCriticalHurt": 25.0,
+                        "elementDurability": 25.0,
                         "strikeType": "Blunt",
                         "enBreak": 110.0,
                         "attackType": "Melee",
@@ -531,7 +531,7 @@
                         "hitImpulseType": "LV7",
                         "overrideHitImpulse": {
                           "hitLevel": "Air",
-                          "LPIJAJONFHC": 0.0,
+                          "hitImpulseX": 0.0,
                           "hitImpulseY": 420.0
                         },
                         "retreatType": "ByAttackerForward",
@@ -557,37 +557,37 @@
           "failActions": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_ExtraAttack_Cast",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_ExtraAttack_Cast",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Wriothesley_ExtraAttack_Buff_Flag",
-                  "ratio": 0.0,
-                  "CHDEOOKOFDK": true,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "forceByCaster": true,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "BOIOFIPLBNK",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "AJCFIBNMGKO",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": 1.399999976158142,
-                      "MLOLIKEJCKB": -1.2000000476837158
+                      "x": 0.0,
+                      "y": 1.399999976158142,
+                      "z": -1.2000000476837158
                     },
-                    "NLBFCDKCPAH": true
+                    "useRotation": true
                   },
                   "size": {
-                    "EMBMLEBGFOI": 2.799999952316284,
-                    "NABPJFNICAE": 3.0,
-                    "MLOLIKEJCKB": 3.5999999046325684
+                    "x": 2.799999952316284,
+                    "y": 3.0,
+                    "z": 3.5999999046325684
                   }
                 },
                 "attackInfo": {
@@ -595,10 +595,10 @@
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Wriothesley_ExtraAttack_Damage_AtkRatio",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Wriothesley_ExtraAttack_Damage_AtkRatio",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 110.0,
                     "attackType": "Melee",
@@ -609,7 +609,7 @@
                     "hitImpulseType": "LV7",
                     "overrideHitImpulse": {
                       "hitLevel": "Air",
-                      "LPIJAJONFHC": 0.0,
+                      "hitImpulseX": 0.0,
                       "hitImpulseY": 420.0
                     },
                     "retreatType": "ByAttackerForward",
@@ -644,120 +644,120 @@
           "animEventNames": [
             "ATK01"
           ],
-          "ACKCDHKEGCK": "Wriothesley_NormalAttack_01_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Wriothesley_NormalAttack_01_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK02"
           ],
-          "ACKCDHKEGCK": "Wriothesley_NormalAttack_02_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Wriothesley_NormalAttack_02_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK03"
           ],
-          "ACKCDHKEGCK": "Wriothesley_NormalAttack_03_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Wriothesley_NormalAttack_03_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK04A"
           ],
-          "ACKCDHKEGCK": "Wriothesley_NormalAttack_04A_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Wriothesley_NormalAttack_04A_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK04B"
           ],
-          "ACKCDHKEGCK": "Wriothesley_NormalAttack_04B_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Wriothesley_NormalAttack_04B_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK05"
           ],
-          "ACKCDHKEGCK": "Wriothesley_NormalAttack_05_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Wriothesley_NormalAttack_05_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK01_ElementalArt"
           ],
-          "ACKCDHKEGCK": [
+          "damagePercentage": [
             "Wriothesley_NormalAttack_01_Damage_AtkRatio",
             "Wriothesley_ElementalArt_Buff_Ratio",
             "MUL"
           ],
-          "JIICGJODDDM": 0.0
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK02_ElementalArt"
           ],
-          "ACKCDHKEGCK": [
+          "damagePercentage": [
             "Wriothesley_NormalAttack_02_Damage_AtkRatio",
             "Wriothesley_ElementalArt_Buff_Ratio",
             "MUL"
           ],
-          "JIICGJODDDM": 0.0
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK03_ElementalArt"
           ],
-          "ACKCDHKEGCK": [
+          "damagePercentage": [
             "Wriothesley_NormalAttack_03_Damage_AtkRatio",
             "Wriothesley_ElementalArt_Buff_Ratio",
             "MUL"
           ],
-          "JIICGJODDDM": 0.0
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK04A_ElementalArt"
           ],
-          "ACKCDHKEGCK": [
+          "damagePercentage": [
             "Wriothesley_NormalAttack_04A_Damage_AtkRatio",
             "Wriothesley_ElementalArt_Buff_Ratio",
             "MUL"
           ],
-          "JIICGJODDDM": 0.0
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK04B_ElementalArt"
           ],
-          "ACKCDHKEGCK": [
+          "damagePercentage": [
             "Wriothesley_NormalAttack_04B_Damage_AtkRatio",
             "Wriothesley_ElementalArt_Buff_Ratio",
             "MUL"
           ],
-          "JIICGJODDDM": 0.0
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK05_ElementalArt"
           ],
-          "ACKCDHKEGCK": [
+          "damagePercentage": [
             "Wriothesley_NormalAttack_05_Damage_AtkRatio",
             "Wriothesley_ElementalArt_Buff_Ratio",
             "MUL"
           ],
-          "JIICGJODDDM": 0.0
+          "damagePercentageRatio": 0.0
         }
       ],
       "abilitySpecials": {
@@ -784,11 +784,11 @@
       "modifiers": {
         "Blank": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "Avatar_Wriothesley_AttackSpeed_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToGlobalValueMixin",
@@ -809,14 +809,14 @@
                 [
                   {
                     "$type": "ApplyModifier",
-                    "PositionDampTime": true,
+                    "doOffStage": true,
                     "modifierName": "Avatar_Wriothesley_AttackSpeed_Buff_Self_Timer"
                   }
                 ],
                 [
                   {
                     "$type": "ApplyModifier",
-                    "PositionDampTime": true,
+                    "doOffStage": true,
                     "modifierName": "Avatar_Wriothesley_AttackSpeed_Buff_Team_Timer"
                   }
                 ]
@@ -826,42 +826,42 @@
           "onBeingHealed": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Wriothesley_AttackSpeed_Buff",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "Predicated",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
                   "$type": "MGBEOHBKPCD",
                   "logic": "Equal",
-                  "ratio": 0.0
+                  "value": 0.0
                 },
                 {
-                  "$type": "HLLFAEKLJGA",
+                  "$type": "ByTargetHPRatio",
                   "target": "Self",
                   "logic": "Equal",
-                  "HCODJCODFCI": 1.0
+                  "HPRatio": 1.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "Predicated",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "targetPredicates": [
                     {
-                      "$type": "JOHLCNIOCHC"
+                      "$type": "ByIsLocalAvatar"
                     }
                   ],
                   "successActions": [
                     {
                       "$type": "SetGlobalValue",
-                      "PositionDampTime": true,
-                      "ratio": 1.0,
+                      "doOffStage": true,
+                      "value": 1.0,
                       "key": "_ABILITY_Wriothesley_AttackSpeed_Buff",
                       "maxValue": 0.0,
                       "minValue": 0.0
@@ -870,8 +870,8 @@
                   "failActions": [
                     {
                       "$type": "SetGlobalValue",
-                      "PositionDampTime": true,
-                      "ratio": 2.0,
+                      "doOffStage": true,
+                      "value": 2.0,
                       "key": "_ABILITY_Wriothesley_AttackSpeed_Buff",
                       "maxValue": 0.0,
                       "minValue": 0.0
@@ -884,7 +884,7 @@
         },
         "Avatar_Wriothesley_AttackSpeed_Buff_Self_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
@@ -894,12 +894,12 @@
         },
         "Avatar_Wriothesley_AttackSpeed_Buff_Team_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
               "target": "CurTeamAvatars",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Avatar_Wriothesley_AttackSpeed_Buff_Team"
             }
           ]
@@ -908,7 +908,7 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Animator_AttackSpeedRatio": "Wriothesley_AttackSpeed_Buff_Self"
           },
@@ -918,7 +918,7 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Animator_AttackSpeedRatio": "Wriothesley_AttackSpeed_Buff_Team"
           },
@@ -927,12 +927,12 @@
         "Avatar_Wriothesley_AttackSpeed_Buff_Self_Timer": {
           "modifierName": "",
           "duration": "Wriothesley_AttackSpeed_Buff_Self_Duration",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Wriothesley_AttackSpeed_Buff",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -942,12 +942,12 @@
         "Avatar_Wriothesley_AttackSpeed_Buff_Team_Timer": {
           "modifierName": "",
           "duration": "Wriothesley_AttackSpeed_Buff_Team_Duration",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Wriothesley_AttackSpeed_Buff",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1019,50 +1019,50 @@
       "modifiers": {
         "VFX_Jet": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_ElementalArt_Smoke_L",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_ElementalArt_Smoke_L",
               "effectTempleteID": -1.0
             },
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_ElementalArt_Smoke_R",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_ElementalArt_Smoke_R",
               "effectTempleteID": -1.0
             }
           ]
         },
         "VFX_CoolDownSmoke": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_CoolDownSmoke_L",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_CoolDownSmoke_L",
               "effectTempleteID": -1.0
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_CoolDownSmoke_R",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_CoolDownSmoke_R",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Rushmove": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FixedAvatarRushMove",
               "toPos": {
-                "$type": "AJCFIBNMGKO",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.0,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               },
               "timeRange": 0.20000000298023224,
               "maxRange": 6.0,
@@ -1075,47 +1075,47 @@
         },
         "SkinControl_1": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "intID": "SkinControl",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorInt",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "intID": "SkinControl",
-              "ratio": 0.0
+              "value": 0.0
             }
           ]
         },
         "SkinControl_2": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "intID": "SkinControl",
-              "ratio": 2.0
+              "value": 2.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorInt",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "intID": "SkinControl",
-              "ratio": 0.0
+              "value": 0.0
             }
           ]
         },
         "AfterImage_Attack04": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "EnableAfterImage",
@@ -1133,14 +1133,14 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Wriothesley_ElementalArt_Buff_Duration",
-          "bonusCriticalHurt": "Wriothesley_ElementalArt_Buff_Duration",
+          "elementDurability": "Wriothesley_ElementalArt_Buff_Duration",
           "modifierMixins": [
             {
               "$type": "AttachModifierToPredicateMixin",
               "predicates": [
                 {
-                  "$type": "HLLFAEKLJGA",
-                  "HCODJCODFCI": 0.5
+                  "$type": "ByTargetHPRatio",
+                  "HPRatio": 0.5
                 }
               ],
               "modifierName": "Avatar_Wriothesley_NormalAttack_Buff_Handler"
@@ -1153,8 +1153,8 @@
                   "$type": "AttachModifier",
                   "predicates": [
                     {
-                      "$type": "ICMKMNNHKNB",
-                      "FABCANIFKGH": "Wriothesley_PermanentSkill_2"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "Wriothesley_PermanentSkill_2"
                     }
                   ],
                   "modifierName": "UNIQUE_Wriothesley_HPUpDown_Buff"
@@ -1172,16 +1172,16 @@
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Wriothesley_ElementalArt_Buff_Extend_CD",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Wriothesley_Constellation_2_AddHurt_Stacking",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1192,13 +1192,13 @@
             },
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_Buff_LowHP",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_Buff_LowHP",
               "effectTempleteID": -1.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Wriothesley_ElementalArt_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1207,45 +1207,45 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Wriothesley_ElementalArt_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Wriothesley_Constellation_2_AddHurt_Stacking",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.10000000149011612,
+              "doOffStage": true,
+              "value": 0.10000000149011612,
               "key": "_ABILITY_Wriothesley_Constellation_1_Chance",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_Buff_LowHP_Dissolve",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_Buff_LowHP_Dissolve",
               "effectTempleteID": -1.0
             }
           ],
           "onKill": [
             {
               "$type": "RemoveUniqueModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Avatar_Wriothesley_ElementalArt_Buff_Handler"
             }
           ],
           "onAvatarOut": [
             {
               "$type": "RemoveUniqueModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Avatar_Wriothesley_ElementalArt_Buff_Handler"
             }
           ]
@@ -1253,11 +1253,11 @@
         "Avatar_Male_Catalyst_Wriothesley_Buff_VFX": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_Buff_Blast",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_Buff_Blast",
               "effectTempleteID": -1.0
             }
           ]
@@ -1270,21 +1270,21 @@
           },
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "Wriothesley_HPUpDown_AttackRatio"
           },
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "Wriothesley_Constellation_2"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Wriothesley_Constellation_2"
                 }
               ],
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Wriothesley_Constellation_2_AddHurt_Stacking",
               "useLimitRange": true,
               "maxValue": "Wriothesley_HPUpDown_Buff_Stacking_Max",
@@ -1295,7 +1295,7 @@
         },
         "Avatar_Wriothesley_NormalAttack_Buff_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ReplaceEventPatternMixin",
@@ -1320,12 +1320,12 @@
               "$type": "AttachModifier",
               "predicates": [
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "Wriothesley_Constellation_1"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Wriothesley_Constellation_1"
                 },
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "Wriothesley_PermanentSkill_1"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Wriothesley_PermanentSkill_1"
                 }
               ],
               "modifierName": "Avatar_Wriothesley_Constellation_1_Handler"
@@ -1337,7 +1337,7 @@
               "target": "Other",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "NormalAttack_01",
                     "NormalAttack_02",
@@ -1347,17 +1347,17 @@
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster",
                     "Gadget"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -1377,20 +1377,20 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 2.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "GenerateElemBall",
               "configID": 2022,
               "born": {
-                "$type": "ALJGHOOKOAP",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.0,
-                  "MLOLIKEJCKB": 1.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 1.0
                 }
               },
-              "value": 1.0,
+              "ratio": 1.0,
               "baseEnergy": 3.0
             }
           ]
@@ -1399,12 +1399,12 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.10000000149011612,
           "onAdded": [
             {
               "$type": "LoseHP",
-              "LBNLJFPDOGO": "Wriothesley_ElementalArt_Buff_LoseHP",
+              "amountByTargetMaxHPRatio": "Wriothesley_ElementalArt_Buff_LoseHP",
               "lethal": false,
               "amount": ""
             }
@@ -1412,7 +1412,7 @@
           "onThinkInterval": [
             {
               "$type": "RemoveModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "Avatar_Wriothesley_ElementalArt_LoseHP"
             }
           ],
@@ -1420,16 +1420,16 @@
         },
         "Blank": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "Avatar_Wriothesley_ExtraAttack_Buff_CD_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_Wriothesley_ExtraAttack_Buff_CD_Flag",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -0.5,
                 0.5,
@@ -1459,13 +1459,13 @@
             "Wriothesley_ExtraAttack_Buff_CD_Reduce",
             "SUB"
           ],
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
               "target": "Caster",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Wriothesley_ExtraAttack_Buff_CD_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1475,15 +1475,15 @@
         "Avatar_Wriothesley_ExtraAttack_Buff_Predicate": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToPredicateMixin",
               "predicates": [
                 {
-                  "$type": "HLLFAEKLJGA",
+                  "$type": "ByTargetHPRatio",
                   "logic": "LesserOrEqual",
-                  "HCODJCODFCI": "Wriothesley_ExtraAttack_Buff_HP_Threshold"
+                  "HPRatio": "Wriothesley_ExtraAttack_Buff_HP_Threshold"
                 }
               ],
               "modifierName": "Avatar_Wriothesley_ExtraAttack_Buff_Trigger"
@@ -1493,7 +1493,7 @@
         "Avatar_Wriothesley_ExtraAttack_Buff_Trigger": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -1504,14 +1504,14 @@
         "Avatar_Wriothesley_ExtraAttack_Buff_Handler": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "attackTags": [
                 "ExtraAttack"
               ],
-              "JIICGJODDDM": [
+              "damagePercentageRatio": [
                 "Wriothesley_ExtraAttack_Buff_Ratio",
                 "Wriothesley_ExtraAttack_Buff_Extra_Ratio",
                 "ADD"
@@ -1530,19 +1530,19 @@
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_Buff_Aura",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_Buff_Aura",
               "effectTempleteID": -1.0
             },
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_Buff_Mark",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_Buff_Mark",
               "effectTempleteID": -1.0
             },
             {
               "$type": "SetGlobalValue",
               "target": "Caster",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Wriothesley_ExtraAttack_Buff_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1552,8 +1552,8 @@
             {
               "$type": "SetGlobalValue",
               "target": "Caster",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Wriothesley_ExtraAttack_Buff_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1561,7 +1561,7 @@
             {
               "$type": "SetGlobalValue",
               "target": "Caster",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Wriothesley_ExtraAttack_Buff_CD_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1573,23 +1573,23 @@
               "target": "Other",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "ExtraAttack"
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster",
                     "Gadget"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -1603,21 +1603,21 @@
                 },
                 {
                   "$type": "AddElementDurability",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "predicates": [
                     {
-                      "$type": "BMLGBKCIOIN",
+                      "$type": "ByTargetGlobalValue",
                       "target": "Caster",
                       "key": "_ABILITY_Wriothesley_ElementalArt_Buff_Extend_CD",
-                      "ratio": 0.0,
-                      "PODFMDAEAGL": "LessAndEqual"
+                      "value": 0.0,
+                      "compareType": "LessAndEqual"
                     },
                     {
-                      "$type": "ICMKMNNHKNB",
-                      "FABCANIFKGH": "Wriothesley_Constellation_1"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "Wriothesley_Constellation_1"
                     }
                   ],
-                  "ratio": "Wriothesley_ElementalArt_Buff_Extend_Duration",
+                  "value": "Wriothesley_ElementalArt_Buff_Extend_Duration",
                   "modifierName": "UNIQUE_Avatar_Wriothesley_ElementalArt_Buff_Handler",
                   "useLimitRange": true,
                   "maxValue": [
@@ -1628,16 +1628,16 @@
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "PositionDampTime": true,
-                  "ratio": 1.0,
+                  "doOffStage": true,
+                  "value": 1.0,
                   "key": "_ABILITY_Wriothesley_ElementalArt_Buff_Extend_CD",
                   "maxValue": 0.0,
                   "minValue": 0.0
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "PositionDampTime": true,
-                  "ratio": 0.10000000149011612,
+                  "doOffStage": true,
+                  "value": 0.10000000149011612,
                   "key": "_ABILITY_Wriothesley_Constellation_1_Chance",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -1654,11 +1654,11 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "HealHP",
-              "amountByTargetCurrentHPRatio": [
+              "amountByCasterMaxHPRatio": [
                 "Wriothesley_ExtraAttack_Buff_HealHP",
                 "Wriothesley_ExtraAttack_Buff_HealHP_Extra",
                 "ADD"
@@ -1669,42 +1669,42 @@
         },
         "Avatar_Wriothesley_Constellation_1_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onHittingOther": [
             {
               "$type": "Predicated",
               "target": "Other",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "NormalAttack_05"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Wriothesley_ExtraAttack_Buff_CD_Flag",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Wriothesley_ExtraAttack_Buff_Flag",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -1722,8 +1722,8 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Wriothesley_ElementalArt_Buff_Mark",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -1732,8 +1732,8 @@
           "$type": "AttachModifier",
           "predicates": [
             {
-              "$type": "ICMKMNNHKNB",
-              "FABCANIFKGH": "Wriothesley_PermanentSkill_1"
+              "$type": "ByUnlockTalentParam",
+              "talentParam": "Wriothesley_PermanentSkill_1"
             }
           ],
           "modifierName": "Avatar_Wriothesley_ExtraAttack_Buff_CD_Handler"
@@ -1742,16 +1742,16 @@
       "onAbilityStart": [
         {
           "$type": "AvatarSkillStart",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "predicates": [
             {
-              "$type": "CJJOADBCAEH",
+              "$type": "BySkillReady",
               "skillID": 10862
             }
           ],
           "skillID": 10862,
-          "amountByCasterMaxHPRatio": 1.0,
-          "costStaminaDelta": 1.0
+          "cdRatio": 1.0,
+          "costStaminaRatio": 1.0
         },
         {
           "$type": "RemoveUniqueModifier",
@@ -1821,7 +1821,7 @@
       "modifiers": {
         "Emotion": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ControlEmotion",
@@ -1833,19 +1833,19 @@
           "onRemoved": [
             {
               "$type": "ControlEmotion",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ],
           "onAvatarOut": [
             {
               "$type": "ControlEmotion",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ]
         },
         "Disable_DungeonFog": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "DungeonFogEffects",
@@ -1856,7 +1856,7 @@
         },
         "Invincible": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "EffectChangeAlphaMixin",
@@ -1876,7 +1876,7 @@
         },
         "Post_Effect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "TriggerPostProcessEffectMixin",
@@ -1887,7 +1887,7 @@
         },
         "Weather": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "TriggerWeatherMixin",
@@ -1899,7 +1899,7 @@
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Wriothesley_Constellation_2_AddHurt_Stacking_Cache",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1913,47 +1913,47 @@
             },
             {
               "$type": "AvatarSkillStart",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "CJJOADBCAEH",
+                  "$type": "BySkillReady",
                   "skillID": 10865
                 }
               ],
               "skillID": 10865,
-              "amountByCasterMaxHPRatio": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             }
           ]
         },
         "Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "DIALJIOFPIN",
+                  "$type": "ByAttackNotHitScene",
                   "attackPattern": {
-                    "$type": "AHDHJOAODLF",
+                    "$type": "ConfigAttackSphere",
                     "triggerType": "TriggerNoRepeat",
                     "born": {
-                      "$type": "AJCFIBNMGKO",
+                      "$type": "ConfigBornBySelf",
                       "offset": {
-                        "EMBMLEBGFOI": 0.0,
-                        "NABPJFNICAE": 2.200000047683716,
-                        "MLOLIKEJCKB": 0.0
+                        "x": 0.0,
+                        "y": 2.200000047683716,
+                        "z": 0.0
                       },
-                      "NLBFCDKCPAH": true
+                      "useRotation": true
                     },
-                    "DLFACKMBPCH": 1.5
+                    "radius": 1.5
                   },
                   "EKNIGCODMEC": true
                 },
                 {
                   "$type": "BMFEEBJMPEL",
-                  "PODFMDAEAGL": "LessAndEqual",
+                  "compareType": "LessAndEqual",
                   "PPOJDAJAEKP": 0.5
                 }
               ],
@@ -1973,15 +1973,15 @@
               "failActions": [
                 {
                   "$type": "AttachEffect",
-                  "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_ElementalBurst_NoCamera",
+                  "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_ElementalBurst_NoCamera",
                   "born": {
-                    "$type": "AJCFIBNMGKO",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": 0.0,
-                      "MLOLIKEJCKB": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "NLBFCDKCPAH": true
+                    "useRotation": true
                   },
                   "effectTempleteID": -1.0
                 }
@@ -1995,11 +1995,11 @@
           "onRemoved": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             },
             {
               "$type": "AvatarCameraParam",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "cameraParam": {
                 "forceRadius": 6.0,
                 "forceRadiusDuration": 0.0,
@@ -2022,11 +2022,11 @@
             },
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             },
             {
               "$type": "EnableHeadControl",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "enable": true
             }
           ]
@@ -2035,8 +2035,8 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_ArkheGrade_Attack_CD",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -2072,13 +2072,13 @@
         {
           "$type": "CreateGadget",
           "born": {
-            "$type": "AJCFIBNMGKO",
+            "$type": "ConfigBornBySelf",
             "offset": {
-              "EMBMLEBGFOI": 0.0,
-              "NABPJFNICAE": 0.0,
-              "MLOLIKEJCKB": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
-            "NLBFCDKCPAH": true
+            "useRotation": true
           },
           "gadgetID": 41086001,
           "campID": 1001,
@@ -2095,7 +2095,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Wriothesley_ElementalBurst_Count",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             0.5,
             1.5,
@@ -2122,25 +2122,25 @@
                 "$type": "Predicated",
                 "targetPredicates": [
                   {
-                    "$type": "BMLGBKCIOIN",
+                    "$type": "ByTargetGlobalValue",
                     "target": "OriginOwner",
                     "key": "_ABILITY_ArkheGrade_Attack_CD",
-                    "ratio": 0.0,
-                    "PODFMDAEAGL": "NoneOrEqual"
+                    "value": 0.0,
+                    "compareType": "NoneOrEqual"
                   }
                 ],
                 "successActions": [
                   {
                     "$type": "AttachEffect",
-                    "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_ElementalBurst_Explode_Arkhe",
+                    "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_ElementalBurst_Explode_Arkhe",
                     "born": {
-                      "$type": "AJCFIBNMGKO",
+                      "$type": "ConfigBornBySelf",
                       "offset": {
-                        "EMBMLEBGFOI": 0.0,
-                        "NABPJFNICAE": 0.0,
-                        "MLOLIKEJCKB": 0.0
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       },
-                      "NLBFCDKCPAH": true
+                      "useRotation": true
                     },
                     "effectTempleteID": -1.0
                   }
@@ -2165,19 +2165,19 @@
       "modifiers": {
         "VFX": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_ElementalBurst_Explode",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_ElementalBurst_Explode",
               "born": {
-                "$type": "AJCFIBNMGKO",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.0,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               },
               "effectTempleteID": -1.0
             }
@@ -2185,27 +2185,27 @@
         },
         "ModifyDamage": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "attackTags": [
                 "Elemental_Burst"
               ],
-              "JIICGJODDDM": "Wriothesley_Constellation_2_AddHurt"
+              "damagePercentageRatio": "Wriothesley_Constellation_2_AddHurt"
             }
           ]
         },
         "Count": {
           "modifierName": "",
           "duration": 1.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.10000000149011612,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Wriothesley_ElementalBurst_Count",
               "useLimitRange": true,
               "maxValue": 10.0,
@@ -2215,8 +2215,8 @@
           "onThinkInterval": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Wriothesley_ElementalBurst_Count",
               "useLimitRange": true,
               "maxValue": 10.0,
@@ -2229,27 +2229,27 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "BOIOFIPLBNK",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "AJCFIBNMGKO",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": 2.0,
-                      "MLOLIKEJCKB": 0.0
+                      "x": 0.0,
+                      "y": 2.0,
+                      "z": 0.0
                     },
-                    "NLBFCDKCPAH": true
+                    "useRotation": true
                   },
                   "size": {
-                    "EMBMLEBGFOI": 8.0,
-                    "NABPJFNICAE": 5.0,
-                    "MLOLIKEJCKB": 16.0
+                    "x": 8.0,
+                    "y": 5.0,
+                    "z": 16.0
                   }
                 },
                 "attackInfo": {
@@ -2257,10 +2257,10 @@
                   "attenuationTag": "Elemental_Burst",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Wriothesley_ElementalBurst_Damage",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Wriothesley_ElementalBurst_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 50.0,
                     "attackType": "Melee",
@@ -2271,7 +2271,7 @@
                     "hitImpulseType": "LV4",
                     "overrideHitImpulse": {
                       "hitLevel": "Heavy",
-                      "LPIJAJONFHC": 400.0,
+                      "hitImpulseX": 400.0,
                       "hitImpulseY": 0.0
                     },
                     "retreatType": "ByAttackerForward"
@@ -2298,17 +2298,17 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "OriginOwner",
                   "key": "_ABILITY_ArkheGrade_Attack_CD",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -2316,21 +2316,21 @@
                   "$type": "TriggerAttackEvent",
                   "attackEvent": {
                     "attackPattern": {
-                      "$type": "BOIOFIPLBNK",
+                      "$type": "ConfigAttackBox",
                       "triggerType": "TriggerNoRepeat",
                       "born": {
-                        "$type": "AJCFIBNMGKO",
+                        "$type": "ConfigBornBySelf",
                         "offset": {
-                          "EMBMLEBGFOI": 0.0,
-                          "NABPJFNICAE": 2.0,
-                          "MLOLIKEJCKB": 0.0
+                          "x": 0.0,
+                          "y": 2.0,
+                          "z": 0.0
                         },
-                        "NLBFCDKCPAH": true
+                        "useRotation": true
                       },
                       "size": {
-                        "EMBMLEBGFOI": 10.0,
-                        "NABPJFNICAE": 5.0,
-                        "MLOLIKEJCKB": 16.0
+                        "x": 10.0,
+                        "y": 5.0,
+                        "z": 16.0
                       }
                     },
                     "attackInfo": {
@@ -2338,10 +2338,10 @@
                       "attenuationTag": "",
                       "attenuationGroup": "default",
                       "attackProperty": {
-                        "ACKCDHKEGCK": "Wriothesley_ElementalBurst_Damage_Arkhe",
-                        "JIICGJODDDM": 0.0,
+                        "damagePercentage": "Wriothesley_ElementalBurst_Damage_Arkhe",
+                        "damagePercentageRatio": 0.0,
                         "elementType": "Ice",
-                        "bonusCriticalHurt": 0.0,
+                        "elementDurability": 0.0,
                         "strikeType": "Default",
                         "enBreak": 20.0,
                         "attackType": "Melee",
@@ -2352,7 +2352,7 @@
                         "hitImpulseType": "LV7",
                         "overrideHitImpulse": {
                           "hitLevel": "Air",
-                          "LPIJAJONFHC": 0.0,
+                          "hitImpulseX": 0.0,
                           "hitImpulseY": 600.0
                         },
                         "retreatType": "ByAttackerForward",
@@ -2387,12 +2387,12 @@
         "Avatar_Wriothesley_ElementalBurst_Arkhe_CD_Handler": {
           "modifierName": "",
           "duration": "Wriothesley_ElementalBurst_Arkhe_CD",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_ArkheGrade_Attack_CD",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2401,8 +2401,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_ArkheGrade_Attack_CD",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2425,7 +2425,7 @@
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": [
+          "value": [
             "Wriothesley_Constellation_2_AddHurt_Ratio",
             "Wriothesley_Constellation_2_AddHurt_Stacking_Gadget",
             "MUL"
@@ -2441,7 +2441,7 @@
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Wriothesley_ElementalBurst_Count",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -2594,7 +2594,7 @@
       "modifiers": {
         "HideWeapon": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerHideWeapon",
@@ -2621,28 +2621,28 @@
         },
         "FallingAnthem_SetVisible": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerSetVisible",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerSetVisible",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "visible": true
             }
           ]
         },
         "FallingAnthem_BS_Material": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Catalyst_FallAnthem_BS_Ice",
+              "effectPattern": "Eff_Avatar_Catalyst_FallAnthem_BS_Ice",
               "effectTempleteID": -1.0
             },
             {
@@ -2653,7 +2653,7 @@
         },
         "FallingAnthem_BS_VelocityForce_Initialize": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -2.0
           },
@@ -2668,35 +2668,35 @@
         },
         "FallingAnthem_LoopDamage": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "AHDHJOAODLF",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "AJCFIBNMGKO",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": 0.0,
-                      "MLOLIKEJCKB": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "NLBFCDKCPAH": true
+                    "useRotation": true
                   },
-                  "DLFACKMBPCH": 1.5
+                  "radius": 1.5
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Wriothesley_FallingAnthem_Normal_Loop_Damage",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Wriothesley_FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 0.0,
+                    "elementDurability": 0.0,
                     "strikeType": "Default",
                     "enBreak": 5.0,
                     "damagePercentage": 0.0
@@ -2714,7 +2714,7 @@
         },
         "FallingAnthem_FallingDamageImmune_01": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ClearGlobalValue",
@@ -2724,12 +2724,12 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv0",
+              "value": "FallingAnthem_FallingDamageRatio_Lv0",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
@@ -2739,16 +2739,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "value": "FallingAnthem_Altitude_Lv1"
                 },
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv1",
+              "value": "FallingAnthem_FallingDamageRatio_Lv1",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
@@ -2758,16 +2758,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "value": "FallingAnthem_Altitude_Lv2"
                 },
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv1"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv2",
+              "value": "FallingAnthem_FallingDamageRatio_Lv2",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
@@ -2777,16 +2777,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "value": "FallingAnthem_Altitude_Lv3"
                 },
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv2"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv3",
+              "value": "FallingAnthem_FallingDamageRatio_Lv3",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
@@ -2796,11 +2796,11 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv3"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv4",
+              "value": "FallingAnthem_FallingDamageRatio_Lv4",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
@@ -2814,7 +2814,7 @@
         },
         "FallingAnthem_FallingDamageImmune_02": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -2829,14 +2829,14 @@
         },
         "FallingAnthem_FallingDamageImmune_03": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
           }
         },
         "Inertia": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ApplyInertiaVelocityMixin",
@@ -2847,18 +2847,18 @@
         },
         "FallingAnthem_Height_Detect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -2868,11 +2868,11 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
-              "ratio": 5.0,
+              "value": 5.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -2882,35 +2882,35 @@
               "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -2920,15 +2920,15 @@
         },
         "FallingAnthem_OverHead_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "HLKAIMGJOLH",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -2942,25 +2942,25 @@
         },
         "FallingAnthem_OverHead_Camera_Remover": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ]
         },
         "FallingAnthem_Landed_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "HLKAIMGJOLH",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -2974,7 +2974,7 @@
         },
         "FallingAnthem_ClearVelocityForce": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "RemoveVelocityForce",
@@ -2987,11 +2987,11 @@
         },
         "FallingAnthem_Attach_SelfEffect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Catalyst_FallAnthem_Self_Ice",
+              "effectPattern": "Eff_Avatar_Catalyst_FallAnthem_Self_Ice",
               "effectTempleteID": -1.0
             }
           ]
@@ -2999,7 +2999,7 @@
         "FallingAnthem_Remove_SelfEffect": {
           "modifierName": "",
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "RemoveModifier",
@@ -3010,7 +3010,7 @@
         "FallingAnthem_BSCameraRadialBlur": {
           "modifierName": "",
           "duration": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "CameraBlurMixin",
@@ -3025,16 +3025,16 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_FallingAnthem_UseCamera",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_FallingAttack_Altitude",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -3045,37 +3045,37 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "CHDEOOKOFDK": true,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "FPJICLLGBLO",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "ALJGHOOKOAP",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": -0.5,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 0.0
                 }
               },
               "height": 2.0,
-              "DLFACKMBPCH": 3.0
+              "radius": 3.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "ACKCDHKEGCK": "Wriothesley_FallingAnthem_Normal_Rank_1_Damage",
-                "JIICGJODDDM": 0.0,
+                "damagePercentage": "Wriothesley_FallingAnthem_Normal_Rank_1_Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Ice",
-                "bonusCriticalHurt": 25.0,
+                "elementDurability": 25.0,
                 "strikeType": "Default",
                 "enBreak": 50.0,
                 "damagePercentage": 0.0
@@ -3108,36 +3108,36 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "CHDEOOKOFDK": true
+              "value": 1.0,
+              "forceByCaster": true
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "FPJICLLGBLO",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "ALJGHOOKOAP",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": -0.5,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 0.0
                 }
               },
               "height": 2.0,
-              "DLFACKMBPCH": 3.5
+              "radius": 3.5
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "ACKCDHKEGCK": "Wriothesley_FallingAnthem_Normal_Rank_2_Damage",
-                "JIICGJODDDM": 0.0,
+                "damagePercentage": "Wriothesley_FallingAnthem_Normal_Rank_2_Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Ice",
-                "bonusCriticalHurt": 25.0,
+                "elementDurability": 25.0,
                 "strikeType": "Default",
                 "enBreak": 100.0,
                 "damagePercentage": 0.0
@@ -3171,27 +3171,27 @@
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "CHDEOOKOFDK": true,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             }
           ],
-          "shieldHP": "Eff_Avatar_Catalyst_FallAnthem_Strike_01_Ice",
+          "effectPattern": "Eff_Avatar_Catalyst_FallAnthem_Strike_01_Ice",
           "effectTempleteID": -1.0
         },
         {
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "CHDEOOKOFDK": true
+              "value": 1.0,
+              "forceByCaster": true
             }
           ],
-          "shieldHP": "Eff_Avatar_Catalyst_FallAnthem_Strike_02_Ice",
+          "effectPattern": "Eff_Avatar_Catalyst_FallAnthem_Strike_02_Ice",
           "effectTempleteID": -1.0
         }
       ]
@@ -3223,7 +3223,7 @@
         },
         {
           "$type": "AttachToMultiNormalizedTimeMixin",
-          "ANCNKEPIBBL": [
+          "normalizedStateIDList": [
             {
               "stateID": "Attack01"
             },
@@ -3610,17 +3610,17 @@
       "modifiers": {
         "Avatar_Wriothesley_Gauntlet_Handler_VFX": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_Gauntlet_R",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_Gauntlet_R",
               "effectTempleteID": -1.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Wriothesley_Ganutlet_Dissolved",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -3631,20 +3631,20 @@
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Wriothesley_Ganutlet_Dissolved",
-                  "ratio": 0.0,
-                  "CHDEOOKOFDK": true
+                  "value": 0.0,
+                  "forceByCaster": true
                 }
               ],
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_Gauntlet_Dissolve_R",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_Gauntlet_Dissolve_R",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Avatar_Wriothesley_Weapon_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerHideWeapon",
@@ -3673,24 +3673,24 @@
         },
         "Avatar_Wriothesley_Gauntlet_L_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_Show01_Gauntlet_Appear_R",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_Show01_Gauntlet_Appear_R",
               "effectTempleteID": -1.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Wriothesley_Ganutlet_Dissolved",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "TriggerSetRenderersEnable",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Wriothesley_Gauntlet_L_Model"
@@ -3703,10 +3703,10 @@
               "$type": "SetAnimatorTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Wriothesley_Ganutlet_Dissolved",
-                  "ratio": 0.0,
-                  "CHDEOOKOFDK": true
+                  "value": 0.0,
+                  "forceByCaster": true
                 }
               ],
               "triggerID": "Gauntlet_Dissolve"
@@ -3715,42 +3715,42 @@
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Wriothesley_Ganutlet_Dissolved",
-                  "ratio": 0.0,
-                  "CHDEOOKOFDK": true
+                  "value": 0.0,
+                  "forceByCaster": true
                 }
               ],
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_Gauntlet_Dissolve_L",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_Gauntlet_Dissolve_L",
               "effectTempleteID": -1.0
             },
             {
               "$type": "ApplyModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "Avatar_Wriothesley_Gauntlet_L_Disable"
             }
           ]
         },
         "Avatar_Wriothesley_Gauntlet_R_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_Show01_Gauntlet_Appear",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_Show01_Gauntlet_Appear",
               "effectTempleteID": -1.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Wriothesley_Ganutlet_Dissolved",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "TriggerSetRenderersEnable",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Wriothesley_Gauntlet_R_Model"
@@ -3763,10 +3763,10 @@
               "$type": "SetAnimatorTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Wriothesley_Ganutlet_Dissolved",
-                  "ratio": 0.0,
-                  "CHDEOOKOFDK": true
+                  "value": 0.0,
+                  "forceByCaster": true
                 }
               ],
               "triggerID": "Gauntlet_Dissolve"
@@ -3775,25 +3775,25 @@
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Wriothesley_Ganutlet_Dissolved",
-                  "ratio": 0.0,
-                  "CHDEOOKOFDK": true
+                  "value": 0.0,
+                  "forceByCaster": true
                 }
               ],
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_Gauntlet_Dissolve_R",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_Gauntlet_Dissolve_R",
               "effectTempleteID": -1.0
             },
             {
               "$type": "ApplyModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "Avatar_Wriothesley_Gauntlet_R_Disable"
             }
           ]
         },
         "Avatar_Wriothesley_Gauntlet_L_Enable": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "RemoveModifier",
@@ -3801,7 +3801,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnable",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Wriothesley_Gauntlet_L_Model"
@@ -3812,7 +3812,7 @@
         },
         "Avatar_Wriothesley_Gauntlet_R_Enable": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "RemoveModifier",
@@ -3820,7 +3820,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnable",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Wriothesley_Gauntlet_R_Model"
@@ -3831,7 +3831,7 @@
         },
         "Avatar_Wriothesley_Gauntlet_L_Dissolve": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
@@ -3839,7 +3839,7 @@
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_Gauntlet_Dissolve_L",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_Gauntlet_Dissolve_L",
               "effectTempleteID": -1.0
             },
             {
@@ -3848,8 +3848,8 @@
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Wriothesley_Ganutlet_Dissolved",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -3858,7 +3858,7 @@
         },
         "Avatar_Wriothesley_Gauntlet_R_Dissolve": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
@@ -3866,7 +3866,7 @@
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Catalyst_Wriothesley_Gauntlet_Dissolve_R",
+              "effectPattern": "Eff_Avatar_Male_Catalyst_Wriothesley_Gauntlet_Dissolve_R",
               "effectTempleteID": -1.0
             },
             {
@@ -3875,8 +3875,8 @@
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Wriothesley_Ganutlet_Dissolved",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -3885,12 +3885,12 @@
         },
         "Avatar_Wriothesley_Gauntlet_ElementalBurst_Dissolve": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Wriothesley_Ganutlet_Dissolved",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -3901,12 +3901,12 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.20000000298023224,
           "onThinkInterval": [
             {
               "$type": "TriggerSetRenderersEnable",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Wriothesley_Gauntlet_L_Model"
@@ -3923,12 +3923,12 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.20000000298023224,
           "onThinkInterval": [
             {
               "$type": "TriggerSetRenderersEnable",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Wriothesley_Gauntlet_R_Model"
@@ -3943,11 +3943,11 @@
         },
         "Avatar_Wriothesley_Gauntlet_Initialize": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAvatarIn": [
             {
               "$type": "TriggerSetRenderersEnable",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Wriothesley_Gauntlet_R_Model"
@@ -3955,7 +3955,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnable",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Wriothesley_Gauntlet_L_Model"
@@ -3965,7 +3965,7 @@
           "onReconnect": [
             {
               "$type": "TriggerSetRenderersEnable",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Wriothesley_Gauntlet_R_Model"
@@ -3973,7 +3973,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnable",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Wriothesley_Gauntlet_L_Model"
@@ -3983,11 +3983,11 @@
         },
         "Avatar_Wriothesley_Gauntlet_Initialize_2": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerSetRenderersEnable",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Wriothesley_Gauntlet_R_Model"
@@ -3995,7 +3995,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnable",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Wriothesley_Gauntlet_L_Model"
@@ -4007,7 +4007,7 @@
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "Avatar_Wriothesley_Gauntlet_Initialize"
         }
       ]

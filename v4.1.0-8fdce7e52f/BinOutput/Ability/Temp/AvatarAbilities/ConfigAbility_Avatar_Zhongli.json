@@ -9,7 +9,7 @@
           "skillID": 10301,
           "chargeTime": 0.11999999731779099,
           "secondChargeTime": 0.3499999940395355,
-          "OnBeginUncharged": [
+          "onBeginUncharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "DoSkill"
@@ -18,46 +18,46 @@
               "$type": "SetAnimatorInt",
               "predicates": [
                 {
-                  "$type": "PCGEEHLBIKD",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "ODHHOPGKIJL",
+                      "$type": "ByAnimatorInt",
                       "logic": "Equal",
-                      "ratio": 0,
+                      "value": 0,
                       "parameter": "ComboCount"
                     },
                     {
-                      "$type": "ODHHOPGKIJL",
+                      "$type": "ByAnimatorInt",
                       "logic": "Equal",
-                      "ratio": 6,
+                      "value": 6,
                       "parameter": "ComboCount"
                     }
                   ]
                 }
               ],
               "intID": "SkillID",
-              "ratio": 99.0
+              "value": 99.0
             },
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
             }
           ],
-          "OnReleaseUncharged": [
+          "onReleaseUncharged": [
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
-          "OnBeginCharged": [
+          "onBeginCharged": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging",
-              "ratio": true
+              "value": true
             }
           ],
-          "OnReleaseCharged": [
+          "onReleaseCharged": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
@@ -65,17 +65,17 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
-          "OnBeginSecondCharged": [
+          "onBeginSecondCharged": [
             {
               "$type": "SetAnimatorTrigger",
               "predicates": [
                 {
-                  "$type": "JBHMMMFDLGB",
+                  "$type": "ByLocalAvatarStamina",
                   "logic": "GreaterOrEqual",
-                  "OLEDMOJGGJG": [
+                  "stamina": [
                     "ExtraAttack_Pole_Stamina_Cost",
                     "Flexible_Stamina",
                     "ADD"
@@ -88,9 +88,9 @@
               "$type": "SetAnimatorInt",
               "predicates": [
                 {
-                  "$type": "JBHMMMFDLGB",
+                  "$type": "ByLocalAvatarStamina",
                   "logic": "GreaterOrEqual",
-                  "OLEDMOJGGJG": [
+                  "stamina": [
                     "ExtraAttack_Pole_Stamina_Cost",
                     "Flexible_Stamina",
                     "ADD"
@@ -98,7 +98,7 @@
                 }
               ],
               "intID": "SkillID",
-              "ratio": 6.0
+              "value": 6.0
             },
             {
               "$type": "SetAnimatorBool",
@@ -129,13 +129,13 @@
       "modifiers": {
         "ExtraAttack_StaminaCost": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 10002,
-              "amount": 1.0,
-              "costStaminaDelta": "ExtraAttack_Pole_Stamina_Cost"
+              "cdRatio": 1.0,
+              "costStaminaRatio": "ExtraAttack_Pole_Stamina_Cost"
             }
           ]
         }
@@ -174,11 +174,11 @@
       "modifiers": {
         "Eff_PillarOrShield": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockStand_Born_Hand",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockStand_Born_Hand",
               "effectTempleteID": -1.0
             }
           ]
@@ -208,26 +208,26 @@
         "UNIQUE_HairEmissionScaler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetEmissionScaler",
               "materialType": "Hair",
-              "value": 20.0
+              "ratio": 20.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetEmissionScaler",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "materialType": "Hair",
-              "value": 1.0
+              "ratio": 1.0
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_HairEmission_Dissipate",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_HairEmission_Dissipate",
               "born": {
-                "$type": "JIKCNOBCHGH",
+                "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "PRIVATE_Hair"
               },
               "effectTempleteID": -1.0
@@ -259,17 +259,17 @@
       "modifiers": {
         "PillarEffect_Alert": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "KillGadget",
               "predicates": [
                 {
-                  "$type": "DMKIHIEKBCM",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "PillarFever"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "PillarFever"
                     }
                   ]
                 }
@@ -281,7 +281,7 @@
             {
               "$type": "TriggerAbility",
               "otherTargets": {
-                "$type": "CMIMADHJDHK",
+                "$type": "SelectTargetsByChildren",
                 "topLimit": 1,
                 "sortType": "Reversed",
                 "configID": 41030002
@@ -293,13 +293,13 @@
                   "BMIHOOHKGMH": [
                     41030002
                   ],
-                  "value": 2,
-                  "NHIKJLNOOBG": "MoreThanAndEqual",
+                  "ratio": 2,
+                  "compareType": "MoreThanAndEqual",
                   "POBFGJAICGG": true
                 },
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "PillarFever"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "PillarFever"
                 }
               ],
               "abilityName": "SkillObj_Zhongli_PrimoPillar"
@@ -308,18 +308,18 @@
               "$type": "SetGlobalPos",
               "key": "PrimoPillarPos",
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 3.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 3.0
                 },
-                "INILOPENDHK": {
-                  "$type": "FNGFFMFIDIM",
-                  "GCNLPNIOLDK": {
-                    "EJNNCBMCPOB": 0.0,
-                    "OIODIHMNJPJ": 0.0,
-                    "CFFEIADEGNK": 0.0
+                "direction": {
+                  "$type": "ConfigDirectionByEntity",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
                   }
                 }
               }
@@ -328,27 +328,27 @@
               "$type": "SetGlobalDir",
               "key": "PrimoPillarDir",
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "INILOPENDHK": {
-                  "$type": "FNGFFMFIDIM",
-                  "GCNLPNIOLDK": {
-                    "EJNNCBMCPOB": 0.0,
-                    "OIODIHMNJPJ": 0.0,
-                    "CFFEIADEGNK": 0.0
+                "direction": {
+                  "$type": "ConfigDirectionByEntity",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
                   }
                 }
               }
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockStand_Born_Prelude",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockStand_Born_Prelude",
               "born": {
-                "$type": "NHIAENEEFCC",
+                "$type": "ConfigBornByGlobalValue",
                 "positionKey": "PrimoPillarPos",
                 "directionKey": "PrimoPillarDir"
               },
@@ -356,7 +356,7 @@
             },
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockStand_Born_Hand1",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockStand_Born_Hand1",
               "effectTempleteID": -1.0
             }
           ]
@@ -367,37 +367,37 @@
           "$type": "SetGlobalPos",
           "key": "EffPillarHandPos",
           "born": {
-            "$type": "JIKCNOBCHGH",
+            "$type": "ConfigBornByAttachPoint",
             "offset": {
-              "EJNNCBMCPOB": 0.0,
-              "OIODIHMNJPJ": 0.0,
-              "CFFEIADEGNK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "attachPointName": "PRIVATE_RHand",
-            "LKKEIPNOCOB": "Self"
+            "attachPointTargetType": "Self"
           }
         },
         {
           "$type": "SetGlobalDir",
           "key": "EffPillarHandDir",
           "born": {
-            "$type": "JIKCNOBCHGH",
+            "$type": "ConfigBornByAttachPoint",
             "offset": {
-              "EJNNCBMCPOB": 0.0,
-              "OIODIHMNJPJ": 0.0,
-              "CFFEIADEGNK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "attachPointName": "PRIVATE_RHand",
-            "LKKEIPNOCOB": "Self"
+            "attachPointTargetType": "Self"
           }
         },
         {
           "$type": "CreateGadget",
           "born": {
-            "$type": "NHIAENEEFCC",
-            "EFLKPFAOPCH": true,
+            "$type": "ConfigBornByGlobalValue",
+            "onGround": true,
             "HAMPFHGCBNL": true,
-            "OJLGGEEIHCH": 4.0,
+            "onGroundRaycastUpDist": 4.0,
             "DLAKDMCDFDK": true,
             "positionKey": "PrimoPillarPos",
             "directionKey": "PrimoPillarDir"
@@ -408,9 +408,9 @@
         },
         {
           "$type": "FireEffect",
-          "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockStand_Born_Hand1_01",
+          "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockStand_Born_Hand1_01",
           "born": {
-            "$type": "NHIAENEEFCC",
+            "$type": "ConfigBornByGlobalValue",
             "positionKey": "EffPillarHandPos",
             "directionKey": "EffPillarHandDir"
           },
@@ -419,8 +419,8 @@
         {
           "$type": "AvatarSkillStart",
           "skillID": 10302,
-          "amount": 0.3330000042915344,
-          "costStaminaDelta": 1.0
+          "cdRatio": 0.3330000042915344,
+          "costStaminaRatio": 1.0
         }
       ]
     }
@@ -440,16 +440,16 @@
         "PillarFX": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockStand_Born",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockStand_Born",
               "effectTempleteID": -1.0
             },
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockStand_Born_Stone",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockStand_Born_Stone",
               "effectTempleteID": -1.0
             }
           ]
@@ -457,7 +457,7 @@
         "PillarLife": {
           "modifierName": "",
           "duration": "Duration",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "KillSelf"
@@ -467,7 +467,7 @@
         "PillarShake": {
           "modifierName": "",
           "duration": 0.05999999865889549,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "ActCameraShake",
@@ -488,46 +488,46 @@
         },
         "PrimoPillar_RockWave": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 2.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "DMKIHIEKBCM",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "HP2ATK"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "HP2ATK"
                     }
                   ]
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
-                  "HAJLEKLDOMG": 2.0
+                  "radius": 2.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "PillarDamage1",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "PillarDamage1",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
-                    "bonusCriticalHurt": 50.0,
+                    "elementDurability": 50.0,
                     "strikeType": "Blunt",
                     "enBreak": 200.0,
                     "attackType": "Melee",
@@ -547,34 +547,34 @@
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "HP2ATK"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "HP2ATK"
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
-                  "HAJLEKLDOMG": 2.0
+                  "radius": 2.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "PillarDamage1",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "PillarDamage1",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
-                    "bonusCriticalHurt": 50.0,
+                    "elementDurability": 50.0,
                     "strikeType": "Blunt",
                     "enBreak": 200.0,
                     "attackType": "Melee",
@@ -602,22 +602,22 @@
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "MAOJMGFBDKD",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -626,7 +626,7 @@
                   "target": "OriginOwner",
                   "key": "PrimoPillarElementBallPos",
                   "born": {
-                    "$type": "CINPPKLNADH"
+                    "$type": "ConfigBornBySelf"
                   }
                 },
                 {
@@ -634,7 +634,7 @@
                   "target": "OriginOwner",
                   "key": "PrimoPillarElementBallDir",
                   "born": {
-                    "$type": "CINPPKLNADH"
+                    "$type": "ConfigBornBySelf"
                   }
                 },
                 {
@@ -648,39 +648,39 @@
           "onThinkInterval": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockStand_Attack",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockStand_Attack",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "DMKIHIEKBCM",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "HP2ATK"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "HP2ATK"
                     }
                   ]
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FEJLMILAGBF",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": -4.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": -4.0
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "size": {
-                    "EJNNCBMCPOB": 8.0,
-                    "OIODIHMNJPJ": 4.0,
-                    "CFFEIADEGNK": 8.0
+                    "x": 8.0,
+                    "y": 4.0,
+                    "z": 8.0
                   }
                 },
                 "attackInfo": {
@@ -688,10 +688,10 @@
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "PillarDamage2",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "PillarDamage2",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 0.0,
                     "attackType": "Melee",
@@ -711,27 +711,27 @@
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "HP2ATK"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "HP2ATK"
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FEJLMILAGBF",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": -4.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": -4.0
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "size": {
-                    "EJNNCBMCPOB": 8.0,
-                    "OIODIHMNJPJ": 4.0,
-                    "CFFEIADEGNK": 8.0
+                    "x": 8.0,
+                    "y": 4.0,
+                    "z": 8.0
                   }
                 },
                 "attackInfo": {
@@ -739,10 +739,10 @@
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "PillarDamage2",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "PillarDamage2",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 0.0,
                     "attackType": "Melee",
@@ -766,14 +766,14 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "LHFNEJIPKPO",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR8H10",
                 "campTargetType": "AllExceptSelf",
-                "GCBPANBPBHC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Gadget",
                     "Bullet",
@@ -781,21 +781,21 @@
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_COMMON_GADGET_ISSUMMON",
-                  "ratio": 1.0
+                  "value": 1.0
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_COMMON_GADGET_ISSUMMON_NOT_ROCK",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Zhongli_PrimoPillar_Mark",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "modifierName": "RockResonance"
@@ -807,28 +807,28 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 1.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Randomed",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "chance": 0.5,
               "successActions": [
                 {
                   "$type": "GenerateElemBall",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "configID": 2023,
                   "born": {
-                    "$type": "NHIAENEEFCC",
-                    "GKMEIIBAKPF": {
-                      "$type": "EJANLOLDHJD",
-                      "IGCGGBOLFLB": 0.5,
-                      "OMJPLAAKNDB": 1.5
+                    "$type": "ConfigBornByGlobalValue",
+                    "bornRandom": {
+                      "$type": "BornRandomFromCenter",
+                      "minRandomRange": 0.5,
+                      "maxRandomRange": 1.5
                     },
                     "positionKey": "PrimoPillarElementBallPos",
                     "directionKey": "PrimoPillarElementBallDir"
                   },
-                  "value": 1.0,
+                  "ratio": 1.0,
                   "baseEnergy": 3.0
                 }
               ]
@@ -838,11 +838,11 @@
         "RockResonance": {
           "modifierName": "",
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockStand_Attack",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockStand_Attack",
               "effectTempleteID": -1.0
             },
             {
@@ -850,32 +850,32 @@
               "target": "Caster",
               "predicates": [
                 {
-                  "$type": "DMKIHIEKBCM",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "HP2ATK"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "HP2ATK"
                     }
                   ]
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FEJLMILAGBF",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": -4.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": -4.0
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "size": {
-                    "EJNNCBMCPOB": 8.0,
-                    "OIODIHMNJPJ": 4.0,
-                    "CFFEIADEGNK": 8.0
+                    "x": 8.0,
+                    "y": 4.0,
+                    "z": 8.0
                   }
                 },
                 "attackInfo": {
@@ -883,10 +883,10 @@
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "PillarDamage2",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "PillarDamage2",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 0.0,
                     "attackType": "Melee",
@@ -907,27 +907,27 @@
               "target": "Caster",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "HP2ATK"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "HP2ATK"
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FEJLMILAGBF",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": -4.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": -4.0
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "size": {
-                    "EJNNCBMCPOB": 8.0,
-                    "OIODIHMNJPJ": 4.0,
-                    "CFFEIADEGNK": 8.0
+                    "x": 8.0,
+                    "y": 4.0,
+                    "z": 8.0
                   }
                 },
                 "attackInfo": {
@@ -935,10 +935,10 @@
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "PillarDamage2",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "PillarDamage2",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 0.0,
                     "attackType": "Melee",
@@ -981,7 +981,7 @@
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 1.0,
+          "value": 1.0,
           "key": "_ABILITY_Zhongli_PrimoPillar_Mark",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -1009,7 +1009,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Zhongli_Debuff_On_GeoOrder",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -0.5,
             0.5,
@@ -1025,24 +1025,24 @@
               {
                 "$type": "ApplyModifier",
                 "otherTargets": {
-                  "$type": "LHFNEJIPKPO",
+                  "$type": "SelectTargetsByShape",
                   "shapeName": "CircleR7_5H10",
                   "campTargetType": "Enemy",
-                  "GCBPANBPBHC": 1.0
+                  "sizeRatio": 1.0
                 },
-                "PositionDampTime": true,
+                "doOffStage": true,
                 "predicates": [
                   {
-                    "$type": "OCBHACLGALE",
+                    "$type": "ByEntityTypes",
                     "entityTypes": [
                       "Monster"
                     ]
                   },
                   {
-                    "$type": "HDDHHAGMLJK",
+                    "$type": "ByTargetGlobalValue",
                     "key": "_ANIMAL_ENTITY_TYPE",
-                    "ratio": 0.0,
-                    "NHIKJLNOOBG": "NoneOrEqual"
+                    "value": 0.0,
+                    "compareType": "NoneOrEqual"
                   }
                 ],
                 "modifierName": "UNIQUE_Zhongli_RockShield_Debuff"
@@ -1067,13 +1067,13 @@
       "modifiers": {
         "RockShield_Starter": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 10302,
-              "amount": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             },
             {
               "$type": "ApplyModifier",
@@ -1083,8 +1083,8 @@
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "PillarFever"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "PillarFever"
                 }
               ],
               "successActions": [
@@ -1097,27 +1097,27 @@
                       "BMIHOOHKGMH": [
                         41030002
                       ],
-                      "value": 1,
-                      "NHIKJLNOOBG": "LessAndEqual",
+                      "ratio": 1,
+                      "compareType": "LessAndEqual",
                       "POBFGJAICGG": true
                     }
                   ],
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 3.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 3.0
                     },
-                    "EFLKPFAOPCH": true,
+                    "onGround": true,
                     "HAMPFHGCBNL": true,
-                    "OJLGGEEIHCH": 4.0,
-                    "INILOPENDHK": {
-                      "$type": "FNGFFMFIDIM",
-                      "GCNLPNIOLDK": {
-                        "EJNNCBMCPOB": 0.0,
-                        "OIODIHMNJPJ": 0.0,
-                        "CFFEIADEGNK": 0.0
+                    "onGroundRaycastUpDist": 4.0,
+                    "direction": {
+                      "$type": "ConfigDirectionByEntity",
+                      "angleOffset": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
                     },
                     "DLAKDMCDFDK": true
@@ -1137,26 +1137,26 @@
                       "BMIHOOHKGMH": [
                         41030002
                       ],
-                      "NHIKJLNOOBG": "NoneOrEqual",
+                      "compareType": "NoneOrEqual",
                       "POBFGJAICGG": true
                     }
                   ],
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 3.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 3.0
                     },
-                    "EFLKPFAOPCH": true,
+                    "onGround": true,
                     "HAMPFHGCBNL": true,
-                    "OJLGGEEIHCH": 4.0,
-                    "INILOPENDHK": {
-                      "$type": "FNGFFMFIDIM",
-                      "GCNLPNIOLDK": {
-                        "EJNNCBMCPOB": 0.0,
-                        "OIODIHMNJPJ": 0.0,
-                        "CFFEIADEGNK": 0.0
+                    "onGroundRaycastUpDist": 4.0,
+                    "direction": {
+                      "$type": "ConfigDirectionByEntity",
+                      "angleOffset": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
                     },
                     "DLAKDMCDFDK": true
@@ -1172,50 +1172,50 @@
         "RockReunion_Start": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield_BS",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield_BS",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "DMKIHIEKBCM",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "HP2ATK"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "HP2ATK"
                     }
                   ]
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -5.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": -5.0,
+                      "z": 0.0
                     }
                   },
                   "height": 10.0,
-                  "HAJLEKLDOMG": 10.0
+                  "radius": 10.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Damage",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 142.89999389648438,
                     "attackType": "Range",
@@ -1244,34 +1244,34 @@
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "HP2ATK"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "HP2ATK"
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -5.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": -5.0,
+                      "z": 0.0
                     }
                   },
                   "height": 10.0,
-                  "HAJLEKLDOMG": 10.0
+                  "radius": 10.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Damage",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 142.89999389648438,
                     "attackType": "Range",
@@ -1304,16 +1304,16 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "LHFNEJIPKPO",
+                "$type": "SelectTargetsByShape",
                 "topLimit": 20,
                 "sortType": "Nearest",
                 "shapeName": "CircleR10H10",
                 "campTargetType": "All",
-                "GCBPANBPBHC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "GatherObject"
                   ]
@@ -1324,16 +1324,16 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "LHFNEJIPKPO",
+                "$type": "SelectTargetsByShape",
                 "topLimit": 2,
                 "sortType": "Nearest",
                 "shapeName": "CircleR10H10",
                 "campTargetType": "Enemy",
-                "GCBPANBPBHC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster",
                     "MonsterEquip",
@@ -1343,13 +1343,13 @@
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "KHOGJOOPHBF",
+                  "$type": "ByHasElement",
                   "element": "Rock"
                 }
               ],
@@ -1357,8 +1357,8 @@
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Zhongli_GeoOrderASMaxShield_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1371,7 +1371,7 @@
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield_Recycle_Absorb",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield_Recycle_Absorb",
               "effectTempleteID": -1.0
             }
           ]
@@ -1379,20 +1379,20 @@
         "RockSacrifice": {
           "modifierName": "",
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "KHOGJOOPHBF",
+                  "$type": "ByHasElement",
                   "element": "Rock"
                 }
               ],
               "successActions": [
                 {
                   "$type": "AddElementDurability",
-                  "ratio": -200.0,
+                  "value": -200.0,
                   "modifierName": "",
                   "elementType": "Rock",
                   "sortModifier": "All",
@@ -1405,13 +1405,13 @@
         "RockTribute": {
           "modifierName": "",
           "duration": 0.6499999761581421,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
@@ -1420,14 +1420,14 @@
               "successActions": [
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield_BS_Sarcophagus_01",
+                  "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield_BS_Sarcophagus_01",
                   "effectTempleteID": -1.0
                 }
               ],
               "failActions": [
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield_BS_Sarcophagus",
+                  "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield_BS_Sarcophagus",
                   "effectTempleteID": -1.0
                 }
               ]
@@ -1436,7 +1436,7 @@
           "onRemoved": [
             {
               "$type": "AddElementDurability",
-              "ratio": -150.0,
+              "value": -150.0,
               "modifierName": "",
               "elementType": "Rock",
               "sortModifier": "All",
@@ -1449,25 +1449,25 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "ShieldTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "GlobalMainShieldMixin",
               "shieldType": "Avatar_Rock",
               "shieldAngle": 360.0,
-              "maxShieldByHPRatio": "ShieldRatioDuability",
-              "DKHMAKKMCHI": "ShieldBaseDuability",
+              "shieldHPRatio": "ShieldRatioDuability",
+              "shieldHP": "ShieldBaseDuability",
               "costShieldRatioName": "",
               "showDamageText": "INFO_ELITE_DEFENCE",
               "amountByGetDamage": "HealRatio",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield",
               "childShieldModifierName": "UNIQUE_Zhongli_RockShield_Child_Heal",
               "healLimitedByLocalCreatureMaxHPRatio": "healLimitedByLocalCreatureMaxHPRatio"
             },
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_Zhongli_ToughShield_Level",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -0.5,
                 0.5,
@@ -1495,7 +1495,7 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Zhongli_ToughShield_Level",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1504,7 +1504,7 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Zhongli_ToughShield_Level",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1516,23 +1516,23 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "ShieldTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "GlobalMainShieldMixin",
               "shieldType": "Avatar_Rock",
               "shieldAngle": 360.0,
-              "maxShieldByHPRatio": "ShieldRatioDuability",
-              "DKHMAKKMCHI": "ShieldBaseDuability",
+              "shieldHPRatio": "ShieldRatioDuability",
+              "shieldHP": "ShieldBaseDuability",
               "costShieldRatioName": "",
               "showDamageText": "INFO_ELITE_DEFENCE",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield",
               "childShieldModifierName": "UNIQUE_Zhongli_RockShield_Child_NoHeal"
             },
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_Zhongli_ToughShield_Level",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -0.5,
                 0.5,
@@ -1560,7 +1560,7 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Zhongli_ToughShield_Level",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1569,7 +1569,7 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Zhongli_ToughShield_Level",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1580,7 +1580,7 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "modifierMixins": [
             {
@@ -1595,23 +1595,23 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "LHFNEJIPKPO",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR7_5H10",
                 "campTargetType": "Enemy",
-                "GCBPANBPBHC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "modifierName": "UNIQUE_Zhongli_RockShield_Debuff"
@@ -1620,7 +1620,7 @@
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield_AS",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield_AS",
               "effectTempleteID": -1.0
             }
           ],
@@ -1630,11 +1630,11 @@
               "target": "Team",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "ToughShield"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "ToughShield"
                 }
               ],
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Zhongli_ToughShield_Level",
               "useLimitRange": true,
               "maxValue": 5.0,
@@ -1644,24 +1644,24 @@
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "PCGEEHLBIKD",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "JEDFNMPJIEC",
-                      "GEHPOJHBHEM": 0.0
+                      "$type": "ByHitDamage",
+                      "damage": 0.0
                     },
                     {
-                      "$type": "PCNDFOGECKL",
-                      "KPBJHGOLKAJ": 0.0
+                      "$type": "ByHitEnBreak",
+                      "enBreak": 0.0
                     }
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Team",
                   "key": "_ABILITY_Zhongli_RockShield_BeHit_CD",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -1669,19 +1669,19 @@
                   "$type": "SetGlobalDir",
                   "key": "_ABILITY_Zhongli_RockShield_Hit",
                   "born": {
-                    "$type": "GJHHBKDIGIP"
+                    "$type": "ConfigBornByHitPoint"
                   }
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "value": 0.0,
                   "key": "_ABILITY_Zhongli_RockShield_Hit_0",
                   "maxValue": 0.0,
                   "minValue": 0.0
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "value": 0.0,
                   "key": "_ABILITY_Zhongli_RockShield_Hit_1",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -1693,7 +1693,7 @@
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": [
+                  "value": [
                     "RockShield_HitDir",
                     "RockShield_HitDir_FixParam",
                     "MUL"
@@ -1704,16 +1704,16 @@
                 },
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield_Recycle_Trigger",
+                  "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield_Recycle_Trigger",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 1.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 1.0,
+                      "z": 0.0
                     },
-                    "INILOPENDHK": {
-                      "$type": "HKFLFBALHKG",
+                    "direction": {
+                      "$type": "ConfigDirectionByGlobalValue",
                       "directionKey": "_ABILITY_Zhongli_RockShield_Hit"
                     }
                   },
@@ -1721,7 +1721,7 @@
                 },
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield_Hit",
+                  "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield_Hit",
                   "effectTempleteID": -1.0
                 },
                 {
@@ -1741,23 +1741,23 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "LHFNEJIPKPO",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR7_5H10",
                 "campTargetType": "Enemy",
-                "GCBPANBPBHC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "modifierName": "UNIQUE_Zhongli_RockShield_Debuff"
@@ -1768,7 +1768,7 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "modifierMixins": [
             {
@@ -1783,23 +1783,23 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "LHFNEJIPKPO",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR7_5H10",
                 "campTargetType": "Enemy",
-                "GCBPANBPBHC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "modifierName": "UNIQUE_Zhongli_RockShield_Debuff"
@@ -1808,7 +1808,7 @@
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield_AS",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield_AS",
               "effectTempleteID": -1.0
             }
           ],
@@ -1818,11 +1818,11 @@
               "target": "Team",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "ToughShield"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "ToughShield"
                 }
               ],
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Zhongli_ToughShield_Level",
               "useLimitRange": true,
               "maxValue": 5.0,
@@ -1832,24 +1832,24 @@
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "PCGEEHLBIKD",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "JEDFNMPJIEC",
-                      "GEHPOJHBHEM": 0.0
+                      "$type": "ByHitDamage",
+                      "damage": 0.0
                     },
                     {
-                      "$type": "PCNDFOGECKL",
-                      "KPBJHGOLKAJ": 0.0
+                      "$type": "ByHitEnBreak",
+                      "enBreak": 0.0
                     }
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Team",
                   "key": "_ABILITY_Zhongli_RockShield_BeHit_CD",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -1857,19 +1857,19 @@
                   "$type": "SetGlobalDir",
                   "key": "_ABILITY_Zhongli_RockShield_Hit",
                   "born": {
-                    "$type": "GJHHBKDIGIP"
+                    "$type": "ConfigBornByHitPoint"
                   }
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "value": 0.0,
                   "key": "_ABILITY_Zhongli_RockShield_Hit_0",
                   "maxValue": 0.0,
                   "minValue": 0.0
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "value": 0.0,
                   "key": "_ABILITY_Zhongli_RockShield_Hit_1",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -1881,7 +1881,7 @@
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": [
+                  "value": [
                     "RockShield_HitDir",
                     "RockShield_HitDir_FixParam",
                     "MUL"
@@ -1892,16 +1892,16 @@
                 },
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield_Recycle_Trigger",
+                  "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield_Recycle_Trigger",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 1.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 1.0,
+                      "z": 0.0
                     },
-                    "INILOPENDHK": {
-                      "$type": "HKFLFBALHKG",
+                    "direction": {
+                      "$type": "ConfigDirectionByGlobalValue",
                       "directionKey": "_ABILITY_Zhongli_RockShield_Hit"
                     }
                   },
@@ -1909,7 +1909,7 @@
                 },
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield_Hit",
+                  "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield_Hit",
                   "effectTempleteID": -1.0
                 },
                 {
@@ -1929,23 +1929,23 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "LHFNEJIPKPO",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR7_5H10",
                 "campTargetType": "Enemy",
-                "GCBPANBPBHC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "modifierName": "UNIQUE_Zhongli_RockShield_Debuff"
@@ -1957,7 +1957,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 1.0,
-          "bonusCriticalHurt": 1.0,
+          "elementDurability": 1.0,
           "properties": {
             "Actor_PhysicalSubHurtDelta": "RockShield_Debuff_SubHurtDelta",
             "Actor_FireSubHurtDelta": "RockShield_Debuff_SubHurtDelta",
@@ -1974,11 +1974,11 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 0.75,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Zhongli_RockShield_BeHit_CD",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1987,7 +1987,7 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Zhongli_RockShield_BeHit_CD",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1997,39 +1997,39 @@
         "ShieldBornEffect": {
           "modifierName": "",
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
               "target": "CurLocalAvatar",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield_01",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield_01",
               "effectTempleteID": -1.0
             },
             {
               "$type": "SendEffectTrigger",
               "parameter": "ShieldBorn2",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield"
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield"
             }
           ]
         },
         "ShieldHitEffect": {
           "modifierName": "",
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "ShieldHit2",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield"
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield"
             }
           ]
         },
         "Zhongli_ToughShield_L1_Handler": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixin",
@@ -2040,7 +2040,7 @@
         "Zhongli_ToughShield_L2_Handler": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixin",
@@ -2051,7 +2051,7 @@
         "Zhongli_ToughShield_L3_Handler": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixin",
@@ -2062,7 +2062,7 @@
         "Zhongli_ToughShield_L4_Handler": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixin",
@@ -2073,7 +2073,7 @@
         "Zhongli_ToughShield_L5_Handler": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixin",
@@ -2084,7 +2084,7 @@
         "Zhongli_ToughShield_L1": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_ShieldCostMinusRatio": "ShieldCostMinusRatio"
           },
@@ -2093,7 +2093,7 @@
         "Zhongli_ToughShield_L2": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_ShieldCostMinusRatio": "ShieldCostMinusRatio"
           },
@@ -2102,7 +2102,7 @@
         "Zhongli_ToughShield_L3": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_ShieldCostMinusRatio": "ShieldCostMinusRatio"
           },
@@ -2111,7 +2111,7 @@
         "Zhongli_ToughShield_L4": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_ShieldCostMinusRatio": "ShieldCostMinusRatio"
           },
@@ -2120,7 +2120,7 @@
         "Zhongli_ToughShield_L5": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_ShieldCostMinusRatio": "ShieldCostMinusRatio"
           },
@@ -2128,7 +2128,7 @@
         },
         "Blank": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         }
       },
       "onAbilityStart": [
@@ -2144,34 +2144,34 @@
         },
         {
           "$type": "Predicated",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "targetPredicates": [
             {
-              "$type": "BAECCAACHHE",
-              "DMDCKNEEKBN": "ShieldWithHeal"
+              "$type": "ByUnlockTalentParam",
+              "talentParam": "ShieldWithHeal"
             }
           ],
           "successActions": [
             {
               "$type": "Predicated",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Zhongli_GeoOrderASMaxShield_Mark",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "AttachModifier",
                   "target": "AllTeams",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "predicates": [
                     {
-                      "$type": "AFILDNGEOAA",
+                      "$type": "ByTargetPositionToSelfPosition",
                       "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "value": 40.0
                     }
                   ],
                   "modifierName": "UNIQUE_Zhongli_RockShield_Heal"
@@ -2181,7 +2181,7 @@
                 {
                   "$type": "AttachModifier",
                   "target": "Team",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Zhongli_RockShield_Heal"
                 }
               ]
@@ -2190,24 +2190,24 @@
           "failActions": [
             {
               "$type": "Predicated",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Zhongli_GeoOrderASMaxShield_Mark",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "AttachModifier",
                   "target": "AllTeams",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "predicates": [
                     {
-                      "$type": "AFILDNGEOAA",
+                      "$type": "ByTargetPositionToSelfPosition",
                       "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "value": 40.0
                     }
                   ],
                   "modifierName": "UNIQUE_Zhongli_RockShield_NoHeal"
@@ -2217,7 +2217,7 @@
                 {
                   "$type": "AttachModifier",
                   "target": "Team",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Zhongli_RockShield_NoHeal"
                 }
               ]
@@ -2278,14 +2278,14 @@
       "modifiers": {
         "GeoOrder_CameraShot": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "GeoOrderASMaxShield"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "GeoOrderASMaxShield"
                 }
               ],
               "modifierName": "Debuff_On_GeoOrder"
@@ -2308,7 +2308,7 @@
         "UNIQUE_GeoOrder_Weather": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "TriggerWeatherMixin",
@@ -2323,41 +2323,41 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -2.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": -2.0,
+                      "z": 0.0
                     },
-                    "INILOPENDHK": {
-                      "$type": "JOPFGDLGGLL",
-                      "GCNLPNIOLDK": {
-                        "EJNNCBMCPOB": 0.0,
-                        "OIODIHMNJPJ": 0.0,
-                        "CFFEIADEGNK": 0.0
+                    "direction": {
+                      "$type": "ConfigDirectionByDefault",
+                      "angleOffset": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
                     }
                   },
                   "height": 4.0,
-                  "HAJLEKLDOMG": 3.0
+                  "radius": 3.0
                 },
                 "attackInfo": {
                   "attackTag": "",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": 0.0,
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 100.0,
+                    "damagePercentage": 0.0,
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 100.0,
                     "enBreak": 400.0,
                     "damagePercentage": 0.0
                   },
@@ -2379,55 +2379,55 @@
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "EJOFLHPBMEJ",
+                  "$type": "ByAttackNotHitScene",
                   "attackPattern": {
-                    "$type": "MKKIHKBAOOD",
+                    "$type": "ConfigAttackCircle",
                     "triggerType": "TriggerNoRepeat",
                     "born": {
-                      "$type": "CINPPKLNADH",
+                      "$type": "ConfigBornBySelf",
                       "offset": {
-                        "EJNNCBMCPOB": 0.0,
-                        "OIODIHMNJPJ": 0.5,
-                        "CFFEIADEGNK": 0.0
+                        "x": 0.0,
+                        "y": 0.5,
+                        "z": 0.0
                       }
                     },
                     "height": 2.0,
-                    "HAJLEKLDOMG": 1.0
+                    "radius": 1.0
                   },
                   "PMEOEDPIJPM": true
                 },
                 {
-                  "$type": "EJOFLHPBMEJ",
+                  "$type": "ByAttackNotHitScene",
                   "attackPattern": {
-                    "$type": "FEJLMILAGBF",
+                    "$type": "ConfigAttackBox",
                     "triggerType": "TriggerNoRepeat",
                     "born": {
-                      "$type": "CINPPKLNADH",
+                      "$type": "ConfigBornBySelf",
                       "offset": {
-                        "EJNNCBMCPOB": -5.730000019073486,
-                        "OIODIHMNJPJ": 8.8100004196167,
-                        "CFFEIADEGNK": -5.260000228881836
+                        "x": -5.730000019073486,
+                        "y": 8.8100004196167,
+                        "z": -5.260000228881836
                       },
-                      "INILOPENDHK": {
-                        "$type": "FNGFFMFIDIM",
-                        "GCNLPNIOLDK": {
-                          "EJNNCBMCPOB": -50.0,
-                          "OIODIHMNJPJ": 20.299999237060547,
-                          "CFFEIADEGNK": 0.0
+                      "direction": {
+                        "$type": "ConfigDirectionByEntity",
+                        "angleOffset": {
+                          "x": -50.0,
+                          "y": 20.299999237060547,
+                          "z": 0.0
                         }
                       }
                     },
                     "size": {
-                      "EJNNCBMCPOB": 5.0,
-                      "OIODIHMNJPJ": 20.200000762939453,
-                      "CFFEIADEGNK": 5.0
+                      "x": 5.0,
+                      "y": 20.200000762939453,
+                      "z": 5.0
                     }
                   },
                   "PMEOEDPIJPM": true
                 },
                 {
                   "$type": "LMDOEBHMOEB",
-                  "NHIKJLNOOBG": "LessAndEqual",
+                  "compareType": "LessAndEqual",
                   "FAGECJDKMLM": 0.5
                 }
               ],
@@ -2447,12 +2447,12 @@
                 },
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockJudgement_BS",
+                  "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockJudgement_BS",
                   "effectTempleteID": -1.0
                 },
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockJudgement",
+                  "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockJudgement",
                   "effectTempleteID": -1.0
                 }
               ],
@@ -2463,7 +2463,7 @@
                 },
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockJudgement_BS_01",
+                  "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockJudgement_BS_01",
                   "effectTempleteID": -1.0
                 },
                 {
@@ -2476,23 +2476,23 @@
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "BiggerGeoOrder"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "BiggerGeoOrder"
                 }
               ],
               "successActions": [
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockJudgement_AlertCircle_Talent",
+                  "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockJudgement_AlertCircle_Talent",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 5.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 5.0
                     },
-                    "EFLKPFAOPCH": true,
-                    "OJLGGEEIHCH": 4.0,
+                    "onGround": true,
+                    "onGroundRaycastUpDist": 4.0,
                     "DLAKDMCDFDK": true
                   },
                   "effectTempleteID": -1.0
@@ -2501,16 +2501,16 @@
               "failActions": [
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockJudgement_AlertCircle",
+                  "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockJudgement_AlertCircle",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 5.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 5.0
                     },
-                    "EFLKPFAOPCH": true,
-                    "OJLGGEEIHCH": 4.0,
+                    "onGround": true,
+                    "onGroundRaycastUpDist": 4.0,
                     "DLAKDMCDFDK": true
                   },
                   "effectTempleteID": -1.0
@@ -2519,7 +2519,7 @@
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockJudgement_Fall",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockJudgement_Fall",
               "effectTempleteID": -1.0
             },
             {
@@ -2531,26 +2531,26 @@
         "GeoOrder_End": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "BiggerGeoOrder"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "BiggerGeoOrder"
                 }
               ],
               "successActions": [
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockJudgement_Breakout_Talent",
+                  "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockJudgement_Breakout_Talent",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 5.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 5.0
                     }
                   },
                   "effectTempleteID": -1.0
@@ -2559,13 +2559,13 @@
               "failActions": [
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockJudgement_Breakout",
+                  "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockJudgement_Breakout",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 5.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 5.0
                     }
                   },
                   "effectTempleteID": -1.0
@@ -2576,38 +2576,38 @@
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "DMKIHIEKBCM",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "HP2ATK"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "HP2ATK"
                     }
                   ]
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 5.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 5.0
                     }
                   },
-                  "HAJLEKLDOMG": "Radius"
+                  "radius": "Radius"
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Damage",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
-                    "bonusCriticalHurt": 100.0,
+                    "elementDurability": 100.0,
                     "strikeType": "Blunt",
                     "enBreak": 500.0,
                     "attackType": "Range",
@@ -2627,33 +2627,33 @@
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "HP2ATK"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "HP2ATK"
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 5.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 5.0
                     }
                   },
-                  "HAJLEKLDOMG": "Radius"
+                  "radius": "Radius"
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Damage",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
-                    "bonusCriticalHurt": 100.0,
+                    "elementDurability": 100.0,
                     "strikeType": "Blunt",
                     "enBreak": 500.0,
                     "attackType": "Range",
@@ -2687,8 +2687,8 @@
               "target": "Caster",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "GeoOrderASMaxShield"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "GeoOrderASMaxShield"
                 }
               ],
               "modifierName": "GeoOrderASMaxShield"
@@ -2707,13 +2707,13 @@
         "UNIQUE_Zhongli_HideShieldInGeoOrder": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "HideShield",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield"
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield"
             }
           ],
           "onRemoved": [
@@ -2721,14 +2721,14 @@
               "$type": "SendEffectTrigger",
               "parameter": "ShieldL2",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_RockShield"
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_RockShield"
             }
           ]
         },
         "UNIQUE_Zhongli_ExtraShakeAfterGeoOrder": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "ActCameraShake",
@@ -2751,17 +2751,17 @@
         "GeoOrderASMaxShield": {
           "modifierName": "",
           "duration": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "RemoveUniqueModifier",
               "target": "AllTeams",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "AFILDNGEOAA",
+                  "$type": "ByTargetPositionToSelfPosition",
                   "logic": "LesserOrEqual",
-                  "ratio": 40.0
+                  "value": 40.0
                 }
               ],
               "modifierName": "UNIQUE_Zhongli_RockShield_NoHeal"
@@ -2769,48 +2769,48 @@
             {
               "$type": "RemoveUniqueModifier",
               "target": "AllTeams",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "AFILDNGEOAA",
+                  "$type": "ByTargetPositionToSelfPosition",
                   "logic": "LesserOrEqual",
-                  "ratio": 40.0
+                  "value": 40.0
                 }
               ],
               "modifierName": "UNIQUE_Zhongli_RockShield_Heal"
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Zhongli_GeoOrderASMaxShield_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "TriggerAbility",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "abilityName": "Avatar_Zhongli_RockShield"
             }
           ]
         },
         "Debuff_On_GeoOrder": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Zhongli_Debuff_On_GeoOrder",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Zhongli_Debuff_On_GeoOrder",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2819,16 +2819,16 @@
           "onThinkInterval": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Zhongli_Debuff_On_GeoOrder",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Zhongli_Debuff_On_GeoOrder",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2837,7 +2837,7 @@
         },
         "GeoOrder_State": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
@@ -2854,41 +2854,41 @@
           "onRemoved": [
             {
               "$type": "ControlEmotion",
-              "PositionDampTime": true
+              "doOffStage": true
             },
             {
               "$type": "EnableHeadControl",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "enable": true
             }
           ]
         },
         "GeoOrder_Petrifaction_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "MAOJMGFBDKD",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Burst"
                   ]
                 },
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster",
                     "MonsterEquip"
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -2905,7 +2905,7 @@
           "stacking": "Overlap",
           "modifierName": "",
           "duration": "Petrifaction_Duration",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "state": "ElementPetrifaction",
           "onAdded": [
             {
@@ -2918,7 +2918,7 @@
           "stacking": "Unique",
           "modifierName": "",
           "elementType": "Rock",
-          "bonusCriticalHurt": 1.0,
+          "elementDurability": 1.0,
           "isElementDurabilityMutable": false
         }
       },
@@ -2926,8 +2926,8 @@
         {
           "$type": "AvatarSkillStart",
           "skillID": 10303,
-          "amount": 1.0,
-          "costStaminaDelta": 1.0
+          "cdRatio": 1.0,
+          "costStaminaRatio": 1.0
         },
         {
           "$type": "AttachModifier",
@@ -2948,12 +2948,12 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_CrystalSeed_Fire_Shield_Mark",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -0.5,
                 0.5,
@@ -2967,7 +2967,7 @@
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_CrystalSeed_Water_Shield_Mark",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -0.5,
                 0.5,
@@ -2981,7 +2981,7 @@
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_CrystalSeed_Ice_Shield_Mark",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -0.5,
                 0.5,
@@ -2995,7 +2995,7 @@
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_CrystalSeed_Electric_Shield_Mark",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -0.5,
                 0.5,
@@ -3011,7 +3011,7 @@
         "Zhongli_CrystalSeed_AttackUp_Handler": {
           "stacking": "Multiple",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixin",
@@ -3021,7 +3021,7 @@
         },
         "Zhongli_CrystalSeed_AttackUp": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddHurtDelta": "DPRatio"
           },
@@ -3030,7 +3030,7 @@
         },
         "Blank": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         }
       },
       "onAdded": [
@@ -3209,22 +3209,22 @@
       "modifiers": {
         "LetLanceRain1": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_ExtraAttack",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_ExtraAttack",
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "EFLKPFAOPCH": true,
+                "onGround": true,
                 "HAMPFHGCBNL": true,
-                "INILOPENDHK": {
-                  "$type": "FNGFFMFIDIM"
+                "direction": {
+                  "$type": "ConfigDirectionByEntity"
                 },
                 "DLAKDMCDFDK": true
               },
@@ -3234,22 +3234,22 @@
         },
         "LetLanceRain2": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_ExtraAttack",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_ExtraAttack",
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.10000000149011612,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.10000000149011612,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "EFLKPFAOPCH": true,
+                "onGround": true,
                 "HAMPFHGCBNL": true,
-                "INILOPENDHK": {
-                  "$type": "FNGFFMFIDIM"
+                "direction": {
+                  "$type": "ConfigDirectionByEntity"
                 },
                 "DLAKDMCDFDK": true
               },
@@ -3259,22 +3259,22 @@
         },
         "LetLanceRain3": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_ExtraAttack",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_ExtraAttack",
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "EFLKPFAOPCH": true,
+                "onGround": true,
                 "HAMPFHGCBNL": true,
-                "INILOPENDHK": {
-                  "$type": "FNGFFMFIDIM"
+                "direction": {
+                  "$type": "ConfigDirectionByEntity"
                 },
                 "DLAKDMCDFDK": true
               },
@@ -3284,22 +3284,22 @@
         },
         "LetLanceRain4": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_ExtraAttack",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_ExtraAttack",
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": -0.10000000149011612,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 0.0
+                  "x": -0.10000000149011612,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "EFLKPFAOPCH": true,
+                "onGround": true,
                 "HAMPFHGCBNL": true,
-                "INILOPENDHK": {
-                  "$type": "FNGFFMFIDIM"
+                "direction": {
+                  "$type": "ConfigDirectionByEntity"
                 },
                 "DLAKDMCDFDK": true
               },
@@ -3309,22 +3309,22 @@
         },
         "LetLanceRain5": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_ExtraAttack02",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_ExtraAttack02",
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 1.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 1.0
                 },
-                "EFLKPFAOPCH": true,
+                "onGround": true,
                 "HAMPFHGCBNL": true,
-                "INILOPENDHK": {
-                  "$type": "FNGFFMFIDIM"
+                "direction": {
+                  "$type": "ConfigDirectionByEntity"
                 },
                 "DLAKDMCDFDK": true
               },
@@ -3334,22 +3334,22 @@
         },
         "BulletBlink": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_ExtraAttack_HideSpark",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_ExtraAttack_HideSpark",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerBullet",
               "bulletID": 41030004,
               "born": {
-                "$type": "JIKCNOBCHGH",
+                "$type": "ConfigBornByAttachPoint",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
                 "attachPointName": "RootNode"
               }
@@ -3359,23 +3359,23 @@
             },
             {
               "$type": "TriggerSetPassThrough",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "passThrough": true
             },
             {
               "$type": "EnableHDMesh",
-              "CJNEAAJEPIK": "Default"
+              "hdMeshKey": "Default"
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerSetVisible",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "visible": true
             },
             {
               "$type": "TriggerHideWeapon",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "partNames": [
                 "equip01",
                 "equip02",
@@ -3384,23 +3384,23 @@
             },
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!THW False!!!!!!!!!"
             },
             {
               "$type": "TriggerSetPassThrough",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true
             },
             {
               "$type": "EnableHDMesh",
               "canBeHandledOnRecover": true,
               "enable": true,
-              "CJNEAAJEPIK": "Default"
+              "hdMeshKey": "Default"
             },
             {
               "$type": "KillGadget",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "gadgetInfo": {
                 "configID": 41030004
               }
@@ -3409,11 +3409,11 @@
         },
         "Eff_Blink_Off": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_ExtraAttack_ShowSpark",
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_ExtraAttack_ShowSpark",
               "effectTempleteID": -1.0
             }
           ]
@@ -3421,16 +3421,16 @@
         "HideWeaponOnEnter": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerHideWeapon",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Zhongli_WeaponVisible_Mark",
-                  "ratio": 1.0,
-                  "DLFHFMCJICH": true
+                  "value": 1.0,
+                  "forceByCaster": true
                 }
               ],
               "partNames": [
@@ -3441,7 +3441,7 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Zhongli_WeaponVisible_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -3451,7 +3451,7 @@
         "ShowWeaponOnEnter": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerHideWeapon",
@@ -3464,7 +3464,7 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Zhongli_WeaponVisible_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -3474,11 +3474,11 @@
         "ShowWeaponOnExit": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "TriggerHideWeapon",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "visible": true,
               "partNames": [
                 "equip01",
@@ -3488,13 +3488,13 @@
             },
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!THW True!!!!!!!!!"
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Zhongli_WeaponVisible_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -3504,21 +3504,21 @@
         "HideSpear01OnExit": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "HideSpear",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_NormalAttack01"
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_NormalAttack01"
             }
           ]
         },
         "HideSpear04OnEnter_Handler": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -3529,14 +3529,14 @@
         "HideSpear04OnEnter": {
           "modifierName": "",
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "HideSpear",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_NormalAttack04"
+              "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_NormalAttack04"
             }
           ]
         }
@@ -3544,7 +3544,7 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 1.0,
+          "value": 1.0,
           "key": "_ABILITY_Zhongli_WeaponVisible_Mark",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -3606,13 +3606,13 @@
       "modifiers": {
         "Attack01": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "AIHIBCCIBKG"
+                  "$type": "ByHasAttackTarget"
                 }
               ],
               "successActions": [
@@ -3621,9 +3621,9 @@
                   "target": "SelfAttackTarget",
                   "targetPredicates": [
                     {
-                      "$type": "AFILDNGEOAA",
+                      "$type": "ByTargetPositionToSelfPosition",
                       "logic": "LesserOrEqual",
-                      "ratio": 2.0
+                      "value": 2.0
                     }
                   ],
                   "successActions": [
@@ -3631,31 +3631,31 @@
                       "$type": "TriggerAttackEvent",
                       "predicates": [
                         {
-                          "$type": "DMKIHIEKBCM",
+                          "$type": "ByNot",
                           "predicates": [
                             {
-                              "$type": "BAECCAACHHE",
-                              "DMDCKNEEKBN": "HP2ATK"
+                              "$type": "ByUnlockTalentParam",
+                              "talentParam": "HP2ATK"
                             }
                           ]
                         }
                       ],
                       "attackEvent": {
                         "attackPattern": {
-                          "$type": "FEJLMILAGBF",
+                          "$type": "ConfigAttackBox",
                           "triggerType": "TriggerNoRepeat",
                           "born": {
-                            "$type": "CINPPKLNADH",
+                            "$type": "ConfigBornBySelf",
                             "offset": {
-                              "EJNNCBMCPOB": 0.0,
-                              "OIODIHMNJPJ": 0.8500000238418579,
-                              "CFFEIADEGNK": 0.0
+                              "x": 0.0,
+                              "y": 0.8500000238418579,
+                              "z": 0.0
                             }
                           },
                           "size": {
-                            "EJNNCBMCPOB": 1.5,
-                            "OIODIHMNJPJ": 1.7999999523162842,
-                            "CFFEIADEGNK": 3.799999952316284
+                            "x": 1.5,
+                            "y": 1.7999999523162842,
+                            "z": 3.799999952316284
                           }
                         },
                         "attackInfo": {
@@ -3663,15 +3663,15 @@
                           "attenuationTag": "NormalAttack",
                           "attenuationGroup": "default",
                           "attackProperty": {
-                            "GNBHKEABDNL": "Attack01",
-                            "JKNJLKBGFJK": 0.0,
-                            "bonusCriticalHurt": 25.0,
+                            "damagePercentage": "Attack01",
+                            "damagePercentageRatio": 0.0,
+                            "elementDurability": 25.0,
                             "overrideByWeapon": true,
                             "strikeType": "Spear",
                             "enBreak": 33.7599983215332,
                             "attackType": "Melee",
                             "bonusCritical": 0.0,
-                            "GLKDEEDMHGM": 0.0,
+                            "bonusCriticalHurt": 0.0,
                             "damagePercentage": 0.0
                           },
                           "hitPattern": {
@@ -3698,26 +3698,26 @@
                       "$type": "TriggerAttackEvent",
                       "predicates": [
                         {
-                          "$type": "BAECCAACHHE",
-                          "DMDCKNEEKBN": "HP2ATK"
+                          "$type": "ByUnlockTalentParam",
+                          "talentParam": "HP2ATK"
                         }
                       ],
                       "attackEvent": {
                         "attackPattern": {
-                          "$type": "FEJLMILAGBF",
+                          "$type": "ConfigAttackBox",
                           "triggerType": "TriggerNoRepeat",
                           "born": {
-                            "$type": "CINPPKLNADH",
+                            "$type": "ConfigBornBySelf",
                             "offset": {
-                              "EJNNCBMCPOB": 0.0,
-                              "OIODIHMNJPJ": 0.8500000238418579,
-                              "CFFEIADEGNK": 0.0
+                              "x": 0.0,
+                              "y": 0.8500000238418579,
+                              "z": 0.0
                             }
                           },
                           "size": {
-                            "EJNNCBMCPOB": 1.5,
-                            "OIODIHMNJPJ": 1.7999999523162842,
-                            "CFFEIADEGNK": 3.799999952316284
+                            "x": 1.5,
+                            "y": 1.7999999523162842,
+                            "z": 3.799999952316284
                           }
                         },
                         "attackInfo": {
@@ -3725,9 +3725,9 @@
                           "attenuationTag": "NormalAttack",
                           "attenuationGroup": "default",
                           "attackProperty": {
-                            "GNBHKEABDNL": "Attack01",
-                            "JKNJLKBGFJK": 0.0,
-                            "bonusCriticalHurt": 25.0,
+                            "damagePercentage": "Attack01",
+                            "damagePercentageRatio": 0.0,
+                            "elementDurability": 25.0,
                             "overrideByWeapon": true,
                             "strikeType": "Spear",
                             "enBreak": 33.7599983215332,
@@ -3738,7 +3738,7 @@
                               "MUL"
                             ],
                             "bonusCritical": 0.0,
-                            "GLKDEEDMHGM": 0.0,
+                            "bonusCriticalHurt": 0.0,
                             "damagePercentage": 0.0
                           },
                           "hitPattern": {
@@ -3767,31 +3767,31 @@
                       "$type": "TriggerAttackEvent",
                       "predicates": [
                         {
-                          "$type": "DMKIHIEKBCM",
+                          "$type": "ByNot",
                           "predicates": [
                             {
-                              "$type": "BAECCAACHHE",
-                              "DMDCKNEEKBN": "HP2ATK"
+                              "$type": "ByUnlockTalentParam",
+                              "talentParam": "HP2ATK"
                             }
                           ]
                         }
                       ],
                       "attackEvent": {
                         "attackPattern": {
-                          "$type": "FEJLMILAGBF",
+                          "$type": "ConfigAttackBox",
                           "triggerType": "TriggerNoRepeat",
                           "born": {
-                            "$type": "CINPPKLNADH",
+                            "$type": "ConfigBornBySelf",
                             "offset": {
-                              "EJNNCBMCPOB": 0.0,
-                              "OIODIHMNJPJ": 0.8500000238418579,
-                              "CFFEIADEGNK": 0.0
+                              "x": 0.0,
+                              "y": 0.8500000238418579,
+                              "z": 0.0
                             }
                           },
                           "size": {
-                            "EJNNCBMCPOB": 1.5,
-                            "OIODIHMNJPJ": 1.7999999523162842,
-                            "CFFEIADEGNK": 3.799999952316284
+                            "x": 1.5,
+                            "y": 1.7999999523162842,
+                            "z": 3.799999952316284
                           }
                         },
                         "attackInfo": {
@@ -3799,15 +3799,15 @@
                           "attenuationTag": "NormalAttack",
                           "attenuationGroup": "default",
                           "attackProperty": {
-                            "GNBHKEABDNL": "Attack01",
-                            "JKNJLKBGFJK": 0.0,
-                            "bonusCriticalHurt": 25.0,
+                            "damagePercentage": "Attack01",
+                            "damagePercentageRatio": 0.0,
+                            "elementDurability": 25.0,
                             "overrideByWeapon": true,
                             "strikeType": "Spear",
                             "enBreak": 33.7599983215332,
                             "attackType": "Melee",
                             "bonusCritical": 0.0,
-                            "GLKDEEDMHGM": 0.0,
+                            "bonusCriticalHurt": 0.0,
                             "damagePercentage": 0.0
                           },
                           "hitPattern": {
@@ -3834,26 +3834,26 @@
                       "$type": "TriggerAttackEvent",
                       "predicates": [
                         {
-                          "$type": "BAECCAACHHE",
-                          "DMDCKNEEKBN": "HP2ATK"
+                          "$type": "ByUnlockTalentParam",
+                          "talentParam": "HP2ATK"
                         }
                       ],
                       "attackEvent": {
                         "attackPattern": {
-                          "$type": "FEJLMILAGBF",
+                          "$type": "ConfigAttackBox",
                           "triggerType": "TriggerNoRepeat",
                           "born": {
-                            "$type": "CINPPKLNADH",
+                            "$type": "ConfigBornBySelf",
                             "offset": {
-                              "EJNNCBMCPOB": 0.0,
-                              "OIODIHMNJPJ": 0.8500000238418579,
-                              "CFFEIADEGNK": 0.0
+                              "x": 0.0,
+                              "y": 0.8500000238418579,
+                              "z": 0.0
                             }
                           },
                           "size": {
-                            "EJNNCBMCPOB": 1.5,
-                            "OIODIHMNJPJ": 1.7999999523162842,
-                            "CFFEIADEGNK": 3.799999952316284
+                            "x": 1.5,
+                            "y": 1.7999999523162842,
+                            "z": 3.799999952316284
                           }
                         },
                         "attackInfo": {
@@ -3861,9 +3861,9 @@
                           "attenuationTag": "NormalAttack",
                           "attenuationGroup": "default",
                           "attackProperty": {
-                            "GNBHKEABDNL": "Attack01",
-                            "JKNJLKBGFJK": 0.0,
-                            "bonusCriticalHurt": 25.0,
+                            "damagePercentage": "Attack01",
+                            "damagePercentageRatio": 0.0,
+                            "elementDurability": 25.0,
                             "overrideByWeapon": true,
                             "strikeType": "Spear",
                             "enBreak": 33.7599983215332,
@@ -3874,7 +3874,7 @@
                               "MUL"
                             ],
                             "bonusCritical": 0.0,
-                            "GLKDEEDMHGM": 0.0,
+                            "bonusCriticalHurt": 0.0,
                             "damagePercentage": 0.0
                           },
                           "hitPattern": {
@@ -3905,31 +3905,31 @@
                   "$type": "TriggerAttackEvent",
                   "predicates": [
                     {
-                      "$type": "DMKIHIEKBCM",
+                      "$type": "ByNot",
                       "predicates": [
                         {
-                          "$type": "BAECCAACHHE",
-                          "DMDCKNEEKBN": "HP2ATK"
+                          "$type": "ByUnlockTalentParam",
+                          "talentParam": "HP2ATK"
                         }
                       ]
                     }
                   ],
                   "attackEvent": {
                     "attackPattern": {
-                      "$type": "FEJLMILAGBF",
+                      "$type": "ConfigAttackBox",
                       "triggerType": "TriggerNoRepeat",
                       "born": {
-                        "$type": "CINPPKLNADH",
+                        "$type": "ConfigBornBySelf",
                         "offset": {
-                          "EJNNCBMCPOB": 0.0,
-                          "OIODIHMNJPJ": 0.8500000238418579,
-                          "CFFEIADEGNK": 0.0
+                          "x": 0.0,
+                          "y": 0.8500000238418579,
+                          "z": 0.0
                         }
                       },
                       "size": {
-                        "EJNNCBMCPOB": 1.5,
-                        "OIODIHMNJPJ": 1.7999999523162842,
-                        "CFFEIADEGNK": 3.799999952316284
+                        "x": 1.5,
+                        "y": 1.7999999523162842,
+                        "z": 3.799999952316284
                       }
                     },
                     "attackInfo": {
@@ -3937,15 +3937,15 @@
                       "attenuationTag": "NormalAttack",
                       "attenuationGroup": "default",
                       "attackProperty": {
-                        "GNBHKEABDNL": "Attack01",
-                        "JKNJLKBGFJK": 0.0,
-                        "bonusCriticalHurt": 25.0,
+                        "damagePercentage": "Attack01",
+                        "damagePercentageRatio": 0.0,
+                        "elementDurability": 25.0,
                         "overrideByWeapon": true,
                         "strikeType": "Spear",
                         "enBreak": 33.7599983215332,
                         "attackType": "Melee",
                         "bonusCritical": 0.0,
-                        "GLKDEEDMHGM": 0.0,
+                        "bonusCriticalHurt": 0.0,
                         "damagePercentage": 0.0
                       },
                       "hitPattern": {
@@ -3972,26 +3972,26 @@
                   "$type": "TriggerAttackEvent",
                   "predicates": [
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "HP2ATK"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "HP2ATK"
                     }
                   ],
                   "attackEvent": {
                     "attackPattern": {
-                      "$type": "FEJLMILAGBF",
+                      "$type": "ConfigAttackBox",
                       "triggerType": "TriggerNoRepeat",
                       "born": {
-                        "$type": "CINPPKLNADH",
+                        "$type": "ConfigBornBySelf",
                         "offset": {
-                          "EJNNCBMCPOB": 0.0,
-                          "OIODIHMNJPJ": 0.8500000238418579,
-                          "CFFEIADEGNK": 0.0
+                          "x": 0.0,
+                          "y": 0.8500000238418579,
+                          "z": 0.0
                         }
                       },
                       "size": {
-                        "EJNNCBMCPOB": 1.5,
-                        "OIODIHMNJPJ": 1.7999999523162842,
-                        "CFFEIADEGNK": 3.799999952316284
+                        "x": 1.5,
+                        "y": 1.7999999523162842,
+                        "z": 3.799999952316284
                       }
                     },
                     "attackInfo": {
@@ -3999,9 +3999,9 @@
                       "attenuationTag": "NormalAttack",
                       "attenuationGroup": "default",
                       "attackProperty": {
-                        "GNBHKEABDNL": "Attack01",
-                        "JKNJLKBGFJK": 0.0,
-                        "bonusCriticalHurt": 25.0,
+                        "damagePercentage": "Attack01",
+                        "damagePercentageRatio": 0.0,
+                        "elementDurability": 25.0,
                         "overrideByWeapon": true,
                         "strikeType": "Spear",
                         "enBreak": 33.7599983215332,
@@ -4012,7 +4012,7 @@
                           "MUL"
                         ],
                         "bonusCritical": 0.0,
-                        "GLKDEEDMHGM": 0.0,
+                        "bonusCriticalHurt": 0.0,
                         "damagePercentage": 0.0
                       },
                       "hitPattern": {
@@ -4041,51 +4041,51 @@
         },
         "Attack02": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "DMKIHIEKBCM",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "HP2ATK"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "HP2ATK"
                     }
                   ]
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -0.10000000149011612,
-                      "CFFEIADEGNK": 0.800000011920929
+                      "x": 0.0,
+                      "y": -0.10000000149011612,
+                      "z": 0.800000011920929
                     }
                   },
                   "height": 1.5,
-                  "FILEGMKDKKA": 180.0,
-                  "HAJLEKLDOMG": 2.0
+                  "fanAngle": 180.0,
+                  "radius": 2.0
                 },
                 "attackInfo": {
                   "attackTag": "NormalAttack_02",
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Attack02",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "Attack02",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 25.0,
                     "overrideByWeapon": true,
                     "strikeType": "Slash",
                     "enBreak": 34.31999969482422,
                     "attackType": "Melee",
                     "bonusCritical": 0.0,
-                    "GLKDEEDMHGM": 0.0,
+                    "bonusCriticalHurt": 0.0,
                     "damagePercentage": 0.0
                   },
                   "hitPattern": {
@@ -4112,34 +4112,34 @@
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "HP2ATK"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "HP2ATK"
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -0.10000000149011612,
-                      "CFFEIADEGNK": 0.800000011920929
+                      "x": 0.0,
+                      "y": -0.10000000149011612,
+                      "z": 0.800000011920929
                     }
                   },
                   "height": 1.5,
-                  "FILEGMKDKKA": 180.0,
-                  "HAJLEKLDOMG": 2.0
+                  "fanAngle": 180.0,
+                  "radius": 2.0
                 },
                 "attackInfo": {
                   "attackTag": "NormalAttack_02",
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Attack02",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "Attack02",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 25.0,
                     "overrideByWeapon": true,
                     "strikeType": "Slash",
                     "enBreak": 34.31999969482422,
@@ -4150,7 +4150,7 @@
                       "MUL"
                     ],
                     "bonusCritical": 0.0,
-                    "GLKDEEDMHGM": 0.0,
+                    "bonusCriticalHurt": 0.0,
                     "damagePercentage": 0.0
                   },
                   "hitPattern": {
@@ -4177,37 +4177,37 @@
         },
         "Attack03": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "DMKIHIEKBCM",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "HP2ATK"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "HP2ATK"
                     }
                   ]
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FEJLMILAGBF",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.8500000238418579,
-                      "CFFEIADEGNK": 0.5
+                      "x": 0.0,
+                      "y": 0.8500000238418579,
+                      "z": 0.5
                     }
                   },
                   "size": {
-                    "EJNNCBMCPOB": 1.0,
-                    "OIODIHMNJPJ": 1.7999999523162842,
-                    "CFFEIADEGNK": 1.5
+                    "x": 1.0,
+                    "y": 1.7999999523162842,
+                    "z": 1.5
                   }
                 },
                 "attackInfo": {
@@ -4215,15 +4215,15 @@
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Attack03",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "Attack03",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 25.0,
                     "overrideByWeapon": true,
                     "strikeType": "Spear",
                     "enBreak": 42.0,
                     "attackType": "Melee",
                     "bonusCritical": 0.0,
-                    "GLKDEEDMHGM": 0.0,
+                    "bonusCriticalHurt": 0.0,
                     "damagePercentage": 0.0
                   },
                   "hitPattern": {
@@ -4251,26 +4251,26 @@
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "HP2ATK"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "HP2ATK"
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FEJLMILAGBF",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.8500000238418579,
-                      "CFFEIADEGNK": 0.5
+                      "x": 0.0,
+                      "y": 0.8500000238418579,
+                      "z": 0.5
                     }
                   },
                   "size": {
-                    "EJNNCBMCPOB": 1.0,
-                    "OIODIHMNJPJ": 1.7999999523162842,
-                    "CFFEIADEGNK": 1.5
+                    "x": 1.0,
+                    "y": 1.7999999523162842,
+                    "z": 1.5
                   }
                 },
                 "attackInfo": {
@@ -4278,9 +4278,9 @@
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Attack03",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "Attack03",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 25.0,
                     "overrideByWeapon": true,
                     "strikeType": "Spear",
                     "enBreak": 42.0,
@@ -4291,7 +4291,7 @@
                       "MUL"
                     ],
                     "bonusCritical": 0.0,
-                    "GLKDEEDMHGM": 0.0,
+                    "bonusCriticalHurt": 0.0,
                     "damagePercentage": 0.0
                   },
                   "hitPattern": {
@@ -4319,50 +4319,50 @@
         },
         "Attack04": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "DMKIHIEKBCM",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "HP2ATK"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "HP2ATK"
                     }
                   ]
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -0.10000000149011612,
-                      "CFFEIADEGNK": 1.7999999523162842
+                      "x": 0.0,
+                      "y": -0.10000000149011612,
+                      "z": 1.7999999523162842
                     }
                   },
                   "height": 1.899999976158142,
-                  "HAJLEKLDOMG": 1.7000000476837158
+                  "radius": 1.7000000476837158
                 },
                 "attackInfo": {
                   "attackTag": "NormalAttack_04",
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Attack04",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "Attack04",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 25.0,
                     "overrideByWeapon": true,
                     "strikeType": "Spear",
                     "enBreak": 45.91999816894531,
                     "attackType": "Melee",
                     "bonusCritical": 0.0,
-                    "GLKDEEDMHGM": 0.0,
+                    "bonusCriticalHurt": 0.0,
                     "damagePercentage": 0.0
                   },
                   "hitPattern": {
@@ -4390,33 +4390,33 @@
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "HP2ATK"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "HP2ATK"
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -0.10000000149011612,
-                      "CFFEIADEGNK": 1.7999999523162842
+                      "x": 0.0,
+                      "y": -0.10000000149011612,
+                      "z": 1.7999999523162842
                     }
                   },
                   "height": 1.899999976158142,
-                  "HAJLEKLDOMG": 1.7000000476837158
+                  "radius": 1.7000000476837158
                 },
                 "attackInfo": {
                   "attackTag": "NormalAttack_04",
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Attack04",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "Attack04",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 25.0,
                     "overrideByWeapon": true,
                     "strikeType": "Spear",
                     "enBreak": 45.91999816894531,
@@ -4427,7 +4427,7 @@
                       "MUL"
                     ],
                     "bonusCritical": 0.0,
-                    "GLKDEEDMHGM": 0.0,
+                    "bonusCriticalHurt": 0.0,
                     "damagePercentage": 0.0
                   },
                   "hitPattern": {
@@ -4455,17 +4455,17 @@
         },
         "Attack05_PreciseLance": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerBullet",
               "bulletID": 41030001,
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 0.5
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.5
                 }
               }
             }
@@ -4473,37 +4473,37 @@
         },
         "Attack06": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "DMKIHIEKBCM",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "HP2ATK"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "HP2ATK"
                     }
                   ]
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FEJLMILAGBF",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.800000011920929,
-                      "CFFEIADEGNK": 0.20000000298023224
+                      "x": 0.0,
+                      "y": 0.800000011920929,
+                      "z": 0.20000000298023224
                     }
                   },
                   "size": {
-                    "EJNNCBMCPOB": 1.0,
-                    "OIODIHMNJPJ": 1.7000000476837158,
-                    "CFFEIADEGNK": 4.0
+                    "x": 1.0,
+                    "y": 1.7000000476837158,
+                    "z": 4.0
                   }
                 },
                 "attackInfo": {
@@ -4511,15 +4511,15 @@
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Attack06",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "Attack06",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 25.0,
                     "overrideByWeapon": true,
                     "strikeType": "Spear",
                     "enBreak": 61.52000045776367,
                     "attackType": "Melee",
                     "bonusCritical": 0.0,
-                    "GLKDEEDMHGM": 0.0,
+                    "bonusCriticalHurt": 0.0,
                     "damagePercentage": 0.0
                   },
                   "hitPattern": {
@@ -4546,26 +4546,26 @@
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "HP2ATK"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "HP2ATK"
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FEJLMILAGBF",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.800000011920929,
-                      "CFFEIADEGNK": 0.20000000298023224
+                      "x": 0.0,
+                      "y": 0.800000011920929,
+                      "z": 0.20000000298023224
                     }
                   },
                   "size": {
-                    "EJNNCBMCPOB": 1.0,
-                    "OIODIHMNJPJ": 1.7000000476837158,
-                    "CFFEIADEGNK": 4.0
+                    "x": 1.0,
+                    "y": 1.7000000476837158,
+                    "z": 4.0
                   }
                 },
                 "attackInfo": {
@@ -4573,9 +4573,9 @@
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Attack06",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "Attack06",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 25.0,
                     "overrideByWeapon": true,
                     "strikeType": "Spear",
                     "enBreak": 61.52000045776367,
@@ -4586,7 +4586,7 @@
                       "MUL"
                     ],
                     "bonusCritical": 0.0,
-                    "GLKDEEDMHGM": 0.0,
+                    "bonusCriticalHurt": 0.0,
                     "damagePercentage": 0.0
                   },
                   "hitPattern": {
@@ -4626,55 +4626,55 @@
         "Lance_Attack_Handler": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.10000000149011612,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "PCGEEHLBIKD",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "HDDHHAGMLJK",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_Lance_Attack_Count",
-                      "ratio": 3.0,
-                      "NHIKJLNOOBG": "LessAndEqual"
+                      "value": 3.0,
+                      "compareType": "LessAndEqual"
                     },
                     {
-                      "$type": "HDDHHAGMLJK",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_Lance_Attack_Count",
-                      "ratio": 0.0,
-                      "NHIKJLNOOBG": "NoneOrEqual"
+                      "value": 0.0,
+                      "compareType": "NoneOrEqual"
                     }
                   ]
                 },
                 {
-                  "$type": "DMKIHIEKBCM",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "HP2ATK"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "HP2ATK"
                     }
                   ]
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FEJLMILAGBF",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.8999999761581421,
-                      "CFFEIADEGNK": -1.0
+                      "x": 0.0,
+                      "y": 0.8999999761581421,
+                      "z": -1.0
                     }
                   },
                   "size": {
-                    "EJNNCBMCPOB": 1.0,
-                    "OIODIHMNJPJ": 3.0999999046325684,
-                    "CFFEIADEGNK": 4.0
+                    "x": 1.0,
+                    "y": 3.0999999046325684,
+                    "z": 4.0
                   }
                 },
                 "attackInfo": {
@@ -4682,15 +4682,15 @@
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Attack05",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "Attack05",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 25.0,
                     "overrideByWeapon": true,
                     "strikeType": "Slash",
                     "enBreak": 11.520000457763672,
                     "attackType": "Melee",
                     "bonusCritical": 0.0,
-                    "GLKDEEDMHGM": 0.0,
+                    "bonusCriticalHurt": 0.0,
                     "damagePercentage": 0.0
                   },
                   "hitPattern": {
@@ -4717,43 +4717,43 @@
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "PCGEEHLBIKD",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "HDDHHAGMLJK",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_Lance_Attack_Count",
-                      "ratio": 3.0,
-                      "NHIKJLNOOBG": "LessAndEqual"
+                      "value": 3.0,
+                      "compareType": "LessAndEqual"
                     },
                     {
-                      "$type": "HDDHHAGMLJK",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_Lance_Attack_Count",
-                      "ratio": 0.0,
-                      "NHIKJLNOOBG": "NoneOrEqual"
+                      "value": 0.0,
+                      "compareType": "NoneOrEqual"
                     }
                   ]
                 },
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "HP2ATK"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "HP2ATK"
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FEJLMILAGBF",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.8999999761581421,
-                      "CFFEIADEGNK": -1.0
+                      "x": 0.0,
+                      "y": 0.8999999761581421,
+                      "z": -1.0
                     }
                   },
                   "size": {
-                    "EJNNCBMCPOB": 1.0,
-                    "OIODIHMNJPJ": 3.0999999046325684,
-                    "CFFEIADEGNK": 4.0
+                    "x": 1.0,
+                    "y": 3.0999999046325684,
+                    "z": 4.0
                   }
                 },
                 "attackInfo": {
@@ -4761,9 +4761,9 @@
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Attack05",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "Attack05",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 25.0,
                     "overrideByWeapon": true,
                     "strikeType": "Slash",
                     "enBreak": 11.520000457763672,
@@ -4774,7 +4774,7 @@
                       "MUL"
                     ],
                     "bonusCritical": 0.0,
-                    "GLKDEEDMHGM": 0.0,
+                    "bonusCriticalHurt": 0.0,
                     "damagePercentage": 0.0
                   },
                   "hitPattern": {
@@ -4799,7 +4799,7 @@
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_Lance_Attack_Count",
               "useLimitRange": true,
               "maxValue": 4.0,
@@ -4811,7 +4811,7 @@
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "shieldHP": "Eff_Avatar_Male_Pole_Zhongli_NormalAttack05_Follow",
+          "effectPattern": "Eff_Avatar_Male_Pole_Zhongli_NormalAttack05_Follow",
           "effectTempleteID": -1.0
         },
         {
@@ -4835,7 +4835,7 @@
           "target": "Target",
           "targetPredicates": [
             {
-              "$type": "OCBHACLGALE",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "MonsterEquip"
               ]
@@ -4847,11 +4847,11 @@
               "target": "Target",
               "predicates": [
                 {
-                  "$type": "DMKIHIEKBCM",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "HP2ATK"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "HP2ATK"
                     }
                   ]
                 }
@@ -4861,15 +4861,15 @@
                 "attenuationTag": "ExtraAttack",
                 "attenuationGroup": "Avatar_Pole_ExtraAttack",
                 "attackProperty": {
-                  "GNBHKEABDNL": "ExtraAttack",
-                  "JKNJLKBGFJK": 0.0,
-                  "bonusCriticalHurt": 25.0,
+                  "damagePercentage": "ExtraAttack",
+                  "damagePercentageRatio": 0.0,
+                  "elementDurability": 25.0,
                   "overrideByWeapon": true,
                   "strikeType": "Spear",
                   "enBreak": 103.27999877929688,
                   "attackType": "Melee",
                   "bonusCritical": 0.0,
-                  "GLKDEEDMHGM": 0.0,
+                  "bonusCriticalHurt": 0.0,
                   "damagePercentage": 0.0
                 },
                 "hitPattern": {
@@ -4902,8 +4902,8 @@
               "target": "Target",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "HP2ATK"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "HP2ATK"
                 }
               ],
               "attackInfo": {
@@ -4911,9 +4911,9 @@
                 "attenuationTag": "ExtraAttack",
                 "attenuationGroup": "Avatar_Pole_ExtraAttack",
                 "attackProperty": {
-                  "GNBHKEABDNL": "ExtraAttack",
-                  "JKNJLKBGFJK": 0.0,
-                  "bonusCriticalHurt": 25.0,
+                  "damagePercentage": "ExtraAttack",
+                  "damagePercentageRatio": 0.0,
+                  "elementDurability": 25.0,
                   "overrideByWeapon": true,
                   "strikeType": "Spear",
                   "enBreak": 103.27999877929688,
@@ -4924,7 +4924,7 @@
                     "MUL"
                   ],
                   "bonusCritical": 0.0,
-                  "GLKDEEDMHGM": 0.0,
+                  "bonusCriticalHurt": 0.0,
                   "damagePercentage": 0.0
                 },
                 "hitPattern": {
@@ -4958,44 +4958,44 @@
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "DMKIHIEKBCM",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "HP2ATK"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "HP2ATK"
                     }
                   ]
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
-                  "DOFMONBFMLG": true,
+                  "filterByFrame": true,
                   "born": {
-                    "$type": "HLHLJAHKGKI",
+                    "$type": "ConfigBornByCollisionPoint",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
                   },
-                  "HAJLEKLDOMG": 0.800000011920929
+                  "radius": 0.800000011920929
                 },
                 "attackInfo": {
                   "attackTag": "ExtraAttack",
                   "attenuationTag": "ExtraAttack",
                   "attenuationGroup": "Avatar_Pole_ExtraAttack",
                   "attackProperty": {
-                    "GNBHKEABDNL": "ExtraAttack",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "ExtraAttack",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 25.0,
                     "overrideByWeapon": true,
                     "strikeType": "Spear",
                     "enBreak": 103.27999877929688,
                     "attackType": "Melee",
                     "bonusCritical": 0.0,
-                    "GLKDEEDMHGM": 0.0,
+                    "bonusCriticalHurt": 0.0,
                     "damagePercentage": 0.0
                   },
                   "hitPattern": {
@@ -5029,33 +5029,33 @@
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "HP2ATK"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "HP2ATK"
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
-                  "DOFMONBFMLG": true,
+                  "filterByFrame": true,
                   "born": {
-                    "$type": "HLHLJAHKGKI",
+                    "$type": "ConfigBornByCollisionPoint",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
                   },
-                  "HAJLEKLDOMG": 0.800000011920929
+                  "radius": 0.800000011920929
                 },
                 "attackInfo": {
                   "attackTag": "ExtraAttack",
                   "attenuationTag": "ExtraAttack",
                   "attenuationGroup": "Avatar_Pole_ExtraAttack",
                   "attackProperty": {
-                    "GNBHKEABDNL": "ExtraAttack",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "ExtraAttack",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 25.0,
                     "overrideByWeapon": true,
                     "strikeType": "Spear",
                     "enBreak": 103.27999877929688,
@@ -5066,7 +5066,7 @@
                       "MUL"
                     ],
                     "bonusCritical": 0.0,
-                    "GLKDEEDMHGM": 0.0,
+                    "bonusCriticalHurt": 0.0,
                     "damagePercentage": 0.0
                   },
                   "hitPattern": {
@@ -5206,11 +5206,11 @@
         "FallingAnthem_BS_Material": {
           "modifierName": "",
           "duration": 0.5299999713897705,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Pole_FallingAnthem_BS_Normal",
+              "effectPattern": "Eff_Avatar_Pole_FallingAnthem_BS_Normal",
               "effectTempleteID": -1.0
             }
           ],
@@ -5227,7 +5227,7 @@
         },
         "FallingAnthem_BS_VelocityForce_Initialize": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -2.0
           },
@@ -5242,44 +5242,44 @@
         },
         "FallingAnthem_LoopDamage": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "DMKIHIEKBCM",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "HP2ATK"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "HP2ATK"
                     }
                   ]
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
                   },
-                  "HAJLEKLDOMG": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "FallingAnthem_Normal_Loop_Damage",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 0.0,
+                    "damagePercentage": "FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 0.0,
                     "overrideByWeapon": true,
                     "strikeType": "Slash",
                     "enBreak": 25.0,
@@ -5299,32 +5299,32 @@
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "HP2ATK"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "HP2ATK"
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
                   },
-                  "HAJLEKLDOMG": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "FallingAnthem_Normal_Loop_Damage",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 0.0,
+                    "damagePercentage": "FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 0.0,
                     "overrideByWeapon": true,
                     "strikeType": "Slash",
                     "enBreak": 25.0,
@@ -5351,37 +5351,37 @@
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "DMKIHIEKBCM",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "BAECCAACHHE",
-                      "DMDCKNEEKBN": "HP2ATK"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "HP2ATK"
                     }
                   ]
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
                   },
-                  "HAJLEKLDOMG": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "FallingAnthem_Normal_Loop_Damage",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 0.0,
+                    "damagePercentage": "FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 0.0,
                     "overrideByWeapon": true,
                     "strikeType": "Slash",
                     "enBreak": 25.0,
@@ -5401,32 +5401,32 @@
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "HP2ATK"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "HP2ATK"
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
                   },
-                  "HAJLEKLDOMG": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "FallingAnthem_Normal_Loop_Damage",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 0.0,
+                    "damagePercentage": "FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 0.0,
                     "overrideByWeapon": true,
                     "strikeType": "Slash",
                     "enBreak": 25.0,
@@ -5451,7 +5451,7 @@
         },
         "FallingAnthem_FallingDamageImmune_01": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ClearGlobalValue",
@@ -5461,12 +5461,12 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv0",
+              "value": "FallingAnthem_FallingDamageRatio_Lv0",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
@@ -5476,16 +5476,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "value": "FallingAnthem_Altitude_Lv1"
                 },
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv1",
+              "value": "FallingAnthem_FallingDamageRatio_Lv1",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
@@ -5495,16 +5495,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "value": "FallingAnthem_Altitude_Lv2"
                 },
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv1"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv2",
+              "value": "FallingAnthem_FallingDamageRatio_Lv2",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
@@ -5514,16 +5514,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "value": "FallingAnthem_Altitude_Lv3"
                 },
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv2"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv3",
+              "value": "FallingAnthem_FallingDamageRatio_Lv3",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
@@ -5533,11 +5533,11 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv3"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv4",
+              "value": "FallingAnthem_FallingDamageRatio_Lv4",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
@@ -5551,7 +5551,7 @@
         },
         "FallingAnthem_FallingDamageImmune_02": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -5566,19 +5566,19 @@
         },
         "FallingAnthem_FallingDamageImmune_03": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
           }
         },
         "FallingAnthem_Loop_Normal": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_FallingAnthem_UseCamera",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -1.0,
                 0.5,
@@ -5593,29 +5593,29 @@
         },
         "FallingAnthem_Loop_Normal_Rank_1": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Pole_FallingAnthem_Loop_01_Normal",
+              "effectPattern": "Eff_Avatar_Pole_FallingAnthem_Loop_01_Normal",
               "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_Loop_Normal_Rank_2": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Pole_FallingAnthem_Loop_02_Normal",
+              "effectPattern": "Eff_Avatar_Pole_FallingAnthem_Loop_02_Normal",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Inertia": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ApplyInertiaVelocityMixin",
@@ -5626,18 +5626,18 @@
         },
         "FallingAnthem_Height_Detect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -5647,11 +5647,11 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
-              "ratio": 5.0,
+              "value": 5.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -5661,35 +5661,35 @@
               "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -5699,15 +5699,15 @@
         },
         "FallingAnthem_OverHead_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "NOPHJIEDHCB",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -5721,25 +5721,25 @@
         },
         "FallingAnthem_OverHead_Camera_Remover": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ]
         },
         "FallingAnthem_Landed_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "NOPHJIEDHCB",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -5753,7 +5753,7 @@
         },
         "FallingAnthem_ClearVelocityForce": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "RemoveVelocityForce",
@@ -5770,45 +5770,45 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "DLFHFMCJICH": true,
-              "NHIKJLNOOBG": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             },
             {
-              "$type": "DMKIHIEKBCM",
+              "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "HP2ATK"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "HP2ATK"
                 }
               ]
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MKKIHKBAOOD",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "OIONBKCKNFC",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": -0.5,
-                  "CFFEIADEGNK": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "HAJLEKLDOMG": 3.0
+              "radius": 3.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "GNBHKEABDNL": "FallingAnthem_Normal_Rank_1_Damage",
-                "JKNJLKBGFJK": 0.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_1_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "overrideByWeapon": true,
                 "strikeType": "Blunt",
                 "enBreak": 100.0,
@@ -5843,40 +5843,40 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "DLFHFMCJICH": true,
-              "NHIKJLNOOBG": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             },
             {
-              "$type": "BAECCAACHHE",
-              "DMDCKNEEKBN": "HP2ATK"
+              "$type": "ByUnlockTalentParam",
+              "talentParam": "HP2ATK"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MKKIHKBAOOD",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "OIONBKCKNFC",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": -0.5,
-                  "CFFEIADEGNK": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "HAJLEKLDOMG": 3.0
+              "radius": 3.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "GNBHKEABDNL": "FallingAnthem_Normal_Rank_1_Damage",
-                "JKNJLKBGFJK": 0.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_1_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "overrideByWeapon": true,
                 "strikeType": "Blunt",
                 "enBreak": 100.0,
@@ -5916,44 +5916,44 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "DLFHFMCJICH": true
+              "value": 1.0,
+              "forceByCaster": true
             },
             {
-              "$type": "DMKIHIEKBCM",
+              "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "HP2ATK"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "HP2ATK"
                 }
               ]
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MKKIHKBAOOD",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "OIONBKCKNFC",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": -0.5,
-                  "CFFEIADEGNK": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "HAJLEKLDOMG": 5.0
+              "radius": 5.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "GNBHKEABDNL": "FallingAnthem_Normal_Rank_2_Damage",
-                "JKNJLKBGFJK": 0.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_2_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "overrideByWeapon": true,
                 "strikeType": "Blunt",
                 "enBreak": 150.0,
@@ -5989,39 +5989,39 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "DLFHFMCJICH": true
+              "value": 1.0,
+              "forceByCaster": true
             },
             {
-              "$type": "BAECCAACHHE",
-              "DMDCKNEEKBN": "HP2ATK"
+              "$type": "ByUnlockTalentParam",
+              "talentParam": "HP2ATK"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MKKIHKBAOOD",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "OIONBKCKNFC",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": -0.5,
-                  "CFFEIADEGNK": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "HAJLEKLDOMG": 5.0
+              "radius": 5.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "GNBHKEABDNL": "FallingAnthem_Normal_Rank_2_Damage",
-                "JKNJLKBGFJK": 0.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_2_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "overrideByWeapon": true,
                 "strikeType": "Blunt",
                 "enBreak": 150.0,
@@ -6062,27 +6062,27 @@
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "DLFHFMCJICH": true,
-              "NHIKJLNOOBG": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             }
           ],
-          "shieldHP": "Eff_Avatar_Pole_FallingAnthem_Strike_01_Normal",
+          "effectPattern": "Eff_Avatar_Pole_FallingAnthem_Strike_01_Normal",
           "effectTempleteID": -1.0
         },
         {
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "DLFHFMCJICH": true
+              "value": 1.0,
+              "forceByCaster": true
             }
           ],
-          "shieldHP": "Eff_Avatar_Pole_FallingAnthem_Strike_02_Normal",
+          "effectPattern": "Eff_Avatar_Pole_FallingAnthem_Strike_02_Normal",
           "effectTempleteID": -1.0
         }
       ]

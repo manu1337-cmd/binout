@@ -9,7 +9,7 @@
           "skillID": 10386,
           "chargeTime": 0.11999999731779099,
           "secondChargeTime": 0.20000000298023224,
-          "OnBeginUncharged": [
+          "onBeginUncharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "DoSkill"
@@ -17,28 +17,28 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 99.0
+              "value": 99.0
             },
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
             }
           ],
-          "OnReleaseUncharged": [
+          "onReleaseUncharged": [
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
-          "OnBeginCharged": [
+          "onBeginCharged": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging",
-              "ratio": true
+              "value": true
             }
           ],
-          "OnReleaseCharged": [
+          "onReleaseCharged": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
@@ -46,17 +46,17 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
-          "OnBeginSecondCharged": [
+          "onBeginSecondCharged": [
             {
               "$type": "SetAnimatorTrigger",
               "predicates": [
                 {
-                  "$type": "CDIPLFJLMNO",
+                  "$type": "ByLocalAvatarStamina",
                   "logic": "GreaterOrEqual",
-                  "EHMLCAAGIMF": [
+                  "stamina": [
                     "ExtraAttack_Sword_Stamina_Cost",
                     "Flexible_Stamina",
                     "ADD"
@@ -69,9 +69,9 @@
               "$type": "SetAnimatorInt",
               "predicates": [
                 {
-                  "$type": "CDIPLFJLMNO",
+                  "$type": "ByLocalAvatarStamina",
                   "logic": "GreaterOrEqual",
-                  "EHMLCAAGIMF": [
+                  "stamina": [
                     "ExtraAttack_Sword_Stamina_Cost",
                     "Flexible_Stamina",
                     "ADD"
@@ -79,7 +79,7 @@
                 }
               ],
               "intID": "SkillID",
-              "ratio": 6.0
+              "value": 6.0
             },
             {
               "$type": "SetAnimatorBool",
@@ -109,13 +109,13 @@
       "modifiers": {
         "ExtraAttack_StaminaCost": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 10001,
-              "amountByCasterMaxHPRatio": 1.0,
-              "costStaminaDelta": "ExtraAttack_Sword_Stamina_Cost"
+              "cdRatio": 1.0,
+              "costStaminaRatio": "ExtraAttack_Sword_Stamina_Cost"
             }
           ]
         }
@@ -169,7 +169,7 @@
       "modifiers": {
         "Focus": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarEnterFocus",
@@ -206,34 +206,34 @@
         },
         "Charge_FX": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 10.0,
+              "value": 10.0,
               "key": "_FURIOUSMONOLITH_THROW_RANGE",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_Aim_Line",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_Aim_Line",
               "effectTempleteID": -1.0
             }
           ]
         },
         "AimingAlertFX": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_AimAlert",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_AimAlert",
               "effectTempleteID": -1.0
             },
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_AimAlert_Hand",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_AimAlert_Hand",
               "effectTempleteID": -1.0
             }
           ]
@@ -243,14 +243,14 @@
         {
           "$type": "AvatarSkillStart",
           "skillID": 10387,
-          "amountByCasterMaxHPRatio": 1.0,
-          "costStaminaDelta": 1.0
+          "cdRatio": 1.0,
+          "costStaminaRatio": 1.0
         },
         {
           "$type": "TriggerBullet",
           "bulletID": 41038003,
           "born": {
-            "$type": "ILHMMCNMNEG",
+            "$type": "ConfigBornByAttachPoint",
             "attachPointName": "FocusAnchor"
           }
         }
@@ -274,15 +274,15 @@
       "modifiers": {
         "KillGadget": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "otherTargets": {
-                "$type": "BMGGFEAPNEB",
+                "$type": "SelectTargetsByChildren",
                 "configID": 41038001
               },
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Albedo_Monolith_DieFx_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -290,7 +290,7 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "BMGGFEAPNEB",
+                "$type": "SelectTargetsByChildren",
                 "configID": 41038001
               },
               "modifierName": "Albedo_FuriousMonolith_Killer"
@@ -300,7 +300,7 @@
         "Albedo_FuriousMonolith_Killer": {
           "modifierName": "",
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "KillSelf",
@@ -315,21 +315,21 @@
         {
           "$type": "AvatarSkillStart",
           "skillID": 10387,
-          "amountByCasterMaxHPRatio": 1.0,
-          "costStaminaDelta": 1.0
+          "cdRatio": 1.0,
+          "costStaminaRatio": 1.0
         },
         {
           "$type": "CreateGadget",
           "born": {
-            "$type": "AJCFIBNMGKO",
+            "$type": "ConfigBornBySelf",
             "offset": {
-              "EMBMLEBGFOI": 0.0,
-              "NABPJFNICAE": 0.0,
-              "MLOLIKEJCKB": 3.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 3.0
             },
-            "CMLNNDEJCEF": true,
+            "onGround": true,
             "FNODDBCCBMP": true,
-            "EFKJEGODJCO": 3.0
+            "onGroundRaycastUpDist": 3.0
           },
           "gadgetID": 41038001,
           "campID": 1001,
@@ -346,10 +346,10 @@
         {
           "$type": "CreateGadget",
           "born": {
-            "$type": "NNOMECHMEBA",
-            "CMLNNDEJCEF": true,
+            "$type": "ConfigBornByGlobalValue",
+            "onGround": true,
             "FNODDBCCBMP": true,
-            "EFKJEGODJCO": 3.0,
+            "onGroundRaycastUpDist": 3.0,
             "positionKey": "_ABILITY_Albedo_Monolith_CustomPos",
             "directionKey": "_ABILITY_Albedo_Monolith_CustomDir"
           },
@@ -370,7 +370,7 @@
           "target": "OriginOwner",
           "key": "_ABILITY_Albedo_Monolith_CustomPos",
           "born": {
-            "$type": "MNJLPLGJGLI"
+            "$type": "ConfigBornByCollisionPoint"
           }
         },
         {
@@ -378,7 +378,7 @@
           "target": "OriginOwner",
           "key": "_ABILITY_Albedo_Monolith_CustomDir",
           "born": {
-            "$type": "GHHFGNOPNBM"
+            "$type": "ConfigBornBySelfOwner"
           }
         },
         {
@@ -399,7 +399,7 @@
           "target": "OriginOwner",
           "key": "_ABILITY_Albedo_Monolith_CustomPos",
           "born": {
-            "$type": "AJCFIBNMGKO"
+            "$type": "ConfigBornBySelf"
           }
         },
         {
@@ -407,7 +407,7 @@
           "target": "OriginOwner",
           "key": "_ABILITY_Albedo_Monolith_CustomDir",
           "born": {
-            "$type": "GHHFGNOPNBM"
+            "$type": "ConfigBornBySelfOwner"
           }
         },
         {
@@ -451,7 +451,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onThinkInterval": [
             {
@@ -464,7 +464,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "RemoveUniqueModifier",
@@ -474,7 +474,7 @@
               "$type": "CreateMovingPlatform",
               "lifeByOwnerIsAlive": true,
               "born": {
-                "$type": "AJCFIBNMGKO"
+                "$type": "ConfigBornBySelf"
               },
               "gadgetID": 41038002,
               "campID": 1001,
@@ -486,12 +486,12 @@
         "Albedo_Monolith_Field_AvatarCheckDelay_Intro": {
           "modifierName": "",
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Albedo_Monolith_Field_AvatarCheckDelay",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -506,7 +506,7 @@
               "successActions": [
                 {
                   "$type": "SetOverrideMapValue",
-                  "ratio": 0.5,
+                  "value": 0.5,
                   "overrideMapKey": "AvatarCheckDelay",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -515,7 +515,7 @@
               "failActions": [
                 {
                   "$type": "SetOverrideMapValue",
-                  "ratio": 0.25,
+                  "value": 0.25,
                   "overrideMapKey": "AvatarCheckDelay",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -525,7 +525,7 @@
             {
               "$type": "ApplyModifier",
               "target": "CurTeamAvatars",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Albedo_Monolith_Field_AvatarCheckDelay"
             }
           ]
@@ -534,20 +534,20 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "AvatarCheckDelay",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Albedo_Monolith_Field_AvatarCheckDelay",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Albedo_Monolith_Field_AvatarInDelay",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -556,16 +556,16 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Albedo_Monolith_Field_AvatarCheckDelay",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Albedo_Monolith_Field_AvatarInDelay",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -575,13 +575,13 @@
         "Albedo_Monolith_Field_AvatarCheckDelay_Outro": {
           "modifierName": "",
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "target": "CurTeamAvatars",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Albedo_Monolith_Field_AvatarCheckDelay",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -593,7 +593,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "KillSelf",
@@ -607,11 +607,11 @@
         "FuriousMonolith_RockDurability_Handler": {
           "modifierName": "",
           "elementType": "Rock",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Albedo_Monolith_DieFx_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -623,7 +623,7 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "BMGGFEAPNEB",
+                "$type": "SelectTargetsByChildren",
                 "configID": 41038002
               },
               "modifierName": "UNIQUE_Albedo_FuriousMonolith_Elevator_Killer"
@@ -643,11 +643,11 @@
         "Recover_RockDurability": {
           "modifierName": "",
           "duration": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddElementDurability",
-              "ratio": 100.0,
+              "value": 100.0,
               "modifierName": "FuriousMonolith_RockDurability_Handler",
               "elementType": "Rock",
               "useLimitRange": true,
@@ -659,11 +659,11 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_Elevator_Fail",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_Elevator_Fail",
               "effectTempleteID": -1.0
             }
           ]
@@ -672,7 +672,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Duration",
-          "bonusCriticalHurt": "Duration",
+          "elementDurability": "Duration",
           "onRemoved": [
             {
               "$type": "KillSelf"
@@ -691,12 +691,12 @@
         },
         {
           "$type": "AttachEffect",
-          "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith",
+          "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith",
           "effectTempleteID": -1.0
         },
         {
           "$type": "FireEffect",
-          "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_Earthquake",
+          "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_Earthquake",
           "effectTempleteID": -1.0
         },
         {
@@ -707,28 +707,28 @@
           "$type": "TriggerAttackEvent",
           "attackEvent": {
             "attackPattern": {
-              "$type": "FPJICLLGBLO",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "AJCFIBNMGKO",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": -2.0,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": -2.0,
+                  "z": 0.0
                 }
               },
               "height": 4.0,
-              "DLFACKMBPCH": 5.0
+              "radius": 5.0
             },
             "attackInfo": {
               "attackTag": "Elemental_Art",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "ACKCDHKEGCK": "OpeningDamage",
-                "JIICGJODDDM": 0.0,
+                "damagePercentage": "OpeningDamage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Rock",
-                "bonusCriticalHurt": 25.0,
+                "elementDurability": 25.0,
                 "strikeType": "Blunt",
                 "enBreak": 50.0,
                 "attackType": "Melee",
@@ -761,22 +761,22 @@
           "target": "Target",
           "targetPredicates": [
             {
-              "$type": "CACJBJLHLDL",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Avatar"
               ]
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Albedo_Monolith_Field_AvatarStateMark",
-              "ratio": 0.0,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Albedo_Monolith_Field_AvatarInDelay",
-              "ratio": 0.0,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             }
           ],
           "successActions": [
@@ -785,10 +785,10 @@
               "target": "Target",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Albedo_Monolith_Field_AvatarCheckDelay",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "modifierName": "Albedo_Monolith_Field_AvatarCheckDelay_Intro"
@@ -800,28 +800,28 @@
           "target": "Target",
           "targetPredicates": [
             {
-              "$type": "CACJBJLHLDL",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Avatar"
               ]
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Albedo_Monolith_Field_AvatarStateMark",
-              "ratio": 0.0,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Albedo_Monolith_Field_AvatarCheckDelay",
-              "ratio": 1.0
+              "value": 1.0
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "target": "Caster",
               "key": "_ABILITY_Albedo_Monolith_ElevatorCD",
-              "ratio": 0.0,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             }
           ],
           "successActions": [
@@ -838,7 +838,7 @@
             },
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!TryTriggerPlatformStartMove!!!!!!!!!!"
             },
             {
@@ -854,22 +854,22 @@
           "$type": "Predicated",
           "targetPredicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Albedo_Monolith_DieFx_Mark",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "successActions": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_Broken",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_Broken",
               "effectTempleteID": -1.0
             }
           ],
           "failActions": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_Die",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_Die",
               "effectTempleteID": -1.0
             }
           ]
@@ -877,7 +877,7 @@
         {
           "$type": "ApplyModifier",
           "otherTargets": {
-            "$type": "BMGGFEAPNEB",
+            "$type": "SelectTargetsByChildren",
             "configID": 41038002
           },
           "modifierName": "UNIQUE_Albedo_FuriousMonolith_Elevator_Killer"
@@ -912,29 +912,29 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR10H10",
                 "campTargetType": "Enemy",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "modifierName": "Albedo_Monolith_Field_Monitor"
@@ -942,14 +942,14 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR10H20",
                 "campTargetType": "Alliance",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
@@ -960,14 +960,14 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR10H20",
                 "campTargetType": "Alliance",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
@@ -980,37 +980,37 @@
         "Albedo_Monolith_Field_Monitor": {
           "modifierName": "",
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onBeingHit": [
             {
               "$type": "Predicated",
               "target": "Other",
               "targetPredicates": [
                 {
-                  "$type": "EPMJKNBAIPE",
-                  "OCCFCJJBLFH": 0.0
+                  "$type": "ByHitDamage",
+                  "damage": 0.0
                 },
                 {
-                  "$type": "ECAAGMBEMJE",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "LLOPNFJPJDN",
+                      "$type": "ByHasAbilityState",
                       "target": "Self",
                       "abilityState": "Invincible"
                     },
                     {
-                      "$type": "LLOPNFJPJDN",
+                      "$type": "ByHasAbilityState",
                       "target": "Self",
                       "abilityState": "LockHP"
                     }
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Albedo_MonolithField_AlchemyTrapCD",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -1018,15 +1018,15 @@
                   "$type": "Predicated",
                   "targetPredicates": [
                     {
-                      "$type": "LLOPNFJPJDN",
+                      "$type": "ByHasAbilityState",
                       "target": "Self",
                       "abilityState": "Limbo"
                     },
                     {
-                      "$type": "GIGOKNOCENN",
+                      "$type": "ByTargetHPValue",
                       "target": "Self",
                       "logic": "Lesser",
-                      "AEDIMKJCFCH": 2.0
+                      "HP": 2.0
                     }
                   ],
                   "failActions": [
@@ -1048,7 +1048,7 @@
                           "target": "Other",
                           "targetPredicates": [
                             {
-                              "$type": "BEAICMDDNON",
+                              "$type": "ByAttackTags",
                               "attackTags": [
                                 "Elemental_Burst",
                                 "Elemental_Art"
@@ -1061,20 +1061,20 @@
                               "target": "Other",
                               "targetPredicates": [
                                 {
-                                  "$type": "BEAICMDDNON",
+                                  "$type": "ByAttackTags",
                                   "attackTags": [
                                     "Elemental_Art"
                                   ]
                                 },
                                 {
-                                  "$type": "MOMNDKCBAEK",
+                                  "$type": "ByAttackType",
                                   "attackType": "Melee"
                                 }
                               ],
                               "successActions": [
                                 {
                                   "$type": "DebugLog",
-                                  "PositionDampTime": true,
+                                  "doOffStage": true,
                                   "content": "!!!!!!!!!!ElementalArt_BornAttack_Check!!!!!!!!!!"
                                 },
                                 {
@@ -1088,7 +1088,7 @@
                           "failActions": [
                             {
                               "$type": "DebugLog",
-                              "PositionDampTime": true,
+                              "doOffStage": true,
                               "content": "!!!!!!!!!!Not_ElementalArt_Or_Burst_Check!!!!!!!!!!"
                             },
                             {
@@ -1102,7 +1102,7 @@
                       "failActions": [
                         {
                           "$type": "DebugLog",
-                          "PositionDampTime": true,
+                          "doOffStage": true,
                           "content": "!!!!!!!!!!Not_Albedo_Check!!!!!!!!!!"
                         },
                         {
@@ -1122,7 +1122,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 1.0,
-          "bonusCriticalHurt": 1.0,
+          "elementDurability": 1.0,
           "modifierMixins": [
             {
               "$type": "AttachToStateIDMixin",
@@ -1146,11 +1146,11 @@
         "UNIQUE_Albedo_Monolith_Field_AvatarStateMark": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Albedo_Monolith_Field_AvatarStateMark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1159,8 +1159,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Albedo_Monolith_Field_AvatarStateMark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1171,12 +1171,12 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddElementDurability",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "modifierName": "UNIQUE_Albedo_Monolith_Field_AvatarStateCheck",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -1189,30 +1189,30 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "AlchemyTrapCD",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalPos",
               "target": "Caster",
               "key": "_ABILITY_Albedo_AlchemyTrap_Pos",
               "born": {
-                "$type": "ILHMMCNMNEG",
+                "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "Fx_ChestNode",
-                "HLNCPLHDEND": "Applier"
+                "attachPointTargetType": "Applier"
               }
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Albedo_MonolithField_AlchemyTrapCD",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemyTrap_Explode",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemyTrap_Explode",
               "born": {
-                "$type": "NNOMECHMEBA",
+                "$type": "ConfigBornByGlobalValue",
                 "positionKey": "_ABILITY_Albedo_AlchemyTrap_Pos",
                 "directionKey": ""
               },
@@ -1222,24 +1222,24 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "AHDHJOAODLF",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "NNOMECHMEBA",
+                    "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_ABILITY_Albedo_AlchemyTrap_Pos",
                     "directionKey": ""
                   },
-                  "DLFACKMBPCH": 3.4000000953674316
+                  "radius": 3.4000000953674316
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 50.0,
                     "damageExtra": [
@@ -1264,25 +1264,25 @@
               "target": "OriginOwner",
               "predicates": [
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "BloomEnergy"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "BloomEnergy"
                 }
               ],
-              "ratio": "BloomEnergy"
+              "value": "BloomEnergy"
             },
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "BloomBurst"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "BloomBurst"
                 }
               ],
               "successActions": [
                 {
                   "$type": "AddGlobalValue",
                   "target": "OriginOwner",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstCount",
                   "useLimitRange": true,
                   "maxValue": 4.0,
@@ -1291,7 +1291,7 @@
                 {
                   "$type": "AddElementDurability",
                   "target": "OriginOwner",
-                  "ratio": "BloomBurst_Timer",
+                  "value": "BloomBurst_Timer",
                   "modifierName": "UNIQUE_Albedo_BloomBurst_Handler",
                   "useLimitRange": true,
                   "maxValue": "BloomBurst_Timer",
@@ -1300,7 +1300,7 @@
                 {
                   "$type": "AddElementDurability",
                   "target": "Team",
-                  "ratio": "BloomBurst_Timer",
+                  "value": "BloomBurst_Timer",
                   "modifierName": "UNIQUE_Albedo_BloomBurst_FXHandler",
                   "useLimitRange": true,
                   "maxValue": "BloomBurst_Timer",
@@ -1312,7 +1312,7 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Albedo_MonolithField_AlchemyTrapCD",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1321,33 +1321,33 @@
         },
         "Albedo_AlchemyTrap_BloomElemBall_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "MOMNDKCBAEK",
+                  "$type": "ByAttackType",
                   "attackType": "Default"
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -1361,35 +1361,35 @@
         },
         "Albedo_AlchemyTrap_BloomAttackUp": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "attackTags": [
                 "Elemental_Art"
               ],
-              "JIICGJODDDM": 0.25,
+              "damagePercentageRatio": 0.25,
               "predicates": [
                 {
-                  "$type": "HLLFAEKLJGA",
+                  "$type": "ByTargetHPRatio",
                   "logic": "LesserOrEqual",
-                  "HCODJCODFCI": 0.5
+                  "HPRatio": 0.5
                 },
                 {
-                  "$type": "MOMNDKCBAEK",
+                  "$type": "ByAttackType",
                   "attackType": "Default"
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ]
             }
@@ -1399,7 +1399,7 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Randomed",
@@ -1409,11 +1409,11 @@
                   "$type": "GenerateElemBall",
                   "configID": 2023,
                   "born": {
-                    "$type": "NNOMECHMEBA",
+                    "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_ABILITY_Albedo_AlchemyTrap_Pos",
                     "directionKey": ""
                   },
-                  "value": 1.0,
+                  "ratio": 1.0,
                   "baseEnergy": 3.0
                 }
               ]
@@ -1424,27 +1424,27 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onThinkInterval": [
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR10H20",
                 "campTargetType": "Alliance",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
                 },
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "FallingAttackUp"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "FallingAttackUp"
                 }
               ],
               "modifierName": "UNIQUE_Albedo_Monolith_Field_FallingAttackUp"
@@ -1452,21 +1452,21 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR10H20",
                 "campTargetType": "Alliance",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
                 },
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "FallingAttackUp"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "FallingAttackUp"
                 }
               ],
               "modifierName": "Albedo_Monolith_Field_FallingAttackUp_Keeper"
@@ -1476,38 +1476,38 @@
               "target": "AllTeams",
               "predicates": [
                 {
-                  "$type": "LAEHCOBNNDC",
+                  "$type": "ByTargetPositionToSelfPosition",
                   "logic": "LesserOrEqual",
-                  "ratio": 10.0
+                  "value": 10.0
                 },
                 {
-                  "$type": "GANAKOPLMGI",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "BMLGBKCIOIN",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_CrystalSeed_Fire_Shield_Mark",
-                      "ratio": 1.0
+                      "value": 1.0
                     },
                     {
-                      "$type": "BMLGBKCIOIN",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_CrystalSeed_Water_Shield_Mark",
-                      "ratio": 1.0
+                      "value": 1.0
                     },
                     {
-                      "$type": "BMLGBKCIOIN",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_CrystalSeed_Ice_Shield_Mark",
-                      "ratio": 1.0
+                      "value": 1.0
                     },
                     {
-                      "$type": "BMLGBKCIOIN",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_CrystalSeed_Electric_Shield_Mark",
-                      "ratio": 1.0
+                      "value": 1.0
                     }
                   ]
                 },
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "ShieldFever"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "ShieldFever"
                 }
               ],
               "modifierName": "UNIQUE_Albedo_Monolith_Field_ShieldFever"
@@ -1517,38 +1517,38 @@
               "target": "AllTeams",
               "predicates": [
                 {
-                  "$type": "LAEHCOBNNDC",
+                  "$type": "ByTargetPositionToSelfPosition",
                   "logic": "LesserOrEqual",
-                  "ratio": 10.0
+                  "value": 10.0
                 },
                 {
-                  "$type": "GANAKOPLMGI",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "BMLGBKCIOIN",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_CrystalSeed_Fire_Shield_Mark",
-                      "ratio": 1.0
+                      "value": 1.0
                     },
                     {
-                      "$type": "BMLGBKCIOIN",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_CrystalSeed_Water_Shield_Mark",
-                      "ratio": 1.0
+                      "value": 1.0
                     },
                     {
-                      "$type": "BMLGBKCIOIN",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_CrystalSeed_Ice_Shield_Mark",
-                      "ratio": 1.0
+                      "value": 1.0
                     },
                     {
-                      "$type": "BMLGBKCIOIN",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_CrystalSeed_Electric_Shield_Mark",
-                      "ratio": 1.0
+                      "value": 1.0
                     }
                   ]
                 },
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "ShieldFever"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "ShieldFever"
                 }
               ],
               "modifierName": "Albedo_Monolith_Field_ShieldFever_Keeper"
@@ -1559,14 +1559,14 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 1.0,
-          "bonusCriticalHurt": 1.0,
+          "elementDurability": 1.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "attackTags": [
                 "FallingAttack"
               ],
-              "JIICGJODDDM": 0.30000001192092896
+              "damagePercentageRatio": 0.30000001192092896
             }
           ]
         },
@@ -1574,7 +1574,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 1.0,
-          "bonusCriticalHurt": 1.0,
+          "elementDurability": 1.0,
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixin",
@@ -1585,12 +1585,12 @@
         "UNIQUE_Albedo_CrystalSeed_AttackUp": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "ignoreEventInfo": true,
-              "JIICGJODDDM": 0.17000000178813934
+              "damagePercentageRatio": 0.17000000178813934
             }
           ],
           "state": "AttackUp"
@@ -1599,12 +1599,12 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddElementDurability",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "modifierName": "UNIQUE_Albedo_Monolith_Field_FallingAttackUp",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -1616,12 +1616,12 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddElementDurability",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "modifierName": "UNIQUE_Albedo_Monolith_Field_ShieldFever",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -1631,13 +1631,13 @@
         },
         "Blank": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         }
       },
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_FieldAlert",
+          "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_FieldAlert",
           "effectTempleteID": -1.0
         },
         {
@@ -1656,8 +1656,8 @@
           "$type": "Predicated",
           "targetPredicates": [
             {
-              "$type": "ICMKMNNHKNB",
-              "FABCANIFKGH": "BloomExtraDPR"
+              "$type": "ByUnlockTalentParam",
+              "talentParam": "BloomExtraDPR"
             }
           ],
           "successActions": [
@@ -1671,7 +1671,7 @@
       "onKill": [
         {
           "$type": "FireEffect",
-          "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_FieldAlert_Die",
+          "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_FieldAlert_Die",
           "effectTempleteID": -1.0
         }
       ]
@@ -1694,13 +1694,13 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 2.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.12999999523162842,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 5.5,
                 6.5,
@@ -1726,7 +1726,7 @@
           "onAdded": [
             {
               "$type": "AddElementDurability",
-              "ratio": 5.0,
+              "value": 5.0,
               "modifierName": "UNIQUE_MonolithLife",
               "useLimitRange": true,
               "maxValue": 30.0,
@@ -1734,7 +1734,7 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1743,21 +1743,21 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstCount",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomExtraDmg",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1766,7 +1766,7 @@
           "onThinkInterval": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount",
               "useLimitRange": true,
               "maxValue": 15.0,
@@ -1778,11 +1778,11 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1790,31 +1790,31 @@
             {
               "$type": "Predicated",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "topLimit": 1,
                 "sortType": "Random",
                 "shapeName": "CircleR10H10",
                 "campTargetType": "Enemy",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloom_UnavailableMark",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -1825,7 +1825,7 @@
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "value": 0.0,
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -1836,9 +1836,9 @@
               "$type": "ApplyModifier",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "modifierName": "Albedo_AlchemicalBreakOut_FullBloom_OnSelf1"
@@ -1849,11 +1849,11 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1861,31 +1861,31 @@
             {
               "$type": "Predicated",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "topLimit": 1,
                 "sortType": "Random",
                 "shapeName": "CircleR10H10",
                 "campTargetType": "Enemy",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloom_UnavailableMark",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -1896,7 +1896,7 @@
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "value": 0.0,
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -1907,9 +1907,9 @@
               "$type": "ApplyModifier",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "modifierName": "Albedo_AlchemicalBreakOut_FullBloom_OnSelf2"
@@ -1920,11 +1920,11 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1932,31 +1932,31 @@
             {
               "$type": "Predicated",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "topLimit": 1,
                 "sortType": "Random",
                 "shapeName": "CircleR10H10",
                 "campTargetType": "Enemy",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloom_UnavailableMark",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -1967,7 +1967,7 @@
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "value": 0.0,
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -1978,9 +1978,9 @@
               "$type": "ApplyModifier",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "modifierName": "Albedo_AlchemicalBreakOut_FullBloom_OnSelf3"
@@ -1991,11 +1991,11 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2003,31 +2003,31 @@
             {
               "$type": "Predicated",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "topLimit": 1,
                 "sortType": "Random",
                 "shapeName": "CircleR10H10",
                 "campTargetType": "Enemy",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloom_UnavailableMark",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -2038,7 +2038,7 @@
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "value": 0.0,
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -2049,9 +2049,9 @@
               "$type": "ApplyModifier",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "modifierName": "Albedo_AlchemicalBreakOut_FullBloom_OnSelf4"
@@ -2062,11 +2062,11 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2074,31 +2074,31 @@
             {
               "$type": "Predicated",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "topLimit": 1,
                 "sortType": "Random",
                 "shapeName": "CircleR10H10",
                 "campTargetType": "Enemy",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloom_UnavailableMark",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -2109,7 +2109,7 @@
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "value": 0.0,
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -2120,9 +2120,9 @@
               "$type": "ApplyModifier",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "modifierName": "Albedo_AlchemicalBreakOut_FullBloom_OnSelf5"
@@ -2133,11 +2133,11 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2145,31 +2145,31 @@
             {
               "$type": "Predicated",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "topLimit": 1,
                 "sortType": "Random",
                 "shapeName": "CircleR10H10",
                 "campTargetType": "Enemy",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloom_UnavailableMark",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -2180,7 +2180,7 @@
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "value": 0.0,
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -2191,9 +2191,9 @@
               "$type": "ApplyModifier",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "modifierName": "Albedo_AlchemicalBreakOut_FullBloom_OnSelf6"
@@ -2204,11 +2204,11 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2216,31 +2216,31 @@
             {
               "$type": "Predicated",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "topLimit": 1,
                 "sortType": "Random",
                 "shapeName": "CircleR10H10",
                 "campTargetType": "Enemy",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloom_UnavailableMark",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -2251,7 +2251,7 @@
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "value": 0.0,
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -2262,9 +2262,9 @@
               "$type": "ApplyModifier",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomCount_NoTarget",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "modifierName": "Albedo_AlchemicalBreakOut_FullBloom_OnSelf7"
@@ -2275,11 +2275,11 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": "FullBloomDelay",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!FullBloom_OnTarget!!!!!!!!!!"
             },
             {
@@ -2288,11 +2288,11 @@
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
               "born": {
-                "$type": "ILHMMCNMNEG",
+                "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "Fx_ChestNode",
-                "HLNCPLHDEND": "Self"
+                "attachPointTargetType": "Self"
               },
               "effectTempleteID": -1.0
             }
@@ -2303,25 +2303,25 @@
               "target": "Caster",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "AHDHJOAODLF",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "ILHMMCNMNEG",
+                    "$type": "ConfigBornByAttachPoint",
                     "attachPointName": "Fx_ChestNode",
-                    "HLNCPLHDEND": "Self"
+                    "attachPointTargetType": "Self"
                   },
-                  "DLFACKMBPCH": 3.0
+                  "radius": 3.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "Elemental_Burst",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Damage_Burst",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Damage_Burst",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "damageExtra": "FullBloomExtraDmg",
                     "damagePercentage": 0.0
@@ -2338,7 +2338,7 @@
             },
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!Albedo_AlchemicalBreakOut_FullBloom_OnTarget!!!!!!!!!!"
             }
           ]
@@ -2347,11 +2347,11 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloom_UnavailableMark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2360,7 +2360,7 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloom_UnavailableMark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2371,31 +2371,31 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": "FullBloomDelay",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!FullBloom_OnSelf!!!!!!!!!!"
             },
             {
               "$type": "SetGlobalPos",
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos",
               "born": {
-                "$type": "AJCFIBNMGKO",
-                "OCACHEEBJCE": {
-                  "$type": "EOKEDICAOIL",
-                  "PBLLHJAOIIG": 0.5,
-                  "KMBNDMHDCJG": 9.5
+                "$type": "ConfigBornBySelf",
+                "bornRandom": {
+                  "$type": "BornRandomFromCenter",
+                  "minRandomRange": 0.5,
+                  "maxRandomRange": 9.5
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               }
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
               "born": {
-                "$type": "NNOMECHMEBA",
+                "$type": "ConfigBornByGlobalValue",
                 "positionKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos",
                 "directionKey": ""
               },
@@ -2407,25 +2407,25 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "AHDHJOAODLF",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "NNOMECHMEBA",
+                    "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos",
                     "directionKey": ""
                   },
-                  "DLFACKMBPCH": 3.0
+                  "radius": 3.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "Elemental_Burst",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Damage_Burst",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Damage_Burst",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "damageExtra": "FullBloomExtraDmg",
                     "damagePercentage": 0.0
@@ -2442,7 +2442,7 @@
             },
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!Albedo_AlchemicalBreakOut_FullBloom_OnSelf!!!!!!!!!!"
             }
           ]
@@ -2451,31 +2451,31 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": "FullBloomDelay",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!FullBloom_OnSelf!!!!!!!!!!"
             },
             {
               "$type": "SetGlobalPos",
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos1",
               "born": {
-                "$type": "AJCFIBNMGKO",
-                "OCACHEEBJCE": {
-                  "$type": "EOKEDICAOIL",
-                  "PBLLHJAOIIG": 0.5,
-                  "KMBNDMHDCJG": 9.5
+                "$type": "ConfigBornBySelf",
+                "bornRandom": {
+                  "$type": "BornRandomFromCenter",
+                  "minRandomRange": 0.5,
+                  "maxRandomRange": 9.5
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               }
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
               "born": {
-                "$type": "NNOMECHMEBA",
+                "$type": "ConfigBornByGlobalValue",
                 "positionKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos1",
                 "directionKey": ""
               },
@@ -2487,25 +2487,25 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "AHDHJOAODLF",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "NNOMECHMEBA",
+                    "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos1",
                     "directionKey": ""
                   },
-                  "DLFACKMBPCH": 3.0
+                  "radius": 3.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "Elemental_Burst",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Damage_Burst",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Damage_Burst",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "damageExtra": "FullBloomExtraDmg",
                     "damagePercentage": 0.0
@@ -2522,7 +2522,7 @@
             },
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!Albedo_AlchemicalBreakOut_FullBloom_OnSelf!!!!!!!!!!"
             }
           ]
@@ -2531,31 +2531,31 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": "FullBloomDelay",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!FullBloom_OnSelf!!!!!!!!!!"
             },
             {
               "$type": "SetGlobalPos",
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos2",
               "born": {
-                "$type": "AJCFIBNMGKO",
-                "OCACHEEBJCE": {
-                  "$type": "EOKEDICAOIL",
-                  "PBLLHJAOIIG": 0.5,
-                  "KMBNDMHDCJG": 9.5
+                "$type": "ConfigBornBySelf",
+                "bornRandom": {
+                  "$type": "BornRandomFromCenter",
+                  "minRandomRange": 0.5,
+                  "maxRandomRange": 9.5
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               }
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
               "born": {
-                "$type": "NNOMECHMEBA",
+                "$type": "ConfigBornByGlobalValue",
                 "positionKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos2",
                 "directionKey": ""
               },
@@ -2567,25 +2567,25 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "AHDHJOAODLF",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "NNOMECHMEBA",
+                    "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos2",
                     "directionKey": ""
                   },
-                  "DLFACKMBPCH": 3.0
+                  "radius": 3.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "Elemental_Burst",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Damage_Burst",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Damage_Burst",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "damageExtra": "FullBloomExtraDmg",
                     "damagePercentage": 0.0
@@ -2602,7 +2602,7 @@
             },
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!Albedo_AlchemicalBreakOut_FullBloom_OnSelf!!!!!!!!!!"
             }
           ]
@@ -2611,31 +2611,31 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": "FullBloomDelay",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!FullBloom_OnSelf!!!!!!!!!!"
             },
             {
               "$type": "SetGlobalPos",
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos3",
               "born": {
-                "$type": "AJCFIBNMGKO",
-                "OCACHEEBJCE": {
-                  "$type": "EOKEDICAOIL",
-                  "PBLLHJAOIIG": 0.5,
-                  "KMBNDMHDCJG": 9.5
+                "$type": "ConfigBornBySelf",
+                "bornRandom": {
+                  "$type": "BornRandomFromCenter",
+                  "minRandomRange": 0.5,
+                  "maxRandomRange": 9.5
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               }
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
               "born": {
-                "$type": "NNOMECHMEBA",
+                "$type": "ConfigBornByGlobalValue",
                 "positionKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos3",
                 "directionKey": ""
               },
@@ -2647,25 +2647,25 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "AHDHJOAODLF",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "NNOMECHMEBA",
+                    "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos3",
                     "directionKey": ""
                   },
-                  "DLFACKMBPCH": 3.0
+                  "radius": 3.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "Elemental_Burst",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Damage_Burst",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Damage_Burst",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "damageExtra": "FullBloomExtraDmg",
                     "damagePercentage": 0.0
@@ -2682,7 +2682,7 @@
             },
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!Albedo_AlchemicalBreakOut_FullBloom_OnSelf!!!!!!!!!!"
             }
           ]
@@ -2691,31 +2691,31 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": "FullBloomDelay",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!FullBloom_OnSelf!!!!!!!!!!"
             },
             {
               "$type": "SetGlobalPos",
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos4",
               "born": {
-                "$type": "AJCFIBNMGKO",
-                "OCACHEEBJCE": {
-                  "$type": "EOKEDICAOIL",
-                  "PBLLHJAOIIG": 0.5,
-                  "KMBNDMHDCJG": 9.5
+                "$type": "ConfigBornBySelf",
+                "bornRandom": {
+                  "$type": "BornRandomFromCenter",
+                  "minRandomRange": 0.5,
+                  "maxRandomRange": 9.5
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               }
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
               "born": {
-                "$type": "NNOMECHMEBA",
+                "$type": "ConfigBornByGlobalValue",
                 "positionKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos4",
                 "directionKey": ""
               },
@@ -2727,25 +2727,25 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "AHDHJOAODLF",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "NNOMECHMEBA",
+                    "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos4",
                     "directionKey": ""
                   },
-                  "DLFACKMBPCH": 3.0
+                  "radius": 3.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "Elemental_Burst",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Damage_Burst",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Damage_Burst",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "damageExtra": "FullBloomExtraDmg",
                     "damagePercentage": 0.0
@@ -2762,7 +2762,7 @@
             },
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!Albedo_AlchemicalBreakOut_FullBloom_OnSelf!!!!!!!!!!"
             }
           ]
@@ -2771,31 +2771,31 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": "FullBloomDelay",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!FullBloom_OnSelf!!!!!!!!!!"
             },
             {
               "$type": "SetGlobalPos",
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos5",
               "born": {
-                "$type": "AJCFIBNMGKO",
-                "OCACHEEBJCE": {
-                  "$type": "EOKEDICAOIL",
-                  "PBLLHJAOIIG": 0.5,
-                  "KMBNDMHDCJG": 9.5
+                "$type": "ConfigBornBySelf",
+                "bornRandom": {
+                  "$type": "BornRandomFromCenter",
+                  "minRandomRange": 0.5,
+                  "maxRandomRange": 9.5
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               }
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
               "born": {
-                "$type": "NNOMECHMEBA",
+                "$type": "ConfigBornByGlobalValue",
                 "positionKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos5",
                 "directionKey": ""
               },
@@ -2807,25 +2807,25 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "AHDHJOAODLF",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "NNOMECHMEBA",
+                    "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos5",
                     "directionKey": ""
                   },
-                  "DLFACKMBPCH": 3.0
+                  "radius": 3.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "Elemental_Burst",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Damage_Burst",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Damage_Burst",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "damageExtra": "FullBloomExtraDmg",
                     "damagePercentage": 0.0
@@ -2842,7 +2842,7 @@
             },
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!Albedo_AlchemicalBreakOut_FullBloom_OnSelf!!!!!!!!!!"
             }
           ]
@@ -2851,31 +2851,31 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": "FullBloomDelay",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!FullBloom_OnSelf!!!!!!!!!!"
             },
             {
               "$type": "SetGlobalPos",
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos6",
               "born": {
-                "$type": "AJCFIBNMGKO",
-                "OCACHEEBJCE": {
-                  "$type": "EOKEDICAOIL",
-                  "PBLLHJAOIIG": 0.5,
-                  "KMBNDMHDCJG": 9.5
+                "$type": "ConfigBornBySelf",
+                "bornRandom": {
+                  "$type": "BornRandomFromCenter",
+                  "minRandomRange": 0.5,
+                  "maxRandomRange": 9.5
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               }
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
               "born": {
-                "$type": "NNOMECHMEBA",
+                "$type": "ConfigBornByGlobalValue",
                 "positionKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos6",
                 "directionKey": ""
               },
@@ -2887,25 +2887,25 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "AHDHJOAODLF",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "NNOMECHMEBA",
+                    "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos6",
                     "directionKey": ""
                   },
-                  "DLFACKMBPCH": 3.0
+                  "radius": 3.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "Elemental_Burst",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Damage_Burst",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Damage_Burst",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "damageExtra": "FullBloomExtraDmg",
                     "damagePercentage": 0.0
@@ -2922,7 +2922,7 @@
             },
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!Albedo_AlchemicalBreakOut_FullBloom_OnSelf!!!!!!!!!!"
             }
           ]
@@ -2931,31 +2931,31 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": "FullBloomDelay",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!FullBloom_OnSelf!!!!!!!!!!"
             },
             {
               "$type": "SetGlobalPos",
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos7",
               "born": {
-                "$type": "AJCFIBNMGKO",
-                "OCACHEEBJCE": {
-                  "$type": "EOKEDICAOIL",
-                  "PBLLHJAOIIG": 0.5,
-                  "KMBNDMHDCJG": 9.5
+                "$type": "ConfigBornBySelf",
+                "bornRandom": {
+                  "$type": "BornRandomFromCenter",
+                  "minRandomRange": 0.5,
+                  "maxRandomRange": 9.5
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               }
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Explode",
               "born": {
-                "$type": "NNOMECHMEBA",
+                "$type": "ConfigBornByGlobalValue",
                 "positionKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos7",
                 "directionKey": ""
               },
@@ -2967,25 +2967,25 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "AHDHJOAODLF",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "NNOMECHMEBA",
+                    "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstRandomPos7",
                     "directionKey": ""
                   },
-                  "DLFACKMBPCH": 3.0
+                  "radius": 3.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "Elemental_Burst",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Damage_Burst",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Damage_Burst",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "damageExtra": "FullBloomExtraDmg",
                     "damagePercentage": 0.0
@@ -3002,7 +3002,7 @@
             },
             {
               "$type": "DebugLog",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "content": "!!!!!!!!!!!Albedo_AlchemicalBreakOut_FullBloom_OnSelf!!!!!!!!!!"
             }
           ]
@@ -3016,7 +3016,7 @@
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": [
+          "value": [
             "FIGHT_PROP_CUR_DEFENSE",
             "DEF2ATK_Ratio",
             "MUL",
@@ -3051,7 +3051,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_COMMON_MOVING_PLATFORM_ACTIVE",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -0.5,
             0.5,
@@ -3074,11 +3074,11 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "ElevatorLife",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_Elevator",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_Elevator",
               "effectTempleteID": -1.0
             },
             {
@@ -3090,7 +3090,7 @@
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_Elevator_Die",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_FuriousMonolith_Elevator_Die",
               "effectTempleteID": -1.0
             },
             {
@@ -3105,11 +3105,11 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "CreateElevator_CD",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Albedo_Monolith_ElevatorCD",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -3118,7 +3118,7 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Albedo_Monolith_ElevatorCD",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -3127,13 +3127,13 @@
         },
         "Blank": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         }
       },
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_COMMON_MOVING_PLATFORM_ACTIVE",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -3183,7 +3183,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstCount",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             0.5,
             4.5
@@ -3195,7 +3195,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstCount",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             1.5,
             2.5,
@@ -3212,7 +3212,7 @@
               {
                 "$type": "ApplyModifier",
                 "target": "Team",
-                "PositionDampTime": true,
+                "doOffStage": true,
                 "modifierName": "Albedo_BloomBurst_L2Trigger"
               }
             ],
@@ -3220,7 +3220,7 @@
               {
                 "$type": "ApplyModifier",
                 "target": "Team",
-                "PositionDampTime": true,
+                "doOffStage": true,
                 "modifierName": "Albedo_BloomBurst_L3Trigger"
               }
             ],
@@ -3228,7 +3228,7 @@
               {
                 "$type": "ApplyModifier",
                 "target": "Team",
-                "PositionDampTime": true,
+                "doOffStage": true,
                 "modifierName": "Albedo_BloomBurst_L4Trigger"
               }
             ]
@@ -3248,7 +3248,7 @@
         "AlchemicalBreakOut_Start": {
           "modifierName": "",
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
@@ -3258,35 +3258,35 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPJICLLGBLO",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "AJCFIBNMGKO",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": -2.0,
-                      "MLOLIKEJCKB": 0.0
+                      "x": 0.0,
+                      "y": -2.0,
+                      "z": 0.0
                     },
-                    "NLICIODEGDO": {
-                      "$type": "JEMIKCPCEHA",
-                      "JOEDEGAHBHC": {
-                        "EMBMLEBGFOI": 0.0,
-                        "NABPJFNICAE": 0.0,
-                        "MLOLIKEJCKB": 0.0
+                    "direction": {
+                      "$type": "ConfigDirectionByDefault",
+                      "angleOffset": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
                     }
                   },
                   "height": 4.0,
-                  "DLFACKMBPCH": 3.0
+                  "radius": 3.0
                 },
                 "attackInfo": {
                   "attackTag": "",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": 0.0,
-                    "JIICGJODDDM": 0.0,
-                    "bonusCriticalHurt": 100.0,
+                    "damagePercentage": 0.0,
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 100.0,
                     "enBreak": 400.0,
                     "damagePercentage": 0.0
                   },
@@ -3295,7 +3295,7 @@
                     "hitImpulseType": "",
                     "overrideHitImpulse": {
                       "hitLevel": "Heavy",
-                      "LPIJAJONFHC": 800.0,
+                      "hitImpulseX": 800.0,
                       "hitImpulseY": 0.0
                     },
                     "retreatType": "ByHitDirection"
@@ -3308,43 +3308,43 @@
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "DIALJIOFPIN",
+                  "$type": "ByAttackNotHitScene",
                   "attackPattern": {
-                    "$type": "FPJICLLGBLO",
+                    "$type": "ConfigAttackCircle",
                     "triggerType": "TriggerNoRepeat",
                     "born": {
-                      "$type": "AJCFIBNMGKO",
+                      "$type": "ConfigBornBySelf",
                       "offset": {
-                        "EMBMLEBGFOI": 0.0,
-                        "NABPJFNICAE": 0.5,
-                        "MLOLIKEJCKB": 0.0
+                        "x": 0.0,
+                        "y": 0.5,
+                        "z": 0.0
                       }
                     },
                     "height": 2.0,
-                    "DLFACKMBPCH": 1.0
+                    "radius": 1.0
                   },
                   "EKNIGCODMEC": true
                 },
                 {
                   "$type": "BMFEEBJMPEL",
-                  "PODFMDAEAGL": "LessAndEqual",
+                  "compareType": "LessAndEqual",
                   "PPOJDAJAEKP": 0.5
                 }
               ],
               "successActions": [
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Self_Hand",
+                  "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Self_Hand",
                   "effectTempleteID": -1.0
                 },
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Self_Sword",
+                  "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Self_Sword",
                   "effectTempleteID": -1.0
                 },
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Self",
+                  "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Self",
                   "effectTempleteID": -1.0
                 },
                 {
@@ -3355,22 +3355,22 @@
               "failActions": [
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Self_Hand_Thirdparty",
+                  "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Self_Hand_Thirdparty",
                   "effectTempleteID": -1.0
                 },
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Self_Sword_Thirdparty",
+                  "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Self_Sword_Thirdparty",
                   "effectTempleteID": -1.0
                 },
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Self_Thirdparty",
+                  "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_Self_Thirdparty",
                   "effectTempleteID": -1.0
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_ShakeMark",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -3385,7 +3385,7 @@
         },
         "AlchemicalBreakOut_CameraShot": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "AvatarCameraParam",
@@ -3402,7 +3402,7 @@
         },
         "AlchemicalBreakOut_End": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -3412,10 +3412,10 @@
             {
               "$type": "AddGlobalValue",
               "otherTargets": {
-                "$type": "BMGGFEAPNEB",
+                "$type": "SelectTargetsByChildren",
                 "configID": 41038001
               },
-              "ratio": "BloomLevel",
+              "value": "BloomLevel",
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstCount",
               "useLimitRange": true,
               "maxValue": 4.0,
@@ -3423,7 +3423,7 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": [
+              "value": [
                 "FIGHT_PROP_CUR_DEFENSE",
                 "DEF2ATK_Ratio",
                 "MUL",
@@ -3444,42 +3444,42 @@
             {
               "$type": "AvatarSkillStart",
               "skillID": 10388,
-              "amountByCasterMaxHPRatio": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_RockWave",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_RockWave",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPJICLLGBLO",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "AJCFIBNMGKO",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": -2.700000047683716,
-                      "MLOLIKEJCKB": 0.0
+                      "x": 0.0,
+                      "y": -2.700000047683716,
+                      "z": 0.0
                     }
                   },
                   "height": 5.400000095367432,
-                  "KMDPCOICLCN": 120.0,
-                  "DLFACKMBPCH": 8.0
+                  "fanAngle": 120.0,
+                  "radius": 8.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "OpeningDamage",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "OpeningDamage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Rock",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 100.0,
                     "attackType": "Melee",
@@ -3507,21 +3507,21 @@
             {
               "$type": "TriggerAbility",
               "otherTargets": {
-                "$type": "BMGGFEAPNEB",
+                "$type": "SelectTargetsByChildren",
                 "configID": 41038001
               },
               "abilityName": "SkillObj_Albedo_FuriousMonolith_FullBloom"
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstCount",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_FullBloomExtraDmg",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -3531,8 +3531,8 @@
               "target": "Caster",
               "targetPredicates": [
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "ElemMasteryUp"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "ElemMasteryUp"
                 }
               ],
               "successActions": [
@@ -3541,9 +3541,9 @@
                   "target": "AllPlayerAvatars",
                   "predicates": [
                     {
-                      "$type": "LAEHCOBNNDC",
+                      "$type": "ByTargetPositionToSelfPosition",
                       "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "value": 40.0
                     }
                   ],
                   "modifierName": "UNIQUE_Albedo_AlchemicalBreakOut_ElemMasteryUp"
@@ -3553,16 +3553,16 @@
                   "target": "AllPlayerAvatars",
                   "predicates": [
                     {
-                      "$type": "LAEHCOBNNDC",
+                      "$type": "ByTargetPositionToSelfPosition",
                       "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "value": 40.0
                     }
                   ],
                   "modifierName": "Albedo_AlchemicalBreakOut_ElemMasteryUp_Keeper"
                 },
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_ElemMasteryUp",
+                  "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_AlchemicalBreakOut_ElemMasteryUp",
                   "effectTempleteID": -1.0
                 }
               ]
@@ -3571,15 +3571,15 @@
         },
         "AlchemicalBreakOut_Shake": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "ActCameraShake",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_ShakeMark",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "cameraShake": {
@@ -3598,7 +3598,7 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_ShakeMark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -3608,7 +3608,7 @@
         "UNIQUE_AlchemicalBreakOut_Weather": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "TriggerWeatherMixin",
@@ -3621,7 +3621,7 @@
         },
         "AlchemicalBreakOut_State": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
@@ -3638,11 +3638,11 @@
           "onRemoved": [
             {
               "$type": "ControlEmotion",
-              "PositionDampTime": true
+              "doOffStage": true
             },
             {
               "$type": "EnableHeadControl",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "enable": true
             }
           ]
@@ -3652,20 +3652,20 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "BloomBurst_Timer",
-          "bonusCriticalHurt": "BloomBurst_Timer",
+          "elementDurability": "BloomBurst_Timer",
           "onAdded": [
             {
               "$type": "ApplyModifier",
               "target": "Team",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Albedo_BloomBurst_FXHandler"
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstCount",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -3673,7 +3673,7 @@
             {
               "$type": "RemoveUniqueModifier",
               "target": "Team",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Albedo_BloomBurst_FXHandler"
             }
           ]
@@ -3682,7 +3682,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "BloomBurst_Timer",
-          "bonusCriticalHurt": "BloomBurst_Timer",
+          "elementDurability": "BloomBurst_Timer",
           "modifierMixins": [
             {
               "$type": "DoActionByTeamStatusMixin",
@@ -3705,89 +3705,89 @@
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_BloomBurstCount",
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_BloomBurstCount",
               "effectTempleteID": -1.0
             },
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstCount",
-                  "ratio": 2.0
+                  "value": 2.0
                 }
               ],
               "parameter": "L2",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_BloomBurstCount"
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_BloomBurstCount"
             },
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstCount",
-                  "ratio": 3.0
+                  "value": 3.0
                 }
               ],
               "parameter": "L3",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_BloomBurstCount"
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_BloomBurstCount"
             },
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Albedo_AlchemicalBreakOut_BloomBurstCount",
-                  "ratio": 4.0
+                  "value": 4.0
                 }
               ],
               "parameter": "L4",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_BloomBurstCount"
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_BloomBurstCount"
             }
           ]
         },
         "Albedo_BloomBurst_L2Trigger": {
           "modifierName": "",
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "L2",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_BloomBurstCount"
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_BloomBurstCount"
             }
           ]
         },
         "Albedo_BloomBurst_L3Trigger": {
           "modifierName": "",
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "L3",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_BloomBurstCount"
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_BloomBurstCount"
             }
           ]
         },
         "Albedo_BloomBurst_L4Trigger": {
           "modifierName": "",
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "L4",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Sword_Albedo_BloomBurstCount"
+              "effectPattern": "Eff_Avatar_Boy_Sword_Albedo_BloomBurstCount"
             }
           ]
         },
@@ -3795,7 +3795,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "ElemMasteryUpTime",
-          "bonusCriticalHurt": "ElemMasteryUpTime",
+          "elementDurability": "ElemMasteryUpTime",
           "properties": {
             "Actor_ElemMasteryDelta": "ElemMasteryDelta"
           },
@@ -3806,12 +3806,12 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddElementDurability",
-              "PositionDampTime": true,
-              "ratio": "ElemMasteryUpTime",
+              "doOffStage": true,
+              "value": "ElemMasteryUpTime",
               "modifierName": "UNIQUE_Albedo_AlchemicalBreakOut_ElemMasteryUp",
               "useLimitRange": true,
               "maxValue": "ElemMasteryUpTime",
@@ -3821,7 +3821,7 @@
         },
         "Blank": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         }
       },
       "onAbilityStart": [
@@ -3842,56 +3842,56 @@
           "attackTags": [
             "NormalAttack_01"
           ],
-          "ACKCDHKEGCK": "damage1",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "damage1",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": [
             "NormalAttack_02"
           ],
-          "ACKCDHKEGCK": "damage2",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "damage2",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": [
             "NormalAttack_03"
           ],
-          "ACKCDHKEGCK": "damage3",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "damage3",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": [
             "NormalAttack_04"
           ],
-          "ACKCDHKEGCK": "damage4",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "damage4",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": [
             "NormalAttack_05"
           ],
-          "ACKCDHKEGCK": "damage5",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "damage5",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ExtraAttack_1"
           ],
-          "ACKCDHKEGCK": "damage6",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "damage6",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ExtraAttack_2"
           ],
-          "ACKCDHKEGCK": "damage7",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "damage7",
+          "damagePercentageRatio": 0.0
         }
       ],
       "abilitySpecials": {
@@ -4033,11 +4033,11 @@
       "modifiers": {
         "FallingAnthem_AttachWeaponEffect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Sword_FallAnthem_Self_01",
+              "effectPattern": "Eff_Avatar_Sword_FallAnthem_Self_01",
               "effectTempleteID": -1.0
             }
           ]
@@ -4045,7 +4045,7 @@
         "FallingAnthem_CameraRadialBlur": {
           "modifierName": "",
           "duration": 0.23000000417232513,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "CameraBlurMixin",
@@ -4058,18 +4058,18 @@
         },
         "FallingAnthem_BS_Material": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Sword_FallAnthem_BS",
+              "effectPattern": "Eff_Avatar_Sword_FallAnthem_BS",
               "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_BS_VelocityForce_Initialize": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -2.0
           },
@@ -4084,33 +4084,33 @@
         },
         "FallingAnthem_LoopDamage": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "AHDHJOAODLF",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "AJCFIBNMGKO",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": 0.0,
-                      "MLOLIKEJCKB": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
                   },
-                  "DLFACKMBPCH": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "FallingAnthem_Normal_Loop_Damage",
-                    "JIICGJODDDM": 0.0,
-                    "bonusCriticalHurt": 0.0,
+                    "damagePercentage": "FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 0.0,
                     "overrideByWeapon": true,
                     "strikeType": "Slash",
                     "enBreak": 25.0,
@@ -4130,7 +4130,7 @@
         },
         "FallingAnthem_FallingDamageImmune_01": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ClearGlobalValue",
@@ -4140,12 +4140,12 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv0",
+              "value": "FallingAnthem_FallingDamageRatio_Lv0",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
@@ -4155,16 +4155,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "value": "FallingAnthem_Altitude_Lv1"
                 },
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv1",
+              "value": "FallingAnthem_FallingDamageRatio_Lv1",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
@@ -4174,16 +4174,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "value": "FallingAnthem_Altitude_Lv2"
                 },
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv1"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv2",
+              "value": "FallingAnthem_FallingDamageRatio_Lv2",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
@@ -4193,16 +4193,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "value": "FallingAnthem_Altitude_Lv3"
                 },
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv2"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv3",
+              "value": "FallingAnthem_FallingDamageRatio_Lv3",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
@@ -4212,11 +4212,11 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv3"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv4",
+              "value": "FallingAnthem_FallingDamageRatio_Lv4",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
@@ -4230,7 +4230,7 @@
         },
         "FallingAnthem_FallingDamageImmune_02": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -4245,19 +4245,19 @@
         },
         "FallingAnthem_FallingDamageImmune_03": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
           }
         },
         "FallingAnthem_Loop_Normal": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_FallingAnthem_UseCamera",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -1.0,
                 0.5,
@@ -4272,29 +4272,29 @@
         },
         "FallingAnthem_Loop_Normal_Rank_1": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Sword_FallAnthem_Loop_01",
+              "effectPattern": "Eff_Avatar_Sword_FallAnthem_Loop_01",
               "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_Loop_Normal_Rank_2": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Sword_FallAnthem_Loop_02",
+              "effectPattern": "Eff_Avatar_Sword_FallAnthem_Loop_02",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Inertia": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ApplyInertiaVelocityMixin",
@@ -4305,18 +4305,18 @@
         },
         "FallingAnthem_Height_Detect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -4326,11 +4326,11 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
-              "ratio": 5.0,
+              "value": 5.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -4340,35 +4340,35 @@
               "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -4378,15 +4378,15 @@
         },
         "FallingAnthem_OverHead_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "HLKAIMGJOLH",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -4400,25 +4400,25 @@
         },
         "FallingAnthem_OverHead_Camera_Remover": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ]
         },
         "FallingAnthem_Landed_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "HLKAIMGJOLH",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -4432,7 +4432,7 @@
         },
         "FallingAnthem_ClearVelocityForce": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "RemoveVelocityForce",
@@ -4445,7 +4445,7 @@
         },
         "FallingAnthem_ClearVelocityForce_AS": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "RemoveVelocityForce",
@@ -4462,36 +4462,36 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "CHDEOOKOFDK": true,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "FPJICLLGBLO",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "ALJGHOOKOAP",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": -0.5,
-                  "MLOLIKEJCKB": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "DLFACKMBPCH": 3.0
+              "radius": 3.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "ACKCDHKEGCK": "FallingAnthem_Normal_Rank_1_Damage",
-                "JIICGJODDDM": 0.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_1_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "overrideByWeapon": true,
                 "strikeType": "Blunt",
                 "enBreak": 100.0,
@@ -4526,35 +4526,35 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "CHDEOOKOFDK": true
+              "value": 1.0,
+              "forceByCaster": true
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "FPJICLLGBLO",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "ALJGHOOKOAP",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": -0.5,
-                  "MLOLIKEJCKB": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "DLFACKMBPCH": 5.0
+              "radius": 5.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "ACKCDHKEGCK": "FallingAnthem_Normal_Rank_2_Damage",
-                "JIICGJODDDM": 0.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_2_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "overrideByWeapon": true,
                 "strikeType": "Blunt",
                 "enBreak": 150.0,
@@ -4590,27 +4590,27 @@
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "CHDEOOKOFDK": true,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             }
           ],
-          "shieldHP": "Eff_Avatar_Sword_FallAnthem_Strike_01",
+          "effectPattern": "Eff_Avatar_Sword_FallAnthem_Strike_01",
           "effectTempleteID": -1.0
         },
         {
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "CHDEOOKOFDK": true
+              "value": 1.0,
+              "forceByCaster": true
             }
           ],
-          "shieldHP": "Eff_Avatar_Sword_FallAnthem_Strike_02",
+          "effectPattern": "Eff_Avatar_Sword_FallAnthem_Strike_02",
           "effectTempleteID": -1.0
         }
       ]

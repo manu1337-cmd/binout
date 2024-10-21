@@ -1,11 +1,11 @@
 [
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Tohma_ExtraAttack",
       "abilityMixins": [
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "ExtraAttack"
           ],
@@ -13,7 +13,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "ExtraAttack_BS"
           ],
@@ -21,7 +21,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "ExtraAttack"
           ],
@@ -29,75 +29,75 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "FGEGOMCIFMA",
+          "$type": "ButtonHoldChargeMixin",
           "skillID": 10501,
           "chargeTime": 0.11999999731779099,
-          "ANJJMLDEPDA": 0.20000000298023224,
+          "secondChargeTime": 0.20000000298023224,
           "onBeginUncharged": [
             {
-              "$type": "KEBEIINPIOE",
-              "OEMEMBJJJPH": "DoSkill"
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "DoSkill"
             },
             {
-              "$type": "ANEGGLOPIGK",
+              "$type": "SetAnimatorInt",
               "predicates": [
                 {
-                  "$type": "DEKMHDDOFGB",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "LNMPHLBFHCE",
+                      "$type": "ByAnimatorInt",
                       "logic": "Equal",
-                      "repeatTimes": 0,
+                      "value": 0,
                       "parameter": "ComboCount"
                     },
                     {
-                      "$type": "LNMPHLBFHCE",
+                      "$type": "ByAnimatorInt",
                       "logic": "Equal",
-                      "repeatTimes": 4,
+                      "value": 4,
                       "parameter": "ComboCount"
                     }
                   ]
                 }
               ],
               "intID": "SkillID",
-              "repeatTimes": 99.0
+              "value": 99.0
             },
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
             }
           ],
           "onReleaseUncharged": [
             {
-              "$type": "ANEGGLOPIGK",
+              "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "repeatTimes": 1.0
+              "value": 1.0
             }
           ],
           "onBeginCharged": [
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "IsCharging",
-              "repeatTimes": true
+              "value": true
             }
           ],
           "onReleaseCharged": [
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
             },
             {
-              "$type": "ANEGGLOPIGK",
+              "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "repeatTimes": 1.0
+              "value": 1.0
             }
           ],
           "onBeginSecondCharged": [
             {
-              "$type": "KEBEIINPIOE",
+              "$type": "SetAnimatorTrigger",
               "predicates": [
                 {
-                  "$type": "HIJGMAGJNMO",
+                  "$type": "ByLocalAvatarStamina",
                   "logic": "GreaterOrEqual",
                   "stamina": [
                     "ExtraAttack_Pole_Stamina_Cost",
@@ -106,13 +106,13 @@
                   ]
                 }
               ],
-              "OEMEMBJJJPH": "DoSkill"
+              "triggerID": "DoSkill"
             },
             {
-              "$type": "ANEGGLOPIGK",
+              "$type": "SetAnimatorInt",
               "predicates": [
                 {
-                  "$type": "HIJGMAGJNMO",
+                  "$type": "ByLocalAvatarStamina",
                   "logic": "GreaterOrEqual",
                   "stamina": [
                     "ExtraAttack_Pole_Stamina_Cost",
@@ -122,10 +122,10 @@
                 }
               ],
               "intID": "SkillID",
-              "repeatTimes": 6.0
+              "value": 6.0
             },
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
             }
           ],
@@ -137,7 +137,7 @@
           ]
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "ExtraAttack"
           ],
@@ -152,85 +152,85 @@
       "modifiers": {
         "ExtraAttack_StaminaCost": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "JJJCJIKOMNL",
+              "$type": "AvatarSkillStart",
               "skillID": 10002,
-              "costStaminaRatio": 1.0,
-              "IOFCJNLJBLE": "ExtraAttack_Pole_Stamina_Cost"
+              "cdRatio": 1.0,
+              "costStaminaRatio": "ExtraAttack_Pole_Stamina_Cost"
             }
           ]
         },
         "ExtraAttack_FX": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_ExtraAttack_Sprint",
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Male_Pole_Tohma_ExtraAttack_Sprint",
               "born": {
-                "$type": "GNIAPFBHMIK",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": -0.30000001192092896,
-                  "MEJNCDENBNH": 0.0
+                  "x": 0.0,
+                  "y": -0.30000001192092896,
+                  "z": 0.0
                 }
               },
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "ExtraAttack_BS_FX": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_ExtraAttack",
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Male_Pole_Tohma_ExtraAttack",
               "born": {
-                "$type": "GNIAPFBHMIK",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": -0.30000001192092896,
-                  "MEJNCDENBNH": 0.0
+                  "x": 0.0,
+                  "y": -0.30000001192092896,
+                  "z": 0.0
                 }
               },
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "ExtraAttack_CloseCollider": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "CNAMGJCNFBK",
-              "shieldHP": true,
+              "doOffStage": true,
               "passThrough": true
             },
             {
-              "$type": "HDCGKAJPLBH",
+              "$type": "EnableHDMesh",
               "hdMeshKey": "Default"
             }
           ],
           "onRemoved": [
             {
               "$type": "CNAMGJCNFBK",
-              "shieldHP": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true
             },
             {
-              "$type": "HDCGKAJPLBH",
+              "$type": "EnableHDMesh",
               "canBeHandledOnRecover": true,
               "enable": true,
               "hdMeshKey": "Default"
             },
             {
-              "$type": "JACFKHFCKAL",
-              "shieldHP": true,
+              "$type": "KillGadget",
+              "doOffStage": true,
               "gadgetInfo": {
                 "configID": 41050001
               }
@@ -242,11 +242,11 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Tohma_ExtraAttack_CreateBullet",
       "onAbilityStart": [
         {
-          "$type": "PDGILBJBOOA",
+          "$type": "TriggerBullet",
           "bulletID": 41050001
         }
       ]
@@ -254,18 +254,18 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Tohma_ExtraAttack_Bullet",
       "abilitySpecials": {
         "ExtraAttack": 0.0
       },
       "onAbilityStart": [
         {
-          "$type": "OIDAEPDOMEP",
+          "$type": "Predicated",
           "target": "Target",
           "targetPredicates": [
             {
-              "$type": "AEHBHLJCPJK",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "MonsterEquip"
               ]
@@ -273,16 +273,16 @@
           ],
           "successActions": [
             {
-              "$type": "KMOHOKINPPE",
+              "$type": "DamageByAttackValue",
               "target": "Target",
               "attackInfo": {
                 "attackTag": "ExtraAttack",
                 "attenuationTag": "ExtraAttack",
                 "attenuationGroup": "Avatar_Pole_ExtraAttack",
                 "attackProperty": {
-                  "actorGrassSubHurtDelta": "ExtraAttack",
-                  "actorWaterSubHurtDelta": 0.0,
-                  "MCCELHKGPOP": 25.0,
+                  "damagePercentage": "ExtraAttack",
+                  "damagePercentageRatio": 0.0,
+                  "elementDurability": 25.0,
                   "overrideByWeapon": true,
                   "strikeType": "Spear",
                   "enBreak": 120.0,
@@ -311,29 +311,29 @@
           ],
           "failActions": [
             {
-              "$type": "KIBGAKKBNCL",
+              "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KHBCMELAIKO",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "LPEJICOBGCF",
+                    "$type": "ConfigBornByCollisionPoint",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
                   },
-                  "DCBIMHFGHEJ": 0.800000011920929
+                  "radius": 0.800000011920929
                 },
                 "attackInfo": {
                   "attackTag": "ExtraAttack",
                   "attenuationTag": "ExtraAttack",
                   "attenuationGroup": "Avatar_Pole_ExtraAttack",
                   "attackProperty": {
-                    "actorGrassSubHurtDelta": "ExtraAttack",
-                    "actorWaterSubHurtDelta": 0.0,
-                    "MCCELHKGPOP": 25.0,
+                    "damagePercentage": "ExtraAttack",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 25.0,
                     "overrideByWeapon": true,
                     "strikeType": "Spear",
                     "enBreak": 120.0,
@@ -368,7 +368,7 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Tohma_ElementalArt_Handler",
       "abilitySpecials": {
         "SkillType": 0.0,
@@ -396,32 +396,32 @@
       "modifiers": {
         "UNIQUE_Tohma_ElementalArt_FireShield_Team": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": "Dura",
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": "Dura",
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "PHADKHEKHDD",
+              "$type": "GlobalMainShieldMixin",
               "shieldType": "Avatar_Fire",
-              "ANEJFKMKING": 360.0,
-              "maxShieldByHPRatio": "ShieldHPRatio",
-              "JADNLKMAFEE": "ShieldHPConst",
+              "shieldAngle": 360.0,
+              "shieldHPRatio": "ShieldHPRatio",
+              "shieldHP": "ShieldHPConst",
               "costShieldRatioName": "",
               "showDamageText": "INFO_ELITE_DEFENCE",
               "onShieldBroken": [
                 {
-                  "$type": "AHHAGLJGKDD",
+                  "$type": "ApplyModifier",
                   "target": "Caster",
                   "predicates": [
                     {
-                      "$type": "FBDCPKHCLDA",
+                      "$type": "ByUnlockTalentParam",
                       "talentParam": "Tohma_Talent1_ReduceCD"
                     },
                     {
-                      "$type": "IAMKIOEEDMI",
+                      "$type": "ByNot",
                       "predicates": [
                         {
-                          "$type": "PDFJBJNKPKD",
+                          "$type": "ByTargetType",
                           "target": "CurLocalAvatar",
                           "targetType": "Caster",
                           "BELECNJNNJE": ""
@@ -432,48 +432,48 @@
                   "modifierName": "UNIQUE_Tohma_Talent1_ReduceCD"
                 },
                 {
-                  "$type": "FKNNJLHBIOD",
+                  "$type": "RemoveUniqueModifier",
                   "modifierName": "UNIQUE_Tohma_ElementalArt_FireShield_Team"
                 }
               ],
-              "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_Shield",
+              "effectPattern": "Eff_Avatar_Male_Pole_Tohma_Shield",
               "childShieldModifierName": "UNIQUE_Tohma_ElementalArt_FireShield_Child"
             }
           ],
           "onAdded": [
             {
-              "$type": "HLHAODOBHPK",
+              "$type": "SetGlobalValue",
               "target": "Caster",
-              "repeatTimes": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Avatar_Tohma_HasTeamShield",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ],
           "onRemoved": [
             {
-              "$type": "HLHAODOBHPK",
+              "$type": "SetGlobalValue",
               "target": "Caster",
-              "repeatTimes": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Avatar_Tohma_HasTeamShield",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "EHPLOGLPPAC",
-              "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_Shield_Broken",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Male_Pole_Tohma_Shield_Broken",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "UNIQUE_Tohma_ElementalArt_FireShield_Child": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "IKEELJLIBOC",
+              "$type": "GlobalSubShieldMixin",
               "mainShieldModifierName": "UNIQUE_Tohma_ElementalArt_FireShield_Team"
             }
           ],
@@ -482,55 +482,55 @@
           },
           "onAdded": [
             {
-              "$type": "OIDAEPDOMEP",
+              "$type": "Predicated",
               "target": "Caster",
-              "shieldHP": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Avatar_Tohma_Has_ELementalBurstBuff",
-                  "repeatTimes": 1.0
+                  "value": 1.0
                 }
               ],
               "successActions": [
                 {
-                  "$type": "CIPKLOKNNJH",
+                  "$type": "SendEffectTrigger",
                   "target": "Team",
-                  "shieldHP": true,
+                  "doOffStage": true,
                   "parameter": "Burst",
                   "attachPoint": "",
-                  "damageRatio": "Bool",
+                  "type": "Bool",
                   "value": 1,
-                  "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_Shield"
+                  "effectPattern": "Eff_Avatar_Male_Pole_Tohma_Shield"
                 }
               ],
               "failActions": [
                 {
-                  "$type": "CIPKLOKNNJH",
+                  "$type": "SendEffectTrigger",
                   "target": "Team",
-                  "shieldHP": true,
+                  "doOffStage": true,
                   "parameter": "Burst",
                   "attachPoint": "",
-                  "damageRatio": "Bool",
-                  "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_Shield"
+                  "type": "Bool",
+                  "effectPattern": "Eff_Avatar_Male_Pole_Tohma_Shield"
                 }
               ]
             }
           ],
           "onBeingHit": [
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "target": "Caster",
               "predicates": [
                 {
-                  "$type": "FBDCPKHCLDA",
+                  "$type": "ByUnlockTalentParam",
                   "talentParam": "Tohma_Talent1_ReduceCD"
                 },
                 {
-                  "$type": "IAMKIOEEDMI",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "PDFJBJNKPKD",
+                      "$type": "ByTargetType",
                       "target": "CurLocalAvatar",
                       "targetType": "Caster",
                       "BELECNJNNJE": ""
@@ -541,18 +541,18 @@
               "modifierName": "UNIQUE_Tohma_Talent1_ReduceCD"
             },
             {
-              "$type": "OIDAEPDOMEP",
+              "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "DEKMHDDOFGB",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "AJHKNDFIBIC",
+                      "$type": "ByHitDamage",
                       "damage": 0.0
                     },
                     {
-                      "$type": "KCEJFPMFNPF",
+                      "$type": "ByHitEnBreak",
                       "enBreak": 0.0
                     }
                   ]
@@ -560,7 +560,7 @@
               ],
               "successActions": [
                 {
-                  "$type": "AHHAGLJGKDD",
+                  "$type": "ApplyModifier",
                   "target": "Team",
                   "modifierName": "UNIQUE_Tohma_Shield_Hit_Handler"
                 }
@@ -571,28 +571,28 @@
         "UNIQUE_Tohma_Shield_Hit_Handler": {
           "stacking": "Unique",
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": 0.5,
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": 0.5,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "CIPKLOKNNJH",
+              "$type": "SendEffectTrigger",
               "target": "Team",
               "parameter": "Hit",
               "attachPoint": "",
-              "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_Shield"
+              "effectPattern": "Eff_Avatar_Male_Pole_Tohma_Shield"
             }
           ]
         },
         "UNIQUE_Tohma_ShieldCostMinusRatio_CD": {
           "stacking": "Unique",
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": "PermanentSkill1_CDTime",
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": "PermanentSkill1_CDTime",
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "modifierName": "UNIQUE_Tohma_ShieldCostMinusRatio_Buff"
             }
           ]
@@ -604,9 +604,9 @@
             "maxModifierNumForMultipleType": "PermanentSkill1_Stack"
           },
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": "PermanentSkill1_Time",
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": "PermanentSkill1_Time",
+          "elementDurability": 100.0,
           "properties": {
             "Actor_ShieldCostMinusRatio": "PermanentSkill1_ShieldCostMinusRatio"
           },
@@ -617,48 +617,48 @@
           "timeScale": "Level",
           "stacking": "Unique",
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": "Talent1_CD",
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": "Talent1_CD",
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "IMIOFAIILMH",
-              "shieldHP": true,
+              "$type": "ModifyAvatarSkillCD",
+              "doOffStage": true,
               "skillID": 10502,
-              "cdMin": [
+              "cdDelta": [
                 0.0,
                 "Art_CD",
                 "SUB"
               ]
             },
             {
-              "$type": "IMIOFAIILMH",
-              "shieldHP": true,
+              "$type": "ModifyAvatarSkillCD",
+              "doOffStage": true,
               "skillID": 10505,
-              "cdMin": [
+              "cdDelta": [
                 0.0,
                 "Burst_CD",
                 "SUB"
               ]
             },
             {
-              "$type": "EHPLOGLPPAC",
+              "$type": "FireEffect",
               "target": "CurLocalAvatar",
-              "shieldHP": true,
-              "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_Talent_ReduceCD",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "doOffStage": true,
+              "effectPattern": "Eff_Avatar_Male_Pole_Tohma_Talent_ReduceCD",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "UNIQUE_Tohma_Talent6_DamageUp": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": "Talent6_Time",
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": "Talent6_Time",
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "JNBKKMJIOFE",
+              "$type": "ModifyDamageMixin",
               "attackTags": [
                 "NormalAttack_01",
                 "NormalAttack_02",
@@ -669,48 +669,48 @@
                 "ExtraAttack",
                 "FallingAttack"
               ],
-              "actorWaterSubHurtDelta": "Talent6_DamageUp"
+              "damagePercentageRatio": "Talent6_DamageUp"
             }
           ],
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "shieldHP": true,
-              "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_Talent_TeamBuff",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "doOffStage": true,
+              "effectPattern": "Eff_Avatar_Male_Pole_Tohma_Talent_TeamBuff",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         }
       },
       "onAdded": [
         {
-          "$type": "HLHAODOBHPK",
-          "repeatTimes": 0.0,
+          "$type": "SetGlobalValue",
+          "value": 0.0,
           "key": "_ABILITY_Avatar_Tohma_HasTeamShield",
-          "param2": 0.0,
-          "triggerID": 0.0
+          "maxValue": 0.0,
+          "minValue": 0.0
         }
       ],
       "onAbilityStart": [
         {
-          "$type": "OIDAEPDOMEP",
-          "shieldHP": true,
+          "$type": "Predicated",
+          "doOffStage": true,
           "targetPredicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Avatar_Tohma_HasTeamShield",
-              "repeatTimes": 0.0,
+              "value": 0.0,
               "compareType": "NoneOrEqual"
             }
           ],
           "successActions": [
             {
-              "$type": "OIDAEPDOMEP",
-              "shieldHP": true,
+              "$type": "Predicated",
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "MFKFEMOBPIC",
+                  "$type": "ByTargetOverrideMapValue",
                   "logic": "Equal",
                   "targetAbilityName": "",
                   "targetKey": "SkillType",
@@ -719,71 +719,71 @@
               ],
               "successActions": [
                 {
-                  "$type": "DBHLBHMKABM",
-                  "shieldHP": true,
-                  "repeatTimes": "ElementalArt_ShieldHPRatio",
+                  "$type": "SetOverrideMapValue",
+                  "doOffStage": true,
+                  "value": "ElementalArt_ShieldHPRatio",
                   "overrideMapKey": "ShieldHPRatio",
-                  "param2": 0.0,
-                  "triggerID": 0.0
+                  "maxValue": 0.0,
+                  "minValue": 0.0
                 },
                 {
-                  "$type": "DBHLBHMKABM",
-                  "shieldHP": true,
-                  "repeatTimes": "ElementalArt_ShieldHPConst",
+                  "$type": "SetOverrideMapValue",
+                  "doOffStage": true,
+                  "value": "ElementalArt_ShieldHPConst",
                   "overrideMapKey": "ShieldHPConst",
-                  "param2": 0.0,
-                  "triggerID": 0.0
+                  "maxValue": 0.0,
+                  "minValue": 0.0
                 },
                 {
-                  "$type": "DBHLBHMKABM",
-                  "shieldHP": true,
-                  "repeatTimes": "ArtDura",
+                  "$type": "SetOverrideMapValue",
+                  "doOffStage": true,
+                  "value": "ArtDura",
                   "overrideMapKey": "Dura",
-                  "param2": 0.0,
-                  "triggerID": 0.0
+                  "maxValue": 0.0,
+                  "minValue": 0.0
                 }
               ],
               "failActions": [
                 {
-                  "$type": "DBHLBHMKABM",
-                  "shieldHP": true,
-                  "repeatTimes": "ElementalBurst_ShieldHPRatio",
+                  "$type": "SetOverrideMapValue",
+                  "doOffStage": true,
+                  "value": "ElementalBurst_ShieldHPRatio",
                   "overrideMapKey": "ShieldHPRatio",
-                  "param2": 0.0,
-                  "triggerID": 0.0
+                  "maxValue": 0.0,
+                  "minValue": 0.0
                 },
                 {
-                  "$type": "DBHLBHMKABM",
-                  "shieldHP": true,
-                  "repeatTimes": "ElementalBurst_ShieldHPConst",
+                  "$type": "SetOverrideMapValue",
+                  "doOffStage": true,
+                  "value": "ElementalBurst_ShieldHPConst",
                   "overrideMapKey": "ShieldHPConst",
-                  "param2": 0.0,
-                  "triggerID": 0.0
+                  "maxValue": 0.0,
+                  "minValue": 0.0
                 },
                 {
-                  "$type": "DBHLBHMKABM",
-                  "shieldHP": true,
-                  "repeatTimes": "BurstDura",
+                  "$type": "SetOverrideMapValue",
+                  "doOffStage": true,
+                  "value": "BurstDura",
                   "overrideMapKey": "Dura",
-                  "param2": 0.0,
-                  "triggerID": 0.0
+                  "maxValue": 0.0,
+                  "minValue": 0.0
                 }
               ]
             },
             {
-              "$type": "GNLJNLOMNGD",
+              "$type": "AttachModifier",
               "target": "Team",
-              "shieldHP": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Tohma_ElementalArt_FireShield_Team"
             }
           ],
           "failActions": [
             {
-              "$type": "OIDAEPDOMEP",
-              "shieldHP": true,
+              "$type": "Predicated",
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "MFKFEMOBPIC",
+                  "$type": "ByTargetOverrideMapValue",
                   "logic": "Equal",
                   "targetAbilityName": "",
                   "targetKey": "SkillType",
@@ -792,71 +792,71 @@
               ],
               "successActions": [
                 {
-                  "$type": "DBHLBHMKABM",
-                  "shieldHP": true,
-                  "repeatTimes": "ElementalArt_ShieldHPRatio",
+                  "$type": "SetOverrideMapValue",
+                  "doOffStage": true,
+                  "value": "ElementalArt_ShieldHPRatio",
                   "overrideMapKey": "ShieldHPRatio",
-                  "param2": 0.0,
-                  "triggerID": 0.0
+                  "maxValue": 0.0,
+                  "minValue": 0.0
                 },
                 {
-                  "$type": "DBHLBHMKABM",
-                  "shieldHP": true,
-                  "repeatTimes": "ElementalArt_ShieldHPConst",
+                  "$type": "SetOverrideMapValue",
+                  "doOffStage": true,
+                  "value": "ElementalArt_ShieldHPConst",
                   "overrideMapKey": "ShieldHPConst",
-                  "param2": 0.0,
-                  "triggerID": 0.0
+                  "maxValue": 0.0,
+                  "minValue": 0.0
                 },
                 {
-                  "$type": "DBHLBHMKABM",
-                  "shieldHP": true,
-                  "repeatTimes": "ArtDura",
+                  "$type": "SetOverrideMapValue",
+                  "doOffStage": true,
+                  "value": "ArtDura",
                   "overrideMapKey": "Dura",
-                  "param2": 0.0,
-                  "triggerID": 0.0
+                  "maxValue": 0.0,
+                  "minValue": 0.0
                 }
               ],
               "failActions": [
                 {
-                  "$type": "DBHLBHMKABM",
-                  "shieldHP": true,
-                  "repeatTimes": "ElementalBurst_ShieldHPRatio",
+                  "$type": "SetOverrideMapValue",
+                  "doOffStage": true,
+                  "value": "ElementalBurst_ShieldHPRatio",
                   "overrideMapKey": "ShieldHPRatio",
-                  "param2": 0.0,
-                  "triggerID": 0.0
+                  "maxValue": 0.0,
+                  "minValue": 0.0
                 },
                 {
-                  "$type": "DBHLBHMKABM",
-                  "shieldHP": true,
-                  "repeatTimes": "ElementalBurst_ShieldHPConst",
+                  "$type": "SetOverrideMapValue",
+                  "doOffStage": true,
+                  "value": "ElementalBurst_ShieldHPConst",
                   "overrideMapKey": "ShieldHPConst",
-                  "param2": 0.0,
-                  "triggerID": 0.0
+                  "maxValue": 0.0,
+                  "minValue": 0.0
                 },
                 {
-                  "$type": "DBHLBHMKABM",
-                  "shieldHP": true,
-                  "repeatTimes": "BurstDura",
+                  "$type": "SetOverrideMapValue",
+                  "doOffStage": true,
+                  "value": "BurstDura",
                   "overrideMapKey": "Dura",
-                  "param2": 0.0,
-                  "triggerID": 0.0
+                  "maxValue": 0.0,
+                  "minValue": 0.0
                 }
               ]
             },
             {
-              "$type": "CIPKLOKNNJH",
+              "$type": "SendEffectTrigger",
               "target": "Team",
-              "shieldHP": true,
+              "doOffStage": true,
               "parameter": "Refresh",
               "attachPoint": "",
-              "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_Shield"
+              "effectPattern": "Eff_Avatar_Male_Pole_Tohma_Shield"
             },
             {
               "$type": "PHAPNPKLBOF",
               "target": "Team",
-              "shieldHP": true,
-              "maxShieldByHPRatio": "ShieldHPRatio",
-              "JADNLKMAFEE": "ShieldHPConst",
+              "doOffStage": true,
+              "shieldHPRatio": "ShieldHPRatio",
+              "shieldHP": "ShieldHPConst",
               "shieldHPRatio": "MaxShieldByAvatarHPRatio",
               "maxShieldHP": "MaxShieldByAvatarHP",
               "modifierName": "UNIQUE_Tohma_ElementalArt_FireShield_Team",
@@ -865,85 +865,85 @@
           ]
         },
         {
-          "$type": "OIDAEPDOMEP",
-          "shieldHP": true,
+          "$type": "Predicated",
+          "doOffStage": true,
           "targetPredicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Avatar_Tohma_Has_ELementalBurstBuff",
-              "repeatTimes": 1.0
+              "value": 1.0
             }
           ],
           "successActions": [
             {
-              "$type": "CIPKLOKNNJH",
+              "$type": "SendEffectTrigger",
               "target": "Team",
-              "shieldHP": true,
+              "doOffStage": true,
               "parameter": "Burst",
               "attachPoint": "",
-              "damageRatio": "Bool",
+              "type": "Bool",
               "value": 1,
-              "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_Shield"
+              "effectPattern": "Eff_Avatar_Male_Pole_Tohma_Shield"
             }
           ],
           "failActions": [
             {
-              "$type": "CIPKLOKNNJH",
+              "$type": "SendEffectTrigger",
               "target": "Team",
-              "shieldHP": true,
+              "doOffStage": true,
               "parameter": "Burst",
               "attachPoint": "",
-              "damageRatio": "Bool",
-              "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_Shield"
+              "type": "Bool",
+              "effectPattern": "Eff_Avatar_Male_Pole_Tohma_Shield"
             }
           ]
         },
         {
-          "$type": "AHHAGLJGKDD",
+          "$type": "ApplyModifier",
           "target": "CurLocalAvatar",
-          "shieldHP": true,
+          "doOffStage": true,
           "predicates": [
             {
-              "$type": "FBDCPKHCLDA",
+              "$type": "ByUnlockTalentParam",
               "talentParam": "Tohma_PermanentSkill_1_GainShieldCostMinusRatio"
             }
           ],
           "modifierName": "UNIQUE_Tohma_ShieldCostMinusRatio_CD"
         },
         {
-          "$type": "OIDAEPDOMEP",
+          "$type": "Predicated",
           "target": "Caster",
-          "shieldHP": true,
+          "doOffStage": true,
           "targetPredicates": [
             {
-              "$type": "FBDCPKHCLDA",
+              "$type": "ByUnlockTalentParam",
               "talentParam": "Tohma_Talent6_DamageUp"
             }
           ],
           "successActions": [
             {
-              "$type": "FKNNJLHBIOD",
+              "$type": "RemoveUniqueModifier",
               "target": "AllPlayerAvatars",
-              "shieldHP": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "JNGIOOCDJEA",
+                  "$type": "ByTargetPositionToSelfPosition",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": 40.0,
+                  "value": 40.0,
                   "BBKEGPFIAJL": ""
                 }
               ],
               "modifierName": "UNIQUE_Tohma_Talent6_DamageUp"
             },
             {
-              "$type": "GNLJNLOMNGD",
+              "$type": "AttachModifier",
               "target": "AllPlayerAvatars",
-              "shieldHP": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "JNGIOOCDJEA",
+                  "$type": "ByTargetPositionToSelfPosition",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": 40.0,
+                  "value": 40.0,
                   "BBKEGPFIAJL": ""
                 }
               ],
@@ -956,7 +956,7 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Tohma_ElementalArt_Strike",
       "abilitySpecials": {
         "ElementalArt_Damage": 0.0
@@ -964,46 +964,46 @@
       "modifiers": {
         "UNIQUE_Tohma_ElementalArt_FireBuff": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": 1.0,
+          "isUnique": true,
+          "duration": 1.0,
           "elementType": "Fire",
-          "MCCELHKGPOP": 25.0
+          "elementDurability": 25.0
         },
         "GenerateElemBall_Tohma_ElementalArt": {
           "stacking": "Unique",
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onHittingOther": [
             {
-              "$type": "OIDAEPDOMEP",
+              "$type": "Predicated",
               "target": "Other",
               "targetPredicates": [
                 {
-                  "$type": "EBMBJLDAEDL",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "AEHBHLJCPJK",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "repeatTimes": 0.0,
+                  "value": 0.0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
-                  "$type": "AHHAGLJGKDD",
+                  "$type": "ApplyModifier",
                   "modifierName": "Ball"
                 },
                 {
-                  "$type": "AHHAGLJGKDD",
+                  "$type": "ApplyModifier",
                   "modifierName": "Ball_Extra"
                 }
               ]
@@ -1013,25 +1013,25 @@
         "Ball": {
           "stacking": "Unique",
           "modifierName": "",
-          "elementDurability": 0.30000001192092896,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.30000001192092896,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "EPOIHLNJHMM",
+              "$type": "Randomed",
               "chance": 1.0,
               "successActions": [
                 {
-                  "$type": "PMKKKIKFPBE",
+                  "$type": "GenerateElemBall",
                   "configID": 2017,
                   "born": {
-                    "$type": "GNIAPFBHMIK",
+                    "$type": "ConfigBornByTarget",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
                   },
-                  "hpRatio": 1.0,
+                  "ratio": 1.0,
                   "baseEnergy": 9.0
                 }
               ]
@@ -1041,25 +1041,25 @@
         "Ball_Extra": {
           "stacking": "Unique",
           "modifierName": "",
-          "elementDurability": 0.30000001192092896,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.30000001192092896,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "EPOIHLNJHMM",
+              "$type": "Randomed",
               "chance": 0.5,
               "successActions": [
                 {
-                  "$type": "PMKKKIKFPBE",
+                  "$type": "GenerateElemBall",
                   "configID": 2017,
                   "born": {
-                    "$type": "GNIAPFBHMIK",
+                    "$type": "ConfigBornByTarget",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
                   },
-                  "hpRatio": 1.0,
+                  "ratio": 1.0,
                   "baseEnergy": 3.0
                 }
               ]
@@ -1069,56 +1069,56 @@
       },
       "onAdded": [
         {
-          "$type": "GNLJNLOMNGD",
+          "$type": "AttachModifier",
           "modifierName": "GenerateElemBall_Tohma_ElementalArt"
         }
       ],
       "onAbilityStart": [
         {
-          "$type": "JJJCJIKOMNL",
+          "$type": "AvatarSkillStart",
           "skillID": 10502,
-          "costStaminaRatio": 1.0,
-          "IOFCJNLJBLE": 1.0
+          "cdRatio": 1.0,
+          "costStaminaRatio": 1.0
         },
         {
-          "$type": "LMFHAOAPGKG",
+          "$type": "TriggerAbility",
           "abilityName": "Avatar_Tohma_ElementalArt_Handler",
           "abilitySpecials": {
             "SkillType": 1.0
           }
         },
         {
-          "$type": "GNLJNLOMNGD",
+          "$type": "AttachModifier",
           "target": "CurLocalAvatar",
           "modifierName": "UNIQUE_Tohma_ElementalArt_FireBuff"
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "attackEvent": {
             "attackPattern": {
-              "$type": "DCBLBBGDIAN",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": -0.5,
-                  "MEJNCDENBNH": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.5,
               "fanAngle": 270.0,
-              "DCBIMHFGHEJ": 3.0
+              "radius": 3.0
             },
             "attackInfo": {
               "attackTag": "Elemental_Art",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": "ElementalArt_Damage",
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentage": "ElementalArt_Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Fire",
-                "MCCELHKGPOP": 25.0,
+                "elementDurability": 25.0,
                 "strikeType": "Slash",
                 "enBreak": 150.0,
                 "attackType": "Melee",
@@ -1150,18 +1150,18 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Tohma_ElementalBurst_Start",
       "abilityMixins": [
         {
-          "$type": "KKKMAAMBHMO",
+          "$type": "AttachToNormalizedTimeMixin",
           "stateID": "ElementalBurst",
           "modifierName": "Tohma_ElementalBurst_SkillStart&Camera_Remover_Handler",
           "normalizeEnd": 0.6499999761581421,
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "ElementalBurst"
           ],
@@ -1176,22 +1176,22 @@
       "modifiers": {
         "Tohma_ElementalBurst_SkillStart&Camera_Remover_Handler": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "JJJCJIKOMNL",
+              "$type": "AvatarSkillStart",
               "skillID": 10505,
-              "costStaminaRatio": 1.0,
-              "IOFCJNLJBLE": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             },
             {
-              "$type": "CHPBPACHAOH",
+              "$type": "EnableHeadControl",
               "blend": false
             }
           ],
           "onRemoved": [
             {
-              "$type": "CFCENANLJGI",
+              "$type": "AvatarCameraParam",
               "cameraParam": {
                 "forceRadius": 6.0,
                 "forceRadiusDuration": 0.0,
@@ -1199,37 +1199,37 @@
               }
             },
             {
-              "$type": "KOEMHHFKCIL",
-              "shieldHP": true
+              "$type": "AvatarExitCameraShot",
+              "doOffStage": true
             },
             {
-              "$type": "CHPBPACHAOH",
-              "shieldHP": true,
+              "$type": "EnableHeadControl",
+              "doOffStage": true,
               "enable": true
             },
             {
-              "$type": "HLHAODOBHPK",
-              "shieldHP": true,
-              "repeatTimes": 1.0,
+              "$type": "SetGlobalValue",
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Avatar_Tohma_Has_ELementalBurstBuff",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "CIPKLOKNNJH",
+              "$type": "SendEffectTrigger",
               "target": "Team",
-              "shieldHP": true,
+              "doOffStage": true,
               "parameter": "Burst",
               "attachPoint": "",
-              "damageRatio": "Bool",
+              "type": "Bool",
               "value": 1,
-              "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_Shield"
+              "effectPattern": "Eff_Avatar_Male_Pole_Tohma_Shield"
             }
           ],
           "onAvatarOut": [
             {
-              "$type": "CFCENANLJGI",
-              "shieldHP": true,
+              "$type": "AvatarCameraParam",
+              "doOffStage": true,
               "cameraParam": {
                 "forceRadius": 6.0,
                 "forceRadiusDuration": 0.0,
@@ -1237,23 +1237,23 @@
               }
             },
             {
-              "$type": "KOEMHHFKCIL",
-              "shieldHP": true
+              "$type": "AvatarExitCameraShot",
+              "doOffStage": true
             },
             {
-              "$type": "CHPBPACHAOH",
-              "shieldHP": true,
+              "$type": "EnableHeadControl",
+              "doOffStage": true,
               "enable": true
             }
           ]
         },
         "Tohma_ElementalBurst_Invincible": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
-              "$type": "HCPCNNBJEMK",
+              "$type": "AttachAbilityStateResistance",
               "resistanceListID": 11002
             }
           ]
@@ -1261,37 +1261,37 @@
       },
       "onAbilityStart": [
         {
-          "$type": "EHPLOGLPPAC",
-          "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_ElementalBurst",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Male_Pole_Tohma_ElementalBurst",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "attackEvent": {
             "attackPattern": {
-              "$type": "DCBLBBGDIAN",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "ignoreMassive": true,
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 0.0,
-                  "MEJNCDENBNH": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
               },
-              "DCBIMHFGHEJ": 4.0
+              "radius": 4.0
             },
             "attackInfo": {
               "attackTag": "Elemental_Burst",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": "ElementalBurst_Damage",
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentage": "ElementalBurst_Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Fire",
-                "MCCELHKGPOP": 50.0,
+                "elementDurability": 50.0,
                 "enBreak": 200.0,
                 "KLIMCEGLPLG": 0.0
               },
@@ -1325,21 +1325,21 @@
           }
         },
         {
-          "$type": "IDGCPDMDNEG",
+          "$type": "ReviveElemEnergy",
           "predicates": [
             {
-              "$type": "FBDCPKHCLDA",
+              "$type": "ByUnlockTalentParam",
               "talentParam": "Tohma_Talent4_ReviveEnergy"
             }
           ],
-          "repeatTimes": "Tohma_Talent4_Value"
+          "value": "Tohma_Talent4_Value"
         }
       ]
     }
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Tohma_ElementalBurst_Buff_Handler",
       "abilitySpecials": {
         "Dura": 0.9200000166893005,
@@ -1348,9 +1348,9 @@
       "modifiers": {
         "UNIQUE_Tohma_ElementalBurst_Buff_Handler": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": "Dura",
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": "Dura",
+          "elementDurability": 100.0,
           "thinkInterval": [
             "Dura",
             1.0,
@@ -1358,78 +1358,78 @@
           ],
           "modifierMixins": [
             {
-              "$type": "KAHAFCGFMGA",
+              "$type": "CurLocalAvatarMixin",
               "modifierName": "UNIQUE_Tohma_ElementalBurst_AttackDetect"
             }
           ],
           "onAdded": [
             {
-              "$type": "GNLJNLOMNGD",
+              "$type": "AttachModifier",
               "target": "Team",
               "modifierName": "UNIQUE_Avatar_Male_Pole_Tohma_ElementalBurst_TeamEffect"
             }
           ],
           "onRemoved": [
             {
-              "$type": "HLHAODOBHPK",
+              "$type": "SetGlobalValue",
               "target": "Caster",
-              "shieldHP": true,
-              "repeatTimes": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Tohma_ElementalBurst_AttackMark",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "HLHAODOBHPK",
-              "shieldHP": true,
-              "repeatTimes": 0.0,
+              "$type": "SetGlobalValue",
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Avatar_Tohma_Has_ELementalBurstBuff",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "CIPKLOKNNJH",
+              "$type": "SendEffectTrigger",
               "target": "Team",
-              "shieldHP": true,
+              "doOffStage": true,
               "parameter": "Burst",
               "attachPoint": "",
-              "damageRatio": "Bool",
-              "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_Shield"
+              "type": "Bool",
+              "effectPattern": "Eff_Avatar_Male_Pole_Tohma_Shield"
             }
           ],
           "onThinkInterval": [
             {
-              "$type": "CIPKLOKNNJH",
+              "$type": "SendEffectTrigger",
               "target": "Team",
-              "shieldHP": true,
+              "doOffStage": true,
               "parameter": "End",
               "attachPoint": "",
-              "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_ElementalBurst_BuffBegin"
+              "effectPattern": "Eff_Avatar_Male_Pole_Tohma_ElementalBurst_BuffBegin"
             }
           ]
         },
         "UNIQUE_Avatar_Male_Pole_Tohma_ElementalBurst_TeamEffect": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": "Dura",
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": "Dura",
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_ElementalBurst_BuffBegin",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Male_Pole_Tohma_ElementalBurst_BuffBegin",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "UNIQUE_Tohma_ElementalBurst_AttackDetect": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": "Dura",
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": "Dura",
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "GCNBGFLGJKP",
+              "$type": "AttachToStateGroupNormalizedTimeMixin",
               "stateGroupIDs": [
                 "State_Group_Avatar_Normal_Attack"
               ],
@@ -1442,94 +1442,94 @@
         },
         "UNIQUE_Tohma_ElementalBurst_AttackMark": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "HLHAODOBHPK",
+              "$type": "SetGlobalValue",
               "target": "Caster",
-              "shieldHP": true,
-              "repeatTimes": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Tohma_ElementalBurst_AttackMark",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "INPLALHENKA",
+              "$type": "SetGlobalPos",
               "key": "_ABILITY_Avatar_Tohma_ElementalBurstPos",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 0.0,
-                  "MEJNCDENBNH": -1.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": -1.0
                 }
               },
               "setTarget": false
             },
             {
-              "$type": "DKABOJNNDAD",
+              "$type": "SetGlobalDir",
               "key": "_ABILITY_Avatar_Tohma_ElementalBurstDir",
               "setTarget": false
             },
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "target": "Caster",
               "modifierName": "UNIQUE_Tohma_ElementalBurst_Attack_CDHandler"
             }
           ],
           "onRemoved": [
             {
-              "$type": "HLHAODOBHPK",
+              "$type": "SetGlobalValue",
               "target": "Caster",
-              "shieldHP": true,
-              "repeatTimes": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Tohma_ElementalBurst_AttackMark",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         },
         "UNIQUE_Tohma_ElementalBurst_Attack_CDHandler": {
           "stacking": "Unique",
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "elementDurability": 100.0,
           "thinkInterval": "CDTime",
           "onAdded": [
             {
-              "$type": "LMFHAOAPGKG",
+              "$type": "TriggerAbility",
               "target": "Caster",
-              "shieldHP": true,
+              "doOffStage": true,
               "abilityName": "Avatar_Tohma_ElementalBurst_TriggerAttack"
             }
           ],
           "onThinkInterval": [
             {
-              "$type": "OIDAEPDOMEP",
-              "shieldHP": true,
+              "$type": "Predicated",
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Tohma_ElementalBurst_AttackMark",
-                  "repeatTimes": 1.0
+                  "value": 1.0
                 }
               ],
               "successActions": [
                 {
-                  "$type": "OIDAEPDOMEP",
+                  "$type": "Predicated",
                   "target": "CurLocalAvatar",
-                  "shieldHP": true,
+                  "doOffStage": true,
                   "targetPredicates": [
                     {
-                      "$type": "DEKMHDDOFGB",
+                      "$type": "ByAny",
                       "predicates": [
                         {
-                          "$type": "NBELJOOMNEK",
+                          "$type": "ByHasAbilityState",
                           "abilityState": "ElementFreeze"
                         },
                         {
-                          "$type": "NBELJOOMNEK",
+                          "$type": "ByHasAbilityState",
                           "abilityState": "ElementPetrifaction"
                         }
                       ]
@@ -1537,16 +1537,16 @@
                   ],
                   "successActions": [
                     {
-                      "$type": "FKNNJLHBIOD",
-                      "shieldHP": true,
+                      "$type": "RemoveUniqueModifier",
+                      "doOffStage": true,
                       "modifierName": "UNIQUE_Tohma_ElementalBurst_Attack_CDHandler"
                     }
                   ],
                   "failActions": [
                     {
-                      "$type": "LMFHAOAPGKG",
+                      "$type": "TriggerAbility",
                       "target": "Caster",
-                      "shieldHP": true,
+                      "doOffStage": true,
                       "abilityName": "Avatar_Tohma_ElementalBurst_TriggerAttack"
                     }
                   ]
@@ -1554,8 +1554,8 @@
               ],
               "failActions": [
                 {
-                  "$type": "FKNNJLHBIOD",
-                  "shieldHP": true,
+                  "$type": "RemoveUniqueModifier",
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Tohma_ElementalBurst_Attack_CDHandler"
                 }
               ]
@@ -1565,29 +1565,29 @@
       },
       "onAdded": [
         {
-          "$type": "HLHAODOBHPK",
-          "repeatTimes": 0.0,
+          "$type": "SetGlobalValue",
+          "value": 0.0,
           "key": "_ABILITY_Tohma_ElementalBurst_AttackMark",
-          "param2": 0.0,
-          "triggerID": 0.0
+          "maxValue": 0.0,
+          "minValue": 0.0
         },
         {
-          "$type": "HLHAODOBHPK",
-          "repeatTimes": 0.0,
+          "$type": "SetGlobalValue",
+          "value": 0.0,
           "key": "_ABILITY_Avatar_Tohma_Has_ELementalBurstBuff",
-          "param2": 0.0,
-          "triggerID": 0.0
+          "maxValue": 0.0,
+          "minValue": 0.0
         }
       ],
       "onAbilityStart": [
         {
-          "$type": "FKNNJLHBIOD",
-          "shieldHP": true,
+          "$type": "RemoveUniqueModifier",
+          "doOffStage": true,
           "modifierName": "UNIQUE_Tohma_ElementalBurst_Buff_Handler"
         },
         {
-          "$type": "AHHAGLJGKDD",
-          "shieldHP": true,
+          "$type": "ApplyModifier",
+          "doOffStage": true,
           "modifierName": "UNIQUE_Tohma_ElementalBurst_Buff_Handler"
         }
       ]
@@ -1595,7 +1595,7 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Tohma_ElementalBurst_TriggerAttack",
       "abilitySpecials": {
         "ElementalBurst_TriggerDamage": 0.0,
@@ -1605,41 +1605,41 @@
         "UNIQUE_Tohma_ElementalBurst_Armor_BlinkEffect": {
           "stacking": "Unique",
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": 0.30000001192092896,
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": 0.30000001192092896,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "CIPKLOKNNJH",
+              "$type": "SendEffectTrigger",
               "parameter": "TriggerAttack",
               "attachPoint": "",
-              "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_ElementalBurst_BuffBegin"
+              "effectPattern": "Eff_Avatar_Male_Pole_Tohma_ElementalBurst_BuffBegin"
             }
           ]
         }
       },
       "onAbilityStart": [
         {
-          "$type": "AHHAGLJGKDD",
+          "$type": "ApplyModifier",
           "target": "Team",
-          "shieldHP": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_Tohma_ElementalBurst_Armor_BlinkEffect"
         },
         {
-          "$type": "LMFHAOAPGKG",
-          "shieldHP": true,
+          "$type": "TriggerAbility",
+          "doOffStage": true,
           "abilityName": "Avatar_Tohma_ElementalArt_Handler",
           "abilitySpecials": {
             "SkillType": 2.0
           }
         },
         {
-          "$type": "EHPLOGLPPAC",
+          "$type": "FireEffect",
           "target": "Caster",
-          "shieldHP": true,
-          "rotationDampTime": "Eff_Avatar_Male_Pole_Tohma_SupportHit",
+          "doOffStage": true,
+          "effectPattern": "Eff_Avatar_Male_Pole_Tohma_SupportHit",
           "born": {
-            "$type": "BGKKAEIIDIA",
+            "$type": "ConfigBornByGlobalValue",
             "direction": {
               "$type": "EAJKEIMIEEH",
               "range": 3
@@ -1647,30 +1647,30 @@
             "positionKey": "_ABILITY_Avatar_Tohma_ElementalBurstPos",
             "directionKey": "_ABILITY_Avatar_Tohma_ElementalBurstDir"
           },
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "target": "Caster",
-          "shieldHP": true,
+          "doOffStage": true,
           "attackEvent": {
             "attackPattern": {
-              "$type": "MFBGHKHFOPA",
+              "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
               "massiveAttackRatio": 0.4000000059604645,
               "born": {
-                "$type": "BGKKAEIIDIA",
+                "$type": "ConfigBornByGlobalValue",
                 "offset": {
-                  "LNOGCFLGIJI": 1.0
+                  "y": 1.0
                 },
                 "positionKey": "_ABILITY_Avatar_Tohma_ElementalBurstPos",
                 "directionKey": "_ABILITY_Avatar_Tohma_ElementalBurstDir"
               },
               "size": {
-                "EPAKBMBAOKK": 4.5,
-                "LNOGCFLGIJI": 2.0,
-                "MEJNCDENBNH": 8.0
+                "x": 4.5,
+                "y": 2.0,
+                "z": 8.0
               }
             },
             "attackInfo": {
@@ -1678,12 +1678,12 @@
               "attenuationTag": "Elemental_Burst",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": "ElementalBurst_TriggerDamage",
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentage": "ElementalBurst_TriggerDamage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Fire",
-                "MCCELHKGPOP": 25.0,
+                "elementDurability": 25.0,
                 "enBreak": 35.0,
-                "DGPOFOAJEFP": [
+                "damageExtra": [
                   "HP2Damage",
                   "FIGHT_PROP_MAX_HP",
                   "MUL"
@@ -1705,48 +1705,48 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Tohma_NormalAttack_DamageHandler",
       "abilityMixins": [
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK01"
           ],
-          "actorGrassSubHurtDelta": "Attack01",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "Attack01",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK02"
           ],
-          "actorGrassSubHurtDelta": "Attack02",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "Attack02",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK03_01"
           ],
-          "actorGrassSubHurtDelta": "Attack03_01",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "Attack03_01",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK03_02"
           ],
-          "actorGrassSubHurtDelta": "Attack03_02",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "Attack03_02",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK04"
           ],
-          "actorGrassSubHurtDelta": "Attack04",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "Attack04",
+          "damagePercentageRatio": 0.0
         }
       ],
       "abilitySpecials": {
@@ -1760,16 +1760,16 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Tohma_FallingAnthem",
       "abilityMixins": [
         {
-          "$type": "IKPEFCGOOJO",
+          "$type": "AvatarChangeSkillMixin",
           "jumpSkillID": 5050010,
           "flySkillID": 5050010
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS"
           ],
@@ -1777,7 +1777,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_Loop"
           ],
@@ -1785,7 +1785,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_Loop"
           ],
@@ -1793,7 +1793,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS"
           ],
@@ -1801,7 +1801,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop",
@@ -1812,7 +1812,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop",
@@ -1823,7 +1823,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop"
@@ -1832,7 +1832,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop",
@@ -1843,7 +1843,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS"
           ],
@@ -1870,14 +1870,14 @@
       "modifiers": {
         "FallingAnthem_BS_Material": {
           "modifierName": "",
-          "elementDurability": 0.5299999713897705,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.5299999713897705,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "EHPLOGLPPAC",
-              "rotationDampTime": "Eff_Avatar_Pole_FallingAnthem_BS_Normal",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Pole_FallingAnthem_BS_Normal",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ],
           "onRemoved": [
@@ -1893,7 +1893,7 @@
         },
         "FallingAnthem_BS_VelocityForce_Initialize": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -2.0
           },
@@ -1908,33 +1908,33 @@
         },
         "FallingAnthem_LoopDamage": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onAdded": [
             {
-              "$type": "KIBGAKKBNCL",
+              "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KHBCMELAIKO",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
                   },
-                  "DCBIMHFGHEJ": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "actorGrassSubHurtDelta": "FallingAnthem_Normal_Loop_Damage",
-                    "actorWaterSubHurtDelta": 0.0,
-                    "MCCELHKGPOP": 0.0,
+                    "damagePercentage": "FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 0.0,
                     "overrideByWeapon": true,
                     "strikeType": "Slash",
                     "enBreak": 25.0,
@@ -1954,29 +1954,29 @@
           ],
           "onThinkInterval": [
             {
-              "$type": "KIBGAKKBNCL",
+              "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KHBCMELAIKO",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
                   },
-                  "DCBIMHFGHEJ": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "actorGrassSubHurtDelta": "FallingAnthem_Normal_Loop_Damage",
-                    "actorWaterSubHurtDelta": 0.0,
-                    "MCCELHKGPOP": 0.0,
+                    "damagePercentage": "FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 0.0,
                     "overrideByWeapon": true,
                     "strikeType": "Spear",
                     "enBreak": 25.0,
@@ -1997,134 +1997,134 @@
         },
         "FallingAnthem_FallingDamageImmune_01": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "LENKODOFEAF",
+              "$type": "ClearGlobalValue",
               "key": "_ABILITY_FallingAttack_Altitude"
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv0"
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "repeatTimes": "FallingAnthem_FallingDamageRatio_Lv0",
+              "value": "FallingAnthem_FallingDamageRatio_Lv0",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv0",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv0"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv0"
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv1"
+                  "value": "FallingAnthem_Altitude_Lv1"
                 },
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv0"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "repeatTimes": "FallingAnthem_FallingDamageRatio_Lv1",
+              "value": "FallingAnthem_FallingDamageRatio_Lv1",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv1",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv1"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv1"
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv2"
+                  "value": "FallingAnthem_Altitude_Lv2"
                 },
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv1"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv1"
                 }
               ],
-              "repeatTimes": "FallingAnthem_FallingDamageRatio_Lv2",
+              "value": "FallingAnthem_FallingDamageRatio_Lv2",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv2",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv2"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv2"
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv3"
+                  "value": "FallingAnthem_Altitude_Lv3"
                 },
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv2"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv2"
                 }
               ],
-              "repeatTimes": "FallingAnthem_FallingDamageRatio_Lv3",
+              "value": "FallingAnthem_FallingDamageRatio_Lv3",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv3",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv3"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv3"
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv3"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv3"
                 }
               ],
-              "repeatTimes": "FallingAnthem_FallingDamageRatio_Lv4",
+              "value": "FallingAnthem_FallingDamageRatio_Lv4",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv4",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv4"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv4"
             },
             {
-              "$type": "GNLJNLOMNGD",
+              "$type": "AttachModifier",
               "modifierName": "FallingAnthem_FallingDamageImmune_02"
             }
           ]
         },
         "FallingAnthem_FallingDamageImmune_02": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "DBGFNDFDIBF",
+              "$type": "SetGlobalValueToOverrideMap",
               "globalValueKey": "_ABILITY_FallingAttack_Altitude",
               "overrideMapKey": "FallingAnthem_FallingDamageRatio"
             },
             {
-              "$type": "GNLJNLOMNGD",
+              "$type": "AttachModifier",
               "modifierName": "FallingAnthem_FallingDamageImmune_03"
             }
           ]
         },
         "FallingAnthem_FallingDamageImmune_03": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
           }
         },
         "FallingAnthem_Loop_Normal": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "GBFNENNJIBL",
+              "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_FallingAnthem_UseCamera",
-              "gvInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -1.0,
                 0.5,
@@ -2139,31 +2139,31 @@
         },
         "FallingAnthem_Loop_Normal_Rank_1": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "EHPLOGLPPAC",
-              "rotationDampTime": "Eff_Avatar_Pole_FallingAnthem_Loop_01_Normal",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Pole_FallingAnthem_Loop_01_Normal",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_Loop_Normal_Rank_2": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Pole_FallingAnthem_Loop_02_Normal",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Pole_FallingAnthem_Loop_02_Normal",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Inertia": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "HFGABACOIMJ",
@@ -2174,88 +2174,88 @@
         },
         "FallingAnthem_Height_Detect": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
-              "repeatTimes": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
-              "repeatTimes": 5.0,
+              "value": 5.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
-              "param2": 1.0,
-              "triggerID": 0.0
+              "maxValue": 1.0,
+              "minValue": 0.0
             },
             {
-              "$type": "DBNHDNBHADP",
+              "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "repeatTimes": 0.0
+              "value": 0.0
             },
             {
-              "$type": "DBNHDNBHADP",
+              "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "repeatTimes": 1.0
+              "value": 1.0
             }
           ],
           "onRemoved": [
             {
-              "$type": "DBNHDNBHADP",
+              "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "repeatTimes": 0.0
+              "value": 0.0
             },
             {
-              "$type": "ACPEIOBJLKD",
-              "repeatTimes": 0.0,
+              "$type": "AddGlobalValue",
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         },
         "FallingAnthem_OverHead_Camera": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "CFCENANLJGI",
+              "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "DGFIOEDKLLD",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "repeatTimes": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -2269,25 +2269,25 @@
         },
         "FallingAnthem_OverHead_Camera_Remover": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "KOEMHHFKCIL",
-              "shieldHP": true
+              "$type": "AvatarExitCameraShot",
+              "doOffStage": true
             }
           ]
         },
         "FallingAnthem_Landed_Camera": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "CFCENANLJGI",
+              "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "DGFIOEDKLLD",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "repeatTimes": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -2301,7 +2301,7 @@
         },
         "FallingAnthem_ClearVelocityForce": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "MOEOJKHGNPK",
@@ -2315,39 +2315,39 @@
       },
       "onAbilityStart": [
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "repeatTimes": 0.0,
+              "value": 0.0,
               "forceByCaster": true,
               "compareType": "NoneOrEqual"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "DCBLBBGDIAN",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "GNIAPFBHMIK",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": -0.5,
-                  "MEJNCDENBNH": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "DCBIMHFGHEJ": 3.0
+              "radius": 3.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": "FallingAnthem_Normal_Rank_1_Damage",
-                "actorWaterSubHurtDelta": 0.0,
-                "MCCELHKGPOP": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_1_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "overrideByWeapon": true,
                 "strikeType": "Blunt",
                 "enBreak": 100.0,
@@ -2380,38 +2380,38 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "repeatTimes": 1.0,
+              "value": 1.0,
               "forceByCaster": true
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "DCBLBBGDIAN",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "GNIAPFBHMIK",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": -0.5,
-                  "MEJNCDENBNH": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "DCBIMHFGHEJ": 5.0
+              "radius": 5.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": "FallingAnthem_Normal_Rank_2_Damage",
-                "actorWaterSubHurtDelta": 0.0,
-                "MCCELHKGPOP": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_2_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "overrideByWeapon": true,
                 "strikeType": "Blunt",
                 "enBreak": 150.0,
@@ -2445,33 +2445,33 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "EHPLOGLPPAC",
+          "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "repeatTimes": 0.0,
+              "value": 0.0,
               "forceByCaster": true,
               "compareType": "NoneOrEqual"
             }
           ],
-          "rotationDampTime": "Eff_Avatar_Pole_FallingAnthem_Strike_01_Normal",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "effectPattern": "Eff_Avatar_Pole_FallingAnthem_Strike_01_Normal",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         },
         {
-          "$type": "EHPLOGLPPAC",
+          "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "repeatTimes": 1.0,
+              "value": 1.0,
               "forceByCaster": true
             }
           ],
-          "rotationDampTime": "Eff_Avatar_Pole_FallingAnthem_Strike_02_Normal",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "effectPattern": "Eff_Avatar_Pole_FallingAnthem_Strike_02_Normal",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         }
       ]
     }

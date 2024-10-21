@@ -9,7 +9,7 @@
           "skillID": 10811,
           "chargeTime": 0.25,
           "secondChargeTime": "Max_Dura",
-          "OnBeginUncharged": [
+          "onBeginUncharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "DoSkill"
@@ -17,7 +17,7 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1.0
             },
             {
               "$type": "ResetAnimatorTrigger",
@@ -28,7 +28,7 @@
               "modifierName": "SetTrigger"
             }
           ],
-          "OnBeginCharged": [
+          "onBeginCharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "DoSkill"
@@ -36,10 +36,10 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 6.0
+              "value": 6.0
             }
           ],
-          "OnReleaseCharged": [
+          "onReleaseCharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "EndHoldTrigger"
@@ -49,7 +49,7 @@
               "modifierName": "SetTrigger"
             }
           ],
-          "OnBeginSecondCharged": [
+          "onBeginSecondCharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "EndHoldTrigger"
@@ -106,11 +106,11 @@
       "modifiers": {
         "ExtraAttack_GV": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Avatar_Kaveh_ExtraAttack_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -119,8 +119,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Avatar_Kaveh_ExtraAttack_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -130,7 +130,7 @@
         "SetTrigger": {
           "modifierName": "",
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SetAnimatorTrigger",
@@ -140,27 +140,27 @@
         },
         "Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ],
           "onAvatarOut": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ]
         },
         "Cost": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "CostStaminaMixin",
-              "costStaminaRatio": "StaminaCost",
+              "costStaminaDelta": "StaminaCost",
               "onStaminaEmpty": [
                 {
                   "$type": "SetAnimatorTrigger",
@@ -319,17 +319,17 @@
       "modifiers": {
         "Kaveh_ElementalArt_Chest_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest",
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest",
               "effectTempleteID": -1.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Kaveh_Chest_Dissolved",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -340,16 +340,16 @@
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_Chest_Dissolved",
-                  "ratio": 0.0,
-                  "CHDEOOKOFDK": true
+                  "value": 0.0,
+                  "forceByCaster": true
                 }
               ],
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest_Dissolve",
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest_Dissolve",
               "born": {
-                "$type": "ILHMMCNMNEG",
-                "NLBFCDKCPAH": true,
+                "$type": "ConfigBornByAttachPoint",
+                "useRotation": true,
                 "attachPointName": "WeaponL"
               },
               "effectTempleteID": -1.0
@@ -358,18 +358,18 @@
         },
         "Kaveh_ElementalArt_Chest_Dissolve_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Disp_Dissolve",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Kaveh_Chest_Dissolved",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -378,95 +378,95 @@
         },
         "Kaveh_ElementalArt_Chest_Attack01_BS_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Trans_Attack01_BS",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 0.0
+                  "value": 0.0
                 }
               ],
               "parameter": "Disp_Loop",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "parameter": "Disp_Loop_Burst",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             }
           ]
         },
         "Kaveh_ElementalArt_Chest_Attack02_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Trans_Attack02",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 0.0
+                  "value": 0.0
                 }
               ],
               "parameter": "Disp_Loop",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "parameter": "Disp_Loop_Burst",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             }
           ]
         },
         "Kaveh_ElementalArt_Chest_Attack03_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Trans_Attack03",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SendEffectTrigger",
               "parameter": "Disp_Dissolve",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             }
           ],
           "onRemoved": [
@@ -474,71 +474,71 @@
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 0.0
+                  "value": 0.0
                 }
               ],
               "parameter": "Disp_Appear",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "parameter": "Disp_Loop_Burst",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             }
           ]
         },
         "Kaveh_ElementalArt_Chest_Attack04_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Trans_Attack04",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SendEffectTrigger",
               "parameter": "Disp_Dissolve",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 0.0
+                  "value": 0.0
                 }
               ],
               "parameter": "AddOn_Attack04",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "parameter": "AddOn_Attack04_Burst",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             }
           ],
           "onRemoved": [
@@ -546,136 +546,136 @@
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 0.0
+                  "value": 0.0
                 }
               ],
               "parameter": "Disp_Appear",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "parameter": "Disp_Loop_Burst",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             }
           ]
         },
         "Kaveh_ElementalArt_Chest_ExtraAttack_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 0.0
+                  "value": 0.0
                 }
               ],
               "parameter": "Disp_Loop",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SendEffectTrigger",
               "parameter": "Trans_ExtraAttack_BS",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             }
           ]
         },
         "Kaveh_ElementalArt_Chest_ExtraAttack_1_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Trans_ExtraAttack_1",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             }
           ]
         },
         "Kaveh_ElementalArt_Chest_ExtraAttack_2_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Trans_ExtraAttack_2",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             }
           ]
         },
         "Kaveh_ElementalArt_Chest_ExtraAttack_3_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Trans_ExtraAttack_3",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             }
           ]
         },
         "Kaveh_ElementalArt_Chest_ElementalArt_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Trans_ElementalArt",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SendEffectTrigger",
               "parameter": "Disp_Appear",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SendEffectTrigger",
               "parameter": "AddOn_ElementalArt",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             }
           ]
         },
         "Kaveh_ElementalArt_Chest_ElementalBurst_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Trans_ElementalBurst",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SendEffectTrigger",
               "parameter": "Disp_Appear_Burst",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SendEffectTrigger",
               "parameter": "AddOn_ElementalBurst",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             }
           ]
         }
@@ -759,7 +759,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Avatar_Kaveh_WeaponVFX_Flag",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -0.5,
             0.5,
@@ -776,11 +776,11 @@
       "modifiers": {
         "Blank": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "Avatar_Kaveh_HideWeapon": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerHideWeapon",
@@ -807,35 +807,35 @@
         },
         "Avatar_Kaveh_WeaponEffect_Handle_GV": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 0.0
+                  "value": 0.0
                 }
               ],
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Avatar_Kaveh_WeaponVFX_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
-              "ratio": 2.0,
+              "value": 2.0,
               "key": "_ABILITY_Avatar_Kaveh_WeaponVFX_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -844,8 +844,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Avatar_Kaveh_WeaponVFX_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -854,13 +854,13 @@
         },
         "Avatar_Kaveh_WeaponEffect_Handle_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "sheathPoint"
                 ]
@@ -871,13 +871,13 @@
         },
         "Avatar_Kaveh_WeaponEffect_Handle_ElementalBurst_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "sheathPoint"
                 ]
@@ -888,35 +888,35 @@
         },
         "Avatar_Kaveh_WeaponEffect_Handle": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Weapon_Handle",
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Weapon_Handle",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Avatar_Kaveh_WeaponEffect_Handle_ElementalBurst": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Weapon_Handle_ElementalBurst",
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Weapon_Handle_ElementalBurst",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Avatar_Kaveh_WeaponEffect_Appear_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "sheathPoint"
                 ]
@@ -927,33 +927,33 @@
         },
         "Avatar_Kaveh_WeaponEffect_Appear": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Weapon_Appear",
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Weapon_Appear",
               "effectTempleteID": -1.0
             },
             {
               "$type": "AttachEffect",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Weapon_Appear_ElementalBurst",
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Weapon_Appear_ElementalBurst",
               "effectTempleteID": -1.0
             }
           ]
@@ -982,29 +982,29 @@
       "modifiers": {
         "Avatar_Kaveh_ElementalArt_ElementalBall_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onHittingOther": [
             {
               "$type": "Predicated",
               "target": "Other",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -1022,39 +1022,39 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "GenerateElemBall",
               "configID": 2019,
               "born": {
-                "$type": "ALJGHOOKOAP",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.0,
-                  "MLOLIKEJCKB": 1.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 1.0
                 }
               },
-              "value": 1.0,
+              "ratio": 1.0,
               "baseEnergy": 6.0
             }
           ]
         },
         "Avatar_Kaveh_ElementalArt_Strike": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_ElementalArt_Strike",
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_ElementalArt_Strike",
               "born": {
-                "$type": "AJCFIBNMGKO",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.0,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               },
               "effectTempleteID": -1.0
             }
@@ -1064,8 +1064,8 @@
               "$type": "ApplyModifier",
               "predicates": [
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "Kaveh_Constellation_1"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Kaveh_Constellation_1"
                 }
               ],
               "modifierName": "UNIQUE_Avatar_Kaveh_ElementalArt_HealBuff"
@@ -1073,37 +1073,37 @@
             {
               "$type": "AvatarSkillStart",
               "skillID": 10812,
-              "amountByCasterMaxHPRatio": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             },
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPJICLLGBLO",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "AJCFIBNMGKO",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": -2.0,
-                      "MLOLIKEJCKB": 0.0
+                      "x": 0.0,
+                      "y": -2.0,
+                      "z": 0.0
                     },
-                    "NLBFCDKCPAH": true
+                    "useRotation": true
                   },
                   "height": 4.0,
-                  "DLFACKMBPCH": 5.0
+                  "radius": 5.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Kaveh_ElementalArt_Damage",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Kaveh_ElementalArt_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Grass",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 75.0,
                     "damagePercentage": 0.0
@@ -1113,7 +1113,7 @@
                     "hitImpulseType": "LV7",
                     "overrideHitImpulse": {
                       "hitLevel": "Air",
-                      "LPIJAJONFHC": 0.0,
+                      "hitImpulseX": 0.0,
                       "hitImpulseY": 600.0
                     }
                   },
@@ -1135,7 +1135,7 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "entityTypePriority": [
                   "Gadget",
                   "Bullet"
@@ -1143,25 +1143,25 @@
                 "shapeName": "CircleR5H4",
                 "HICPDDPCFNO": "CurLocalAvatar",
                 "campTargetType": "All",
-                "LNJEBBILGME": "CurLocalAvatar",
-                "BGEBJHNLDLA": 1.0
+                "campBasedOn": "CurLocalAvatar",
+                "sizeRatio": 1.0
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "GANAKOPLMGI",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "BMLGBKCIOIN",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Is_Overgrow_Mushroom",
-                      "ratio": 1.0,
-                      "PODFMDAEAGL": "MoreThanAndEqual"
+                      "value": 1.0,
+                      "compareType": "MoreThanAndEqual"
                     },
                     {
-                      "$type": "BMLGBKCIOIN",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Is_Overgrow_Mushroom_Seed",
-                      "ratio": 1.0,
-                      "PODFMDAEAGL": "MoreThanAndEqual"
+                      "value": 1.0,
+                      "compareType": "MoreThanAndEqual"
                     }
                   ]
                 }
@@ -1174,7 +1174,7 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 0.05000000074505806,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "KillSelf",
@@ -1189,7 +1189,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Kaveh_ElementalArt_HealBuff_Duration",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_HealedAddDelta": "Kaveh_ElementalArt_HealBuff_HealedAddDelta",
             "Actor_GrassSubHurtDelta": "Kaveh_ElementalArt_HealBuff_GrassSubHurtDelta"
@@ -1261,7 +1261,7 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 0.05000000074505806,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "KillSelf",
@@ -1274,14 +1274,14 @@
         },
         "Avatar_Kaveh_ElementalBurst_Invincible": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 10815,
-              "amountByCasterMaxHPRatio": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             },
             {
               "$type": "AttachAbilityStateResistance",
@@ -1291,19 +1291,19 @@
         },
         "Avatar_Kaveh_ElementalBurst_VFX": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_ElementalBurst",
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_ElementalBurst",
               "born": {
-                "$type": "AJCFIBNMGKO",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.0,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               },
               "effectTempleteID": -1.0
             }
@@ -1311,15 +1311,15 @@
         },
         "Avatar_Kaveh_ElementalBurst_ExitCamera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             },
             {
               "$type": "AvatarCameraParam",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "cameraParam": {
                 "forceRadius": 6.0,
                 "forceRadiusDuration": 0.0,
@@ -1330,7 +1330,7 @@
         },
         "Avatar_Kaveh_ElementalBurst_Pre_Weather": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "TriggerWeatherMixin",
@@ -1343,11 +1343,11 @@
         "Avatar_Kaveh_ElementalBurst_Enhancement_Weapon": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_ElementalBurst_Weapon",
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_ElementalBurst_Weapon",
               "effectTempleteID": -1.0
             }
           ]
@@ -1356,7 +1356,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Kaveh_ElementalBurst_Duration",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ReplaceEventPatternMixin",
@@ -1386,7 +1386,7 @@
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Buff",
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Buff",
               "effectTempleteID": -1.0
             },
             {
@@ -1398,7 +1398,7 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1407,13 +1407,13 @@
               "$type": "SendEffectTrigger",
               "parameter": "Disp_Light_On",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "AttachModifier",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "sheathPoint"
                 ]
@@ -1424,8 +1424,8 @@
               "$type": "AttachModifier",
               "predicates": [
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "Kaveh_Constellation_2"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Kaveh_Constellation_2"
                 }
               ],
               "modifierName": "Avatar_Kaveh_ElementalBurst_AtkSpeedBuff"
@@ -1439,8 +1439,8 @@
               "$type": "AttachModifier",
               "predicates": [
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "Kaveh_PermanentSkill_2"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Kaveh_PermanentSkill_2"
                 }
               ],
               "modifierName": "Avatar_Kaveh_ElementalBurst_ElementMastery_Handler"
@@ -1449,8 +1449,8 @@
               "$type": "AttachModifier",
               "predicates": [
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "Kaveh_Constellation_6"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Kaveh_Constellation_6"
                 }
               ],
               "modifierName": "Avatar_Kaveh_ElementalBurst_ExtraStrike_Handler"
@@ -1460,12 +1460,12 @@
             {
               "$type": "SetAnimatorBool",
               "boolID": "CanSpecialPerform",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1474,19 +1474,19 @@
               "$type": "SendEffectTrigger",
               "parameter": "Disp_Light_Off",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Chest"
             },
             {
               "$type": "SetGlobalValue",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Avatar_Kaveh_ExtraAttack_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Avatar_Kaveh_WeaponVFX_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1495,13 +1495,13 @@
               "$type": "SetGlobalValue",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Avatar_Kaveh_FallingAttack_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Avatar_Kaveh_WeaponVFX_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1510,13 +1510,13 @@
               "$type": "SetGlobalValue",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Avatar_Kaveh_FallingAttack_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Avatar_Kaveh_FallingAttackVFX_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1525,21 +1525,21 @@
           "onKill": [
             {
               "$type": "RemoveUniqueModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Avatar_Kaveh_ElementalBurst_Handler"
             }
           ],
           "onAvatarOut": [
             {
               "$type": "RemoveUniqueModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Avatar_Kaveh_ElementalBurst_Handler"
             }
           ]
         },
         "Avatar_Kaveh_ElementalBurst_ReactionDamageUp_TeamBuff": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_ElemReactOvergrowDelta": "Kaveh_ElementalBurst_ReactionDamageUp_TeamBuff_ElemReactOvergrowDelta"
           },
@@ -1547,14 +1547,14 @@
         },
         "Avatar_Kaveh_ElementalBurst_ExtraStrike_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Other",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "NormalAttack_01",
                     "NormalAttack_02",
@@ -1565,23 +1565,23 @@
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_Kaveh_ElementalBurst_ExtraStrike_CD",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -1600,7 +1600,7 @@
         "Avatar_Kaveh_ElementalBurst_ExtraStrike_Attack": {
           "modifierName": "",
           "duration": 0.4000000059604645,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onAdded": [
             {
@@ -1608,24 +1608,24 @@
               "target": "SelfAttackTarget",
               "key": "_ABILITY_Kaveh_ElementalBurst_ExtraStrike_Pos",
               "born": {
-                "$type": "JDHLOIMFAHJ",
+                "$type": "ConfigBornBySelectedPoint",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 1.0,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 0.0
                 }
               },
               "setTarget": false
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_Extra_Strike",
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_Extra_Strike",
               "born": {
-                "$type": "NNOMECHMEBA",
+                "$type": "ConfigBornByGlobalValue",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.0,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
                 "positionKey": "_ABILITY_Kaveh_ElementalBurst_ExtraStrike_Pos",
                 "directionKey": ""
@@ -1638,30 +1638,30 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "AHDHJOAODLF",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "NNOMECHMEBA",
+                    "$type": "ConfigBornByGlobalValue",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": 0.0,
-                      "MLOLIKEJCKB": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "positionKey": "_ABILITY_Kaveh_ElementalBurst_ExtraStrike_Pos",
                     "directionKey": ""
                   },
-                  "DLFACKMBPCH": 4.0
+                  "radius": 4.0
                 },
                 "attackInfo": {
                   "attackTag": "Kaveh_ExtraStrike",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Kaveh_ElementalBurst_ExtraStrike_Damage",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Kaveh_ElementalBurst_ExtraStrike_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Grass",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 25.0,
                     "damagePercentage": 0.0
@@ -1671,7 +1671,7 @@
                     "hitImpulseType": "LV7",
                     "overrideHitImpulse": {
                       "hitLevel": "Air",
-                      "LPIJAJONFHC": 0.0,
+                      "hitImpulseX": 0.0,
                       "hitImpulseY": 600.0
                     },
                     "hitHaltTime": 0.09000000357627869,
@@ -1695,7 +1695,7 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "entityTypePriority": [
                   "Gadget",
                   "Bullet"
@@ -1703,25 +1703,25 @@
                 "shapeName": "CircleR4H4",
                 "HICPDDPCFNO": "CurLocalAvatar",
                 "campTargetType": "All",
-                "LNJEBBILGME": "CurLocalAvatar",
-                "BGEBJHNLDLA": 1.0
+                "campBasedOn": "CurLocalAvatar",
+                "sizeRatio": 1.0
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "GANAKOPLMGI",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "BMLGBKCIOIN",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Is_Overgrow_Mushroom",
-                      "ratio": 1.0,
-                      "PODFMDAEAGL": "MoreThanAndEqual"
+                      "value": 1.0,
+                      "compareType": "MoreThanAndEqual"
                     },
                     {
-                      "$type": "BMLGBKCIOIN",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Is_Overgrow_Mushroom_Seed",
-                      "ratio": 1.0,
-                      "PODFMDAEAGL": "MoreThanAndEqual"
+                      "value": 1.0,
+                      "compareType": "MoreThanAndEqual"
                     }
                   ]
                 }
@@ -1734,7 +1734,7 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 0.05000000074505806,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "KillSelf",
@@ -1749,13 +1749,13 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 9.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Kaveh_ElementalBurst_ExtraStrike_CD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_Kaveh_ElementalBurst_ExtraStrike_CD",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1764,8 +1764,8 @@
           "onThinkInterval": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_Kaveh_ElementalBurst_ExtraStrike_CD",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1778,14 +1778,14 @@
         },
         "Avatar_Kaveh_ElementalBurst_ElementMastery_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Other",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "NormalAttack_01",
                     "NormalAttack_02",
@@ -1796,23 +1796,23 @@
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_Kaveh_PermanentSkill_2_CD",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -1835,7 +1835,7 @@
             "maxModifierNumForMultipleType": "Kaveh_ElementalBurst_ElementMastery_Buff_StackNum"
           },
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_ElemMasteryDelta": "Kaveh_ElementalBurst_ElementMastery_Buff_ElemMasteryDelta"
           },
@@ -1846,13 +1846,13 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.10000000149011612,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_Kaveh_PermanentSkill_2_CD",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1861,8 +1861,8 @@
           "onThinkInterval": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_Kaveh_PermanentSkill_2_CD",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1875,7 +1875,7 @@
         },
         "Avatar_Kaveh_ElementalBurst_AtkSpeedBuff": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Animator_AttackSpeedRatio": "Kaveh_ElementalBurst_AtkSpeedBuff"
           },
@@ -1885,16 +1885,16 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_Kaveh_ElementalBurst_ExtraStrike_CD",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -1905,30 +1905,30 @@
           "$type": "TriggerAttackEvent",
           "attackEvent": {
             "attackPattern": {
-              "$type": "FPJICLLGBLO",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "AJCFIBNMGKO",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": -2.5,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": -2.5,
+                  "z": 0.0
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               },
               "height": 5.0,
-              "DLFACKMBPCH": 5.0
+              "radius": 5.0
             },
             "attackInfo": {
               "attackTag": "Elemental_Burst",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "ACKCDHKEGCK": "Kaveh_ElementalBurst_Damage",
-                "JIICGJODDDM": 0.0,
+                "damagePercentage": "Kaveh_ElementalBurst_Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Grass",
                 "elementRank": 1.5,
-                "bonusCriticalHurt": 50.0,
+                "elementDurability": 50.0,
                 "strikeType": "Default",
                 "enBreak": 100.0,
                 "attackType": "Melee",
@@ -1956,7 +1956,7 @@
         {
           "$type": "ApplyModifier",
           "otherTargets": {
-            "$type": "DBCDEKOJIJJ",
+            "$type": "SelectTargetsByShape",
             "entityTypePriority": [
               "Gadget",
               "Bullet"
@@ -1964,25 +1964,25 @@
             "shapeName": "CircleR5H5",
             "HICPDDPCFNO": "CurLocalAvatar",
             "campTargetType": "All",
-            "LNJEBBILGME": "CurLocalAvatar",
-            "BGEBJHNLDLA": 1.0
+            "campBasedOn": "CurLocalAvatar",
+            "sizeRatio": 1.0
           },
-          "PositionDampTime": true,
+          "doOffStage": true,
           "predicates": [
             {
-              "$type": "GANAKOPLMGI",
+              "$type": "ByAny",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Is_Overgrow_Mushroom",
-                  "ratio": 1.0,
-                  "PODFMDAEAGL": "MoreThanAndEqual"
+                  "value": 1.0,
+                  "compareType": "MoreThanAndEqual"
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Is_Overgrow_Mushroom_Seed",
-                  "ratio": 1.0,
-                  "PODFMDAEAGL": "MoreThanAndEqual"
+                  "value": 1.0,
+                  "compareType": "MoreThanAndEqual"
                 }
               ]
             }
@@ -1991,13 +1991,13 @@
         },
         {
           "$type": "FireEffect",
-          "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_ElementalBurst_Cast",
+          "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_ElementalBurst_Cast",
           "effectTempleteID": -1.0
         },
         {
           "$type": "FireEffect",
           "muteRemoteAction": true,
-          "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_ElementalBurst_Cast_Camera",
+          "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_ElementalBurst_Cast_Camera",
           "effectTempleteID": -1.0
         },
         {
@@ -2042,14 +2042,14 @@
       "modifiers": {
         "Avatar_Kaveh_Overgrow_HealHP_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onBeingHit": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "OverGrowDamage",
                     "OverGrow_Alter_Damage",
@@ -2070,11 +2070,11 @@
         "Avatar_Kaveh_Overgrow_HealHP": {
           "modifierName": "",
           "duration": "Kaveh_Overgrow_HealHP_CD",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "HealHP",
-              "AEDJFLPMFDA": [
+              "amount": [
                 "FIGHT_PROP_ELEMENT_MASTERY",
                 "Kaveh_Overgrow_HealHP_ElemMastery_Multiplier",
                 "MUL"
@@ -2103,7 +2103,7 @@
       "modifiers": {
         "Avatar_Kaveh_Overgrow_ReactionDamageUp_Buff": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_ElemReactOvergrowDelta": "Kaveh_Overgrow_ReactionDamageUp_Buff_ElemReactOvergrowDelta"
           },
@@ -2223,7 +2223,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Avatar_Kaveh_FallingAttackVFX_Flag",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -0.5,
             0.5,
@@ -2256,15 +2256,15 @@
       "modifiers": {
         "Blank": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "FallingAnthem_GV": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Avatar_Kaveh_FallingAttack_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2273,8 +2273,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Avatar_Kaveh_FallingAttack_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2283,35 +2283,35 @@
         },
         "FallingAnthem_AttachSelfEffect_GV": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 0.0
+                  "value": 0.0
                 }
               ],
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Avatar_Kaveh_FallingAttackVFX_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
-              "ratio": 2.0,
+              "value": 2.0,
               "key": "_ABILITY_Avatar_Kaveh_FallingAttackVFX_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2320,8 +2320,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Avatar_Kaveh_FallingAttackVFX_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2330,83 +2330,83 @@
         },
         "Avatar_Kaveh_FallingAttackVFX_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Self_02",
+              "effectPattern": "Eff_Avatar_Claymore_FallAnthem_Self_02",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Avatar_Kaveh_FallingAttackVFX_ElementalBurst_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_FallingAnthem_Self_02",
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_FallingAnthem_Self_02",
               "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_BS_Material": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 0.0
+                  "value": 0.0
                 }
               ],
-              "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Self",
+              "effectPattern": "Eff_Avatar_Claymore_FallAnthem_Self",
               "effectTempleteID": -1.0
             },
             {
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_FallingAnthem_Self",
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_FallingAnthem_Self",
               "effectTempleteID": -1.0
             },
             {
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 0.0
+                  "value": 0.0
                 }
               ],
-              "shieldHP": "Eff_Avatar_Claymore_FallAnthem_BS",
+              "effectPattern": "Eff_Avatar_Claymore_FallAnthem_BS",
               "effectTempleteID": -1.0
             },
             {
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
-              "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_FallingAnthem_BS",
+              "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_FallingAnthem_BS",
               "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_BS_VelocityForce_Initialize": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -2.0
           },
@@ -2421,42 +2421,42 @@
         },
         "FallingAnthem_LoopDamage": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "AHDHJOAODLF",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "AJCFIBNMGKO",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": 0.0,
-                      "MLOLIKEJCKB": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     },
-                    "NLBFCDKCPAH": true
+                    "useRotation": true
                   },
-                  "DLFACKMBPCH": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "FallingAnthem_Normal_Loop_Damage",
-                    "JIICGJODDDM": 0.0,
-                    "bonusCriticalHurt": 0.0,
+                    "damagePercentage": "FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 0.0,
                     "overrideByWeapon": true,
                     "strikeType": "Slash",
                     "enBreak": 35.0,
@@ -2476,35 +2476,35 @@
               "$type": "TriggerAttackEvent",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "AHDHJOAODLF",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "AJCFIBNMGKO",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": 0.0,
-                      "MLOLIKEJCKB": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     },
-                    "NLBFCDKCPAH": true
+                    "useRotation": true
                   },
-                  "DLFACKMBPCH": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "FallingAnthem_Normal_Loop_Damage",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Grass",
-                    "bonusCriticalHurt": 0.0,
+                    "elementDurability": 0.0,
                     "overrideByWeapon": true,
                     "strikeType": "Slash",
                     "enBreak": 35.0,
@@ -2524,7 +2524,7 @@
         },
         "FallingAnthem_FallingDamageImmune_01": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ClearGlobalValue",
@@ -2534,12 +2534,12 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv0",
+              "value": "FallingAnthem_FallingDamageRatio_Lv0",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
@@ -2549,16 +2549,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "value": "FallingAnthem_Altitude_Lv1"
                 },
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv1",
+              "value": "FallingAnthem_FallingDamageRatio_Lv1",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
@@ -2568,16 +2568,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "value": "FallingAnthem_Altitude_Lv2"
                 },
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv1"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv2",
+              "value": "FallingAnthem_FallingDamageRatio_Lv2",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
@@ -2587,16 +2587,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "value": "FallingAnthem_Altitude_Lv3"
                 },
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv2"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv3",
+              "value": "FallingAnthem_FallingDamageRatio_Lv3",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
@@ -2606,11 +2606,11 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv3"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv4",
+              "value": "FallingAnthem_FallingDamageRatio_Lv4",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
@@ -2624,7 +2624,7 @@
         },
         "FallingAnthem_FallingDamageImmune_02": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -2639,19 +2639,19 @@
         },
         "FallingAnthem_FallingDamageImmune_03": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
           }
         },
         "FallingAnthem_Loop_Normal": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_FallingAnthem_UseCamera",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -1.0,
                 0.5,
@@ -2666,15 +2666,15 @@
         },
         "FallingAnthem_Loop_Normal_Rank_1": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "FallingAnthem_Loop_Normal_Rank_2": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "Inertia": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ApplyInertiaVelocityMixin",
@@ -2685,18 +2685,18 @@
         },
         "FallingAnthem_Height_Detect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -2706,11 +2706,11 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
-              "ratio": 5.0,
+              "value": 5.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -2720,35 +2720,35 @@
               "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -2758,15 +2758,15 @@
         },
         "FallingAnthem_OverHead_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "HLKAIMGJOLH",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -2780,25 +2780,25 @@
         },
         "FallingAnthem_OverHead_Camera_Remover": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ]
         },
         "FallingAnthem_Landed_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "HLKAIMGJOLH",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -2812,7 +2812,7 @@
         },
         "FallingAnthem_ClearVelocityForce": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "RemoveVelocityForce",
@@ -2829,42 +2829,42 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "CHDEOOKOFDK": true,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-              "ratio": 0.0,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "FPJICLLGBLO",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "ALJGHOOKOAP",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": -0.5,
-                  "MLOLIKEJCKB": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "DLFACKMBPCH": 3.0
+              "radius": 3.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "ACKCDHKEGCK": "FallingAnthem_Normal_Rank_1_Damage",
-                "JIICGJODDDM": 0.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_1_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "overrideByWeapon": true,
                 "strikeType": "Blunt",
                 "enBreak": 150.0,
@@ -2899,41 +2899,41 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "CHDEOOKOFDK": true
+              "value": 1.0,
+              "forceByCaster": true
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-              "ratio": 0.0,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "FPJICLLGBLO",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "ALJGHOOKOAP",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": -0.5,
-                  "MLOLIKEJCKB": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "DLFACKMBPCH": 5.0
+              "radius": 5.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "ACKCDHKEGCK": "FallingAnthem_Normal_Rank_2_Damage",
-                "JIICGJODDDM": 0.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_2_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "overrideByWeapon": true,
                 "strikeType": "Blunt",
                 "enBreak": 200.0,
@@ -2969,42 +2969,42 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "CHDEOOKOFDK": true,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "FPJICLLGBLO",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "ALJGHOOKOAP",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": -0.5,
-                  "MLOLIKEJCKB": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "DLFACKMBPCH": 3.0
+              "radius": 3.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "ACKCDHKEGCK": "FallingAnthem_Normal_Rank_1_Damage",
-                "JIICGJODDDM": 0.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_1_Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Grass",
-                "bonusCriticalHurt": 25.0,
+                "elementDurability": 25.0,
                 "strikeType": "Blunt",
                 "enBreak": 150.0,
                 "attackType": "Melee",
@@ -3038,41 +3038,41 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "CHDEOOKOFDK": true
+              "value": 1.0,
+              "forceByCaster": true
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "FPJICLLGBLO",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "ALJGHOOKOAP",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": -0.5,
-                  "MLOLIKEJCKB": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "DLFACKMBPCH": 5.0
+              "radius": 5.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "ACKCDHKEGCK": "FallingAnthem_Normal_Rank_2_Damage",
-                "JIICGJODDDM": 0.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_2_Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Grass",
-                "bonusCriticalHurt": 25.0,
+                "elementDurability": 25.0,
                 "strikeType": "Blunt",
                 "enBreak": 200.0,
                 "attackType": "Melee",
@@ -3107,74 +3107,74 @@
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "CHDEOOKOFDK": true,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-              "ratio": 0.0
+              "value": 0.0
             }
           ],
-          "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Strike_01",
+          "effectPattern": "Eff_Avatar_Claymore_FallAnthem_Strike_01",
           "effectTempleteID": -1.0
         },
         {
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "CHDEOOKOFDK": true
+              "value": 1.0,
+              "forceByCaster": true
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-              "ratio": 0.0
+              "value": 0.0
             }
           ],
-          "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Strike_02",
+          "effectPattern": "Eff_Avatar_Claymore_FallAnthem_Strike_02",
           "effectTempleteID": -1.0
         },
         {
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "CHDEOOKOFDK": true,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
-          "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_FallingAnthem_Strike_01",
+          "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_FallingAnthem_Strike_01",
           "effectTempleteID": -1.0
         },
         {
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "CHDEOOKOFDK": true
+              "value": 1.0,
+              "forceByCaster": true
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Kaveh_ElementalBurst_Flag",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
-          "shieldHP": "Eff_Avatar_Male_Claymore_Kaveh_FallingAnthem_Strike_02",
+          "effectPattern": "Eff_Avatar_Male_Claymore_Kaveh_FallingAnthem_Strike_02",
           "effectTempleteID": -1.0
         }
       ]
@@ -3190,96 +3190,96 @@
           "animEventNames": [
             "ATK01"
           ],
-          "ACKCDHKEGCK": "Kaveh_NormalAttack_01_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Kaveh_NormalAttack_01_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK02"
           ],
-          "ACKCDHKEGCK": "Kaveh_NormalAttack_02_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Kaveh_NormalAttack_02_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK03"
           ],
-          "ACKCDHKEGCK": "Kaveh_NormalAttack_03_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Kaveh_NormalAttack_03_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK04"
           ],
-          "ACKCDHKEGCK": "Kaveh_NormalAttack_04_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Kaveh_NormalAttack_04_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ExtraAttack1"
           ],
-          "ACKCDHKEGCK": "Kaveh_ExtraAttack_01_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Kaveh_ExtraAttack_01_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ExtraAttack2"
           ],
-          "ACKCDHKEGCK": "Kaveh_ExtraAttack_02_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Kaveh_ExtraAttack_02_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK01_ElementalBurst"
           ],
-          "ACKCDHKEGCK": "Kaveh_NormalAttack_01_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Kaveh_NormalAttack_01_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK02_ElementalBurst"
           ],
-          "ACKCDHKEGCK": "Kaveh_NormalAttack_02_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Kaveh_NormalAttack_02_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK03_ElementalBurst"
           ],
-          "ACKCDHKEGCK": "Kaveh_NormalAttack_03_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Kaveh_NormalAttack_03_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK04_ElementalBurst"
           ],
-          "ACKCDHKEGCK": "Kaveh_NormalAttack_04_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Kaveh_NormalAttack_04_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ExtraAttack1_ElementalBurst"
           ],
-          "ACKCDHKEGCK": "Kaveh_ExtraAttack_01_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Kaveh_ExtraAttack_01_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ExtraAttack2_ElementalBurst"
           ],
-          "ACKCDHKEGCK": "Kaveh_ExtraAttack_02_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Kaveh_ExtraAttack_02_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         }
       ],
       "abilitySpecials": {

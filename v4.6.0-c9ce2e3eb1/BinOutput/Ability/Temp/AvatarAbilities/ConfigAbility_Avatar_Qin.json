@@ -1,79 +1,79 @@
 [
   {
     "Default": {
-      "$type": "MoleMole.Config.ConfigAbility",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_ExtraAttack",
       "abilityMixins": [
         {
-          "$type": "MoleMole.Config.ButtonHoldChargeMixin",
+          "$type": "ButtonHoldChargeMixin",
           "skillID": 10031,
           "chargeTime": 0.11999999731779099,
-          "CFOHCLHPPAE": 0.20000000298023224,
+          "secondChargeTime": 0.20000000298023224,
           "onBeginUncharged": [
             {
-              "$type": "MoleMole.Config.SetAnimatorTrigger",
-              "value": "DoSkill"
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "DoSkill"
             },
             {
-              "$type": "MoleMole.Config.SetAnimatorInt",
+              "$type": "SetAnimatorInt",
               "predicates": [
                 {
-                  "$type": "BNNPNEDKIIH",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "KKGAFDMCEPD",
+                      "$type": "ByAnimatorInt",
                       "logic": "Equal",
-                      "param3": 0,
+                      "value": 0,
                       "parameter": "ComboCount"
                     },
                     {
-                      "$type": "KKGAFDMCEPD",
+                      "$type": "ByAnimatorInt",
                       "logic": "Equal",
-                      "param3": 5,
+                      "value": 5,
                       "parameter": "ComboCount"
                     }
                   ]
                 }
               ],
               "intID": "SkillID",
-              "param3": 99.0
+              "value": 99.0
             },
             {
-              "$type": "MoleMole.Config.SetAnimatorBool",
+              "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
             }
           ],
           "onReleaseUncharged": [
             {
-              "$type": "MoleMole.Config.SetAnimatorInt",
+              "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "param3": 1.0
+              "value": 1.0
             }
           ],
           "onBeginCharged": [
             {
-              "$type": "MoleMole.Config.SetAnimatorBool",
+              "$type": "SetAnimatorBool",
               "boolID": "IsCharging",
-              "param3": true
+              "value": true
             }
           ],
           "onReleaseCharged": [
             {
-              "$type": "MoleMole.Config.SetAnimatorBool",
+              "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
             },
             {
-              "$type": "MoleMole.Config.SetAnimatorInt",
+              "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "param3": 1.0
+              "value": 1.0
             }
           ],
           "onBeginSecondCharged": [
             {
-              "$type": "MoleMole.Config.SetAnimatorTrigger",
+              "$type": "SetAnimatorTrigger",
               "predicates": [
                 {
-                  "$type": "COLOHOOIDEN",
+                  "$type": "ByLocalAvatarStamina",
                   "logic": "GreaterOrEqual",
                   "stamina": [
                     "ExtraAttack_Sword_Stamina_Cost",
@@ -82,13 +82,13 @@
                   ]
                 }
               ],
-              "value": "DoSkill"
+              "triggerID": "DoSkill"
             },
             {
-              "$type": "MoleMole.Config.SetAnimatorInt",
+              "$type": "SetAnimatorInt",
               "predicates": [
                 {
-                  "$type": "COLOHOOIDEN",
+                  "$type": "ByLocalAvatarStamina",
                   "logic": "GreaterOrEqual",
                   "stamina": [
                     "ExtraAttack_Sword_Stamina_Cost",
@@ -98,10 +98,10 @@
                 }
               ],
               "intID": "SkillID",
-              "param3": 6.0
+              "value": 6.0
             },
             {
-              "$type": "MoleMole.Config.SetAnimatorBool",
+              "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
             }
           ],
@@ -114,7 +114,7 @@
           ]
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "ExtraAttack"
           ],
@@ -129,42 +129,42 @@
       "modifiers": {
         "ExtraAttack_StaminaCost": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AvatarSkillStart",
+              "$type": "AvatarSkillStart",
               "skillID": 10001,
-              "amountByTargetCurrentHPRatio": 1.0,
+              "cdRatio": 1.0,
               "costStaminaRatio": "ExtraAttack_Sword_Stamina_Cost"
             }
           ]
         },
         "Qin_ExtraAttack_Detect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "target": "Target",
               "predicates": [
                 {
-                  "$type": "IPJIAJLNIKC",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "ExtraAttack"
                   ]
                 },
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster",
                     "Gadget"
                   ]
                 },
                 {
-                  "$type": "POOFKGMBLNA",
+                  "$type": "ByTargetGlobalValue",
                   "key": "Qin_ExtraAttack_Recently_Lifted",
-                  "param3": 0.0,
-                  "param2": 1.0,
+                  "value": 0.0,
+                  "maxValue": 1.0,
                   "compareType": "NoneOrEqual"
                 }
               ],
@@ -175,11 +175,11 @@
         "UNIQUE_Qin_ExtraAttack_WeightDown_Pre": {
           "modifierName": "",
           "isUnique": true,
-          "elementDurability": 0.4000000059604645,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.4000000059604645,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "modifierName": "UNIQUE_Qin_ExtraAttack_WeightDown"
             }
           ]
@@ -188,28 +188,28 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "elementDurability": 3.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 3.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -1.9800000190734863
           },
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AttachEffect",
+              "$type": "AttachEffect",
               "predicates": [
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster",
                     "Gadget"
                   ]
                 }
               ],
-              "rotationDampTime": "Eff_Avatar_Boy_Bow_Venti_Rise_Monster",
-              "NHGDGLICLFB": -1.0
+              "effectPattern": "Eff_Avatar_Boy_Bow_Venti_Rise_Monster",
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "modifierName": "Qin_ExtraAttack_Recently_Lifted"
             }
           ],
@@ -218,57 +218,57 @@
         "Qin_ExtraAttack_WeightDown_Afterwards": {
           "stacking": "Unique",
           "modifierName": "",
-          "elementDurability": 1.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.5,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -1.9299999475479126
           },
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AttachEffect",
+              "$type": "AttachEffect",
               "predicates": [
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster",
                     "Gadget"
                   ]
                 }
               ],
-              "rotationDampTime": "Eff_Avatar_Boy_Bow_Venti_Rise_Monster",
-              "NHGDGLICLFB": -1.0
+              "effectPattern": "Eff_Avatar_Boy_Bow_Venti_Rise_Monster",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Qin_ExtraAttack_Recently_Lifted": {
           "modifierName": "",
-          "elementDurability": 6.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 6.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AddGlobalValue",
-              "param3": 1.0,
+              "$type": "AddGlobalValue",
+              "value": 1.0,
               "key": "Qin_ExtraAttack_Recently_Lifted",
               "useLimitRange": true,
-              "param2": 1.0,
-              "triggerID": 0.0
+              "maxValue": 1.0,
+              "minValue": 0.0
             }
           ],
           "onRemoved": [
             {
-              "$type": "MoleMole.Config.AddGlobalValue",
-              "param3": -5.0,
+              "$type": "AddGlobalValue",
+              "value": -5.0,
               "key": "Qin_ExtraAttack_Recently_Lifted",
               "useLimitRange": true,
-              "param2": 1.0,
-              "triggerID": 0.0
+              "maxValue": 1.0,
+              "minValue": 0.0
             }
           ]
         }
       },
       "onAdded": [
         {
-          "$type": "MoleMole.Config.ApplyModifier",
+          "$type": "ApplyModifier",
           "modifierName": "Qin_ExtraAttack_Detect"
         }
       ]
@@ -276,11 +276,11 @@
   },
   {
     "Default": {
-      "$type": "MoleMole.Config.ConfigAbility",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_VortexSmash",
       "abilityMixins": [
         {
-          "$type": "MoleMole.Config.SkillButtonHoldChargeMixin",
+          "$type": "SkillButtonHoldChargeMixin",
           "skillID": 10033,
           "nextLoopTriggerID": "NextLoopTrigger",
           "endHoldTrigger": "EndHoldTrigger",
@@ -295,7 +295,7 @@
           ]
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "VortexSmash_BS",
             "VortexSmash_Charge_01",
@@ -306,7 +306,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "VortexSmash_Charge_01"
           ],
@@ -314,7 +314,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "VortexSmash_Charge_01"
           ],
@@ -322,7 +322,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "VortexSmash_Charge_01",
             "VortexSmash_Strike_01"
@@ -331,7 +331,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "VortexSmash_Strike"
           ],
@@ -351,14 +351,14 @@
       "modifiers": {
         "Initialize": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "MoleMole.Config.ModifyDamageMixin",
+              "$type": "ModifyDamageMixin",
               "attackTags": [
                 "Elemental_Art"
               ],
-              "AILJJDMKONE": [
+              "damagePercentageRatio": [
                 "DamageRate",
                 "IsCharged",
                 "MUL"
@@ -367,34 +367,34 @@
           ],
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AttachModifier",
-              "temperature": true,
+              "$type": "AttachModifier",
+              "doOffStage": true,
               "modifierName": "DetectAttackLanded"
             },
             {
-              "$type": "MoleMole.Config.SetOverrideMapValue",
-              "param3": 2.0,
+              "$type": "SetOverrideMapValue",
+              "value": 2.0,
               "overrideMapKey": "Strength",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "MoleMole.Config.SetOverrideMapValue",
-              "param3": 0.0,
+              "$type": "SetOverrideMapValue",
+              "value": 0.0,
               "overrideMapKey": "IsCharged",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "MoleMole.Config.AddGlobalValue",
-              "param3": 0.0,
+              "$type": "AddGlobalValue",
+              "value": 0.0,
               "key": "_ABILITY_Qin_VortexSmash_IsCharged",
               "useLimitRange": true,
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "target": "AllPlayerAvatars",
               "modifierName": "Reject_Push"
             }
@@ -402,42 +402,42 @@
         },
         "Charging": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.15000000596046448,
           "onRemoved": [
             {
-              "$type": "MoleMole.Config.AvatarSkillStart",
+              "$type": "AvatarSkillStart",
               "predicates": [
                 {
-                  "$type": "GOKKOCICPNK",
+                  "$type": "BySkillReady",
                   "skillID": 10033
                 }
               ],
               "skillID": 10033,
-              "amountByTargetCurrentHPRatio": 1.0,
+              "cdRatio": 1.0,
               "costStaminaRatio": 1.0
             }
           ],
           "onThinkInterval": [
             {
-              "$type": "MoleMole.Config.TriggerAttackEvent",
+              "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "ABLEKHNLCEE",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "POAPJOHEDDM",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "AOFNOGLCGMP": 0.0,
-                      "CHEGDAPFFHA": 0.0,
-                      "JEGKAACFHJK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "attachPointName": "FocusAnchor"
                   },
                   "size": {
-                    "AOFNOGLCGMP": 2.0,
-                    "CHEGDAPFFHA": 2.0,
-                    "JEGKAACFHJK": 2.5
+                    "x": 2.0,
+                    "y": 2.0,
+                    "z": 2.5
                   }
                 },
                 "attackInfo": {
@@ -445,10 +445,10 @@
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "AGMNCBAKCEF": 0.0,
-                    "AILJJDMKONE": 0.0,
-                    "bonusCriticalHurt": 50.0,
-                    "enBreak": 0.0,
+                    "damagePercentage": 0.0,
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 50.0,
+                    "damage": 0.0,
                     "bonusCritical": 0.0
                   },
                   "hitPattern": {
@@ -463,10 +463,10 @@
         },
         "Focus": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AvatarEnterFocus",
+              "$type": "AvatarEnterFocus",
               "cameraFollowLower": {
                 "x": 0.5,
                 "z": -2.5
@@ -490,40 +490,40 @@
           ],
           "onRemoved": [
             {
-              "$type": "MoleMole.Config.AvatarExitFocus",
+              "$type": "AvatarExitFocus",
               "keepRotation": true
             }
           ]
         },
         "Charging_Wind": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 1.0,
           "modifierMixins": [
             {
-              "$type": "MoleMole.Config.WindZoneMixin",
+              "$type": "WindZoneMixin",
               "shapeName": "CircleR10",
               "born": {
-                "$type": "POAPJOHEDDM",
+                "$type": "ConfigBornByAttachPoint",
                 "offset": {
-                  "AOFNOGLCGMP": 0.4000000059604645,
-                  "CHEGDAPFFHA": 0.0,
-                  "JEGKAACFHJK": 1.7999999523162842
+                  "x": 0.4000000059604645,
+                  "y": 0.0,
+                  "z": 1.7999999523162842
                 },
                 "attachPointName": "FocusAnchor"
               },
               "strength": "Strength",
-              "IMCHCGEMGNL": "Attenuation",
-              "BKCGFGDBNGH": 0.0,
+              "attenuation": "Attenuation",
+              "innerRadius": 0.0,
               "targetType": "All",
               "predicates": [
                 {
-                  "$type": "COJEAIPOLAE",
+                  "$type": "ByTargetWeight",
                   "logic": "LesserOrEqual",
-                  "GMNIOIPEFOM": 150.0
+                  "weight": 150.0
                 },
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ],
@@ -533,19 +533,19 @@
               "modifierName": ""
             },
             {
-              "$type": "MoleMole.Config.CostStaminaMixin",
+              "$type": "CostStaminaMixin",
               "costStaminaDelta": "StaminaCost",
               "onStaminaEmpty": [
                 {
-                  "$type": "MoleMole.Config.SetAnimatorTrigger",
-                  "value": "EndHoldTrigger"
+                  "$type": "SetAnimatorTrigger",
+                  "triggerID": "EndHoldTrigger"
                 }
               ]
             },
             {
-              "$type": "MoleMole.Config.AttachModifierToSelfGlobalValueMixin",
+              "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_Qin_VortexSmash_IsCharged",
-              "gvInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -0.5,
                 0.5,
@@ -560,24 +560,24 @@
           ],
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AttachModifier",
+              "$type": "AttachModifier",
               "predicates": [
                 {
-                  "$type": "NLIKFFFNMCO",
+                  "$type": "ByUnlockTalentParam",
                   "talentParam": "Stronger_VortexSmash"
                 }
               ],
               "modifierName": "VortexSmash_TalentTimer"
             },
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "target": "AllPlayerAvatars",
               "modifierName": "Reject_Push"
             }
           ],
           "onThinkInterval": [
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "target": "AllPlayerAvatars",
               "modifierName": "Reject_Push"
             }
@@ -585,36 +585,36 @@
         },
         "VortexSmash_TalentTimer": {
           "modifierName": "",
-          "elementDurability": 1.0499999523162842,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.0499999523162842,
+          "elementDurability": 100.0,
           "thinkInterval": 1.0,
           "onRemoved": [
             {
-              "$type": "MoleMole.Config.RemoveModifier",
+              "$type": "RemoveModifier",
               "modifierName": "Effect_Control1"
             }
           ],
           "onThinkInterval": [
             {
-              "$type": "MoleMole.Config.SetOverrideMapValue",
-              "param3": 4.0,
+              "$type": "SetOverrideMapValue",
+              "value": 4.0,
               "overrideMapKey": "Strength",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "MoleMole.Config.AddGlobalValue",
-              "param3": 1.0,
+              "$type": "AddGlobalValue",
+              "value": 1.0,
               "key": "_ABILITY_Qin_VortexSmash_IsCharged",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "MoleMole.Config.SetOverrideMapValue",
-              "param3": 1.0,
+              "$type": "SetOverrideMapValue",
+              "value": 1.0,
               "overrideMapKey": "IsCharged",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
               "$type": "MoleMole.Config.ActCameraShake",
@@ -632,59 +632,59 @@
         },
         "Effect_Control1": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AttachEffect",
-              "rotationDampTime": "Eff_Avatar_VortexSmash_Charge_01",
-              "NHGDGLICLFB": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_VortexSmash_Charge_01",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Effect_Control2": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AttachEffect",
-              "rotationDampTime": "Eff_Avatar_VortexSmash_Charge_02",
-              "NHGDGLICLFB": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_VortexSmash_Charge_02",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Reject_Push": {
           "modifierName": "",
-          "elementDurability": 2.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 2.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "MoleMole.Config.RejectAttackMixin",
+              "$type": "RejectAttackMixin",
               "attackTag": "Qin_VortexSmash"
             }
           ]
         },
         "Drag": {
           "modifierName": "",
-          "elementDurability": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
+          "elementDurability": 100.0,
           "state": "Struggle"
         },
         "DetectAttackLanded": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "target": "Target",
               "predicates": [
                 {
-                  "$type": "IPJIAJLNIKC",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ],
@@ -694,22 +694,22 @@
               "modifierName": "Collision"
             },
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "target": "Target",
               "predicates": [
                 {
-                  "$type": "IPJIAJLNIKC",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "VortexSmash_Detect"
                   ]
                 },
                 {
-                  "$type": "COJEAIPOLAE",
+                  "$type": "ByTargetWeight",
                   "logic": "LesserOrEqual",
-                  "GMNIOIPEFOM": 100.0
+                  "weight": 100.0
                 },
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ],
@@ -719,22 +719,22 @@
               "modifierName": "Drag"
             },
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "target": "Target",
               "predicates": [
                 {
-                  "$type": "IPJIAJLNIKC",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "VortexSmash_Detect_Short"
                   ]
                 },
                 {
-                  "$type": "COJEAIPOLAE",
+                  "$type": "ByTargetWeight",
                   "logic": "LesserOrEqual",
-                  "GMNIOIPEFOM": 100.0
+                  "weight": 100.0
                 },
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ],
@@ -747,7 +747,7 @@
         },
         "Collision": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "MoleMole.Config.VelocityDetectMixin",
@@ -755,7 +755,7 @@
               "maxSpeed": 1.0,
               "onNegedge": [
                 {
-                  "$type": "MoleMole.Config.RemoveModifier",
+                  "$type": "RemoveModifier",
                   "modifierName": "Collision"
                 }
               ]
@@ -763,62 +763,62 @@
           ],
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AttachEffect",
-              "rotationDampTime": "Eff_Avatar_VortexSmash_Trail01",
-              "NHGDGLICLFB": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_VortexSmash_Trail01",
+              "effectTempleteID": -1.0
             }
           ],
           "onCrash": [
             {
-              "$type": "MoleMole.Config.RemoveModifier",
+              "$type": "RemoveModifier",
               "modifierName": "Collision"
             }
           ]
         },
         "GenerateElemBall_VortexSmash": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
-              "$type": "MoleMole.Config.Predicated",
+              "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "IPJIAJLNIKC",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "POOFKGMBLNA",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "param3": 0.0,
+                  "value": 0.0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
-                  "$type": "MoleMole.Config.RemoveModifier",
+                  "$type": "RemoveModifier",
                   "target": "Target",
                   "modifierName": "Drag"
                 },
                 {
-                  "$type": "MoleMole.Config.RemoveModifier",
+                  "$type": "RemoveModifier",
                   "target": "Target",
                   "modifierName": "Drag2"
                 },
                 {
-                  "$type": "MoleMole.Config.ApplyModifier",
+                  "$type": "ApplyModifier",
                   "modifierName": "Ball"
                 },
                 {
-                  "$type": "MoleMole.Config.ApplyModifier",
+                  "$type": "ApplyModifier",
                   "modifierName": "Ball_Extra"
                 }
               ]
@@ -828,25 +828,25 @@
         "Ball": {
           "stacking": "Unique",
           "modifierName": "",
-          "elementDurability": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.30000001192092896,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.Randomed",
+              "$type": "Randomed",
               "chance": 1.0,
               "successActions": [
                 {
-                  "$type": "MoleMole.Config.GenerateElemBall",
+                  "$type": "GenerateElemBall",
                   "configID": 2021,
                   "born": {
-                    "$type": "CGJIFGJJOJA",
+                    "$type": "ConfigBornByTarget",
                     "offset": {
-                      "AOFNOGLCGMP": 0.0,
-                      "CHEGDAPFFHA": 0.0,
-                      "JEGKAACFHJK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
                   },
-                  "hpRatio": "GetElementRatio",
+                  "ratio": "GetElementRatio",
                   "baseEnergy": 6.0
                 }
               ]
@@ -856,25 +856,25 @@
         "Ball_Extra": {
           "stacking": "Unique",
           "modifierName": "",
-          "elementDurability": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.Randomed",
+              "$type": "Randomed",
               "chance": 0.6700000166893005,
               "successActions": [
                 {
-                  "$type": "MoleMole.Config.GenerateElemBall",
+                  "$type": "GenerateElemBall",
                   "configID": 2021,
                   "born": {
-                    "$type": "CGJIFGJJOJA",
+                    "$type": "ConfigBornByTarget",
                     "offset": {
-                      "AOFNOGLCGMP": 0.0,
-                      "CHEGDAPFFHA": 0.0,
-                      "JEGKAACFHJK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
                   },
-                  "hpRatio": "GetElementRatio",
+                  "ratio": "GetElementRatio",
                   "baseEnergy": 3.0
                 }
               ]
@@ -883,38 +883,38 @@
         },
         "Drag2": {
           "modifierName": "",
-          "elementDurability": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.20000000298023224,
+          "elementDurability": 100.0,
           "state": "Struggle"
         },
         "Before_VortexSmash": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "target": "AllPlayerAvatars",
               "modifierName": "Reject_Push"
             },
             {
-              "$type": "MoleMole.Config.TriggerAttackEvent",
+              "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "ABLEKHNLCEE",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "POAPJOHEDDM",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "AOFNOGLCGMP": 0.0,
-                      "CHEGDAPFFHA": 0.0,
-                      "JEGKAACFHJK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "attachPointName": "FocusAnchor"
                   },
                   "size": {
-                    "AOFNOGLCGMP": 2.0,
-                    "CHEGDAPFFHA": 2.0,
-                    "JEGKAACFHJK": 2.5
+                    "x": 2.0,
+                    "y": 2.0,
+                    "z": 2.5
                   }
                 },
                 "attackInfo": {
@@ -922,10 +922,10 @@
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "AGMNCBAKCEF": 0.0,
-                    "AILJJDMKONE": 0.0,
-                    "bonusCriticalHurt": 50.0,
-                    "enBreak": 0.0,
+                    "damagePercentage": 0.0,
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 50.0,
+                    "damage": 0.0,
                     "bonusCritical": 0.0
                   },
                   "hitPattern": {
@@ -941,42 +941,42 @@
       },
       "onAdded": [
         {
-          "$type": "MoleMole.Config.AttachModifier",
+          "$type": "AttachModifier",
           "modifierName": "GenerateElemBall_VortexSmash"
         }
       ],
       "onAbilityStart": [
         {
-          "$type": "MoleMole.Config.AvatarSkillStart",
+          "$type": "AvatarSkillStart",
           "predicates": [
             {
-              "$type": "GOKKOCICPNK",
+              "$type": "BySkillReady",
               "skillID": 10033
             }
           ],
           "skillID": 10033,
-          "amountByTargetCurrentHPRatio": 1.0,
+          "cdRatio": 1.0,
           "costStaminaRatio": 1.0
         },
         {
-          "$type": "MoleMole.Config.TriggerAttackEvent",
+          "$type": "TriggerAttackEvent",
           "attackEvent": {
             "attackPattern": {
-              "$type": "ABLEKHNLCEE",
+              "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "POAPJOHEDDM",
+                "$type": "ConfigBornByAttachPoint",
                 "offset": {
-                  "AOFNOGLCGMP": 0.0,
-                  "CHEGDAPFFHA": 0.4000000059604645,
-                  "JEGKAACFHJK": 0.0
+                  "x": 0.0,
+                  "y": 0.4000000059604645,
+                  "z": 0.0
                 },
                 "attachPointName": "FocusAnchor"
               },
               "size": {
-                "AOFNOGLCGMP": 4.0,
-                "CHEGDAPFFHA": 2.4000000953674316,
-                "JEGKAACFHJK": 4.099999904632568
+                "x": 4.0,
+                "y": 2.4000000953674316,
+                "z": 4.099999904632568
               }
             },
             "attackInfo": {
@@ -984,12 +984,12 @@
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "AGMNCBAKCEF": "Art_DMG",
-                "AILJJDMKONE": 0.0,
+                "damagePercentage": "Art_DMG",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Wind",
-                "bonusCriticalHurt": 50.0,
+                "elementDurability": 50.0,
                 "strikeType": "Default",
-                "enBreak": 250.0,
+                "damage": 250.0,
                 "attackType": "Melee",
                 "bonusCritical": 0.0
               },
@@ -1004,24 +1004,24 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "MoleMole.Config.TriggerAttackEvent",
+          "$type": "TriggerAttackEvent",
           "attackEvent": {
             "attackPattern": {
-              "$type": "ABLEKHNLCEE",
+              "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "POAPJOHEDDM",
+                "$type": "ConfigBornByAttachPoint",
                 "offset": {
-                  "AOFNOGLCGMP": 0.0,
-                  "CHEGDAPFFHA": 0.4000000059604645,
-                  "JEGKAACFHJK": 0.6000000238418579
+                  "x": 0.0,
+                  "y": 0.4000000059604645,
+                  "z": 0.6000000238418579
                 },
                 "attachPointName": "FocusAnchor"
               },
               "size": {
-                "AOFNOGLCGMP": 4.0,
-                "CHEGDAPFFHA": 2.4000000953674316,
-                "JEGKAACFHJK": 3.5
+                "x": 4.0,
+                "y": 2.4000000953674316,
+                "z": 3.5
               }
             },
             "attackInfo": {
@@ -1029,11 +1029,11 @@
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "AGMNCBAKCEF": 0.0,
-                "AILJJDMKONE": 0.0,
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 0.0,
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 50.0,
                 "strikeType": "Default",
-                "enBreak": 250.0,
+                "damage": 250.0,
                 "attackType": "Melee",
                 "bonusCritical": 0.0
               },
@@ -1068,11 +1068,11 @@
   },
   {
     "Default": {
-      "$type": "MoleMole.Config.ConfigAbility",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_DandelionWind_Camera",
       "abilityMixins": [
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "DandelionWind"
           ],
@@ -1080,7 +1080,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "DandelionWind"
           ],
@@ -1088,7 +1088,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "DandelionWind",
             "DandelionWind_Out"
@@ -1097,7 +1097,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "DandelionWind",
             "DandelionWind_Out"
@@ -1106,7 +1106,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToNormalizedTimeMixin",
+          "$type": "AttachToNormalizedTimeMixin",
           "stateID": "DandelionWind",
           "modifierName": "SetEmission",
           "normalizeStart": 0.1599999964237213,
@@ -1117,34 +1117,34 @@
       "modifiers": {
         "isGhost": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AttachAbilityStateResistance",
+              "$type": "AttachAbilityStateResistance",
               "resistanceListID": 11002
             }
           ]
         },
         "Tornado_Eff": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "MoleMole.Config.WindZoneMixin",
+              "$type": "WindZoneMixin",
               "shapeName": "CircleR2",
               "strength": -2.0,
-              "IMCHCGEMGNL": 0.0,
-              "BKCGFGDBNGH": 0.0,
+              "attenuation": 0.0,
+              "innerRadius": 0.0,
               "targetType": "All",
               "predicates": [
                 {
-                  "$type": "COJEAIPOLAE",
+                  "$type": "ByTargetWeight",
                   "logic": "LesserOrEqual",
-                  "GMNIOIPEFOM": 150.0
+                  "weight": 150.0
                 },
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ],
@@ -1156,19 +1156,19 @@
           ],
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AttachEffect",
-              "rotationDampTime": "Eff_Qin_DandelionWind_SurroundWind",
-              "NHGDGLICLFB": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Qin_DandelionWind_SurroundWind",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "DandelionWind_Camera_Handler_1": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "MoleMole.Config.TriggerWeatherMixin",
-              "damageRatio": "Skill",
+              "$type": "TriggerWeatherMixin",
+              "type": "Skill",
               "weatherPattern": "Weather_Default_SkillPreset",
               "transDuration": 0.30000001192092896,
               "duration": 0.9900000095367432
@@ -1186,37 +1186,37 @@
             {
               "$type": "MoleMole.Config.SetEmissionScaler",
               "materialType": "Weapon",
-              "value": -1.0,
+              "triggerID": -1.0,
               "duration": 0.30000001192092896
             },
             {
               "$type": "MoleMole.Config.ControlEmotion",
-              "temperature": true
+              "doOffStage": true
             }
           ],
           "onAvatarOut": [
             {
               "$type": "MoleMole.Config.SetEmissionScaler",
               "materialType": "Weapon",
-              "value": -1.0,
+              "triggerID": -1.0,
               "duration": 0.30000001192092896
             },
             {
               "$type": "MoleMole.Config.ControlEmotion",
-              "temperature": true
+              "doOffStage": true
             }
           ]
         },
         "DandelionWind_Camera_Handler_2": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
-              "$type": "MoleMole.Config.AvatarExitCameraShot",
-              "temperature": true
+              "$type": "AvatarExitCameraShot",
+              "doOffStage": true
             },
             {
-              "$type": "MoleMole.Config.AvatarCameraParam",
+              "$type": "AvatarCameraParam",
               "cameraParam": {
                 "forceRadius": 6.0,
                 "forceRadiusDuration": 0.6000000238418579,
@@ -1226,12 +1226,12 @@
           ],
           "onAvatarOut": [
             {
-              "$type": "MoleMole.Config.AvatarExitCameraShot",
-              "temperature": true
+              "$type": "AvatarExitCameraShot",
+              "doOffStage": true
             },
             {
-              "$type": "MoleMole.Config.AvatarCameraParam",
-              "temperature": true,
+              "$type": "AvatarCameraParam",
+              "doOffStage": true,
               "cameraParam": {
                 "forceRadius": 6.0,
                 "forceRadiusDuration": 0.6000000238418579,
@@ -1242,12 +1242,12 @@
         },
         "SetEmission": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "MoleMole.Config.SetEmissionScaler",
               "materialType": "Weapon",
-              "value": 15.0,
+              "triggerID": 15.0,
               "duration": 0.30000001192092896
             }
           ],
@@ -1255,7 +1255,7 @@
             {
               "$type": "MoleMole.Config.SetEmissionScaler",
               "materialType": "Weapon",
-              "value": -1.0,
+              "triggerID": -1.0,
               "duration": 0.6000000238418579
             }
           ]
@@ -1266,21 +1266,21 @@
           "$type": "MoleMole.Config.AvatarEnterCameraShot",
           "predicates": [
             {
-              "$type": "FKOJCIJGMCF",
+              "$type": "ByAttackNotHitScene",
               "attackPattern": {
-                "$type": "ABPNLDBPPHF",
+                "$type": "ConfigAttackCircle",
                 "triggerType": "TriggerNoRepeat",
                 "born": {
-                  "$type": "AHBFOPDDMPB",
+                  "$type": "ConfigBornBySelf",
                   "offset": {
-                    "AOFNOGLCGMP": 0.0,
-                    "CHEGDAPFFHA": 1.2000000476837158,
-                    "JEGKAACFHJK": 0.0
+                    "x": 0.0,
+                    "y": 1.2000000476837158,
+                    "z": 0.0
                   }
                 },
                 "height": 0.20000000298023224,
                 "fanAngle": 30.0,
-                "IDLDJCPGNHD": 0.800000011920929
+                "radius": 0.800000011920929
               }
             },
             {
@@ -1296,7 +1296,7 @@
   },
   {
     "Default": {
-      "$type": "MoleMole.Config.ConfigAbility",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_DandelionWind",
       "abilitySpecials": {
         "Rate": 0.0,
@@ -1305,13 +1305,13 @@
       "modifiers": {
         "RestorEnergy": {
           "modifierName": "",
-          "elementDurability": 0.15000000596046448,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.15000000596046448,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.ReviveElemEnergy",
-              "temperature": true,
-              "param3": [
+              "$type": "ReviveElemEnergy",
+              "doOffStage": true,
+              "value": [
                 "Rate",
                 "ReviveElemEnergyRatio",
                 "MUL"
@@ -1322,19 +1322,19 @@
       },
       "onAbilityStart": [
         {
-          "$type": "MoleMole.Config.AvatarSkillStart",
+          "$type": "AvatarSkillStart",
           "skillID": 10034,
-          "amountByTargetCurrentHPRatio": 1.0,
+          "cdRatio": 1.0,
           "costStaminaRatio": 1.0
         },
         {
-          "$type": "MoleMole.Config.CreateGadget",
+          "$type": "CreateGadget",
           "born": {
-            "$type": "CGJIFGJJOJA",
+            "$type": "ConfigBornByTarget",
             "offset": {
-              "AOFNOGLCGMP": 0.0,
-              "CHEGDAPFFHA": 0.0,
-              "JEGKAACFHJK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             }
           },
           "gadgetID": 41003004,
@@ -1342,13 +1342,13 @@
           "campTargetType": "Alliance"
         },
         {
-          "$type": "MoleMole.Config.CreateGadget",
+          "$type": "CreateGadget",
           "born": {
-            "$type": "CGJIFGJJOJA",
+            "$type": "ConfigBornByTarget",
             "offset": {
-              "AOFNOGLCGMP": 0.0,
-              "CHEGDAPFFHA": 0.0,
-              "JEGKAACFHJK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             }
           },
           "gadgetID": 41003005,
@@ -1356,10 +1356,10 @@
           "campTargetType": "Enemy"
         },
         {
-          "$type": "MoleMole.Config.ApplyModifier",
+          "$type": "ApplyModifier",
           "predicates": [
             {
-              "$type": "NLIKFFFNMCO",
+              "$type": "ByUnlockTalentParam",
               "talentParam": "RestoreEnergy"
             }
           ],
@@ -1370,7 +1370,7 @@
   },
   {
     "Default": {
-      "$type": "MoleMole.Config.ConfigAbility",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_DandelionWind_Heal",
       "abilitySpecials": {
         "BurstHeal": 0.0,
@@ -1383,68 +1383,68 @@
       "modifiers": {
         "DandelionWind_Field": {
           "modifierName": "",
-          "elementDurability": 10.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 10.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AttachEffect",
-              "rotationDampTime": "Eff_Qin_DandelionWind",
-              "NHGDGLICLFB": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Qin_DandelionWind",
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "MoleMole.Config.HealHP",
+              "$type": "HealHP",
               "target": "AllPlayerAvatars",
               "predicates": [
                 {
-                  "$type": "CBCDFBOOFDC",
+                  "$type": "ByTargetPositionToSelfPosition",
                   "logic": "LesserOrEqual",
-                  "param3": 40.0,
+                  "value": 40.0,
                   "PHMALDNHHLD": ""
                 }
               ],
-              "LKDJMGOJHAH": "BurstHealConst",
-              "KECHKKGGAPF": "BurstHeal",
+              "amount": "BurstHealConst",
+              "amountByCasterAttackRatio": "BurstHeal",
               "cdRatio": ""
             },
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "AFOOPHMLCCL",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
                 "campTargetType": "Alliance",
-                "doOffStage": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
                 },
                 {
-                  "$type": "NLIKFFFNMCO",
+                  "$type": "ByUnlockTalentParam",
                   "talentParam": "WindShield"
                 }
               ],
               "modifierName": "Qin_Talent_WindShieldNumSet"
             },
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "AFOOPHMLCCL",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
                 "campTargetType": "Alliance",
-                "doOffStage": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
                 },
                 {
-                  "$type": "NLIKFFFNMCO",
+                  "$type": "ByUnlockTalentParam",
                   "target": "Owner",
                   "talentParam": "WindShield"
                 }
@@ -1452,22 +1452,22 @@
               "modifierName": "UNIQUE_Talent_WindShield"
             },
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "AFOOPHMLCCL",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
                 "campTargetType": "Enemy",
-                "doOffStage": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "NLIKFFFNMCO",
+                  "$type": "ByUnlockTalentParam",
                   "target": "Owner",
                   "talentParam": "WindPressure"
                 }
@@ -1478,107 +1478,107 @@
         },
         "Qin_Talent_WindShieldNumSet": {
           "modifierName": "",
-          "elementDurability": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.10000000149011612,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AddGlobalValue",
-              "temperature": true,
-              "param3": 3.0,
+              "$type": "AddGlobalValue",
+              "doOffStage": true,
+              "value": 3.0,
               "key": "_ABILITY_QinWindShield_COUNT",
               "useLimitRange": true,
-              "param2": 3.0,
-              "triggerID": 3.0
+              "maxValue": 3.0,
+              "minValue": 3.0
             }
           ]
         },
         "DandelionWind_Buff": {
           "modifierName": "",
-          "elementDurability": 10.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 10.5,
+          "elementDurability": 100.0,
           "thinkInterval": 1.0,
           "onThinkInterval": [
             {
-              "$type": "MoleMole.Config.HealHP",
+              "$type": "HealHP",
               "otherTargets": {
-                "$type": "AFOOPHMLCCL",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
                 "campTargetType": "Alliance",
-                "doOffStage": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
                 }
               ],
-              "LKDJMGOJHAH": "HealConst",
-              "KECHKKGGAPF": "Heal",
+              "amount": "HealConst",
+              "amountByCasterAttackRatio": "Heal",
               "cdRatio": ""
             },
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "AFOOPHMLCCL",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
                 "campTargetType": "Alliance",
-                "doOffStage": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
                 },
                 {
-                  "$type": "NLIKFFFNMCO",
+                  "$type": "ByUnlockTalentParam",
                   "talentParam": "WindShield"
                 }
               ],
               "modifierName": "UNIQUE_Talent_WindShield"
             },
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "AFOOPHMLCCL",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
                 "campTargetType": "Alliance",
-                "doOffStage": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
                 },
                 {
-                  "$type": "NLIKFFFNMCO",
+                  "$type": "ByUnlockTalentParam",
                   "talentParam": "WindShield"
                 }
               ],
               "modifierName": "Qin_Talent_WindShieldNumSet"
             },
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "AFOOPHMLCCL",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
                 "campTargetType": "Enemy",
-                "doOffStage": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "NLIKFFFNMCO",
+                  "$type": "ByUnlockTalentParam",
                   "target": "Owner",
                   "talentParam": "WindPressure"
                 }
@@ -1586,16 +1586,16 @@
               "modifierName": "UNIQUE_Qin_Talent_WindDown"
             },
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "AFOOPHMLCCL",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
                 "campTargetType": "Alliance",
-                "doOffStage": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
@@ -1608,8 +1608,8 @@
         "UNIQUE_Qin_Talent_WindDown": {
           "modifierName": "",
           "isUnique": true,
-          "elementDurability": 1.2000000476837158,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.2000000476837158,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_WindSubHurtDelta": "WindHurt"
           },
@@ -1619,19 +1619,19 @@
         "UNIQUE_DandelionWind_Buff_WindBuff": {
           "modifierName": "",
           "isUnique": true,
-          "elementDurability": 0.20000000298023224,
+          "duration": 0.20000000298023224,
           "elementType": "Wind",
-          "bonusCriticalHurt": 25.0
+          "elementDurability": 25.0
         },
         "UNIQUE_Talent_WindShield_Timer": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "MoleMole.Config.AttachModifierToSelfGlobalValueMixin",
+              "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_QinWindShield_COUNT",
-              "gvInTalk": 3.0,
+              "defaultGlobalValueOnCreate": 3.0,
               "valueSteps": [
                 -100.0,
                 0.5,
@@ -1649,25 +1649,25 @@
           ],
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AttachEffect",
-              "rotationDampTime": "Eff_Avatar_Lady_Sword_Qin_TalentShield",
-              "NHGDGLICLFB": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Lady_Sword_Qin_TalentShield",
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "MoleMole.Config.SetGlobalValue",
-              "temperature": true,
-              "param3": 4.0,
+              "$type": "SetGlobalValue",
+              "doOffStage": true,
+              "value": 4.0,
               "key": "_ABILITY_QinWindShield_COUNT",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "MoleMole.Config.SetGlobalValue",
-              "temperature": true,
-              "param3": 3.0,
+              "$type": "SetGlobalValue",
+              "doOffStage": true,
+              "value": 3.0,
               "key": "_ABILITY_QinWindShield_COUNT",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         },
@@ -1675,122 +1675,122 @@
           "stacking": "RefreshUniqueDurability",
           "modifierName": "",
           "isUnique": true,
-          "elementDurability": 10.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 10.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "modifierName": "UNIQUE_Talent_WindShield_Timer"
             }
           ],
           "onRemoved": [
             {
-              "$type": "MoleMole.Config.AddGlobalValue",
-              "temperature": true,
-              "param3": -3.0,
+              "$type": "AddGlobalValue",
+              "doOffStage": true,
+              "value": -3.0,
               "key": "_ABILITY_QinWindShield_COUNT",
               "useLimitRange": true,
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ],
           "onBeingHit": [
             {
-              "$type": "MoleMole.Config.AddGlobalValue",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CCPPBGKEJBP",
-                  "enBreak": 0.0
+                  "$type": "ByHitDamage",
+                  "damage": 0.0
                 }
               ],
-              "param3": -1.0,
+              "value": -1.0,
               "key": "_ABILITY_QinWindShield_COUNT",
               "useLimitRange": true,
-              "param2": 3.0,
-              "triggerID": 0.0
+              "maxValue": 3.0,
+              "minValue": 0.0
             }
           ],
           "onKill": [
             {
-              "$type": "MoleMole.Config.AddGlobalValue",
-              "temperature": true,
-              "param3": -3.0,
+              "$type": "AddGlobalValue",
+              "doOffStage": true,
+              "value": -3.0,
               "key": "_ABILITY_QinWindShield_COUNT",
               "useLimitRange": true,
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         },
         "None": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.4000000059604645,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.SendEffectTrigger",
+              "$type": "SendEffectTrigger",
               "parameter": "Level_0",
               "attachPoint": "",
-              "rotationDampTime": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
+              "effectPattern": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
             }
           ],
           "onThinkInterval": [
             {
-              "$type": "MoleMole.Config.RemoveUniqueModifier",
-              "temperature": true,
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": true,
               "modifierName": "UNIQUE_Talent_WindShield"
             },
             {
-              "$type": "MoleMole.Config.RemoveUniqueModifier",
-              "temperature": true,
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": true,
               "modifierName": "UNIQUE_Talent_WindShield_Timer"
             }
           ]
         },
         "eff_1": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_SubHurtDelta": "LessHurt"
           },
           "onAdded": [
             {
-              "$type": "MoleMole.Config.SendEffectTrigger",
+              "$type": "SendEffectTrigger",
               "parameter": "Level_1",
               "attachPoint": "",
-              "rotationDampTime": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
+              "effectPattern": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
             }
           ],
           "isLimitedProperties": true
         },
         "eff_2": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_SubHurtDelta": "LessHurt"
           },
           "onAdded": [
             {
-              "$type": "MoleMole.Config.SendEffectTrigger",
+              "$type": "SendEffectTrigger",
               "parameter": "Level_2",
               "attachPoint": "",
-              "rotationDampTime": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
+              "effectPattern": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
             }
           ],
           "isLimitedProperties": true
         },
         "eff_3": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_SubHurtDelta": "LessHurt"
           },
           "onAdded": [
             {
-              "$type": "MoleMole.Config.SendEffectTrigger",
+              "$type": "SendEffectTrigger",
               "parameter": "Level_3",
               "attachPoint": "",
-              "rotationDampTime": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
+              "effectPattern": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
             }
           ],
           "isLimitedProperties": true
@@ -1798,11 +1798,11 @@
       },
       "onAdded": [
         {
-          "$type": "MoleMole.Config.AttachModifier",
+          "$type": "AttachModifier",
           "modifierName": "DandelionWind_Buff"
         },
         {
-          "$type": "MoleMole.Config.AttachModifier",
+          "$type": "AttachModifier",
           "modifierName": "DandelionWind_Field"
         }
       ]
@@ -1810,7 +1810,7 @@
   },
   {
     "Default": {
-      "$type": "MoleMole.Config.ConfigAbility",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_DandelionWind_Harm",
       "abilitySpecials": {
         "InOutHarm": 0.0,
@@ -1820,17 +1820,17 @@
         "Avatar_Qin_DandelionWind_Harm_FieldDamage": {
           "stacking": "Unique",
           "modifierName": "",
-          "elementDurability": "interval",
-          "bonusCriticalHurt": 100.0,
+          "duration": "interval",
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.DamageByAttackValue",
+              "$type": "DamageByAttackValue",
               "born": {
-                "$type": "CGJIFGJJOJA",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "AOFNOGLCGMP": 0.0,
-                  "CHEGDAPFFHA": 1.0,
-                  "JEGKAACFHJK": 0.0
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 0.0
                 }
               },
               "attackInfo": {
@@ -1838,13 +1838,13 @@
                 "attenuationTag": "",
                 "attenuationGroup": "default",
                 "attackProperty": {
-                  "AGMNCBAKCEF": "InOutHarm",
-                  "AILJJDMKONE": 0.0,
+                  "damagePercentage": "InOutHarm",
+                  "damagePercentageRatio": 0.0,
                   "elementType": "Wind",
                   "elementRank": 3.0,
-                  "bonusCriticalHurt": 50.0,
+                  "elementDurability": 50.0,
                   "strikeType": "Default",
-                  "enBreak": 50.0,
+                  "damage": 50.0,
                   "bonusCritical": 0.0
                 },
                 "hitPattern": {
@@ -1860,11 +1860,11 @@
       },
       "onFieldEnter": [
         {
-          "$type": "MoleMole.Config.ApplyModifier",
+          "$type": "ApplyModifier",
           "target": "Target",
           "predicates": [
             {
-              "$type": "BBBFIPNGHGH",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Monster"
               ]
@@ -1875,11 +1875,11 @@
       ],
       "onFieldExit": [
         {
-          "$type": "MoleMole.Config.ApplyModifier",
+          "$type": "ApplyModifier",
           "target": "Target",
           "predicates": [
             {
-              "$type": "BBBFIPNGHGH",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Monster"
               ]
@@ -1892,40 +1892,40 @@
   },
   {
     "Default": {
-      "$type": "MoleMole.Config.ConfigAbility",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_DandelionWind_Push",
       "abilitySpecials": {
         "Burst_DMG": 0.0
       },
       "onAbilityStart": [
         {
-          "$type": "MoleMole.Config.TriggerAttackEvent",
+          "$type": "TriggerAttackEvent",
           "attackEvent": {
             "attackPattern": {
-              "$type": "ABPNLDBPPHF",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "AHBFOPDDMPB",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "AOFNOGLCGMP": 0.0,
-                  "CHEGDAPFFHA": 0.0,
-                  "JEGKAACFHJK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
               },
-              "IDLDJCPGNHD": 6.0
+              "radius": 6.0
             },
             "attackInfo": {
               "attackTag": "Elemental_Burst",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "AGMNCBAKCEF": "Burst_DMG",
-                "AILJJDMKONE": 0.0,
+                "damagePercentage": "Burst_DMG",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Wind",
                 "elementRank": 3.0,
-                "bonusCriticalHurt": 50.0,
+                "elementDurability": 50.0,
                 "strikeType": "Default",
-                "enBreak": 400.0,
+                "damage": 400.0,
                 "bonusCritical": 0.0
               },
               "hitPattern": {
@@ -1959,11 +1959,11 @@
   },
   {
     "Default": {
-      "$type": "MoleMole.Config.ConfigAbility",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_SpeedBlur",
       "abilityMixins": [
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Fly"
           ],
@@ -1974,7 +1974,7 @@
       "modifiers": {
         "Blur": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "MoleMole.Config.ActCameraRadialBlur",
@@ -1985,9 +1985,9 @@
               }
             },
             {
-              "$type": "MoleMole.Config.AttachEffect",
-              "rotationDampTime": "Eff_FlyBlur",
-              "NHGDGLICLFB": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_FlyBlur",
+              "effectTempleteID": -1.0
             }
           ]
         }
@@ -1996,11 +1996,11 @@
   },
   {
     "Default": {
-      "$type": "MoleMole.Config.ConfigAbility",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_HinowaSlash",
       "abilityMixins": [
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "HinowaSlash_Loop"
           ],
@@ -2008,7 +2008,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "HinowaSlash_BS",
             "HinowaSlash_Loop",
@@ -2021,18 +2021,18 @@
       "modifiers": {
         "Loop": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AttachEffect",
-              "rotationDampTime": "Eff_Avatar_HinowaSlash_Loop",
-              "NHGDGLICLFB": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_HinowaSlash_Loop",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Inertia": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "MoleMole.Config.ApplyInertiaVelocityMixin",
@@ -2045,18 +2045,18 @@
   },
   {
     "Default": {
-      "$type": "MoleMole.Config.ConfigAbility",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_GreaterSelfHeal",
       "abilityMixins": [
         {
-          "$type": "MoleMole.Config.AttachModifierToPredicateMixin",
+          "$type": "AttachModifierToPredicateMixin",
           "onEvent": "HP",
           "predicates": [
             {
-              "$type": "JAEEKGKDNDI",
+              "$type": "ByTargetHPRatio",
               "target": "Self",
               "logic": "LesserOrEqual",
-              "ratio": 0.30000001192092896
+              "HPRatio": 0.30000001192092896
             }
           ],
           "modifierName": "HealUp"
@@ -2068,15 +2068,15 @@
       "modifiers": {
         "HealUp": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_HealedAddDelta": "Rate"
           },
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AttachEffect",
-              "rotationDampTime": "Eff_Avatar_Properties_Heal_Up",
-              "NHGDGLICLFB": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Properties_Heal_Up",
+              "effectTempleteID": -1.0
             }
           ]
         }
@@ -2085,7 +2085,7 @@
   },
   {
     "Default": {
-      "$type": "MoleMole.Config.ConfigAbility",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_AttackCritic",
       "abilitySpecials": {
         "Chance": 0.0,
@@ -2095,20 +2095,20 @@
       "modifiers": {
         "Talent_HealTeam_Check": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
-              "$type": "MoleMole.Config.Predicated",
+              "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "BBBFIPNGHGH",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "IPJIAJLNIKC",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "NormalAttack_01",
                     "NormalAttack_02",
@@ -2120,21 +2120,21 @@
               ],
               "successActions": [
                 {
-                  "$type": "MoleMole.Config.Randomed",
+                  "$type": "Randomed",
                   "chance": "Chance",
                   "successActions": [
                     {
-                      "$type": "MoleMole.Config.HealHP",
+                      "$type": "HealHP",
                       "target": "AllPlayerAvatars",
                       "predicates": [
                         {
-                          "$type": "CBCDFBOOFDC",
+                          "$type": "ByTargetPositionToSelfPosition",
                           "logic": "LesserOrEqual",
-                          "param3": 40.0,
+                          "value": 40.0,
                           "PHMALDNHHLD": ""
                         }
                       ],
-                      "KECHKKGGAPF": "HealByAttack",
+                      "amountByCasterAttackRatio": "HealByAttack",
                       "cdRatio": ""
                     }
                   ]
@@ -2146,7 +2146,7 @@
       },
       "onAdded": [
         {
-          "$type": "MoleMole.Config.AttachModifier",
+          "$type": "AttachModifier",
           "modifierName": "Talent_HealTeam_Check"
         }
       ],
@@ -2155,11 +2155,11 @@
   },
   {
     "Default": {
-      "$type": "MoleMole.Config.ConfigAbility",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_TeamSpeedWhenGetElementBall",
       "abilityMixins": [
         {
-          "$type": "MoleMole.Config.DoActionByEnergyChangeMixin",
+          "$type": "DoActionByEnergyChangeMixin",
           "elementTypes": [
             "Fire",
             "Water",
@@ -2172,26 +2172,26 @@
           "doWhenEnergyMax": true,
           "onGainEnergyByBall": [
             {
-              "$type": "MoleMole.Config.RemoveUniqueModifier",
+              "$type": "RemoveUniqueModifier",
               "target": "AllPlayerAvatars",
               "predicates": [
                 {
-                  "$type": "CBCDFBOOFDC",
+                  "$type": "ByTargetPositionToSelfPosition",
                   "logic": "LesserOrEqual",
-                  "param3": 40.0,
+                  "value": 40.0,
                   "PHMALDNHHLD": ""
                 }
               ],
               "modifierName": "UNIQUE_Team_Speed_Up"
             },
             {
-              "$type": "MoleMole.Config.ApplyModifier",
+              "$type": "ApplyModifier",
               "target": "AllPlayerAvatars",
               "predicates": [
                 {
-                  "$type": "CBCDFBOOFDC",
+                  "$type": "ByTargetPositionToSelfPosition",
                   "logic": "LesserOrEqual",
-                  "param3": 40.0,
+                  "value": 40.0,
                   "PHMALDNHHLD": ""
                 }
               ],
@@ -2209,8 +2209,8 @@
         "UNIQUE_Team_Speed_Up": {
           "modifierName": "",
           "isUnique": true,
-          "elementDurability": "Time",
-          "bonusCriticalHurt": 100.0,
+          "duration": "Time",
+          "elementDurability": 100.0,
           "properties": {
             "Animator_MoveSpeedRatio": "Speed",
             "Animator_AttackSpeedRatio": "AtkSpeed"
@@ -2224,56 +2224,56 @@
   },
   {
     "Default": {
-      "$type": "MoleMole.Config.ConfigAbility",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_NormalAttackDamage",
       "abilityMixins": [
         {
-          "$type": "MoleMole.Config.ModifyDamageMixin",
+          "$type": "ModifyDamageMixin",
           "attackTags": [
             "NormalAttack_01"
           ],
-          "AGMNCBAKCEF": "Attack01",
-          "AILJJDMKONE": 0.0
+          "damagePercentage": "Attack01",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "MoleMole.Config.ModifyDamageMixin",
+          "$type": "ModifyDamageMixin",
           "attackTags": [
             "NormalAttack_02"
           ],
-          "AGMNCBAKCEF": "Attack02",
-          "AILJJDMKONE": 0.0
+          "damagePercentage": "Attack02",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "MoleMole.Config.ModifyDamageMixin",
+          "$type": "ModifyDamageMixin",
           "attackTags": [
             "NormalAttack_03"
           ],
-          "AGMNCBAKCEF": "Attack03",
-          "AILJJDMKONE": 0.0
+          "damagePercentage": "Attack03",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "MoleMole.Config.ModifyDamageMixin",
+          "$type": "ModifyDamageMixin",
           "attackTags": [
             "NormalAttack_04"
           ],
-          "AGMNCBAKCEF": "Attack04",
-          "AILJJDMKONE": 0.0
+          "damagePercentage": "Attack04",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "MoleMole.Config.ModifyDamageMixin",
+          "$type": "ModifyDamageMixin",
           "attackTags": [
             "NormalAttack_05"
           ],
-          "AGMNCBAKCEF": "Attack05",
-          "AILJJDMKONE": 0.0
+          "damagePercentage": "Attack05",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "MoleMole.Config.ModifyDamageMixin",
+          "$type": "ModifyDamageMixin",
           "attackTags": [
             "ExtraAttack"
           ],
-          "AGMNCBAKCEF": "ExtraAttack",
-          "AILJJDMKONE": 0.0
+          "damagePercentage": "ExtraAttack",
+          "damagePercentageRatio": 0.0
         }
       ],
       "abilitySpecials": {
@@ -2288,7 +2288,7 @@
   },
   {
     "Default": {
-      "$type": "MoleMole.Config.ConfigAbility",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_AutoDefend",
       "abilityMixins": [
         {
@@ -2317,16 +2317,16 @@
   },
   {
     "Default": {
-      "$type": "MoleMole.Config.ConfigAbility",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_FallingAnthem",
       "abilityMixins": [
         {
-          "$type": "MoleMole.Config.AvatarChangeSkillMixin",
+          "$type": "AvatarChangeSkillMixin",
           "jumpSkillID": 5003010,
           "flySkillID": 5003010
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS"
           ],
@@ -2334,7 +2334,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS"
           ],
@@ -2342,7 +2342,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToAnimatorStateIDMixin",
+          "$type": "AttachToAnimatorStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS_2",
             "FallingAnthem_Loop",
@@ -2352,7 +2352,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS"
           ],
@@ -2360,7 +2360,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop",
@@ -2371,7 +2371,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop",
@@ -2382,7 +2382,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop"
@@ -2391,7 +2391,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop",
@@ -2402,7 +2402,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS"
           ],
@@ -2410,7 +2410,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_AS_1",
             "FallingAnthem_AS_2"
@@ -2419,7 +2419,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop"
@@ -2428,7 +2428,7 @@
           "BILMCNCKIAO": ""
         },
         {
-          "$type": "MoleMole.Config.AttachToAnimatorStateIDMixin",
+          "$type": "AttachToAnimatorStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS_2"
           ],
@@ -2455,19 +2455,19 @@
       "modifiers": {
         "FallingAnthem_AttachWeaponEffect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AttachEffect",
-              "rotationDampTime": "Eff_Avatar_Sword_FallAnthem_Self_01",
-              "NHGDGLICLFB": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Sword_FallAnthem_Self_01",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_CameraRadialBlur": {
           "modifierName": "",
-          "elementDurability": 0.23000000417232513,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.23000000417232513,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "MoleMole.Config.CameraBlurMixin",
@@ -2480,18 +2480,18 @@
         },
         "FallingAnthem_BS_Material": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.FireEffect",
-              "rotationDampTime": "Eff_Avatar_Sword_FallAnthem_BS",
-              "NHGDGLICLFB": -1.0
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Sword_FallAnthem_BS",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_BS_VelocityForce_Initialize": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -2.0
           },
@@ -2506,36 +2506,36 @@
         },
         "FallingAnthem_LoopDamage": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onThinkInterval": [
             {
-              "$type": "MoleMole.Config.TriggerAttackEvent",
+              "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "CDFDJKDFCFJ",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "AHBFOPDDMPB",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "AOFNOGLCGMP": 0.0,
-                      "CHEGDAPFFHA": 0.0,
-                      "JEGKAACFHJK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
                   },
-                  "IDLDJCPGNHD": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "AGMNCBAKCEF": "FallingAnthem_Normal_Loop_Damage",
-                    "AILJJDMKONE": 0.0,
-                    "bonusCriticalHurt": 0.0,
+                    "damagePercentage": "FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 0.0,
                     "overrideByWeapon": true,
                     "strikeType": "Slash",
-                    "enBreak": 25.0,
+                    "damage": 25.0,
                     "attackType": "Melee",
                     "bonusCritical": 0.0
                   },
@@ -2552,134 +2552,134 @@
         },
         "FallingAnthem_FallingDamageImmune_01": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.ClearGlobalValue",
+              "$type": "ClearGlobalValue",
               "key": "_ABILITY_FallingAttack_Altitude"
             },
             {
-              "$type": "MoleMole.Config.AddGlobalValue",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "DJJCDJNJBFE",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "param3": "FallingAnthem_Altitude_Lv0"
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "param3": "FallingAnthem_FallingDamageRatio_Lv0",
+              "value": "FallingAnthem_FallingDamageRatio_Lv0",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv0",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv0"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv0"
             },
             {
-              "$type": "MoleMole.Config.AddGlobalValue",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "DJJCDJNJBFE",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "param3": "FallingAnthem_Altitude_Lv1"
+                  "value": "FallingAnthem_Altitude_Lv1"
                 },
                 {
-                  "$type": "DJJCDJNJBFE",
-                  "param3": "FallingAnthem_Altitude_Lv0"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "param3": "FallingAnthem_FallingDamageRatio_Lv1",
+              "value": "FallingAnthem_FallingDamageRatio_Lv1",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv1",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv1"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv1"
             },
             {
-              "$type": "MoleMole.Config.AddGlobalValue",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "DJJCDJNJBFE",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "param3": "FallingAnthem_Altitude_Lv2"
+                  "value": "FallingAnthem_Altitude_Lv2"
                 },
                 {
-                  "$type": "DJJCDJNJBFE",
-                  "param3": "FallingAnthem_Altitude_Lv1"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv1"
                 }
               ],
-              "param3": "FallingAnthem_FallingDamageRatio_Lv2",
+              "value": "FallingAnthem_FallingDamageRatio_Lv2",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv2",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv2"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv2"
             },
             {
-              "$type": "MoleMole.Config.AddGlobalValue",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "DJJCDJNJBFE",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "param3": "FallingAnthem_Altitude_Lv3"
+                  "value": "FallingAnthem_Altitude_Lv3"
                 },
                 {
-                  "$type": "DJJCDJNJBFE",
-                  "param3": "FallingAnthem_Altitude_Lv2"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv2"
                 }
               ],
-              "param3": "FallingAnthem_FallingDamageRatio_Lv3",
+              "value": "FallingAnthem_FallingDamageRatio_Lv3",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv3",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv3"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv3"
             },
             {
-              "$type": "MoleMole.Config.AddGlobalValue",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "DJJCDJNJBFE",
-                  "param3": "FallingAnthem_Altitude_Lv3"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv3"
                 }
               ],
-              "param3": "FallingAnthem_FallingDamageRatio_Lv4",
+              "value": "FallingAnthem_FallingDamageRatio_Lv4",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv4",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv4"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv4"
             },
             {
-              "$type": "MoleMole.Config.AttachModifier",
+              "$type": "AttachModifier",
               "modifierName": "FallingAnthem_FallingDamageImmune_02"
             }
           ]
         },
         "FallingAnthem_FallingDamageImmune_02": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.SetGlobalValueToOverrideMap",
+              "$type": "SetGlobalValueToOverrideMap",
               "globalValueKey": "_ABILITY_FallingAttack_Altitude",
               "overrideMapKey": "FallingAnthem_FallingDamageRatio"
             },
             {
-              "$type": "MoleMole.Config.AttachModifier",
+              "$type": "AttachModifier",
               "modifierName": "FallingAnthem_FallingDamageImmune_03"
             }
           ]
         },
         "FallingAnthem_FallingDamageImmune_03": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
           }
         },
         "FallingAnthem_Loop_Normal": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "MoleMole.Config.AttachModifierToSelfGlobalValueMixin",
+              "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_FallingAnthem_UseCamera",
-              "gvInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -1.0,
                 0.5,
@@ -2694,29 +2694,29 @@
         },
         "FallingAnthem_Loop_Normal_Rank_1": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AttachEffect",
-              "rotationDampTime": "Eff_Avatar_Sword_FallAnthem_Loop_01",
-              "NHGDGLICLFB": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Sword_FallAnthem_Loop_01",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_Loop_Normal_Rank_2": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AttachEffect",
-              "rotationDampTime": "Eff_Avatar_Sword_FallAnthem_Loop_02",
-              "NHGDGLICLFB": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Sword_FallAnthem_Loop_02",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Inertia": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "MoleMole.Config.ApplyInertiaVelocityMixin",
@@ -2727,88 +2727,88 @@
         },
         "FallingAnthem_Height_Detect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AddGlobalValue",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "DJJCDJNJBFE",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "param3": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
-              "param3": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "MoleMole.Config.AddGlobalValue",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "DJJCDJNJBFE",
-                  "param3": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
-              "param3": 5.0,
+              "value": 5.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
-              "param2": 1.0,
-              "triggerID": 0.0
+              "maxValue": 1.0,
+              "minValue": 0.0
             },
             {
-              "$type": "MoleMole.Config.SetAnimatorFloat",
+              "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "DJJCDJNJBFE",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "param3": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "param3": 0.0
+              "value": 0.0
             },
             {
-              "$type": "MoleMole.Config.SetAnimatorFloat",
+              "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "DJJCDJNJBFE",
-                  "param3": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "param3": 1.0
+              "value": 1.0
             }
           ],
           "onRemoved": [
             {
-              "$type": "MoleMole.Config.SetAnimatorFloat",
+              "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "param3": 0.0
+              "value": 0.0
             },
             {
-              "$type": "MoleMole.Config.AddGlobalValue",
-              "param3": 0.0,
+              "$type": "AddGlobalValue",
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         },
         "FallingAnthem_OverHead_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AvatarCameraParam",
+              "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "COBKJPBALPC",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "param3": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -2822,25 +2822,25 @@
         },
         "FallingAnthem_OverHead_Camera_Remover": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AvatarExitCameraShot",
-              "temperature": true
+              "$type": "AvatarExitCameraShot",
+              "doOffStage": true
             }
           ]
         },
         "FallingAnthem_Landed_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "MoleMole.Config.AvatarCameraParam",
+              "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "COBKJPBALPC",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "param3": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -2854,7 +2854,7 @@
         },
         "FallingAnthem_ClearVelocityForce": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "MoleMole.Config.RemoveVelocityForce",
@@ -2867,7 +2867,7 @@
         },
         "FallingAnthem_ClearVelocityForce_AS": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "MoleMole.Config.RemoveVelocityForce",
@@ -2881,42 +2881,42 @@
       },
       "onAbilityStart": [
         {
-          "$type": "MoleMole.Config.TriggerAttackEvent",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "POOFKGMBLNA",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "param3": 0.0,
+              "value": 0.0,
               "forceByCaster": true,
               "compareType": "NoneOrEqual"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "ABPNLDBPPHF",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "CGJIFGJJOJA",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "AOFNOGLCGMP": 0.0,
-                  "CHEGDAPFFHA": -0.5,
-                  "JEGKAACFHJK": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "IDLDJCPGNHD": 3.0
+              "radius": 3.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "AGMNCBAKCEF": "FallingAnthem_Normal_Rank_1_Damage",
-                "AILJJDMKONE": 0.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_1_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "overrideByWeapon": true,
                 "strikeType": "Blunt",
-                "enBreak": 100.0,
+                "damage": 100.0,
                 "attackType": "Melee",
                 "bonusCritical": 0.0
               },
@@ -2945,41 +2945,41 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "MoleMole.Config.TriggerAttackEvent",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "POOFKGMBLNA",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "param3": 1.0,
+              "value": 1.0,
               "forceByCaster": true
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "ABPNLDBPPHF",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "CGJIFGJJOJA",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "AOFNOGLCGMP": 0.0,
-                  "CHEGDAPFFHA": -0.5,
-                  "JEGKAACFHJK": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "IDLDJCPGNHD": 5.0
+              "radius": 5.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "AGMNCBAKCEF": "FallingAnthem_Normal_Rank_2_Damage",
-                "AILJJDMKONE": 0.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_2_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "overrideByWeapon": true,
                 "strikeType": "Blunt",
-                "enBreak": 150.0,
+                "damage": 150.0,
                 "attackType": "Melee",
                 "bonusCritical": 0.0
               },
@@ -3009,31 +3009,31 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "MoleMole.Config.FireEffect",
+          "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "POOFKGMBLNA",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "param3": 0.0,
+              "value": 0.0,
               "forceByCaster": true,
               "compareType": "NoneOrEqual"
             }
           ],
-          "rotationDampTime": "Eff_Avatar_Sword_FallAnthem_Strike_01",
-          "NHGDGLICLFB": -1.0
+          "effectPattern": "Eff_Avatar_Sword_FallAnthem_Strike_01",
+          "effectTempleteID": -1.0
         },
         {
-          "$type": "MoleMole.Config.FireEffect",
+          "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "POOFKGMBLNA",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "param3": 1.0,
+              "value": 1.0,
               "forceByCaster": true
             }
           ],
-          "rotationDampTime": "Eff_Avatar_Sword_FallAnthem_Strike_02",
-          "NHGDGLICLFB": -1.0
+          "effectPattern": "Eff_Avatar_Sword_FallAnthem_Strike_02",
+          "effectTempleteID": -1.0
         }
       ]
     }

@@ -1,60 +1,60 @@
 [
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Heizo_ExtraAttack",
       "abilityMixins": [
         {
-          "$type": "FGEGOMCIFMA",
+          "$type": "ButtonHoldChargeMixin",
           "skillID": 10591,
           "chargeTime": 0.11999999731779099,
-          "ANJJMLDEPDA": 0.20000000298023224,
+          "secondChargeTime": 0.20000000298023224,
           "onBeginUncharged": [
             {
-              "$type": "KEBEIINPIOE",
-              "OEMEMBJJJPH": "DoSkill"
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "DoSkill"
             },
             {
-              "$type": "ANEGGLOPIGK",
+              "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "repeatTimes": 99.0
+              "value": 99.0
             },
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
             }
           ],
           "onReleaseUncharged": [
             {
-              "$type": "ANEGGLOPIGK",
+              "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "repeatTimes": 1.0
+              "value": 1.0
             }
           ],
           "onBeginCharged": [
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "IsCharging",
-              "repeatTimes": true
+              "value": true
             }
           ],
           "onReleaseCharged": [
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
             },
             {
-              "$type": "ANEGGLOPIGK",
+              "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "repeatTimes": 1.0
+              "value": 1.0
             }
           ],
           "onBeginSecondCharged": [
             {
-              "$type": "KEBEIINPIOE",
+              "$type": "SetAnimatorTrigger",
               "predicates": [
                 {
-                  "$type": "HIJGMAGJNMO",
+                  "$type": "ByLocalAvatarStamina",
                   "logic": "GreaterOrEqual",
                   "stamina": [
                     "Heizo_ExtraAttack_Stamina_Cost",
@@ -63,13 +63,13 @@
                   ]
                 }
               ],
-              "OEMEMBJJJPH": "DoSkill"
+              "triggerID": "DoSkill"
             },
             {
-              "$type": "ANEGGLOPIGK",
+              "$type": "SetAnimatorInt",
               "predicates": [
                 {
-                  "$type": "HIJGMAGJNMO",
+                  "$type": "ByLocalAvatarStamina",
                   "logic": "GreaterOrEqual",
                   "stamina": [
                     "Heizo_ExtraAttack_Stamina_Cost",
@@ -79,10 +79,10 @@
                 }
               ],
               "intID": "SkillID",
-              "repeatTimes": 6.0
+              "value": 6.0
             },
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
             }
           ],
@@ -96,7 +96,7 @@
           ]
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "ExtraAttack"
           ],
@@ -104,12 +104,12 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ExtraAttack"
           ],
-          "actorGrassSubHurtDelta": "Heizo_ExtraAttack_DamagePercentage",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "Heizo_ExtraAttack_DamagePercentage",
+          "damagePercentageRatio": 0.0
         }
       ],
       "abilitySpecials": {
@@ -120,13 +120,13 @@
       "modifiers": {
         "ExtraAttack_StaminaCost": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "JJJCJIKOMNL",
+              "$type": "AvatarSkillStart",
               "skillID": 10003,
-              "costStaminaRatio": 1.0,
-              "IOFCJNLJBLE": "Heizo_ExtraAttack_Stamina_Cost"
+              "cdRatio": 1.0,
+              "costStaminaRatio": "Heizo_ExtraAttack_Stamina_Cost"
             }
           ]
         }
@@ -135,25 +135,25 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Heizo_NormalAttack_Handler",
       "abilityMixins": [
         {
-          "$type": "KKKMAAMBHMO",
+          "$type": "AttachToNormalizedTimeMixin",
           "stateID": "Attack03",
           "modifierName": "Heizo_Attack03_Land_VFX",
           "normalizeStart": 0.2199999988079071,
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "KKKMAAMBHMO",
+          "$type": "AttachToNormalizedTimeMixin",
           "stateID": "Attack05",
           "modifierName": "Heizo_Attack05_Land_VFX",
           "normalizeStart": 0.3199999928474426,
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Attack01",
             "Attack02",
@@ -178,60 +178,60 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK01"
           ],
-          "actorGrassSubHurtDelta": "Heizo_NormalAttack_01_Damage_AtkRatio",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "Heizo_NormalAttack_01_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK02"
           ],
-          "actorGrassSubHurtDelta": "Heizo_NormalAttack_02_Damage_AtkRatio",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "Heizo_NormalAttack_02_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK03"
           ],
-          "actorGrassSubHurtDelta": "Heizo_NormalAttack_03_Damage_AtkRatio",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "Heizo_NormalAttack_03_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK04A"
           ],
-          "actorGrassSubHurtDelta": "Heizo_NormalAttack_04A_Damage_AtkRatio",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "Heizo_NormalAttack_04A_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK04B"
           ],
-          "actorGrassSubHurtDelta": "Heizo_NormalAttack_04B_Damage_AtkRatio",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "Heizo_NormalAttack_04B_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK04C"
           ],
-          "actorGrassSubHurtDelta": "Heizo_NormalAttack_04C_Damage_AtkRatio",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "Heizo_NormalAttack_04C_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK05"
           ],
-          "actorGrassSubHurtDelta": "Heizo_NormalAttack_05_Damage_AtkRatio",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "Heizo_NormalAttack_05_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         }
       ],
       "abilitySpecials": {
@@ -246,34 +246,34 @@
       "modifiers": {
         "Heizo_Attack03_Land_VFX": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Attack_03_Land",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Attack_03_Land",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Heizo_Attack05_Land_VFX": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Attack_05_Land",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Attack_05_Land",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Heizo_NormalAttack_HideWeapon": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ABGFEEKKHLI",
+              "$type": "TriggerHideWeapon",
               "partNames": [
                 "sheathPoint",
                 "equip01",
@@ -284,9 +284,9 @@
           ],
           "onRemoved": [
             {
-              "$type": "ABGFEEKKHLI",
-              "shieldHP": true,
-              "CAKFGFNNNOJ": true,
+              "$type": "TriggerHideWeapon",
+              "doOffStage": true,
+              "visible": true,
               "partNames": [
                 "sheathPoint",
                 "equip01",
@@ -301,11 +301,11 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Heizo_ElementalArt_Handler",
       "abilityMixins": [
         {
-          "$type": "NCLPANHDOAH",
+          "$type": "SkillButtonHoldChargeMixin",
           "skillID": 10592,
           "nextLoopTriggerID": "NextLoopTrigger",
           "endHoldTrigger": "EndHoldTrigger",
@@ -322,7 +322,7 @@
           ]
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Heizo_ElementalArt_BS"
           ],
@@ -330,7 +330,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Heizo_ElementalArt_Charge"
           ],
@@ -338,9 +338,9 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "GBFNENNJIBL",
+          "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "Heizo_ElementalArt_Charge_Level",
-          "gvInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -1.0,
             0.5,
@@ -358,7 +358,7 @@
           ]
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Heizo_ElementalArt_Charge"
           ],
@@ -366,7 +366,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Heizo_ElementalArt_Charge_Max"
           ],
@@ -385,18 +385,18 @@
       "modifiers": {
         "UNIQUE_Heizo_ElementalArt_PreCharge_Handler": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": 60.0,
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": 60.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "MCEDBFOPFMO",
+              "$type": "CurLocalAvatarMixinV2",
               "modifierName": "Heizo_ElementalArt_PreCharge_SendEffectTrigger"
             },
             {
-              "$type": "GBFNENNJIBL",
+              "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "Heizo_ElementalArt_PreCharge_Level",
-              "gvInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 0.5,
                 2.5,
@@ -413,29 +413,29 @@
               "actionQueues": [
                 [
                   {
-                    "$type": "AHHAGLJGKDD",
-                    "shieldHP": true,
+                    "$type": "ApplyModifier",
+                    "doOffStage": true,
                     "modifierName": "Heizo_ElementalArt_Charge_VFX_1"
                   }
                 ],
                 [
                   {
-                    "$type": "AHHAGLJGKDD",
-                    "shieldHP": true,
+                    "$type": "ApplyModifier",
+                    "doOffStage": true,
                     "modifierName": "Heizo_ElementalArt_Charge_VFX_2"
                   }
                 ],
                 [
                   {
-                    "$type": "AHHAGLJGKDD",
-                    "shieldHP": true,
+                    "$type": "ApplyModifier",
+                    "doOffStage": true,
                     "modifierName": "Heizo_ElementalArt_Charge_VFX_3"
                   }
                 ],
                 [
                   {
-                    "$type": "AHHAGLJGKDD",
-                    "shieldHP": true,
+                    "$type": "ApplyModifier",
+                    "doOffStage": true,
                     "modifierName": "Heizo_ElementalArt_Charge_VFX_4"
                   }
                 ]
@@ -444,194 +444,194 @@
           ],
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "shieldHP": true,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "doOffStage": true,
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "Heizo_ElementalArt_PreCharge_Level",
-                  "repeatTimes": 2.0
+                  "value": 2.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
-              "damageRatio": "Int",
+              "type": "Int",
               "value": 1,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             },
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "Heizo_ElementalArt_PreCharge_Level",
-                  "repeatTimes": 4.0
+                  "value": 4.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
-              "damageRatio": "Int",
+              "type": "Int",
               "value": 2,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             },
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "Heizo_ElementalArt_PreCharge_Level",
-                  "repeatTimes": 6.0
+                  "value": 6.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
-              "damageRatio": "Int",
+              "type": "Int",
               "value": 3,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             },
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "Heizo_ElementalArt_PreCharge_Level",
-                  "repeatTimes": 8.0
+                  "value": 8.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
-              "damageRatio": "Int",
+              "type": "Int",
               "value": 4,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             }
           ],
           "onRemoved": [
             {
-              "$type": "HLHAODOBHPK",
+              "$type": "SetGlobalValue",
               "target": "Caster",
-              "shieldHP": true,
-              "repeatTimes": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "Heizo_ElementalArt_PreCharge_Level",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "HLHAODOBHPK",
+              "$type": "SetGlobalValue",
               "target": "Caster",
-              "shieldHP": true,
-              "repeatTimes": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "Heizo_ElementalArt_Charge_Level",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "DBGFNDFDIBF",
+              "$type": "SetGlobalValueToOverrideMap",
               "target": "Caster",
-              "shieldHP": true,
+              "doOffStage": true,
               "globalValueKey": "Heizo_ElementalArt_Charge_Level",
               "overrideMapKey": "Charge_Level"
             },
             {
-              "$type": "ANEGGLOPIGK",
+              "$type": "SetAnimatorInt",
               "target": "Caster",
-              "shieldHP": true,
+              "doOffStage": true,
               "intID": "Charge_Level",
-              "repeatTimes": "Charge_Level"
+              "value": "Charge_Level"
             }
           ],
           "onAvatarIn": [
             {
-              "$type": "AHHAGLJGKDD",
-              "shieldHP": true,
+              "$type": "ApplyModifier",
+              "doOffStage": true,
               "modifierName": "Heizo_ElementalArt_Charge_VFX_Enable"
             },
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "Heizo_ElementalArt_PreCharge_Level",
-                  "repeatTimes": 2.0
+                  "value": 2.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
-              "damageRatio": "Int",
+              "type": "Int",
               "value": 1,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             },
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "Heizo_ElementalArt_PreCharge_Level",
-                  "repeatTimes": 4.0
+                  "value": 4.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
-              "damageRatio": "Int",
+              "type": "Int",
               "value": 2,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             },
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "Heizo_ElementalArt_PreCharge_Level",
-                  "repeatTimes": 6.0
+                  "value": 6.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
-              "damageRatio": "Int",
+              "type": "Int",
               "value": 3,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             },
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "Heizo_ElementalArt_PreCharge_Level",
-                  "repeatTimes": 8.0
+                  "value": 8.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
-              "damageRatio": "Int",
+              "type": "Int",
               "value": 4,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             }
           ],
           "onAvatarOut": [
             {
-              "$type": "AHHAGLJGKDD",
-              "shieldHP": true,
+              "$type": "ApplyModifier",
+              "doOffStage": true,
               "modifierName": "Heizo_ElementalArt_Charge_VFX_Disable"
             }
           ]
@@ -639,158 +639,158 @@
         "Heizo_ElementalArt_PreCharge_SendEffectTrigger": {
           "stacking": "Multiple",
           "modifierName": "",
-          "elementDurability": 0.20000000298023224,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.20000000298023224,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "Heizo_ElementalArt_PreCharge_Level",
-                  "repeatTimes": 2.0
+                  "value": 2.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
-              "damageRatio": "Int",
+              "type": "Int",
               "value": 1,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             },
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "Heizo_ElementalArt_PreCharge_Level",
-                  "repeatTimes": 4.0
+                  "value": 4.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
-              "damageRatio": "Int",
+              "type": "Int",
               "value": 2,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             },
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "Heizo_ElementalArt_PreCharge_Level",
-                  "repeatTimes": 6.0
+                  "value": 6.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
-              "damageRatio": "Int",
+              "type": "Int",
               "value": 3,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             },
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "Heizo_ElementalArt_PreCharge_Level",
-                  "repeatTimes": 8.0
+                  "value": 8.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
-              "damageRatio": "Int",
+              "type": "Int",
               "value": 4,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             }
           ]
         },
         "Heizo_ElementalArt_Charge_Add": {
           "stacking": "Unique",
           "modifierName": "",
-          "elementDurability": 0.10000000149011612,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.10000000149011612,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ACPEIOBJLKD",
-              "shieldHP": true,
-              "repeatTimes": 2.0,
+              "$type": "AddGlobalValue",
+              "doOffStage": true,
+              "value": 2.0,
               "key": "Heizo_ElementalArt_PreCharge_Level",
               "useLimitRange": true,
-              "param2": 8.0,
-              "triggerID": 0.0
+              "maxValue": 8.0,
+              "minValue": 0.0
             }
           ]
         },
         "Heizo_ElementalArt_BS_Handler": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "LNNMEHKICEK",
+              "$type": "CopyGlobalValue",
               "srcTarget": "Self",
               "dstTarget": "Self",
               "srcKey": "Heizo_ElementalArt_PreCharge_Level",
               "dstKey": "Heizo_ElementalArt_Charge_Level"
             },
             {
-              "$type": "DBGFNDFDIBF",
+              "$type": "SetGlobalValueToOverrideMap",
               "target": "Caster",
               "globalValueKey": "Heizo_ElementalArt_Charge_Level",
               "overrideMapKey": "Charge_Level"
             },
             {
-              "$type": "ANEGGLOPIGK",
+              "$type": "SetAnimatorInt",
               "target": "Caster",
               "intID": "Charge_Level",
-              "repeatTimes": "Charge_Level"
+              "value": "Charge_Level"
             }
           ]
         },
         "Heizo_ElementalArt_Charge_Handler": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.75,
           "onAdded": [
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "modifierName": "UNIQUE_Heizo_ElementalArt_PreCharge_Handler"
             },
             {
-              "$type": "LNNMEHKICEK",
+              "$type": "CopyGlobalValue",
               "srcTarget": "Self",
               "dstTarget": "Self",
               "srcKey": "Heizo_ElementalArt_PreCharge_Level",
               "dstKey": "Heizo_ElementalArt_Charge_Level"
             },
             {
-              "$type": "DBGFNDFDIBF",
+              "$type": "SetGlobalValueToOverrideMap",
               "target": "Caster",
               "globalValueKey": "Heizo_ElementalArt_Charge_Level",
               "overrideMapKey": "Charge_Level"
             },
             {
-              "$type": "ANEGGLOPIGK",
+              "$type": "SetAnimatorInt",
               "target": "Caster",
               "intID": "Charge_Level",
-              "repeatTimes": "Charge_Level"
+              "value": "Charge_Level"
             }
           ],
           "onRemoved": [
             {
-              "$type": "LMFHAOAPGKG",
+              "$type": "TriggerAbility",
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "Heizo_ElementalArt_Charge_Level",
-                  "repeatTimes": 0.0
+                  "value": 0.0
                 }
               ],
               "abilityName": "Avatar_Heizo_ElementalArt_Reset"
@@ -798,236 +798,236 @@
           ],
           "onThinkInterval": [
             {
-              "$type": "ACPEIOBJLKD",
-              "repeatTimes": 2.0,
+              "$type": "AddGlobalValue",
+              "value": 2.0,
               "key": "Heizo_ElementalArt_PreCharge_Level",
               "useLimitRange": true,
-              "param2": 8.0,
-              "triggerID": 2.0
+              "maxValue": 8.0,
+              "minValue": 2.0
             },
             {
-              "$type": "LNNMEHKICEK",
+              "$type": "CopyGlobalValue",
               "srcTarget": "Self",
               "dstTarget": "Self",
               "srcKey": "Heizo_ElementalArt_PreCharge_Level",
               "dstKey": "Heizo_ElementalArt_Charge_Level"
             },
             {
-              "$type": "DBGFNDFDIBF",
+              "$type": "SetGlobalValueToOverrideMap",
               "target": "Caster",
               "globalValueKey": "Heizo_ElementalArt_Charge_Level",
               "overrideMapKey": "Charge_Level"
             },
             {
-              "$type": "ANEGGLOPIGK",
+              "$type": "SetAnimatorInt",
               "target": "Caster",
               "intID": "Charge_Level",
-              "repeatTimes": "Charge_Level"
+              "value": "Charge_Level"
             }
           ]
         },
         "Heizo_ElementalArt_Charge_VFX": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalArt_Charge_Ground",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalArt_Charge_Ground",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalArt_Charge",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalArt_Charge",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Heizo_ElementalArt_Charge_Blank": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0
+          "elementDurability": 100.0
         },
         "Blank": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0
+          "elementDurability": 100.0
         },
         "Heizo_ElementalArt_Charge_1": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "EHPLOGLPPAC",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalArt_Charge_1",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalArt_Charge_1",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Heizo_ElementalArt_Charge_2": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "EHPLOGLPPAC",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalArt_Charge_2",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalArt_Charge_2",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Heizo_ElementalArt_Charge_3": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "EHPLOGLPPAC",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalArt_Charge_3",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalArt_Charge_3",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Heizo_ElementalArt_Charge_4": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0
+          "elementDurability": 100.0
         },
         "Heizo_ElementalArt_Charge_Max_VFX": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "EHPLOGLPPAC",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Charge_Max",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Charge_Max",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Heizo_ElementalArt_Charge_VFX_1": {
           "modifierName": "",
-          "elementDurability": 0.20000000298023224,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.20000000298023224,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "parameter": "Level",
               "attachPoint": "",
-              "damageRatio": "Int",
+              "type": "Int",
               "value": 1,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             }
           ]
         },
         "Heizo_ElementalArt_Charge_VFX_2": {
           "modifierName": "",
-          "elementDurability": 0.20000000298023224,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.20000000298023224,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "parameter": "Level",
               "attachPoint": "",
-              "damageRatio": "Int",
+              "type": "Int",
               "value": 2,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             }
           ]
         },
         "Heizo_ElementalArt_Charge_VFX_3": {
           "modifierName": "",
-          "elementDurability": 0.20000000298023224,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.20000000298023224,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "parameter": "Level",
               "attachPoint": "",
-              "damageRatio": "Int",
+              "type": "Int",
               "value": 3,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             }
           ]
         },
         "Heizo_ElementalArt_Charge_VFX_4": {
           "modifierName": "",
-          "elementDurability": 0.20000000298023224,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.20000000298023224,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "parameter": "Level",
               "attachPoint": "",
-              "damageRatio": "Int",
+              "type": "Int",
               "value": 4,
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             }
           ]
         },
         "Heizo_ElementalArt_Charge_VFX_Disable": {
           "stacking": "Multiple",
           "modifierName": "",
-          "elementDurability": 0.20000000298023224,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.20000000298023224,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "parameter": "Off",
               "attachPoint": "",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             }
           ]
         },
         "Heizo_ElementalArt_Charge_VFX_Enable": {
           "stacking": "Multiple",
           "modifierName": "",
-          "elementDurability": 0.20000000298023224,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.20000000298023224,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "CIPKLOKNNJH",
-              "shieldHP": true,
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
               "parameter": "On",
               "attachPoint": "",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Count"
             }
           ]
         },
         "Heizo_ElementalArt_ElementalBall_Handler": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onHittingOther": [
             {
-              "$type": "OIDAEPDOMEP",
+              "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "EBMBJLDAEDL",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "AEHBHLJCPJK",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "repeatTimes": 0.0,
+                  "value": 0.0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
-                  "$type": "AHHAGLJGKDD",
+                  "$type": "ApplyModifier",
                   "modifierName": "Heizo_ElementalArt_ElementalBall"
                 }
               ]
@@ -1037,109 +1037,109 @@
         "Heizo_ElementalArt_ElementalBall": {
           "stacking": "Unique",
           "modifierName": "",
-          "elementDurability": 0.20000000298023224,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.20000000298023224,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "PMKKKIKFPBE",
+              "$type": "GenerateElemBall",
               "configID": 2021,
               "born": {
-                "$type": "GNIAPFBHMIK",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 0.0,
-                  "MEJNCDENBNH": 1.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 1.0
                 }
               },
-              "hpRatio": 1.0,
+              "ratio": 1.0,
               "baseEnergy": 6.0
             },
             {
-              "$type": "EPOIHLNJHMM",
+              "$type": "Randomed",
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "Heizo_ElementalArt_Charge_Level",
-                  "repeatTimes": 4.0
+                  "value": 4.0
                 }
               ],
               "chance": 0.5,
               "successActions": [
                 {
-                  "$type": "PMKKKIKFPBE",
+                  "$type": "GenerateElemBall",
                   "configID": 2021,
                   "born": {
-                    "$type": "GNIAPFBHMIK",
+                    "$type": "ConfigBornByTarget",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
                   },
-                  "hpRatio": 1.0,
+                  "ratio": 1.0,
                   "baseEnergy": 3.0
                 }
               ]
             },
             {
-              "$type": "EPOIHLNJHMM",
+              "$type": "Randomed",
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "Heizo_ElementalArt_Charge_Level",
-                  "repeatTimes": 6.0
+                  "value": 6.0
                 }
               ],
               "chance": 0.5,
               "successActions": [
                 {
-                  "$type": "PMKKKIKFPBE",
+                  "$type": "GenerateElemBall",
                   "configID": 2021,
                   "born": {
-                    "$type": "GNIAPFBHMIK",
+                    "$type": "ConfigBornByTarget",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
                   },
-                  "hpRatio": 1.0,
+                  "ratio": 1.0,
                   "baseEnergy": 3.0
                 }
               ]
             },
             {
-              "$type": "PMKKKIKFPBE",
+              "$type": "GenerateElemBall",
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "Heizo_ElementalArt_Charge_Level",
-                  "repeatTimes": 8.0
+                  "value": 8.0
                 }
               ],
               "configID": 2021,
               "born": {
-                "$type": "GNIAPFBHMIK",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 0.0,
-                  "MEJNCDENBNH": 1.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 1.0
                 }
               },
-              "hpRatio": 1.0,
+              "ratio": 1.0,
               "baseEnergy": 3.0
             }
           ]
         },
         "Heizo_ElementalArt_DetectReaction_Handler": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "MHDKGAPMLDM",
+              "$type": "DoActionByElementReactionMixin",
               "entityTypes": [
                 "Monster"
               ],
@@ -1151,7 +1151,7 @@
               ],
               "actions": [
                 {
-                  "$type": "AHHAGLJGKDD",
+                  "$type": "ApplyModifier",
                   "modifierName": "UNIQUE_Heizo_ElementalArt_PreCharge_Trigger"
                 }
               ]
@@ -1160,81 +1160,81 @@
         },
         "UNIQUE_Heizo_ElementalArt_PreCharge_Trigger": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": 0.10000000149011612,
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": 0.10000000149011612,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "LMFHAOAPGKG",
+              "$type": "TriggerAbility",
               "target": "Caster",
-              "shieldHP": true,
+              "doOffStage": true,
               "abilityName": "Avatar_Heizo_ElementalArt_Handler"
             }
           ]
         },
         "Heizo_ElementalArt_TeamBuff_Handler": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onHittingOther": [
             {
-              "$type": "OIDAEPDOMEP",
+              "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "EBMBJLDAEDL",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "AEHBHLJCPJK",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "repeatTimes": 0.0,
+                  "value": 0.0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
-                  "$type": "FKNNJLHBIOD",
+                  "$type": "RemoveUniqueModifier",
                   "target": "AllPlayerAvatars",
-                  "shieldHP": true,
+                  "doOffStage": true,
                   "predicates": [
                     {
-                      "$type": "PDFJBJNKPKD",
+                      "$type": "ByTargetType",
                       "targetType": "Caster",
                       "isTarget": false,
                       "BELECNJNNJE": ""
                     },
                     {
-                      "$type": "JNGIOOCDJEA",
+                      "$type": "ByTargetPositionToSelfPosition",
                       "logic": "LesserOrEqual",
-                      "repeatTimes": 40.0,
+                      "value": 40.0,
                       "BBKEGPFIAJL": ""
                     }
                   ],
                   "modifierName": "UNIQUE_Heizo_ElementalArt_TeamBuff"
                 },
                 {
-                  "$type": "GNLJNLOMNGD",
+                  "$type": "AttachModifier",
                   "target": "AllPlayerAvatars",
-                  "shieldHP": true,
+                  "doOffStage": true,
                   "predicates": [
                     {
-                      "$type": "PDFJBJNKPKD",
+                      "$type": "ByTargetType",
                       "targetType": "Caster",
                       "isTarget": false,
                       "BELECNJNNJE": ""
                     },
                     {
-                      "$type": "JNGIOOCDJEA",
+                      "$type": "ByTargetPositionToSelfPosition",
                       "logic": "LesserOrEqual",
-                      "repeatTimes": 40.0,
+                      "value": 40.0,
                       "BBKEGPFIAJL": ""
                     }
                   ],
@@ -1247,9 +1247,9 @@
         "UNIQUE_Heizo_ElementalArt_TeamBuff": {
           "stacking": "Unique",
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": "Heizo_ElementalArt_TeamBuff_Duration",
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": "Heizo_ElementalArt_TeamBuff_Duration",
+          "elementDurability": 100.0,
           "properties": {
             "Actor_ElemMasteryDelta": "Heizo_ElementalArt_TeamBuff_ElemMastery"
           },
@@ -1258,30 +1258,30 @@
         },
         "UNIQUE_Heizo_AvatarInBoost_Handler": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "elementDurability": 100.0,
           "onAvatarIn": [
             {
-              "$type": "AHHAGLJGKDD",
-              "shieldHP": true,
+              "$type": "ApplyModifier",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Heizo_Buff_AttackSpeed_Flag",
-                  "repeatTimes": 0.0,
+                  "value": 0.0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "modifierName": "UNIQUE_Heizo_Buff_AttackSpeed"
             },
             {
-              "$type": "AHHAGLJGKDD",
-              "shieldHP": true,
+              "$type": "ApplyModifier",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Heizo_Buff_AttackSpeed_Flag",
-                  "repeatTimes": 0.0,
+                  "value": 0.0,
                   "compareType": "NoneOrEqual"
                 }
               ],
@@ -1291,113 +1291,113 @@
         },
         "UNIQUE_Heizo_Buff_AttackSpeed": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": "Heizo_Buff_AttackSpeed_Duration",
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": "Heizo_Buff_AttackSpeed_Duration",
+          "elementDurability": 100.0,
           "properties": {
             "Animator_AttackSpeedRatio": "Heizo_Buff_AttackSpeed_Ratio"
           },
           "onAdded": [
             {
-              "$type": "LMFHAOAPGKG",
+              "$type": "TriggerAbility",
               "target": "Caster",
-              "shieldHP": true,
+              "doOffStage": true,
               "abilityName": "Avatar_Heizo_ElementalArt_Handler"
             },
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_Buff_Aura",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_Buff_Aura",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ],
           "isLimitedProperties": true
         },
         "UNIQUE_Heizo_Buff_AttackSpeed_CDCheck": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": "Heizo_Buff_AttackSpeed_CD",
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": "Heizo_Buff_AttackSpeed_CD",
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "HLHAODOBHPK",
-              "shieldHP": true,
-              "repeatTimes": 1.0,
+              "$type": "SetGlobalValue",
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Heizo_Buff_AttackSpeed_Flag",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ],
           "onRemoved": [
             {
-              "$type": "HLHAODOBHPK",
-              "shieldHP": true,
-              "repeatTimes": 0.0,
+              "$type": "SetGlobalValue",
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Heizo_Buff_AttackSpeed_Flag",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         }
       },
       "onAdded": [
         {
-          "$type": "HLHAODOBHPK",
+          "$type": "SetGlobalValue",
           "target": "Caster",
-          "shieldHP": true,
-          "repeatTimes": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "Heizo_ElementalArt_PreCharge_Level",
-          "param2": 0.0,
-          "triggerID": 0.0
+          "maxValue": 0.0,
+          "minValue": 0.0
         },
         {
-          "$type": "HLHAODOBHPK",
+          "$type": "SetGlobalValue",
           "target": "Caster",
-          "shieldHP": true,
-          "repeatTimes": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "Heizo_ElementalArt_Charge_Level",
-          "param2": 0.0,
-          "triggerID": 0.0
+          "maxValue": 0.0,
+          "minValue": 0.0
         },
         {
-          "$type": "HLHAODOBHPK",
+          "$type": "SetGlobalValue",
           "target": "Caster",
-          "shieldHP": true,
-          "repeatTimes": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Heizo_Buff_AttackSpeed_Flag",
-          "param2": 0.0,
-          "triggerID": 0.0
+          "maxValue": 0.0,
+          "minValue": 0.0
         },
         {
-          "$type": "GNLJNLOMNGD",
+          "$type": "AttachModifier",
           "modifierName": "Heizo_ElementalArt_ElementalBall_Handler"
         },
         {
-          "$type": "AHHAGLJGKDD",
+          "$type": "ApplyModifier",
           "predicates": [
             {
-              "$type": "FBDCPKHCLDA",
+              "$type": "ByUnlockTalentParam",
               "talentParam": "Heizo_PermanentSkill_1"
             }
           ],
           "modifierName": "Heizo_ElementalArt_DetectReaction_Handler"
         },
         {
-          "$type": "GNLJNLOMNGD",
+          "$type": "AttachModifier",
           "predicates": [
             {
-              "$type": "FBDCPKHCLDA",
+              "$type": "ByUnlockTalentParam",
               "talentParam": "Heizo_PermanentSkill_2"
             }
           ],
           "modifierName": "Heizo_ElementalArt_TeamBuff_Handler"
         },
         {
-          "$type": "AHHAGLJGKDD",
-          "shieldHP": true,
+          "$type": "ApplyModifier",
+          "doOffStage": true,
           "predicates": [
             {
-              "$type": "FBDCPKHCLDA",
+              "$type": "ByUnlockTalentParam",
               "talentParam": "Heizo_Constellation_1"
             }
           ],
@@ -1406,13 +1406,13 @@
       ],
       "onAbilityStart": [
         {
-          "$type": "AHHAGLJGKDD",
-          "shieldHP": true,
+          "$type": "ApplyModifier",
+          "doOffStage": true,
           "modifierName": "UNIQUE_Heizo_ElementalArt_PreCharge_Handler"
         },
         {
-          "$type": "AHHAGLJGKDD",
-          "shieldHP": true,
+          "$type": "ApplyModifier",
+          "doOffStage": true,
           "modifierName": "Heizo_ElementalArt_Charge_Add"
         }
       ]
@@ -1420,11 +1420,11 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Heizo_ElementalArt_Reset",
       "onAbilityStart": [
         {
-          "$type": "FKNNJLHBIOD",
+          "$type": "RemoveUniqueModifier",
           "modifierName": "UNIQUE_Heizo_ElementalArt_PreCharge_Handler"
         }
       ]
@@ -1432,7 +1432,7 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Heizo_ElementalArt_Strike",
       "abilitySpecials": {
         "Heizo_ElementalArt_Base_Damage": 0.0,
@@ -1441,17 +1441,17 @@
       },
       "onAbilityStart": [
         {
-          "$type": "JJJCJIKOMNL",
-          "shieldHP": true,
+          "$type": "AvatarSkillStart",
+          "doOffStage": true,
           "predicates": [
             {
-              "$type": "KHEFKHECCKB",
+              "$type": "BySkillReady",
               "skillID": 10592
             }
           ],
           "skillID": 10592,
-          "costStaminaRatio": 1.0,
-          "IOFCJNLJBLE": 1.0
+          "cdRatio": 1.0,
+          "costStaminaRatio": 1.0
         },
         {
           "$type": "ENJGNHAPPGP",
@@ -1462,37 +1462,37 @@
           }
         },
         {
-          "$type": "ENDHKAOAKJH",
-          "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalArt_Click_Cast",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalArt_Click_Cast",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "Heizo_ElementalArt_Charge_Level",
-              "repeatTimes": 0.0,
+              "value": 0.0,
               "compareType": "NoneOrEqual"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MFBGHKHFOPA",
+              "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 1.0,
-                  "MEJNCDENBNH": -0.4000000059604645
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": -0.4000000059604645
                 }
               },
               "size": {
-                "EPAKBMBAOKK": 3.0,
-                "LNOGCFLGIJI": 3.0,
-                "MEJNCDENBNH": 5.0
+                "x": 3.0,
+                "y": 3.0,
+                "z": 5.0
               }
             },
             "attackInfo": {
@@ -1500,10 +1500,10 @@
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": "Heizo_ElementalArt_Base_Damage",
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentage": "Heizo_ElementalArt_Base_Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Wind",
-                "MCCELHKGPOP": 50.0,
+                "elementDurability": 50.0,
                 "strikeType": "Default",
                 "enBreak": 150.0,
                 "attackType": "Melee",
@@ -1532,18 +1532,18 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "Heizo_ElementalArt_Charge_Level",
-              "repeatTimes": 2.0
+              "value": 2.0
             },
             {
-              "$type": "IAMKIOEEDMI",
+              "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "FBDCPKHCLDA",
+                  "$type": "ByUnlockTalentParam",
                   "talentParam": "Heizo_Constellation_6"
                 }
               ]
@@ -1551,20 +1551,20 @@
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MFBGHKHFOPA",
+              "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 1.0,
-                  "MEJNCDENBNH": -0.30000001192092896
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": -0.30000001192092896
                 }
               },
               "size": {
-                "EPAKBMBAOKK": 3.0,
-                "LNOGCFLGIJI": 3.0,
-                "MEJNCDENBNH": 5.0
+                "x": 3.0,
+                "y": 3.0,
+                "z": 5.0
               }
             },
             "attackInfo": {
@@ -1572,14 +1572,14 @@
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": [
+                "damagePercentage": [
                   "Heizo_ElementalArt_Base_Damage",
                   "Heizo_ElementalArt_Level_Damage",
                   "ADD"
                 ],
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentageRatio": 0.0,
                 "elementType": "Wind",
-                "MCCELHKGPOP": 50.0,
+                "elementDurability": 50.0,
                 "strikeType": "Default",
                 "enBreak": 175.0,
                 "attackType": "Melee",
@@ -1608,34 +1608,34 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "Heizo_ElementalArt_Charge_Level",
-              "repeatTimes": 2.0
+              "value": 2.0
             },
             {
-              "$type": "FBDCPKHCLDA",
+              "$type": "ByUnlockTalentParam",
               "talentParam": "Heizo_Constellation_6"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MFBGHKHFOPA",
+              "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 1.0,
-                  "MEJNCDENBNH": -0.30000001192092896
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": -0.30000001192092896
                 }
               },
               "size": {
-                "EPAKBMBAOKK": 3.0,
-                "LNOGCFLGIJI": 3.0,
-                "MEJNCDENBNH": 5.0
+                "x": 3.0,
+                "y": 3.0,
+                "z": 5.0
               }
             },
             "attackInfo": {
@@ -1643,18 +1643,18 @@
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": [
+                "damagePercentage": [
                   "Heizo_ElementalArt_Base_Damage",
                   "Heizo_ElementalArt_Level_Damage",
                   "ADD"
                 ],
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentageRatio": 0.0,
                 "elementType": "Wind",
-                "MCCELHKGPOP": 50.0,
+                "elementDurability": 50.0,
                 "strikeType": "Default",
                 "enBreak": 175.0,
                 "attackType": "Melee",
-                "actorWindSubHurtDelta": "Heizo_ElementalArt_ExtraCritRate",
+                "bonusCritical": "Heizo_ElementalArt_ExtraCritRate",
                 "KLIMCEGLPLG": 0.0
               },
               "hitPattern": {
@@ -1680,18 +1680,18 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "Heizo_ElementalArt_Charge_Level",
-              "repeatTimes": 4.0
+              "value": 4.0
             },
             {
-              "$type": "IAMKIOEEDMI",
+              "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "FBDCPKHCLDA",
+                  "$type": "ByUnlockTalentParam",
                   "talentParam": "Heizo_Constellation_6"
                 }
               ]
@@ -1699,20 +1699,20 @@
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MFBGHKHFOPA",
+              "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 1.0,
-                  "MEJNCDENBNH": -0.30000001192092896
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": -0.30000001192092896
                 }
               },
               "size": {
-                "EPAKBMBAOKK": 3.0,
-                "LNOGCFLGIJI": 3.0,
-                "MEJNCDENBNH": 5.0
+                "x": 3.0,
+                "y": 3.0,
+                "z": 5.0
               }
             },
             "attackInfo": {
@@ -1720,16 +1720,16 @@
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": [
+                "damagePercentage": [
                   "Heizo_ElementalArt_Base_Damage",
                   "Heizo_ElementalArt_Level_Damage",
                   2.0,
                   "MUL",
                   "ADD"
                 ],
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentageRatio": 0.0,
                 "elementType": "Wind",
-                "MCCELHKGPOP": 50.0,
+                "elementDurability": 50.0,
                 "strikeType": "Default",
                 "enBreak": 200.0,
                 "attackType": "Melee",
@@ -1758,34 +1758,34 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "Heizo_ElementalArt_Charge_Level",
-              "repeatTimes": 4.0
+              "value": 4.0
             },
             {
-              "$type": "FBDCPKHCLDA",
+              "$type": "ByUnlockTalentParam",
               "talentParam": "Heizo_Constellation_6"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MFBGHKHFOPA",
+              "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 1.0,
-                  "MEJNCDENBNH": -0.30000001192092896
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": -0.30000001192092896
                 }
               },
               "size": {
-                "EPAKBMBAOKK": 3.0,
-                "LNOGCFLGIJI": 3.0,
-                "MEJNCDENBNH": 5.0
+                "x": 3.0,
+                "y": 3.0,
+                "z": 5.0
               }
             },
             "attackInfo": {
@@ -1793,20 +1793,20 @@
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": [
+                "damagePercentage": [
                   "Heizo_ElementalArt_Base_Damage",
                   "Heizo_ElementalArt_Level_Damage",
                   2.0,
                   "MUL",
                   "ADD"
                 ],
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentageRatio": 0.0,
                 "elementType": "Wind",
-                "MCCELHKGPOP": 50.0,
+                "elementDurability": 50.0,
                 "strikeType": "Default",
                 "enBreak": 200.0,
                 "attackType": "Melee",
-                "actorWindSubHurtDelta": [
+                "bonusCritical": [
                   "Heizo_ElementalArt_ExtraCritRate",
                   2.0,
                   "MUL"
@@ -1836,18 +1836,18 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "Heizo_ElementalArt_Charge_Level",
-              "repeatTimes": 6.0
+              "value": 6.0
             },
             {
-              "$type": "IAMKIOEEDMI",
+              "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "FBDCPKHCLDA",
+                  "$type": "ByUnlockTalentParam",
                   "talentParam": "Heizo_Constellation_6"
                 }
               ]
@@ -1855,20 +1855,20 @@
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MFBGHKHFOPA",
+              "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 1.0,
-                  "MEJNCDENBNH": -0.30000001192092896
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": -0.30000001192092896
                 }
               },
               "size": {
-                "EPAKBMBAOKK": 3.0,
-                "LNOGCFLGIJI": 3.0,
-                "MEJNCDENBNH": 5.0
+                "x": 3.0,
+                "y": 3.0,
+                "z": 5.0
               }
             },
             "attackInfo": {
@@ -1876,16 +1876,16 @@
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": [
+                "damagePercentage": [
                   "Heizo_ElementalArt_Base_Damage",
                   "Heizo_ElementalArt_Level_Damage",
                   3.0,
                   "MUL",
                   "ADD"
                 ],
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentageRatio": 0.0,
                 "elementType": "Wind",
-                "MCCELHKGPOP": 50.0,
+                "elementDurability": 50.0,
                 "strikeType": "Default",
                 "enBreak": 225.0,
                 "attackType": "Melee",
@@ -1914,34 +1914,34 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "Heizo_ElementalArt_Charge_Level",
-              "repeatTimes": 6.0
+              "value": 6.0
             },
             {
-              "$type": "FBDCPKHCLDA",
+              "$type": "ByUnlockTalentParam",
               "talentParam": "Heizo_Constellation_6"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MFBGHKHFOPA",
+              "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 1.0,
-                  "MEJNCDENBNH": -0.30000001192092896
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": -0.30000001192092896
                 }
               },
               "size": {
-                "EPAKBMBAOKK": 3.0,
-                "LNOGCFLGIJI": 3.0,
-                "MEJNCDENBNH": 5.0
+                "x": 3.0,
+                "y": 3.0,
+                "z": 5.0
               }
             },
             "attackInfo": {
@@ -1949,20 +1949,20 @@
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": [
+                "damagePercentage": [
                   "Heizo_ElementalArt_Base_Damage",
                   "Heizo_ElementalArt_Level_Damage",
                   3.0,
                   "MUL",
                   "ADD"
                 ],
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentageRatio": 0.0,
                 "elementType": "Wind",
-                "MCCELHKGPOP": 50.0,
+                "elementDurability": 50.0,
                 "strikeType": "Default",
                 "enBreak": 225.0,
                 "attackType": "Melee",
-                "actorWindSubHurtDelta": [
+                "bonusCritical": [
                   "Heizo_ElementalArt_ExtraCritRate",
                   3.0,
                   "MUL"
@@ -1992,7 +1992,7 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "LMFHAOAPGKG",
+          "$type": "TriggerAbility",
           "abilityName": "Avatar_Heizo_ElementalArt_Reset"
         }
       ]
@@ -2000,7 +2000,7 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Heizo_ElementalArt_Strike_Max",
       "abilitySpecials": {
         "Heizo_ElementalArt_Base_Damage": 0.0,
@@ -2011,26 +2011,26 @@
       },
       "onAbilityStart": [
         {
-          "$type": "JJJCJIKOMNL",
-          "shieldHP": true,
+          "$type": "AvatarSkillStart",
+          "doOffStage": true,
           "predicates": [
             {
-              "$type": "KHEFKHECCKB",
+              "$type": "BySkillReady",
               "skillID": 10592
             }
           ],
           "skillID": 10592,
-          "costStaminaRatio": 1.0,
-          "IOFCJNLJBLE": 1.0
+          "cdRatio": 1.0,
+          "costStaminaRatio": 1.0
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "IAMKIOEEDMI",
+              "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "FBDCPKHCLDA",
+                  "$type": "ByUnlockTalentParam",
                   "talentParam": "Heizo_Constellation_6"
                 }
               ]
@@ -2038,20 +2038,20 @@
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MFBGHKHFOPA",
+              "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 1.0,
-                  "MEJNCDENBNH": -0.30000001192092896
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": -0.30000001192092896
                 }
               },
               "size": {
-                "EPAKBMBAOKK": 4.0,
-                "LNOGCFLGIJI": 3.5,
-                "MEJNCDENBNH": 6.0
+                "x": 4.0,
+                "y": 3.5,
+                "z": 6.0
               }
             },
             "attackInfo": {
@@ -2059,7 +2059,7 @@
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": [
+                "damagePercentage": [
                   "Heizo_ElementalArt_Base_Damage",
                   "Heizo_ElementalArt_Level_Damage",
                   4.0,
@@ -2068,9 +2068,9 @@
                   "Heizo_ElementalArt_Extra_Damage",
                   "ADD"
                 ],
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentageRatio": 0.0,
                 "elementType": "Wind",
-                "MCCELHKGPOP": 50.0,
+                "elementDurability": 50.0,
                 "strikeType": "Default",
                 "enBreak": 250.0,
                 "attackType": "Melee",
@@ -2099,29 +2099,29 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "FBDCPKHCLDA",
+              "$type": "ByUnlockTalentParam",
               "talentParam": "Heizo_Constellation_6"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MFBGHKHFOPA",
+              "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 1.0,
-                  "MEJNCDENBNH": -0.30000001192092896
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": -0.30000001192092896
                 }
               },
               "size": {
-                "EPAKBMBAOKK": 4.0,
-                "LNOGCFLGIJI": 3.0,
-                "MEJNCDENBNH": 6.0
+                "x": 4.0,
+                "y": 3.0,
+                "z": 6.0
               }
             },
             "attackInfo": {
@@ -2129,7 +2129,7 @@
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": [
+                "damagePercentage": [
                   "Heizo_ElementalArt_Base_Damage",
                   "Heizo_ElementalArt_Level_Damage",
                   4.0,
@@ -2138,18 +2138,18 @@
                   "Heizo_ElementalArt_Extra_Damage",
                   "ADD"
                 ],
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentageRatio": 0.0,
                 "elementType": "Wind",
-                "MCCELHKGPOP": 50.0,
+                "elementDurability": 50.0,
                 "strikeType": "Default",
                 "enBreak": 250.0,
                 "attackType": "Melee",
-                "actorWindSubHurtDelta": [
+                "bonusCritical": [
                   "Heizo_ElementalArt_ExtraCritRate",
                   4.0,
                   "MUL"
                 ],
-                "actorIceSubHurtDelta": "Heizo_ElementalArt_ExtraCritHurt",
+                "bonusCriticalHurt": "Heizo_ElementalArt_ExtraCritHurt",
                 "KLIMCEGLPLG": 0.0
               },
               "hitPattern": {
@@ -2175,10 +2175,10 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "ENDHKAOAKJH",
-          "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalArt_Charge_Cast",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalArt_Charge_Cast",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         },
         {
           "$type": "ENJGNHAPPGP",
@@ -2189,7 +2189,7 @@
           }
         },
         {
-          "$type": "LMFHAOAPGKG",
+          "$type": "TriggerAbility",
           "abilityName": "Avatar_Heizo_ElementalArt_Reset"
         }
       ]
@@ -2197,11 +2197,11 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Heizo_ElementalBurst_Strike",
       "abilityMixins": [
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Heizo_ElementalBurst_Leap",
             "Heizo_ElementalBurst_Strike",
@@ -2212,7 +2212,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Heizo_ElementalBurst_Leap"
           ],
@@ -2220,28 +2220,28 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "KKKMAAMBHMO",
+          "$type": "AttachToNormalizedTimeMixin",
           "stateID": "Heizo_ElementalBurst_Leap",
           "modifierName": "Heizo_ElementalBurst_Leap_VFX_2",
           "normalizeStart": 0.10000000149011612,
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "KKKMAAMBHMO",
+          "$type": "AttachToNormalizedTimeMixin",
           "stateID": "Heizo_ElementalBurst_Leap",
           "modifierName": "Heizo_ElementalBurst_Cast_VFX",
           "normalizeStart": 0.699999988079071,
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "KKKMAAMBHMO",
+          "$type": "AttachToNormalizedTimeMixin",
           "stateID": "Heizo_ElementalBurst_Strike",
           "modifierName": "Heizo_ElementalBurst_Land_VFX",
           "normalizeStart": 0.4000000059604645,
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Heizo_ElementalBurst_Land"
           ],
@@ -2249,7 +2249,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Heizo_ElementalBurst_Leap"
           ],
@@ -2257,7 +2257,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Heizo_ElementalBurst_Leap",
             "Heizo_ElementalBurst_Strike"
@@ -2266,7 +2266,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BAEGHHFFMGP",
+          "$type": "AttachToAnimatorStateIDMixin",
           "stateIDs": [
             "Heizo_ElementalBurst_Strike"
           ],
@@ -2274,7 +2274,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Heizo_ElementalBurst_Leap",
             "Heizo_ElementalBurst_Strike"
@@ -2290,12 +2290,12 @@
       "modifiers": {
         "Blank": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0
+          "elementDurability": 100.0
         },
         "CameraEffect": {
           "modifierName": "",
-          "elementDurability": 0.5,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.5,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "GEHHPGLKECC",
@@ -2306,26 +2306,26 @@
         },
         "Heizo_ElementalBurst_FallingDamageImmune": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_FallingDamageRatio": -1.0
           }
         },
         "Heizo_ElementalBurst_Cast_VFX": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "EHPLOGLPPAC",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_Cast",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_Cast",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Heizo_ElementalBurst_Leap_VFX": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ENJGNHAPPGP",
@@ -2336,52 +2336,52 @@
               }
             },
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_Leap",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_Leap",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Heizo_ElementalBurst_Leap_VFX_2": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_BS",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_BS",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Heizo_ElementalBurst_Land_VFX": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_Land",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_Land",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Heizo_ElementalBurst_Land_2_VFX": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "EHPLOGLPPAC",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_Land_2",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_Land_2",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "GravityAdjust": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -2.0
           },
@@ -2389,12 +2389,12 @@
         },
         "Heizo_ElementalBurst_ReviveEnergy_Handler": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "GBFNENNJIBL",
+              "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_Heizo_ReviveEnergy_Count",
-              "gvInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 0.5,
                 1.5,
@@ -2416,100 +2416,100 @@
         "Heizo_ElementalBurst_ReviveEnergy_Base": {
           "stacking": "Unique",
           "modifierName": "",
-          "elementDurability": 0.20000000298023224,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.20000000298023224,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "IDGCPDMDNEG",
-              "shieldHP": true,
-              "repeatTimes": "Heizo_ElementalBurst_ReviveEnergy_Base"
+              "$type": "ReviveElemEnergy",
+              "doOffStage": true,
+              "value": "Heizo_ElementalBurst_ReviveEnergy_Base"
             }
           ]
         },
         "Heizo_ElementalBurst_ReviveEnergy_Extra": {
           "stacking": "Multiple",
           "modifierName": "",
-          "elementDurability": 0.30000001192092896,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.30000001192092896,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "IDGCPDMDNEG",
-              "shieldHP": true,
-              "repeatTimes": "Heizo_ElementalBurst_ReviveEnergy_Extra"
+              "$type": "ReviveElemEnergy",
+              "doOffStage": true,
+              "value": "Heizo_ElementalBurst_ReviveEnergy_Extra"
             }
           ]
         },
         "Invincible": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
-              "$type": "HCPCNNBJEMK",
+              "$type": "AttachAbilityStateResistance",
               "resistanceListID": 11002
             }
           ]
         },
         "CloseCollider": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "CNAMGJCNFBK",
-              "shieldHP": true,
+              "doOffStage": true,
               "passThrough": true
             }
           ],
           "onRemoved": [
             {
               "$type": "CNAMGJCNFBK",
-              "shieldHP": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true
             }
           ]
         },
         "SkillStart": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "JJJCJIKOMNL",
+              "$type": "AvatarSkillStart",
               "skillID": 10595,
-              "costStaminaRatio": 1.0,
-              "IOFCJNLJBLE": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             }
           ]
         },
         "VFX": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Girl_Pole_Yunjin_ElementalBurst_BS",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Girl_Pole_Yunjin_ElementalBurst_BS",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         }
       },
       "onAdded": [
         {
-          "$type": "HLHAODOBHPK",
-          "shieldHP": true,
-          "repeatTimes": 0.0,
+          "$type": "SetGlobalValue",
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Heizo_ReviveEnergy_Count",
-          "param2": 0.0,
-          "triggerID": 0.0
+          "maxValue": 0.0,
+          "minValue": 0.0
         }
       ],
       "onAbilityStart": [
         {
-          "$type": "GNLJNLOMNGD",
+          "$type": "AttachModifier",
           "modifierName": "Heizo_ElementalBurst_ReviveEnergy_Handler"
         },
         {
-          "$type": "AHHAGLJGKDD",
+          "$type": "ApplyModifier",
           "modifierName": "CameraEffect"
         },
         {
@@ -2526,21 +2526,21 @@
           }
         },
         {
-          "$type": "PDGILBJBOOA",
+          "$type": "TriggerBullet",
           "bulletID": 41059002,
           "born": {
-            "$type": "EIIDFNOJEFD",
+            "$type": "ConfigBornByAttachPoint",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "direction": {
-              "$type": "DKNAJJDJPIB",
+              "$type": "ConfigDirectionByAttackTarget",
               "angleOffset": {
-                "EPAKBMBAOKK": 8.0,
-                "LNOGCFLGIJI": 0.0,
-                "MEJNCDENBNH": 0.0
+                "x": 8.0,
+                "y": 0.0,
+                "z": 0.0
               },
               "startPoint": ""
             },
@@ -2548,71 +2548,71 @@
           }
         },
         {
-          "$type": "HLHAODOBHPK",
-          "repeatTimes": 0.0,
+          "$type": "SetGlobalValue",
+          "value": 0.0,
           "key": "_ABILITY_Heizo_ReviveEnergy_Count",
-          "param2": 0.0,
-          "triggerID": 0.0
+          "maxValue": 0.0,
+          "minValue": 0.0
         }
       ]
     }
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Bullet_Heizo_ElementalBurst",
       "modifiers": {
         "Bullet_Heizo_ElementalBurst_VFX": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_Bullet",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_Bullet",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_Bullet_Trail",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_Bullet_Trail",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         }
       },
       "onAdded": [
         {
-          "$type": "GNLJNLOMNGD",
+          "$type": "AttachModifier",
           "modifierName": "Bullet_Heizo_ElementalBurst_VFX"
         }
       ],
       "onAbilityStart": [
         {
-          "$type": "INPLALHENKA",
+          "$type": "SetGlobalPos",
           "key": "_ABILITY_Heizo_ElementalBurstBullet_Pos",
           "born": {
-            "$type": "LPEJICOBGCF"
+            "$type": "ConfigBornByCollisionPoint"
           }
         },
         {
-          "$type": "DKABOJNNDAD",
+          "$type": "SetGlobalDir",
           "target": "Owner",
           "key": "_ABILITY_Heizo_ElementalBurstBullet_Dir",
           "born": {
-            "$type": "GNIAPFBHMIK",
+            "$type": "ConfigBornByTarget",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             }
           },
           "setTarget": false
         },
         {
-          "$type": "DIADBHNCPGO",
+          "$type": "CreateGadget",
           "born": {
-            "$type": "BGKKAEIIDIA",
+            "$type": "ConfigBornByGlobalValue",
             "positionKey": "_ABILITY_Heizo_ElementalBurstBullet_Pos",
             "directionKey": "_ABILITY_Heizo_ElementalBurstBullet_Dir"
           },
@@ -2625,7 +2625,7 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Heizo_ElementalBurst_WindHole",
       "abilitySpecials": {
         "Heizo_ElementalBurst_WindHole_Damage": 0.0,
@@ -2634,55 +2634,55 @@
       "modifiers": {
         "Avatar_Heizo_ElementalBurst_HitCheck": {
           "modifierName": "",
-          "elementDurability": 0.30000001192092896,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.30000001192092896,
+          "elementDurability": 100.0,
           "onHittingOther": [
             {
-              "$type": "OIDAEPDOMEP",
+              "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "EBMBJLDAEDL",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Burst"
                   ]
                 },
                 {
-                  "$type": "AEHBHLJCPJK",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "repeatTimes": 0.0,
+                  "value": 0.0,
                   "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Heizo_ElementalBurst_Counter",
-                  "repeatTimes": 3.0,
+                  "value": 3.0,
                   "compareType": "LessAndEqual"
                 },
                 {
-                  "$type": "IMAAJGIFMIE",
+                  "$type": "ByAttackType",
                   "attackType": "Range"
                 }
               ],
               "successActions": [
                 {
-                  "$type": "ACPEIOBJLKD",
+                  "$type": "AddGlobalValue",
                   "target": "Caster",
-                  "repeatTimes": 1.0,
+                  "value": 1.0,
                   "key": "_ABILITY_Heizo_ElementalBurst_Counter",
                   "useLimitRange": true,
-                  "param2": 4.0,
-                  "triggerID": 0.0
+                  "maxValue": 4.0,
+                  "minValue": 0.0
                 },
                 {
-                  "$type": "AHHAGLJGKDD",
+                  "$type": "ApplyModifier",
                   "target": "Target",
                   "modifierName": "Avatar_Heizo_ElementalBurst_SetElementBomb"
                 }
@@ -2692,165 +2692,165 @@
         },
         "Avatar_Heizo_ElementalBurst_SetElementBomb": {
           "modifierName": "",
-          "elementDurability": 0.6000000238418579,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.6000000238418579,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "HLHAODOBHPK",
+              "$type": "SetGlobalValue",
               "predicates": [
                 {
-                  "$type": "AMIDJIANNBM",
+                  "$type": "ByHasElement",
                   "element": "Ice"
                 }
               ],
-              "repeatTimes": 4.0,
+              "value": 4.0,
               "key": "_ABILITY_Heizo_ElementalBurst_ElementMark",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "HLHAODOBHPK",
+              "$type": "SetGlobalValue",
               "predicates": [
                 {
-                  "$type": "AMIDJIANNBM",
+                  "$type": "ByHasElement",
                   "element": "Frozen"
                 }
               ],
-              "repeatTimes": 4.0,
+              "value": 4.0,
               "key": "_ABILITY_Heizo_ElementalBurst_ElementMark",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "HLHAODOBHPK",
+              "$type": "SetGlobalValue",
               "predicates": [
                 {
-                  "$type": "AMIDJIANNBM",
+                  "$type": "ByHasElement",
                   "element": "Electric"
                 }
               ],
-              "repeatTimes": 3.0,
+              "value": 3.0,
               "key": "_ABILITY_Heizo_ElementalBurst_ElementMark",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "HLHAODOBHPK",
+              "$type": "SetGlobalValue",
               "predicates": [
                 {
-                  "$type": "AMIDJIANNBM",
+                  "$type": "ByHasElement",
                   "element": "Water"
                 }
               ],
-              "repeatTimes": 2.0,
+              "value": 2.0,
               "key": "_ABILITY_Heizo_ElementalBurst_ElementMark",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "HLHAODOBHPK",
+              "$type": "SetGlobalValue",
               "predicates": [
                 {
-                  "$type": "AMIDJIANNBM",
+                  "$type": "ByHasElement",
                   "element": "Fire"
                 }
               ],
-              "repeatTimes": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Heizo_ElementalBurst_ElementMark",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ],
           "onRemoved": [
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Heizo_ElementalBurst_ElementMark",
-                  "repeatTimes": 4.0
+                  "value": 4.0
                 }
               ],
               "modifierName": "Heizo_ElementalBurst_Burst_OnTarget_Ice"
             },
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Heizo_ElementalBurst_ElementMark",
-                  "repeatTimes": 3.0
+                  "value": 3.0
                 }
               ],
               "modifierName": "Heizo_ElementalBurst_Burst_OnTarget_Electric"
             },
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Heizo_ElementalBurst_ElementMark",
-                  "repeatTimes": 2.0
+                  "value": 2.0
                 }
               ],
               "modifierName": "Heizo_ElementalBurst_Burst_OnTarget_Water"
             },
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Heizo_ElementalBurst_ElementMark",
-                  "repeatTimes": 1.0
+                  "value": 1.0
                 }
               ],
               "modifierName": "Heizo_ElementalBurst_Burst_OnTarget_Fire"
             },
             {
-              "$type": "HLHAODOBHPK",
-              "repeatTimes": 0.0,
+              "$type": "SetGlobalValue",
+              "value": 0.0,
               "key": "_ABILITY_Heizo_ElementalBurst_ElementMark",
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         },
         "Heizo_ElementalBurst_Burst_OnTarget_Fire": {
           "stacking": "Unique",
           "modifierName": "",
-          "elementDurability": 0.20000000298023224,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.20000000298023224,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_AfterShock_Burst_Fire",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_AfterShock_Burst_Fire",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "KIBGAKKBNCL",
+              "$type": "TriggerAttackEvent",
               "target": "Caster",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KHBCMELAIKO",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "EIIDFNOJEFD",
+                    "$type": "ConfigBornByAttachPoint",
                     "attachPointName": "Fx_ChestNode",
                     "attachPointTargetType": "Self"
                   },
-                  "DCBIMHFGHEJ": 2.5
+                  "radius": 2.5
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "actorGrassSubHurtDelta": "Heizo_ElementalBurst_AfterShock_Damage",
-                    "actorWaterSubHurtDelta": 0.0,
+                    "damagePercentage": "Heizo_ElementalBurst_AfterShock_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Fire",
                     "elementRank": 1.5,
-                    "MCCELHKGPOP": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 25.0,
                     "KLIMCEGLPLG": 0.0
@@ -2867,7 +2867,7 @@
               "targetType": "Enemy"
             },
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "target": "CasterOriginOwner",
               "modifierName": "Heizo_ElementalBurst_ReviveEnergy_AddCount"
             }
@@ -2876,39 +2876,39 @@
         "Heizo_ElementalBurst_Burst_OnTarget_Water": {
           "stacking": "Unique",
           "modifierName": "",
-          "elementDurability": 0.20000000298023224,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.20000000298023224,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_AfterShock_Burst_Water",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_AfterShock_Burst_Water",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "KIBGAKKBNCL",
+              "$type": "TriggerAttackEvent",
               "target": "Caster",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KHBCMELAIKO",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "EIIDFNOJEFD",
+                    "$type": "ConfigBornByAttachPoint",
                     "attachPointName": "Fx_ChestNode",
                     "attachPointTargetType": "Self"
                   },
-                  "DCBIMHFGHEJ": 2.5
+                  "radius": 2.5
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "actorGrassSubHurtDelta": "Heizo_ElementalBurst_AfterShock_Damage",
-                    "actorWaterSubHurtDelta": 0.0,
+                    "damagePercentage": "Heizo_ElementalBurst_AfterShock_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Water",
                     "elementRank": 1.5,
-                    "MCCELHKGPOP": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 25.0,
                     "KLIMCEGLPLG": 0.0
@@ -2925,7 +2925,7 @@
               "targetType": "Enemy"
             },
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "target": "CasterOriginOwner",
               "modifierName": "Heizo_ElementalBurst_ReviveEnergy_AddCount"
             }
@@ -2934,39 +2934,39 @@
         "Heizo_ElementalBurst_Burst_OnTarget_Ice": {
           "stacking": "Unique",
           "modifierName": "",
-          "elementDurability": 0.20000000298023224,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.20000000298023224,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_AfterShock_Burst_Ice",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_AfterShock_Burst_Ice",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "KIBGAKKBNCL",
+              "$type": "TriggerAttackEvent",
               "target": "Caster",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KHBCMELAIKO",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "EIIDFNOJEFD",
+                    "$type": "ConfigBornByAttachPoint",
                     "attachPointName": "Fx_ChestNode",
                     "attachPointTargetType": "Self"
                   },
-                  "DCBIMHFGHEJ": 2.5
+                  "radius": 2.5
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "actorGrassSubHurtDelta": "Heizo_ElementalBurst_AfterShock_Damage",
-                    "actorWaterSubHurtDelta": 0.0,
+                    "damagePercentage": "Heizo_ElementalBurst_AfterShock_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
                     "elementRank": 1.5,
-                    "MCCELHKGPOP": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 25.0,
                     "KLIMCEGLPLG": 0.0
@@ -2983,7 +2983,7 @@
               "targetType": "Enemy"
             },
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "target": "CasterOriginOwner",
               "modifierName": "Heizo_ElementalBurst_ReviveEnergy_AddCount"
             }
@@ -2992,39 +2992,39 @@
         "Heizo_ElementalBurst_Burst_OnTarget_Electric": {
           "stacking": "Unique",
           "modifierName": "",
-          "elementDurability": 0.20000000298023224,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.20000000298023224,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_AfterShock_Burst_Electric",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_AfterShock_Burst_Electric",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "KIBGAKKBNCL",
+              "$type": "TriggerAttackEvent",
               "target": "Caster",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KHBCMELAIKO",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "EIIDFNOJEFD",
+                    "$type": "ConfigBornByAttachPoint",
                     "attachPointName": "Fx_ChestNode",
                     "attachPointTargetType": "Self"
                   },
-                  "DCBIMHFGHEJ": 2.5
+                  "radius": 2.5
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "actorGrassSubHurtDelta": "Heizo_ElementalBurst_AfterShock_Damage",
-                    "actorWaterSubHurtDelta": 0.0,
+                    "damagePercentage": "Heizo_ElementalBurst_AfterShock_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Electric",
                     "elementRank": 1.5,
-                    "MCCELHKGPOP": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 25.0,
                     "KLIMCEGLPLG": 0.0
@@ -3041,7 +3041,7 @@
               "targetType": "Enemy"
             },
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "target": "CasterOriginOwner",
               "modifierName": "Heizo_ElementalBurst_ReviveEnergy_AddCount"
             }
@@ -3049,36 +3049,36 @@
         },
         "Avatar_Heizo_ElementalBurst_WindZone_Default_Handler": {
           "modifierName": "",
-          "elementDurability": 0.30000001192092896,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.30000001192092896,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "BPPJCCMJONH",
+              "$type": "WindZoneMixin",
               "shapeName": "CircleR6",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 0.5,
-                  "MEJNCDENBNH": 0.0
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 0.0
                 }
               },
               "strength": 3.700000047683716,
-              "OFEGKMGIDPF": 2.0,
-              "DCHKNNKAGGL": 0.5,
+              "attenuation": 2.0,
+              "innerRadius": 0.5,
               "targetType": "All",
               "predicates": [
                 {
-                  "$type": "AEHBHLJCPJK",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ],
                   "reject": true
                 },
                 {
-                  "$type": "PEKBNGKOCPM",
+                  "$type": "ByTargetWeight",
                   "logic": "Lesser",
-                  "JFJCIBICLOG": 150.0
+                  "weight": 150.0
                 }
               ],
               "modifierName": ""
@@ -3087,55 +3087,55 @@
         },
         "Avatar_Heizo_ElementalBurst_WindZone_Handler": {
           "modifierName": "",
-          "elementDurability": 0.20000000298023224,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.20000000298023224,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "modifierName": "Avatar_Heizo_ElementalBurst_WindZone_Monster_Small"
             },
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "modifierName": "Avatar_Heizo_ElementalBurst_WindZone_Monster_Big"
             },
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "modifierName": "Avatar_Heizo_ElementalBurst_WindZone_Other"
             }
           ]
         },
         "Avatar_Heizo_ElementalBurst_WindZone_Monster_Small": {
           "modifierName": "",
-          "elementDurability": 1.0,
-          "MCCELHKGPOP": 100.0,
+          "duration": 1.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "BPPJCCMJONH",
+              "$type": "WindZoneMixin",
               "shapeName": "CircleR6",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 0.5,
-                  "MEJNCDENBNH": 0.0
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 0.0
                 }
               },
               "strength": 4.0,
-              "OFEGKMGIDPF": 2.0,
-              "DCHKNNKAGGL": 0.5,
+              "attenuation": 2.0,
+              "innerRadius": 0.5,
               "reverse": true,
               "targetType": "All",
               "predicates": [
                 {
-                  "$type": "AEHBHLJCPJK",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "PEKBNGKOCPM",
+                  "$type": "ByTargetWeight",
                   "logic": "Lesser",
-                  "JFJCIBICLOG": 100.0
+                  "weight": 100.0
                 }
               ],
               "modifierName": ""
@@ -3144,41 +3144,41 @@
         },
         "Avatar_Heizo_ElementalBurst_WindZone_Monster_Big": {
           "modifierName": "",
-          "elementDurability": 1.0,
-          "MCCELHKGPOP": 100.0,
+          "duration": 1.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "BPPJCCMJONH",
+              "$type": "WindZoneMixin",
               "shapeName": "CircleR6",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 0.5,
-                  "MEJNCDENBNH": 0.0
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 0.0
                 }
               },
               "strength": 10.0,
-              "OFEGKMGIDPF": 3.0,
-              "DCHKNNKAGGL": 0.5,
+              "attenuation": 3.0,
+              "innerRadius": 0.5,
               "reverse": true,
               "targetType": "All",
               "predicates": [
                 {
-                  "$type": "AEHBHLJCPJK",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "PEKBNGKOCPM",
+                  "$type": "ByTargetWeight",
                   "logic": "LesserOrEqual",
-                  "JFJCIBICLOG": 150.0
+                  "weight": 150.0
                 },
                 {
-                  "$type": "PEKBNGKOCPM",
+                  "$type": "ByTargetWeight",
                   "logic": "GreaterOrEqual",
-                  "JFJCIBICLOG": 100.0
+                  "weight": 100.0
                 }
               ],
               "modifierName": ""
@@ -3187,28 +3187,28 @@
         },
         "Avatar_Heizo_ElementalBurst_WindZone_Other": {
           "modifierName": "",
-          "elementDurability": 1.0,
-          "MCCELHKGPOP": 100.0,
+          "duration": 1.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "BPPJCCMJONH",
+              "$type": "WindZoneMixin",
               "shapeName": "CircleR6",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 0.5,
-                  "MEJNCDENBNH": 0.0
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 0.0
                 }
               },
               "strength": 8.0,
-              "OFEGKMGIDPF": 2.0,
-              "DCHKNNKAGGL": 0.5,
+              "attenuation": 2.0,
+              "innerRadius": 0.5,
               "reverse": true,
               "targetType": "All",
               "predicates": [
                 {
-                  "$type": "AEHBHLJCPJK",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar",
                     "Monster"
@@ -3216,9 +3216,9 @@
                   "reject": true
                 },
                 {
-                  "$type": "PEKBNGKOCPM",
+                  "$type": "ByTargetWeight",
                   "logic": "LesserOrEqual",
-                  "JFJCIBICLOG": 150.0
+                  "weight": 150.0
                 }
               ],
               "modifierName": ""
@@ -3228,75 +3228,75 @@
         "Heizo_ElementalBurst_ReviveEnergy_AddCount": {
           "stacking": "Multiple",
           "modifierName": "",
-          "elementDurability": 0.20000000298023224,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.20000000298023224,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ACPEIOBJLKD",
-              "shieldHP": true,
+              "$type": "AddGlobalValue",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "FBDCPKHCLDA",
+                  "$type": "ByUnlockTalentParam",
                   "talentParam": "Heizo_Constellation_4"
                 }
               ],
-              "repeatTimes": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Heizo_ReviveEnergy_Count",
               "useLimitRange": true,
-              "param2": 4.0,
-              "triggerID": 0.0
+              "maxValue": 4.0,
+              "minValue": 0.0
             }
           ]
         }
       },
       "onAdded": [
         {
-          "$type": "GNLJNLOMNGD",
+          "$type": "AttachModifier",
           "modifierName": "Avatar_Heizo_ElementalBurst_HitCheck"
         },
         {
-          "$type": "HLHAODOBHPK",
+          "$type": "SetGlobalValue",
           "target": "Caster",
-          "repeatTimes": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Heizo_ElementalBurst_Counter",
-          "param2": 0.0,
-          "triggerID": 0.0
+          "maxValue": 0.0,
+          "minValue": 0.0
         },
         {
-          "$type": "DKABOJNNDAD",
+          "$type": "SetGlobalDir",
           "target": "Owner",
           "key": "_ABILITY_Heizo_ElementalBurst_Gadget_Dir",
           "born": {
-            "$type": "GNIAPFBHMIK",
+            "$type": "ConfigBornByTarget",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             }
           },
           "setTarget": false
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "attackEvent": {
             "attackPattern": {
-              "$type": "KHBCMELAIKO",
+              "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "DCIDKNMJCLI"
+                "$type": "ConfigBornBySelf"
               },
-              "DCBIMHFGHEJ": 6.0
+              "radius": 6.0
             },
             "attackInfo": {
               "attackTag": "Elemental_Burst",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": "Heizo_ElementalBurst_WindHole_Damage",
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentage": "Heizo_ElementalBurst_WindHole_Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Wind",
                 "elementRank": 1.5,
-                "MCCELHKGPOP": 25.0,
+                "elementDurability": 25.0,
                 "strikeType": "Default",
                 "enBreak": 100.0,
                 "attackType": "Range",
@@ -3325,27 +3325,27 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "EHPLOGLPPAC",
-          "rotationDampTime": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_Hit",
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Boy_Catalyst_Heizo_ElementalBurst_Hit",
           "born": {
-            "$type": "DCIDKNMJCLI",
+            "$type": "ConfigBornBySelf",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             }
           },
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         },
         {
-          "$type": "AHHAGLJGKDD",
+          "$type": "ApplyModifier",
           "predicates": [
             {
-              "$type": "IAMKIOEEDMI",
+              "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "FBDCPKHCLDA",
+                  "$type": "ByUnlockTalentParam",
                   "talentParam": "Heizo_Constellation_2"
                 }
               ]
@@ -3354,10 +3354,10 @@
           "modifierName": "Avatar_Heizo_ElementalBurst_WindZone_Default_Handler"
         },
         {
-          "$type": "AHHAGLJGKDD",
+          "$type": "ApplyModifier",
           "predicates": [
             {
-              "$type": "FBDCPKHCLDA",
+              "$type": "ByUnlockTalentParam",
               "talentParam": "Heizo_Constellation_2"
             }
           ],
@@ -3368,16 +3368,16 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Heizo_FallingAnthem",
       "abilityMixins": [
         {
-          "$type": "IKPEFCGOOJO",
+          "$type": "AvatarChangeSkillMixin",
           "jumpSkillID": 5059010,
           "flySkillID": 5059010
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS"
           ],
@@ -3385,7 +3385,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BAEGHHFFMGP",
+          "$type": "AttachToAnimatorStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS_2",
             "FallingAnthem_Loop",
@@ -3395,7 +3395,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS"
           ],
@@ -3403,7 +3403,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop",
@@ -3414,7 +3414,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop",
@@ -3425,7 +3425,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop"
@@ -3434,7 +3434,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop",
@@ -3445,7 +3445,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS"
           ],
@@ -3453,7 +3453,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BAEGHHFFMGP",
+          "$type": "AttachToAnimatorStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS_2",
             "FallingAnthem_Loop",
@@ -3464,7 +3464,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BAEGHHFFMGP",
+          "$type": "AttachToAnimatorStateIDMixin",
           "stateIDs": [
             "FallingAnthem_AS_1"
           ],
@@ -3472,7 +3472,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BAEGHHFFMGP",
+          "$type": "AttachToAnimatorStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS_2",
             "FallingAnthem_Loop"
@@ -3481,7 +3481,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop",
@@ -3510,10 +3510,10 @@
       "modifiers": {
         "HideWeapon": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ABGFEEKKHLI",
+              "$type": "TriggerHideWeapon",
               "partNames": [
                 "equip01",
                 "equip02",
@@ -3524,8 +3524,8 @@
           ],
           "onRemoved": [
             {
-              "$type": "ABGFEEKKHLI",
-              "CAKFGFNNNOJ": true,
+              "$type": "TriggerHideWeapon",
+              "visible": true,
               "partNames": [
                 "equip01",
                 "equip02",
@@ -3537,40 +3537,40 @@
         },
         "FallingAnthem_SetVisible": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "IPAMJEALJMN",
-              "shieldHP": true
+              "$type": "TriggerSetVisible",
+              "doOffStage": true
             }
           ],
           "onRemoved": [
             {
-              "$type": "IPAMJEALJMN",
-              "shieldHP": true,
-              "CAKFGFNNNOJ": true
+              "$type": "TriggerSetVisible",
+              "doOffStage": true,
+              "visible": true
             }
           ]
         },
         "FallingAnthem_BS_Material": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "EHPLOGLPPAC",
-              "rotationDampTime": "Eff_Avatar_Catalyst_FallAnthem_BS_Wind",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Catalyst_FallAnthem_BS_Wind",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "modifierName": "FallingAnthem_BSCameraRadialBlur"
             }
           ]
         },
         "FallingAnthem_BS_VelocityForce_Initialize": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -2.0
           },
@@ -3585,34 +3585,34 @@
         },
         "FallingAnthem_LoopDamage": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onThinkInterval": [
             {
-              "$type": "KIBGAKKBNCL",
+              "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KHBCMELAIKO",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
                   },
-                  "DCBIMHFGHEJ": 1.5
+                  "radius": 1.5
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "actorGrassSubHurtDelta": "Heizo_FallingAnthem_Normal_Loop_Damage",
-                    "actorWaterSubHurtDelta": 0.0,
+                    "damagePercentage": "Heizo_FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Wind",
-                    "MCCELHKGPOP": 0.0,
+                    "elementDurability": 0.0,
                     "strikeType": "Default",
                     "enBreak": 5.0,
                     "KLIMCEGLPLG": 0.0
@@ -3631,129 +3631,129 @@
         },
         "FallingAnthem_FallingDamageImmune_01": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "LENKODOFEAF",
+              "$type": "ClearGlobalValue",
               "key": "_ABILITY_FallingAttack_Altitude"
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv0"
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "repeatTimes": "FallingAnthem_FallingDamageRatio_Lv0",
+              "value": "FallingAnthem_FallingDamageRatio_Lv0",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv0",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv0"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv0"
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv1"
+                  "value": "FallingAnthem_Altitude_Lv1"
                 },
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv0"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "repeatTimes": "FallingAnthem_FallingDamageRatio_Lv1",
+              "value": "FallingAnthem_FallingDamageRatio_Lv1",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv1",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv1"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv1"
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv2"
+                  "value": "FallingAnthem_Altitude_Lv2"
                 },
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv1"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv1"
                 }
               ],
-              "repeatTimes": "FallingAnthem_FallingDamageRatio_Lv2",
+              "value": "FallingAnthem_FallingDamageRatio_Lv2",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv2",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv2"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv2"
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv3"
+                  "value": "FallingAnthem_Altitude_Lv3"
                 },
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv2"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv2"
                 }
               ],
-              "repeatTimes": "FallingAnthem_FallingDamageRatio_Lv3",
+              "value": "FallingAnthem_FallingDamageRatio_Lv3",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv3",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv3"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv3"
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv3"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv3"
                 }
               ],
-              "repeatTimes": "FallingAnthem_FallingDamageRatio_Lv4",
+              "value": "FallingAnthem_FallingDamageRatio_Lv4",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv4",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv4"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv4"
             },
             {
-              "$type": "GNLJNLOMNGD",
+              "$type": "AttachModifier",
               "modifierName": "FallingAnthem_FallingDamageImmune_02"
             }
           ]
         },
         "FallingAnthem_FallingDamageImmune_02": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "DBGFNDFDIBF",
+              "$type": "SetGlobalValueToOverrideMap",
               "globalValueKey": "_ABILITY_FallingAttack_Altitude",
               "overrideMapKey": "FallingAnthem_FallingDamageRatio"
             },
             {
-              "$type": "GNLJNLOMNGD",
+              "$type": "AttachModifier",
               "modifierName": "FallingAnthem_FallingDamageImmune_03"
             }
           ]
         },
         "FallingAnthem_FallingDamageImmune_03": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
           }
         },
         "Inertia": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "HFGABACOIMJ",
@@ -3764,88 +3764,88 @@
         },
         "FallingAnthem_Height_Detect": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
-              "repeatTimes": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
-              "repeatTimes": 5.0,
+              "value": 5.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
-              "param2": 1.0,
-              "triggerID": 0.0
+              "maxValue": 1.0,
+              "minValue": 0.0
             },
             {
-              "$type": "DBNHDNBHADP",
+              "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "repeatTimes": 0.0
+              "value": 0.0
             },
             {
-              "$type": "DBNHDNBHADP",
+              "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "repeatTimes": 1.0
+              "value": 1.0
             }
           ],
           "onRemoved": [
             {
-              "$type": "DBNHDNBHADP",
+              "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "repeatTimes": 0.0
+              "value": 0.0
             },
             {
-              "$type": "ACPEIOBJLKD",
-              "repeatTimes": 0.0,
+              "$type": "AddGlobalValue",
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         },
         "FallingAnthem_OverHead_Camera": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "CFCENANLJGI",
+              "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "DGFIOEDKLLD",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "repeatTimes": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -3859,25 +3859,25 @@
         },
         "FallingAnthem_OverHead_Camera_Remover": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "KOEMHHFKCIL",
-              "shieldHP": true
+              "$type": "AvatarExitCameraShot",
+              "doOffStage": true
             }
           ]
         },
         "FallingAnthem_Landed_Camera": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "CFCENANLJGI",
+              "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "DGFIOEDKLLD",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "repeatTimes": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -3891,7 +3891,7 @@
         },
         "FallingAnthem_ClearVelocityForce": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "MOEOJKHGNPK",
@@ -3904,31 +3904,31 @@
         },
         "FallingAnthem_Attach_SelfEffect": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Catalyst_FallAnthem_Self_Wind",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Catalyst_FallAnthem_Self_Wind",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_Remove_SelfEffect": {
           "modifierName": "",
-          "elementDurability": 0.10000000149011612,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.10000000149011612,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
-              "$type": "IJMCEELGGIH",
+              "$type": "RemoveModifier",
               "modifierName": "FallingAnthem_Attach_SelfEffect"
             }
           ]
         },
         "FallingAnthem_BSCameraRadialBlur": {
           "modifierName": "",
-          "elementDurability": 0.30000001192092896,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.30000001192092896,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "IFCNAOFGNGG",
@@ -3942,58 +3942,58 @@
       },
       "onAdded": [
         {
-          "$type": "HLHAODOBHPK",
-          "shieldHP": true,
-          "repeatTimes": 0.0,
+          "$type": "SetGlobalValue",
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_FallingAnthem_UseCamera",
-          "param2": 0.0,
-          "triggerID": 0.0
+          "maxValue": 0.0,
+          "minValue": 0.0
         },
         {
-          "$type": "HLHAODOBHPK",
-          "shieldHP": true,
-          "repeatTimes": 0.0,
+          "$type": "SetGlobalValue",
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_FallingAttack_Altitude",
-          "param2": 0.0,
-          "triggerID": 0.0
+          "maxValue": 0.0,
+          "minValue": 0.0
         }
       ],
       "onAbilityStart": [
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "repeatTimes": 0.0,
+              "value": 0.0,
               "forceByCaster": true,
               "compareType": "NoneOrEqual"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "DCBLBBGDIAN",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "GNIAPFBHMIK",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": -0.5,
-                  "MEJNCDENBNH": 0.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 0.0
                 }
               },
               "height": 2.0,
-              "DCBIMHFGHEJ": 3.0
+              "radius": 3.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": "Heizo_FallingAnthem_Normal_Rank_1_Damage",
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentage": "Heizo_FallingAnthem_Normal_Rank_1_Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Wind",
-                "MCCELHKGPOP": 25.0,
+                "elementDurability": 25.0,
                 "strikeType": "Default",
                 "enBreak": 50.0,
                 "KLIMCEGLPLG": 0.0
@@ -4024,39 +4024,39 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "repeatTimes": 1.0,
+              "value": 1.0,
               "forceByCaster": true
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "DCBLBBGDIAN",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "GNIAPFBHMIK",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": -0.5,
-                  "MEJNCDENBNH": 0.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 0.0
                 }
               },
               "height": 2.0,
-              "DCBIMHFGHEJ": 3.5
+              "radius": 3.5
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": "Heizo_FallingAnthem_Normal_Rank_2_Damage",
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentage": "Heizo_FallingAnthem_Normal_Rank_2_Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Wind",
-                "MCCELHKGPOP": 25.0,
+                "elementDurability": 25.0,
                 "strikeType": "Default",
                 "enBreak": 100.0,
                 "KLIMCEGLPLG": 0.0
@@ -4088,62 +4088,62 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "EHPLOGLPPAC",
+          "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "repeatTimes": 0.0,
+              "value": 0.0,
               "forceByCaster": true,
               "compareType": "NoneOrEqual"
             }
           ],
-          "rotationDampTime": "Eff_Avatar_Catalyst_FallAnthem_Strike_01_Wind",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "effectPattern": "Eff_Avatar_Catalyst_FallAnthem_Strike_01_Wind",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         },
         {
-          "$type": "EHPLOGLPPAC",
+          "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "repeatTimes": 1.0,
+              "value": 1.0,
               "forceByCaster": true
             }
           ],
-          "rotationDampTime": "Eff_Avatar_Catalyst_FallAnthem_Strike_02_Wind",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "effectPattern": "Eff_Avatar_Catalyst_FallAnthem_Strike_02_Wind",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         }
       ]
     }
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Heizo_DashStamina_Reduction",
       "modifiers": {
         "Heizo_DashStaminaReduction_Handler": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 5.0,
           "onThinkInterval": [
             {
-              "$type": "GNLJNLOMNGD",
+              "$type": "AttachModifier",
               "target": "CurTeamAvatars",
-              "shieldHP": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_DashStaminaReduction"
             }
           ]
         },
         "UNIQUE_DashStaminaReduction": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "BCJDIOHHNHP",
+              "$type": "AttachToStateIDMixin",
               "stateIDs": [
                 "Sprint",
                 "SprintBS"
@@ -4155,7 +4155,7 @@
         },
         "DashStamina_Reduction": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_CostStaminaRatio": -0.20000000298023224
           }
@@ -4163,14 +4163,14 @@
       },
       "onAdded": [
         {
-          "$type": "GNLJNLOMNGD",
+          "$type": "AttachModifier",
           "target": "CurTeamAvatars",
-          "shieldHP": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_DashStaminaReduction"
         },
         {
-          "$type": "GNLJNLOMNGD",
-          "shieldHP": true,
+          "$type": "AttachModifier",
+          "doOffStage": true,
           "modifierName": "Heizo_DashStaminaReduction_Handler"
         }
       ],

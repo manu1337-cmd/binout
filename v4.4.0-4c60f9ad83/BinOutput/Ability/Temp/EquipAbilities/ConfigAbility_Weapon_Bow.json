@@ -7,23 +7,23 @@
         {
           "$type": "ModifyDamageMixin",
           "ignoreEventInfo": true,
-          "JIICGJODDDM": "Rate",
+          "damagePercentageRatio": "Rate",
           "predicates": [
             {
-              "$type": "CACJBJLHLDL",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Monster"
               ]
             },
             {
-              "$type": "GANAKOPLMGI",
+              "$type": "ByAny",
               "predicates": [
                 {
-                  "$type": "CNMDCPKAGOP",
+                  "$type": "ByHasElement",
                   "element": "Water"
                 },
                 {
-                  "$type": "CNMDCPKAGOP",
+                  "$type": "ByHasElement",
                   "element": "Fire"
                 }
               ]
@@ -45,14 +45,14 @@
         {
           "$type": "ModifyDamageMixin",
           "ignoreEventInfo": true,
-          "JIICGJODDDM": "Rate",
+          "damagePercentageRatio": "Rate",
           "predicates": [
             {
-              "$type": "IFLFDGAHHJJ",
-              "BBHOOFPDHHL": "Head"
+              "$type": "ByHitBoxType",
+              "hitBoxType": "Head"
             },
             {
-              "$type": "CACJBJLHLDL",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Monster"
               ]
@@ -68,18 +68,18 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Other",
               "targetPredicates": [
                 {
-                  "$type": "IFLFDGAHHJJ",
-                  "BBHOOFPDHHL": "Head"
+                  "$type": "ByHitBoxType",
+                  "hitBoxType": "Head"
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
@@ -89,11 +89,11 @@
                 {
                   "$type": "FireEffect",
                   "target": "Target",
-                  "shieldHP": "Eff_Weapon_SpecialHit_Heavy",
+                  "effectPattern": "Eff_Weapon_SpecialHit_Heavy",
                   "born": {
-                    "$type": "AKFBENAJCLO",
-                    "NLICIODEGDO": {
-                      "$type": "BMAMOFPPNBD"
+                    "$type": "ConfigBornByHitPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByEntity"
                     }
                   },
                   "effectTempleteID": -1.0
@@ -126,7 +126,7 @@
               "target": "Other",
               "targetPredicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
@@ -135,7 +135,7 @@
               "successActions": [
                 {
                   "$type": "HealHP",
-                  "LBNLJFPDOGO": "HealAmount",
+                  "amountByTargetMaxHPRatio": "HealAmount",
                   "cdRatio": ""
                 }
               ]
@@ -163,7 +163,7 @@
         "UNIQUE_Bow_RiseDMGWithinTime_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "DoActionByCreateGadgetMixin",
@@ -182,7 +182,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Time",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -195,7 +195,7 @@
                 "NormalAttack_06",
                 "ExtraAttack"
               ],
-              "JIICGJODDDM": "AttackUpRatio"
+              "damagePercentageRatio": "AttackUpRatio"
             }
           ],
           "onRemoved": [
@@ -209,7 +209,7 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -222,7 +222,7 @@
                 "NormalAttack_06",
                 "ExtraAttack"
               ],
-              "JIICGJODDDM": [
+              "damagePercentageRatio": [
                 "AttackDownRatio",
                 "Minus",
                 "MUL"
@@ -252,12 +252,12 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_Weapon_Bow_HeavyCritical",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -0.5,
                 0.5,
@@ -275,7 +275,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 10.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "EquipAffixStart",
@@ -286,8 +286,8 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "value": -1.0,
               "key": "_ABILITY_Weapon_Bow_HeavyCritical",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -299,30 +299,30 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "ExtraAttack"
                   ]
                 },
                 {
-                  "$type": "IFLFDGAHHJJ",
-                  "BBHOOFPDHHL": "Head"
+                  "$type": "ByHitBoxType",
+                  "hitBoxType": "Head"
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "MJACFLGGFHL",
+                  "$type": "ByEquipAffixReady",
                   "target": "Self",
                   "equipAffixDataID": 115305
                 }
@@ -330,13 +330,13 @@
               "successActions": [
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Weapon_Blast_Small",
+                  "effectPattern": "Eff_Weapon_Blast_Small",
                   "born": {
-                    "$type": "MNJLPLGJGLI",
+                    "$type": "ConfigBornByCollisionPoint",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": 0.0,
-                      "MLOLIKEJCKB": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
                   },
                   "effectTempleteID": -1.0
@@ -349,14 +349,14 @@
                     "attenuationTag": "",
                     "attenuationGroup": "default",
                     "attackProperty": {
-                      "ACKCDHKEGCK": "bonusCriticalDamage",
-                      "JIICGJODDDM": 0.0,
-                      "bonusCriticalHurt": 100.0,
+                      "damagePercentage": "bonusCriticalDamage",
+                      "damagePercentageRatio": 0.0,
+                      "elementDurability": 100.0,
                       "strikeType": "Pierce",
                       "enBreak": 20.0,
                       "attackType": "Range",
                       "bonusCritical": 1.0,
-                      "CBNLJFOGCDH": 0.0,
+                      "bonusCriticalHurt": 0.0,
                       "damagePercentage": 0.0
                     },
                     "hitPattern": {
@@ -378,7 +378,7 @@
                 },
                 {
                   "$type": "AddGlobalValue",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "key": "_ABILITY_Weapon_Bow_HeavyCritical",
                   "useLimitRange": true,
                   "maxValue": 1.0,
@@ -396,7 +396,7 @@
         },
         {
           "$type": "AddGlobalValue",
-          "ratio": -1.0,
+          "value": -1.0,
           "key": "_ABILITY_Weapon_Bow_HeavyCritical",
           "useLimitRange": true,
           "maxValue": 1.0,
@@ -406,8 +406,8 @@
       "onRemoved": [
         {
           "$type": "AddGlobalValue",
-          "PositionDampTime": true,
-          "ratio": -1.0,
+          "doOffStage": true,
+          "value": -1.0,
           "key": "_ABILITY_Weapon_Bow_HeavyCritical",
           "useLimitRange": true,
           "maxValue": 1.0,
@@ -428,21 +428,21 @@
         "UNIQUE_Bow_MachineKiller_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "ignoreEventInfo": true,
-              "JIICGJODDDM": "Rate",
+              "damagePercentageRatio": "Rate",
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "EELCEDEMKIJ",
+                  "$type": "ByHasFeatureTag",
                   "featureTagIDs": [
                     4005
                   ]
@@ -474,27 +474,27 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Randomed",
               "target": "Target",
               "predicates": [
                 {
-                  "$type": "HKCKIIBAOPI"
+                  "$type": "ByHitCritical"
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "EPMJKNBAIPE",
-                  "OCCFCJJBLFH": 0.0
+                  "$type": "ByHitDamage",
+                  "damage": 0.0
                 },
                 {
-                  "$type": "MJACFLGGFHL",
+                  "$type": "ByEquipAffixReady",
                   "target": "Self",
                   "equipAffixDataID": 115401
                 }
@@ -514,7 +514,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "CDTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "EquipAffixStart",
@@ -523,26 +523,26 @@
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Weapon_ExtraElementBall",
+              "effectPattern": "Eff_Weapon_ExtraElementBall",
               "effectTempleteID": -1.0
             },
             {
               "$type": "GenerateElemBall",
               "configID": 2024,
               "born": {
-                "$type": "ALJGHOOKOAP",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.0,
-                  "MLOLIKEJCKB": -1.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": -1.0
                 },
-                "OCACHEEBJCE": {
-                  "$type": "EOKEDICAOIL",
-                  "PBLLHJAOIIG": 0.0,
-                  "KMBNDMHDCJG": 0.5
+                "bornRandom": {
+                  "$type": "BornRandomFromCenter",
+                  "minRandomRange": 0.0,
+                  "maxRandomRange": 0.5
                 }
               },
-              "value": 1.0,
+              "ratio": 1.0,
               "baseEnergy": 6.0
             }
           ]
@@ -568,7 +568,7 @@
         "UNIQUE_Bow_RiseElementalSkillDMG_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -578,7 +578,7 @@
                 "Elemental_Art_Hold",
                 "Elemental_Art_Extra"
               ],
-              "JIICGJODDDM": "RiseElementalSkill"
+              "damagePercentageRatio": "RiseElementalSkill"
             }
           ]
         }
@@ -600,7 +600,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Weapon_Bow_ResetCDWhenSkillHit",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -1.5,
             -0.5,
@@ -621,30 +621,30 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "EPMJKNBAIPE",
-                  "OCCFCJJBLFH": 0.0
+                  "$type": "ByHitDamage",
+                  "damage": 0.0
                 },
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "MJACFLGGFHL",
+                  "$type": "ByEquipAffixReady",
                   "target": "Self",
                   "equipAffixDataID": 115403
                 }
@@ -667,7 +667,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 1.899999976158142,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Randomed",
@@ -675,7 +675,7 @@
               "successActions": [
                 {
                   "$type": "AddGlobalValue",
-                  "ratio": -1.0,
+                  "value": -1.0,
                   "key": "_ABILITY_Weapon_Bow_ResetCDWhenSkillHit",
                   "useLimitRange": true,
                   "maxValue": -1.0,
@@ -690,11 +690,11 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "CDTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Weapon_ResetCD",
+              "effectPattern": "Eff_Weapon_ResetCD",
               "effectTempleteID": -1.0
             },
             {
@@ -707,14 +707,14 @@
               "skillSlot": [
                 2
               ],
-              "amountByCasterMaxHPRatio": -1.0
+              "cdRatio": -1.0
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Weapon_Bow_ResetCDWhenSkillHit",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -738,28 +738,28 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "EPMJKNBAIPE",
-                  "OCCFCJJBLFH": 0.0
+                  "$type": "ByHitDamage",
+                  "damage": 0.0
                 },
                 {
-                  "$type": "ECAAGMBEMJE",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "HKCKIIBAOPI"
+                      "$type": "ByHitCritical"
                     }
                   ]
                 }
@@ -767,7 +767,7 @@
               "successActions": [
                 {
                   "$type": "AttachModifier",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Bow_CritUpWhenHitNoCrit_CD"
                 }
               ]
@@ -775,26 +775,26 @@
             {
               "$type": "Predicated",
               "target": "Target",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "EPMJKNBAIPE",
-                  "OCCFCJJBLFH": 0.0
+                  "$type": "ByHitDamage",
+                  "damage": 0.0
                 },
                 {
-                  "$type": "HKCKIIBAOPI"
+                  "$type": "ByHitCritical"
                 }
               ],
               "successActions": [
                 {
                   "$type": "RemoveModifier",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Bow_CritUpWhenHitNoCrit"
                 }
               ]
@@ -806,11 +806,11 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Bow_CritUpWhenHitNoCrit"
             }
           ]
@@ -823,7 +823,7 @@
           },
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_CriticalDelta": "Rate"
           },
@@ -839,7 +839,7 @@
       "onRemoved": [
         {
           "$type": "RemoveModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_Bow_CritUpWhenHitNoCrit"
         }
       ],
@@ -859,7 +859,7 @@
         "UNIQUE_Bow_RiseNormalFallExtra_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -871,14 +871,14 @@
                 "NormalAttack_05",
                 "NormalAttack_06"
               ],
-              "JIICGJODDDM": "RiseNormalAttack"
+              "damagePercentageRatio": "RiseNormalAttack"
             },
             {
               "$type": "ModifyDamageMixin",
               "attackTags": [
                 "ExtraAttack"
               ],
-              "JIICGJODDDM": [
+              "damagePercentageRatio": [
                 "FallExtraAttack",
                 "Minus",
                 "MUL"
@@ -909,27 +909,27 @@
         "UNIQUE_Bow_AttackGainSPDAKTBuff_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "ExtraAttack"
                   ]
                 },
                 {
-                  "$type": "IFLFDGAHHJJ",
-                  "BBHOOFPDHHL": "Head"
+                  "$type": "ByHitBoxType",
+                  "hitBoxType": "Head"
                 }
               ],
               "successActions": [
@@ -945,7 +945,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Time",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "AttackRatio",
             "Animator_MoveSpeedRatio": "MoveSpeedRatio"
@@ -971,7 +971,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Bow_AttackGainAKTDSPDBuff_COUNT",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             0.5,
             1.5,
@@ -997,20 +997,20 @@
         "UNIQUE_Bow_AttackGainAKTSPDBuff_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "NormalAttack_01",
                     "NormalAttack_02",
@@ -1036,11 +1036,11 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "CDTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Bow_AttackGainAKTDSPDBuff_COUNT",
               "useLimitRange": true,
               "maxValue": 4.0,
@@ -1056,12 +1056,12 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 6.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": -10.0,
+              "doOffStage": true,
+              "value": -10.0,
               "key": "_ABILITY_Bow_AttackGainAKTDSPDBuff_COUNT",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -1072,7 +1072,7 @@
         "UNIQUE_Bow_AttackGainAKTDSPDBuff_Buff1": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "AttackRatio",
             "Animator_AttackSpeedRatio": "OverallSpeedRatio"
@@ -1080,7 +1080,7 @@
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Weapon_Attack_Stack1",
+              "effectPattern": "Eff_Weapon_Attack_Stack1",
               "effectTempleteID": -1.0
             }
           ],
@@ -1089,7 +1089,7 @@
         "UNIQUE_Bow_AttackGainAKTDSPDBuff_Buff2": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": [
               "AttackRatio",
@@ -1105,7 +1105,7 @@
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Weapon_Attack_Stack2",
+              "effectPattern": "Eff_Weapon_Attack_Stack2",
               "effectTempleteID": -1.0
             }
           ],
@@ -1114,7 +1114,7 @@
         "UNIQUE_Bow_AttackGainAKTDSPDBuff_Buff3": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": [
               "AttackRatio",
@@ -1130,7 +1130,7 @@
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Weapon_Attack_Stack3",
+              "effectPattern": "Eff_Weapon_Attack_Stack3",
               "effectTempleteID": -1.0
             }
           ],
@@ -1139,7 +1139,7 @@
         "UNIQUE_Bow_AttackGainAKTDSPDBuff_Buff4": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": [
               "AttackRatio",
@@ -1155,7 +1155,7 @@
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Weapon_Attack_Stack4",
+              "effectPattern": "Eff_Weapon_Attack_Stack4",
               "effectTempleteID": -1.0
             }
           ],
@@ -1171,8 +1171,8 @@
       "onRemoved": [
         {
           "$type": "AddGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Bow_AttackGainAKTDSPDBuff_COUNT",
           "useLimitRange": true,
           "maxValue": 0.0,
@@ -1195,7 +1195,7 @@
         "UNIQUE_Bow_FallNormalRiseExtra_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -1207,7 +1207,7 @@
                 "NormalAttack_05",
                 "NormalAttack_06"
               ],
-              "JIICGJODDDM": [
+              "damagePercentageRatio": [
                 "FallNormalAttack",
                 "Minus",
                 "MUL"
@@ -1218,7 +1218,7 @@
               "attackTags": [
                 "ExtraAttack"
               ],
-              "JIICGJODDDM": "RiseExtraAttack"
+              "damagePercentageRatio": "RiseExtraAttack"
             }
           ]
         }
@@ -1240,7 +1240,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_WEAPON_Blackrock_COUNT",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             0.5,
             1.5,
@@ -1262,7 +1262,7 @@
               "target": "Other",
               "targetPredicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
@@ -1275,8 +1275,8 @@
                 },
                 {
                   "$type": "AddGlobalValue",
-                  "PositionDampTime": true,
-                  "ratio": 1.0,
+                  "doOffStage": true,
+                  "value": 1.0,
                   "key": "_ABILITY_WEAPON_Blackrock_COUNT",
                   "useLimitRange": true,
                   "maxValue": 3.0,
@@ -1301,13 +1301,13 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Dua",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "state": "AttackUp",
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "value": -1.0,
               "key": "_ABILITY_WEAPON_Blackrock_COUNT",
               "useLimitRange": true,
               "maxValue": 3.0,
@@ -1318,7 +1318,7 @@
         "UNIQUE_Bow_Blackrock_Buff1": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "Rate"
           },
@@ -1326,14 +1326,14 @@
             {
               "$type": "AttachEffect",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "shieldHP": "Eff_Weapon_Blackrock1_Bow",
+              "effectPattern": "Eff_Weapon_Blackrock1_Bow",
               "effectTempleteID": -1.0
             }
           ],
@@ -1342,7 +1342,7 @@
         "UNIQUE_Bow_Blackrock_Buff2": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": [
               "Rate",
@@ -1354,14 +1354,14 @@
             {
               "$type": "AttachEffect",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "shieldHP": "Eff_Weapon_Blackrock2_Bow",
+              "effectPattern": "Eff_Weapon_Blackrock2_Bow",
               "effectTempleteID": -1.0
             }
           ],
@@ -1370,7 +1370,7 @@
         "UNIQUE_Bow_Blackrock_Buff3": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": [
               "Rate",
@@ -1382,14 +1382,14 @@
             {
               "$type": "AttachEffect",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "shieldHP": "Eff_Weapon_Blackrock3_Bow",
+              "effectPattern": "Eff_Weapon_Blackrock3_Bow",
               "effectTempleteID": -1.0
             }
           ],
@@ -1399,8 +1399,8 @@
       "onRemoved": [
         {
           "$type": "AddGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_WEAPON_Blackrock_COUNT",
           "useLimitRange": true,
           "maxValue": 0.0,
@@ -1418,7 +1418,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Weapon_Bow_AttractField",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -1.5,
             -0.5,
@@ -1442,14 +1442,14 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "NormalAttack_01",
                     "NormalAttack_02",
@@ -1461,13 +1461,13 @@
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "MJACFLGGFHL",
+                  "$type": "ByEquipAffixReady",
                   "target": "Self",
                   "equipAffixDataID": 115409
                 }
@@ -1482,13 +1482,13 @@
                       "$type": "CreateGadget",
                       "target": "Target",
                       "born": {
-                        "$type": "ALJGHOOKOAP",
+                        "$type": "ConfigBornByTarget",
                         "offset": {
-                          "EMBMLEBGFOI": 0.0,
-                          "NABPJFNICAE": 0.0,
-                          "MLOLIKEJCKB": 0.0
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": 0.0
                         },
-                        "CMLNNDEJCEF": true,
+                        "onGround": true,
                         "PDCEFGKJHIH": true
                       },
                       "gadgetID": 40020002,
@@ -1496,7 +1496,7 @@
                     },
                     {
                       "$type": "AddGlobalValue",
-                      "ratio": -1.0,
+                      "value": -1.0,
                       "key": "_ABILITY_Weapon_Bow_AttractField",
                       "useLimitRange": true,
                       "maxValue": -1.0,
@@ -1512,7 +1512,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "CDTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "EquipAffixStart",
@@ -1523,8 +1523,8 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Weapon_Bow_AttractField",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -1549,15 +1549,15 @@
         "Attract_And_Harm": {
           "modifierName": "",
           "duration": "Time",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Interval",
           "modifierMixins": [
             {
               "$type": "WindZoneMixin",
               "shapeName": "CircleR4",
-              "OPDCOCEJKKG": 4.5,
+              "strength": 4.5,
               "attenuation": 0.0,
-              "IADCPKNJHGE": 1.0,
+              "innerRadius": 1.0,
               "targetType": "Enemy",
               "modifierName": ""
             }
@@ -1567,26 +1567,26 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPJICLLGBLO",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "ALJGHOOKOAP",
+                    "$type": "ConfigBornByTarget",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": 0.0,
-                      "MLOLIKEJCKB": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
                   },
-                  "DLFACKMBPCH": 3.0
+                  "radius": 3.0
                 },
                 "attackInfo": {
                   "attackTag": "WeaponSkill",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Damage",
-                    "JIICGJODDDM": 0.0,
-                    "bonusCriticalHurt": 100.0,
+                    "damagePercentage": "Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 100.0,
                     "strikeType": "Default",
                     "enBreak": 0.0,
                     "damagePercentage": 0.0
@@ -1607,9 +1607,9 @@
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "shieldHP": "Eff_Weapon_WindHole",
+          "effectPattern": "Eff_Weapon_WindHole",
           "born": {
-            "$type": "AJCFIBNMGKO"
+            "$type": "ConfigBornBySelf"
           },
           "effectTempleteID": -1.0
         },
@@ -1628,7 +1628,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Bow_Outlaw_BuffLevel",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -0.5,
             0.5,
@@ -1650,36 +1650,36 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Bow_Outlaw_StageCheck",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "Predicated",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Bow_Outlaw_StageCheck",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Weapon_Bow_Outlaw_OnStage"
                 }
               ],
               "failActions": [
                 {
                   "$type": "ApplyModifier",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Weapon_Bow_Outlaw_OffStage"
                 }
               ]
@@ -1690,7 +1690,7 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Timer",
           "onThinkInterval": [
             {
@@ -1703,13 +1703,13 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 1.0,
           "onThinkInterval": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": -2.0,
+              "doOffStage": true,
+              "value": -2.0,
               "key": "_ABILITY_Bow_Outlaw_BuffLevel",
               "useLimitRange": true,
               "maxValue": 10.0,
@@ -1717,7 +1717,7 @@
             },
             {
               "$type": "SetGlobalValueToOverrideMap",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "globalValueKey": "_ABILITY_Bow_Outlaw_BuffLevel",
               "overrideMapKey": "Buff_Level"
             }
@@ -1727,13 +1727,13 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 1.0,
           "onThinkInterval": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Bow_Outlaw_BuffLevel",
               "useLimitRange": true,
               "maxValue": 10.0,
@@ -1741,7 +1741,7 @@
             },
             {
               "$type": "SetGlobalValueToOverrideMap",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "globalValueKey": "_ABILITY_Bow_Outlaw_BuffLevel",
               "overrideMapKey": "Buff_Level"
             }
@@ -1749,17 +1749,17 @@
         },
         "Blank": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "UNIQUE_Weapon_Bow_Outlaw_Buff": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "ignoreEventInfo": true,
-              "JIICGJODDDM": [
+              "damagePercentageRatio": [
                 "Rate",
                 "Buff_Level",
                 "MUL"
@@ -1769,8 +1769,8 @@
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Weapon_Outlaw_Common_Buff",
+              "doOffStage": true,
+              "effectPattern": "Eff_Weapon_Outlaw_Common_Buff",
               "effectTempleteID": -1.0
             }
           ]
@@ -1779,21 +1779,21 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Bow_Outlaw_BuffLevel",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Bow_Outlaw_StageCheck",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetOverrideMapValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "overrideMapKey": "Buff_Level",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -1806,36 +1806,36 @@
       "onRemoved": [
         {
           "$type": "RemoveUniqueModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_Weapon_Bow_Outlaw_OnStage"
         },
         {
           "$type": "RemoveUniqueModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_Weapon_Bow_Outlaw_OffStage"
         }
       ],
       "onAvatarIn": [
         {
           "$type": "RemoveUniqueModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_Weapon_Bow_Outlaw_OffStage"
         },
         {
           "$type": "AttachModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_Weapon_Bow_Outlaw_OnStage"
         }
       ],
       "onAvatarOut": [
         {
           "$type": "RemoveUniqueModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_Weapon_Bow_Outlaw_OnStage"
         },
         {
           "$type": "AttachModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_Weapon_Bow_Outlaw_OffStage"
         }
       ],
@@ -1850,7 +1850,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Weapon_Bow_RangeAttackOnExtraAttackLanded",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -1.5,
             -0.5,
@@ -1872,7 +1872,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "CDTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "EquipAffixStart",
@@ -1883,8 +1883,8 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Weapon_Bow_RangeAttackOnExtraAttackLanded",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -1896,51 +1896,51 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "ExtraAttack"
                   ]
                 },
                 {
-                  "$type": "MJACFLGGFHL",
+                  "$type": "ByEquipAffixReady",
                   "target": "Self",
                   "equipAffixDataID": 115411
                 },
                 {
-                  "$type": "EPMJKNBAIPE",
-                  "OCCFCJJBLFH": 0.0
+                  "$type": "ByHitDamage",
+                  "damage": 0.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "FireEffect",
-                  "shieldHP": "Eff_Weapon_Blast_R30",
+                  "effectPattern": "Eff_Weapon_Blast_R30",
                   "born": {
-                    "$type": "AKFBENAJCLO",
+                    "$type": "ConfigBornByHitPoint",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": 0.0,
-                      "MLOLIKEJCKB": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "NLICIODEGDO": {
-                      "$type": "BMAMOFPPNBD",
-                      "JOEDEGAHBHC": {
-                        "EMBMLEBGFOI": 0.0,
-                        "NABPJFNICAE": 0.0,
-                        "MLOLIKEJCKB": 0.0
+                    "direction": {
+                      "$type": "ConfigDirectionByEntity",
+                      "angleOffset": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
                     }
                   },
@@ -1950,34 +1950,34 @@
                   "$type": "TriggerAttackEvent",
                   "attackEvent": {
                     "attackPattern": {
-                      "$type": "FPJICLLGBLO",
+                      "$type": "ConfigAttackCircle",
                       "triggerType": "TriggerNoRepeat",
                       "born": {
-                        "$type": "AKFBENAJCLO",
+                        "$type": "ConfigBornByHitPoint",
                         "offset": {
-                          "EMBMLEBGFOI": 0.0,
-                          "NABPJFNICAE": -0.5,
-                          "MLOLIKEJCKB": 0.0
+                          "x": 0.0,
+                          "y": -0.5,
+                          "z": 0.0
                         },
-                        "NLICIODEGDO": {
-                          "$type": "BMAMOFPPNBD"
+                        "direction": {
+                          "$type": "ConfigDirectionByEntity"
                         }
                       },
-                      "DLFACKMBPCH": 3.0
+                      "radius": 3.0
                     },
                     "attackInfo": {
                       "attackTag": "WeaponSkill",
                       "attenuationTag": "",
                       "attenuationGroup": "default",
                       "attackProperty": {
-                        "ACKCDHKEGCK": "AtkRate",
-                        "JIICGJODDDM": 0.0,
-                        "bonusCriticalHurt": 100.0,
+                        "damagePercentage": "AtkRate",
+                        "damagePercentageRatio": 0.0,
+                        "elementDurability": 100.0,
                         "strikeType": "Pierce",
                         "enBreak": 20.0,
                         "attackType": "Range",
                         "bonusCritical": 0.0,
-                        "CBNLJFOGCDH": 0.0,
+                        "bonusCriticalHurt": 0.0,
                         "damagePercentage": 0.0
                       },
                       "hitPattern": {
@@ -1997,8 +1997,8 @@
                 },
                 {
                   "$type": "AddGlobalValue",
-                  "PositionDampTime": true,
-                  "ratio": -1.0,
+                  "doOffStage": true,
+                  "value": -1.0,
                   "key": "_ABILITY_Weapon_Bow_RangeAttackOnExtraAttackLanded",
                   "useLimitRange": true,
                   "maxValue": -1.0,
@@ -2026,14 +2026,14 @@
         "UNIQUE_Weapon_Bow_NormalAttackAndElementalArt_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "NormalAttack_01",
                     "NormalAttack_02",
@@ -2044,16 +2044,16 @@
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -2068,7 +2068,7 @@
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art",
                     "Elemental_Art_Hold",
@@ -2076,16 +2076,16 @@
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -2101,7 +2101,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Duration_1",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -2110,7 +2110,7 @@
                 "Elemental_Art_Hold",
                 "Elemental_Art_Extra"
               ],
-              "JIICGJODDDM": "Rate_1"
+              "damagePercentageRatio": "Rate_1"
             }
           ],
           "state": "AttackUp"
@@ -2119,7 +2119,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Duration_2",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -2131,7 +2131,7 @@
                 "NormalAttack_05",
                 "NormalAttack_06"
               ],
-              "JIICGJODDDM": "Rate_2"
+              "damagePercentageRatio": "Rate_2"
             }
           ],
           "state": "AttackUp"
@@ -2171,14 +2171,14 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Dura",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "AtkRate"
           },
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Weapon_Bow_Fleurfair",
+              "effectPattern": "Eff_Weapon_Bow_Fleurfair",
               "effectTempleteID": -1.0
             }
           ],
@@ -2201,7 +2201,7 @@
         "UNIQUE_Bow_Predator_Atk": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackDelta": "Atk"
           },
@@ -2210,31 +2210,31 @@
         "UNIQUE_Bow_Predator_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "EBFGFMPDFLE",
+                  "$type": "ByHitElement",
                   "element": "Ice"
                 },
                 {
-                  "$type": "EPMJKNBAIPE",
-                  "OCCFCJJBLFH": 0.0
+                  "$type": "ByHitDamage",
+                  "damage": 0.0
                 }
               ],
               "successActions": [
@@ -2255,7 +2255,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Dura",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -2268,7 +2268,7 @@
                 "NormalAttack_06",
                 "ExtraAttack"
               ],
-              "JIICGJODDDM": "DamageUp"
+              "damagePercentageRatio": "DamageUp"
             }
           ],
           "state": "AttackUp"
@@ -2279,7 +2279,7 @@
           "$type": "AttachModifier",
           "predicates": [
             {
-              "$type": "EELCEDEMKIJ",
+              "$type": "ByHasFeatureTag",
               "featureTagIDs": [
                 10062
               ]
@@ -2303,7 +2303,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Weapon_Bow_RangeAttackOnAttackLanded",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -1.5,
             -0.5,
@@ -2327,7 +2327,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "CDTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "EquipAffixStart",
@@ -2338,8 +2338,8 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Weapon_Bow_RangeAttackOnAttackLanded",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -2351,26 +2351,26 @@
           "stacking": "Unique",
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "MJACFLGGFHL",
+                  "$type": "ByEquipAffixReady",
                   "target": "Caster",
                   "equipAffixDataID": 115501
                 },
                 {
-                  "$type": "EPMJKNBAIPE",
-                  "OCCFCJJBLFH": 0.0
+                  "$type": "ByHitDamage",
+                  "damage": 0.0
                 }
               ],
               "successActions": [
@@ -2380,20 +2380,20 @@
                   "successActions": [
                     {
                       "$type": "FireEffect",
-                      "shieldHP": "Eff_Weapon_Dvalin_Blast",
+                      "effectPattern": "Eff_Weapon_Dvalin_Blast",
                       "born": {
-                        "$type": "AKFBENAJCLO",
+                        "$type": "ConfigBornByHitPoint",
                         "offset": {
-                          "EMBMLEBGFOI": 0.0,
-                          "NABPJFNICAE": 0.0,
-                          "MLOLIKEJCKB": 0.0
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": 0.0
                         },
-                        "NLICIODEGDO": {
-                          "$type": "BMAMOFPPNBD",
-                          "JOEDEGAHBHC": {
-                            "EMBMLEBGFOI": 0.0,
-                            "NABPJFNICAE": 0.0,
-                            "MLOLIKEJCKB": 0.0
+                        "direction": {
+                          "$type": "ConfigDirectionByEntity",
+                          "angleOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
                           }
                         }
                       },
@@ -2403,34 +2403,34 @@
                       "$type": "TriggerAttackEvent",
                       "attackEvent": {
                         "attackPattern": {
-                          "$type": "FPJICLLGBLO",
+                          "$type": "ConfigAttackCircle",
                           "triggerType": "TriggerNoRepeat",
                           "born": {
-                            "$type": "AKFBENAJCLO",
+                            "$type": "ConfigBornByHitPoint",
                             "offset": {
-                              "EMBMLEBGFOI": 0.0,
-                              "NABPJFNICAE": -0.5,
-                              "MLOLIKEJCKB": 0.0
+                              "x": 0.0,
+                              "y": -0.5,
+                              "z": 0.0
                             },
-                            "NLICIODEGDO": {
-                              "$type": "BMAMOFPPNBD"
+                            "direction": {
+                              "$type": "ConfigDirectionByEntity"
                             }
                           },
-                          "DLFACKMBPCH": 3.0
+                          "radius": 3.0
                         },
                         "attackInfo": {
                           "attackTag": "WeaponSkill",
                           "attenuationTag": "",
                           "attenuationGroup": "default",
                           "attackProperty": {
-                            "ACKCDHKEGCK": "Damage",
-                            "JIICGJODDDM": 0.0,
-                            "bonusCriticalHurt": 100.0,
+                            "damagePercentage": "Damage",
+                            "damagePercentageRatio": 0.0,
+                            "elementDurability": 100.0,
                             "strikeType": "Pierce",
                             "enBreak": 20.0,
                             "attackType": "Range",
                             "bonusCritical": 0.0,
-                            "CBNLJFOGCDH": 0.0,
+                            "bonusCriticalHurt": 0.0,
                             "damagePercentage": 0.0
                           },
                           "hitPattern": {
@@ -2450,7 +2450,7 @@
                     },
                     {
                       "$type": "AddGlobalValue",
-                      "ratio": -1.0,
+                      "value": -1.0,
                       "key": "_ABILITY_Weapon_Bow_RangeAttackOnAttackLanded",
                       "useLimitRange": true,
                       "maxValue": -1.0,
@@ -2477,7 +2477,7 @@
       "modifiers": {
         "Weapon_Bow_RiseDMGWithTime_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "DoActionByCreateGadgetMixin",
@@ -2500,20 +2500,20 @@
                 "NormalAttack_06",
                 "ExtraAttack"
               ],
-              "JIICGJODDDM": "RiseAttackBase"
+              "damagePercentageRatio": "RiseAttackBase"
             }
           ]
         },
         "Weapon_Bow_RiseDMGWithTime_Buff_Handler": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.10000000149011612,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_Weaoin_Bow_RiseDMGWithTime",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -0.5,
                 0.5,
@@ -2536,7 +2536,7 @@
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -5.0,
+              "value": -5.0,
               "key": "_ABILITY_Weaoin_Bow_RiseDMGWithTime",
               "useLimitRange": true,
               "maxValue": 5.0,
@@ -2546,7 +2546,7 @@
           "onThinkInterval": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Weaoin_Bow_RiseDMGWithTime",
               "useLimitRange": true,
               "maxValue": 5.0,
@@ -2556,11 +2556,11 @@
         },
         "Weapon_Bow_RiseDMGonBranchAttack_Buff1": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "Weapon_Bow_RiseDMGonBranchAttack_Buff2": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -2573,13 +2573,13 @@
                 "NormalAttack_06",
                 "ExtraAttack"
               ],
-              "JIICGJODDDM": "RiseAttackPerStage"
+              "damagePercentageRatio": "RiseAttackPerStage"
             }
           ]
         },
         "Weapon_Bow_RiseDMGonBranchAttack_Buff3": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -2592,7 +2592,7 @@
                 "NormalAttack_06",
                 "ExtraAttack"
               ],
-              "JIICGJODDDM": [
+              "damagePercentageRatio": [
                 "RiseAttackPerStage",
                 2.0,
                 "MUL"
@@ -2602,7 +2602,7 @@
         },
         "Weapon_Bow_RiseDMGonBranchAttack_Buff4": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -2615,7 +2615,7 @@
                 "NormalAttack_06",
                 "ExtraAttack"
               ],
-              "JIICGJODDDM": [
+              "damagePercentageRatio": [
                 "RiseAttackPerStage",
                 3.0,
                 "MUL"
@@ -2625,7 +2625,7 @@
         },
         "Weapon_Bow_RiseDMGonBranchAttack_Buff5": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -2638,7 +2638,7 @@
                 "NormalAttack_06",
                 "ExtraAttack"
               ],
-              "JIICGJODDDM": [
+              "damagePercentageRatio": [
                 "RiseAttackPerStage",
                 4.0,
                 "MUL"
@@ -2648,7 +2648,7 @@
         },
         "Weapon_Bow_RiseDMGonBranchAttack_Buff6": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -2661,7 +2661,7 @@
                 "NormalAttack_06",
                 "ExtraAttack"
               ],
-              "JIICGJODDDM": [
+              "damagePercentageRatio": [
                 "RiseAttackPerStage",
                 5.0,
                 "MUL"
@@ -2687,7 +2687,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Weapon_Bow_Widsith_Check",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -1.5,
             -0.5,
@@ -2701,7 +2701,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Weapon_Bow_Widsith",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -0.5,
             0.5,
@@ -2731,20 +2731,20 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "CDTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Weapon_Bow_Widsith",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Weapon_Bow_Widsith_Check",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2754,27 +2754,27 @@
         "UNIQUE_Weapon_Bow_Widsith_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art",
                     "Elemental_Art_Hold",
@@ -2783,7 +2783,7 @@
                   ]
                 },
                 {
-                  "$type": "MJACFLGGFHL",
+                  "$type": "ByEquipAffixReady",
                   "target": "Self",
                   "equipAffixDataID": 115503
                 }
@@ -2791,7 +2791,7 @@
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Weapon_Bow_Widsith_AddGlobalvalue"
                 }
               ]
@@ -2803,12 +2803,12 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Weapon_Bow_Widsith",
               "useLimitRange": true,
               "maxValue": 4.0,
@@ -2816,50 +2816,50 @@
             },
             {
               "$type": "ApplyModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Weapon_Bow_Widsith_Timer"
             },
             {
               "$type": "Predicated",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Weapon_Bow_Widsith",
-                  "ratio": 4.0,
-                  "PODFMDAEAGL": "MoreThanAndEqual"
+                  "value": 4.0,
+                  "compareType": "MoreThanAndEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "EquipAffixStart",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "CD": "CDTime",
                   "equipAffixDataID": 115503
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "PositionDampTime": true,
-                  "ratio": -1.0,
+                  "doOffStage": true,
+                  "value": -1.0,
                   "key": "_ABILITY_Weapon_Bow_Widsith_Check",
                   "maxValue": 0.0,
                   "minValue": 0.0
                 },
                 {
                   "$type": "FireEffect",
-                  "PositionDampTime": true,
-                  "shieldHP": "Eff_Weapon_Widsith_Bow_Burst",
+                  "doOffStage": true,
+                  "effectPattern": "Eff_Weapon_Widsith_Bow_Burst",
                   "effectTempleteID": -1.0
                 },
                 {
                   "$type": "RemoveUniqueModifier",
                   "target": "AllPlayerAvatars",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "predicates": [
                     {
-                      "$type": "LAEHCOBNNDC",
+                      "$type": "ByTargetPositionToSelfPosition",
                       "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "value": 40.0
                     }
                   ],
                   "modifierName": "UNIQUE_Weapon_Widsith_CommonBuff"
@@ -2867,12 +2867,12 @@
                 {
                   "$type": "RemoveUniqueModifier",
                   "target": "AllPlayerAvatars",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "predicates": [
                     {
-                      "$type": "LAEHCOBNNDC",
+                      "$type": "ByTargetPositionToSelfPosition",
                       "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "value": 40.0
                     }
                   ],
                   "modifierName": "UNIQUE_Weapon_Bow_Widsith_BowBuff"
@@ -2880,12 +2880,12 @@
                 {
                   "$type": "ApplyModifier",
                   "target": "AllPlayerAvatars",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "predicates": [
                     {
-                      "$type": "LAEHCOBNNDC",
+                      "$type": "ByTargetPositionToSelfPosition",
                       "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "value": 40.0
                     }
                   ],
                   "modifierName": "UNIQUE_Weapon_Widsith_CommonBuff"
@@ -2893,12 +2893,12 @@
                 {
                   "$type": "ApplyModifier",
                   "target": "AllPlayerAvatars",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "predicates": [
                     {
-                      "$type": "LAEHCOBNNDC",
+                      "$type": "ByTargetPositionToSelfPosition",
                       "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "value": 40.0
                     }
                   ],
                   "modifierName": "UNIQUE_Weapon_Bow_Widsith_BowBuff"
@@ -2906,12 +2906,12 @@
                 {
                   "$type": "ApplyModifier",
                   "target": "AllPlayerAvatars",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "predicates": [
                     {
-                      "$type": "LAEHCOBNNDC",
+                      "$type": "ByTargetPositionToSelfPosition",
                       "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "value": 40.0
                     }
                   ],
                   "modifierName": "UNIQUE_Weapon_Bow_Widsith_BuffEffect"
@@ -2924,20 +2924,20 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 30.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Weapon_Bow_Widsith",
-                  "ratio": 3.0,
-                  "PODFMDAEAGL": "LessAndEqual"
+                  "value": 3.0,
+                  "compareType": "LessAndEqual"
                 }
               ],
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Weapon_Bow_Widsith",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2947,17 +2947,17 @@
         "UNIQUE_Weapon_Bow_Widsith_0": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "UNIQUE_Weapon_Bow_Widsith_1": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Weapon_EnergyPoem_Stack1",
+              "doOffStage": true,
+              "effectPattern": "Eff_Weapon_EnergyPoem_Stack1",
               "effectTempleteID": -1.0
             }
           ]
@@ -2965,12 +2965,12 @@
         "UNIQUE_Weapon_Bow_Widsith_2": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Weapon_EnergyPoem_Stack2",
+              "doOffStage": true,
+              "effectPattern": "Eff_Weapon_EnergyPoem_Stack2",
               "effectTempleteID": -1.0
             }
           ]
@@ -2978,12 +2978,12 @@
         "UNIQUE_Weapon_Bow_Widsith_3": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Weapon_EnergyPoem_Stack3",
+              "doOffStage": true,
+              "effectPattern": "Eff_Weapon_EnergyPoem_Stack3",
               "effectTempleteID": -1.0
             }
           ]
@@ -2991,13 +2991,13 @@
         "UNIQUE_Weapon_Bow_Widsith_Full": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "UNIQUE_Weapon_Widsith_CommonBuff": {
           "modifierName": "",
           "isUnique": true,
           "duration": "Dura",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "CommonBuff"
           },
@@ -3009,7 +3009,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Dura",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_ElemMasteryDelta": "BowBuff"
           },
@@ -3019,16 +3019,16 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Weapon_Widsith_Common_TeamBuff",
+              "effectPattern": "Eff_Weapon_Widsith_Common_TeamBuff",
               "effectTempleteID": -1.0
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Weapon_Widsith_Bow_TeamBuff",
+              "effectPattern": "Eff_Weapon_Widsith_Bow_TeamBuff",
               "effectTempleteID": -1.0
             }
           ]
@@ -3037,14 +3037,14 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Weapon_Bow_Widsith",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Weapon_Bow_Widsith_Check",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -3061,7 +3061,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Bow_Kunwu_IsHasShield",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -0.5,
             0.5,
@@ -3077,7 +3077,7 @@
           "type": "Current",
           "predicates": [
             {
-              "$type": "CDEILODAOAO",
+              "$type": "ByHasShield",
               "type": "All"
             }
           ],
@@ -3093,24 +3093,24 @@
         "UNIQUE_Weapon_Bow_Kunwu_DamageUpWithShield_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -3125,12 +3125,12 @@
         "UNIQUE_Weapon_Bow_Kunwu_CheckShield": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Bow_Kunwu_IsHasShield",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -3140,8 +3140,8 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Bow_Kunwu_IsHasShield",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -3154,12 +3154,12 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Bow_Kunwu_BuffLevel",
               "useLimitRange": true,
               "maxValue": 5.0,
@@ -3175,12 +3175,12 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Timer",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Bow_Kunwu_BuffLevel",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -3191,12 +3191,12 @@
         "UNIQUE_Weapon_Bow_Kunwu_NoShieldBuff": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_Bow_Kunwu_BuffLevel",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -0.5,
                 0.5,
@@ -3220,12 +3220,12 @@
         "UNIQUE_Weapon_Bow_Kunwu_NoShieldBuff_Blank": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "UNIQUE_Weapon_Bow_Kunwu_NoShieldBuff_Level01": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "Dmg_Rate"
           },
@@ -3234,7 +3234,7 @@
         "UNIQUE_Weapon_Bow_Kunwu_NoShieldBuff_Level02": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": [
               "Dmg_Rate",
@@ -3247,7 +3247,7 @@
         "UNIQUE_Weapon_Bow_Kunwu_NoShieldBuff_Level03": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": [
               "Dmg_Rate",
@@ -3260,7 +3260,7 @@
         "UNIQUE_Weapon_Bow_Kunwu_NoShieldBuff_Level04": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": [
               "Dmg_Rate",
@@ -3273,7 +3273,7 @@
         "UNIQUE_Weapon_Bow_Kunwu_NoShieldBuff_Level05": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": [
               "Dmg_Rate",
@@ -3286,12 +3286,12 @@
         "UNIQUE_Weapon_Bow_Kunwu_HasShieldBuff": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_Bow_Kunwu_BuffLevel",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -0.5,
                 0.5,
@@ -3315,12 +3315,12 @@
         "UNIQUE_Weapon_Bow_Kunwu_HasShieldBuff_Blank": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "UNIQUE_Weapon_Bow_Kunwu_HasShieldBuff_Level01": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": [
               "Dmg_Rate",
@@ -3333,7 +3333,7 @@
         "UNIQUE_Weapon_Bow_Kunwu_HasShieldBuff_Level02": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": [
               "Dmg_Rate",
@@ -3346,7 +3346,7 @@
         "UNIQUE_Weapon_Bow_Kunwu_HasShieldBuff_Level03": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": [
               "Dmg_Rate",
@@ -3359,7 +3359,7 @@
         "UNIQUE_Weapon_Bow_Kunwu_HasShieldBuff_Level04": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": [
               "Dmg_Rate",
@@ -3372,7 +3372,7 @@
         "UNIQUE_Weapon_Bow_Kunwu_HasShieldBuff_Level05": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": [
               "Dmg_Rate",
@@ -3385,12 +3385,12 @@
         "UNIQUE_Weapon_Bow_Kunwu_BuffEffHandler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_Bow_Kunwu_BuffLevel",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -0.5,
                 0.5,
@@ -3413,59 +3413,59 @@
         },
         "Weapon_Bow_Kunwu_Eff_Blank": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "Weapon_Bow_Kunwu_Eff_1": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Weapon_Kunwu_Stack_01",
+              "effectPattern": "Eff_Weapon_Kunwu_Stack_01",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Weapon_Bow_Kunwu_Eff_2": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Weapon_Kunwu_Stack_02",
+              "effectPattern": "Eff_Weapon_Kunwu_Stack_02",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Weapon_Bow_Kunwu_Eff_3": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Weapon_Kunwu_Stack_03",
+              "effectPattern": "Eff_Weapon_Kunwu_Stack_03",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Weapon_Bow_Kunwu_Eff_4": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Weapon_Kunwu_Stack_04",
+              "effectPattern": "Eff_Weapon_Kunwu_Stack_04",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Weapon_Bow_Kunwu_Eff_5": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Weapon_Kunwu_Stack_05",
+              "effectPattern": "Eff_Weapon_Kunwu_Stack_05",
               "effectTempleteID": -1.0
             }
           ]
@@ -3482,8 +3482,8 @@
         },
         {
           "$type": "AddGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Bow_Kunwu_BuffLevel",
           "useLimitRange": true,
           "maxValue": 0.0,
@@ -3491,8 +3491,8 @@
         },
         {
           "$type": "AddGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Bow_Kunwu_IsHasShield",
           "useLimitRange": true,
           "maxValue": 0.0,
@@ -3512,12 +3512,12 @@
           "onEvent": "HP",
           "predicates": [
             {
-              "$type": "ECAAGMBEMJE",
+              "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Bow_Morax_Last_MaxHp",
-                  "ratio": "FIGHT_PROP_MAX_HP"
+                  "value": "FIGHT_PROP_MAX_HP"
                 }
               ]
             }
@@ -3525,20 +3525,20 @@
           "actions": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": "FIGHT_PROP_MAX_HP",
+              "doOffStage": true,
+              "value": "FIGHT_PROP_MAX_HP",
               "key": "_ABILITY_Bow_Morax_Last_MaxHp",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "RemoveUniqueModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Bow_Morax_HpToAtk_Buff"
             },
             {
               "$type": "AttachModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Bow_Morax_HpToAtk_Buff"
             }
           ],
@@ -3552,7 +3552,7 @@
         "UNIQUE_Bow_Morax_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 2.0,
           "onAdded": [
             {
@@ -3563,31 +3563,31 @@
           "onThinkInterval": [
             {
               "$type": "Predicated",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Bow_Morax_Last_MaxHp",
-                  "ratio": "FIGHT_PROP_MAX_HP"
+                  "value": "FIGHT_PROP_MAX_HP"
                 }
               ],
               "failActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "PositionDampTime": true,
-                  "ratio": "FIGHT_PROP_MAX_HP",
+                  "doOffStage": true,
+                  "value": "FIGHT_PROP_MAX_HP",
                   "key": "_ABILITY_Bow_Morax_Last_MaxHp",
                   "maxValue": 0.0,
                   "minValue": 0.0
                 },
                 {
                   "$type": "RemoveUniqueModifier",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Bow_Morax_HpToAtk_Buff"
                 },
                 {
                   "$type": "AttachModifier",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Bow_Morax_HpToAtk_Buff"
                 }
               ]
@@ -3597,7 +3597,7 @@
         "UNIQUE_Bow_Morax_HpToAtk_Buff": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackExtraDelta": [
               "FIGHT_PROP_MAX_HP",
@@ -3611,15 +3611,15 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": "FIGHT_PROP_MAX_HP",
+          "doOffStage": true,
+          "value": "FIGHT_PROP_MAX_HP",
           "key": "_ABILITY_Bow_Morax_Last_MaxHp",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "AttachModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_Bow_Morax_Handler"
         }
       ],
@@ -3641,22 +3641,22 @@
             "NormalAttack_05",
             "NormalAttack_06"
           ],
-          "JIICGJODDDM": "NormalUp"
+          "damagePercentageRatio": "NormalUp"
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": [
             "ExtraAttack"
           ],
-          "JIICGJODDDM": "ExtraUp"
+          "damagePercentageRatio": "ExtraUp"
         },
         {
           "$type": "AttachModifierToPredicateMixin",
           "predicates": [
             {
-              "$type": "OJJIDILPBAJ",
+              "$type": "ByEnergyRatio",
               "logic": "GreaterOrEqual",
-              "value": 1.0
+              "ratio": 1.0
             }
           ],
           "modifierName": "UNIQUE_Weapon_Bow_Bakufu_EnergyCheck"
@@ -3671,7 +3671,7 @@
         "UNIQUE_Weapon_Bow_Bakufu_EnergyCheck": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -3683,7 +3683,7 @@
                 "NormalAttack_05",
                 "NormalAttack_06"
               ],
-              "JIICGJODDDM": [
+              "damagePercentageRatio": [
                 "NormalUp",
                 "Rate",
                 "MUL"
@@ -3694,7 +3694,7 @@
               "attackTags": [
                 "ExtraAttack"
               ],
-              "JIICGJODDDM": [
+              "damagePercentageRatio": [
                 "ExtraUp",
                 "Rate",
                 "MUL"
@@ -3714,7 +3714,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Bow_Narukami_BuffLevel",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             0.5,
             1.5,
@@ -3731,9 +3731,9 @@
           "$type": "AttachModifierToPredicateMixin",
           "predicates": [
             {
-              "$type": "OJJIDILPBAJ",
+              "$type": "ByEnergyRatio",
               "logic": "Lesser",
-              "value": 1.0
+              "ratio": 1.0
             }
           ],
           "modifierName": "UNIQUE_Bow_Narukami_Mark1"
@@ -3743,7 +3743,7 @@
           "onTriggerSkill": [
             {
               "$type": "AttachModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Bow_Narukami_Mark3"
             }
           ],
@@ -3761,14 +3761,14 @@
         "UNIQUE_Bow_Narukami_Check": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "NormalAttack_01",
                     "NormalAttack_02",
@@ -3779,20 +3779,20 @@
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "EPMJKNBAIPE",
-                  "OCCFCJJBLFH": 0.0
+                  "$type": "ByHitDamage",
+                  "damage": 0.0
                 }
               ],
               "successActions": [
@@ -3807,12 +3807,12 @@
         "UNIQUE_Bow_Narukami_Mark1": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Bow_Narukami_BuffLevel",
               "useLimitRange": true,
               "maxValue": 3.0,
@@ -3822,8 +3822,8 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "value": -1.0,
               "key": "_ABILITY_Bow_Narukami_BuffLevel",
               "useLimitRange": true,
               "maxValue": 3.0,
@@ -3835,12 +3835,12 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Dura2",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Bow_Narukami_BuffLevel",
               "useLimitRange": true,
               "maxValue": 3.0,
@@ -3850,8 +3850,8 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "value": -1.0,
               "key": "_ABILITY_Bow_Narukami_BuffLevel",
               "useLimitRange": true,
               "maxValue": 3.0,
@@ -3863,12 +3863,12 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Dura3",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Bow_Narukami_BuffLevel",
               "useLimitRange": true,
               "maxValue": 3.0,
@@ -3878,8 +3878,8 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "value": -1.0,
               "key": "_ABILITY_Bow_Narukami_BuffLevel",
               "useLimitRange": true,
               "maxValue": 3.0,
@@ -3890,7 +3890,7 @@
         "UNIQUE_Weapon_Bow_Narukami_Buff1": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -3902,13 +3902,13 @@
                 "NormalAttack_05",
                 "NormalAttack_06"
               ],
-              "JIICGJODDDM": "Rate1"
+              "damagePercentageRatio": "Rate1"
             }
           ],
           "onAdded": [
             {
               "$type": "AttachModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Weapon_Bow_Narukami_Buff1_EffectDelay"
             }
           ],
@@ -3916,14 +3916,14 @@
             {
               "$type": "RemoveUniqueModifier",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Weapon_Bow_Narukami_Buff1_Effect"
             }
           ],
@@ -3933,20 +3933,20 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 5.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 1.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Weapon_Bow_Narukami_Buff1_Effect"
             }
           ],
@@ -3954,14 +3954,14 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Weapon_Bow_Narukami_Buff1_Effect"
             }
           ]
@@ -3969,12 +3969,12 @@
         "UNIQUE_Weapon_Bow_Narukami_Buff1_Effect": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Weapon_NarukamiBuff_Bow_1",
+              "doOffStage": true,
+              "effectPattern": "Eff_Weapon_NarukamiBuff_Bow_1",
               "effectTempleteID": -1.0
             }
           ]
@@ -3982,7 +3982,7 @@
         "UNIQUE_Weapon_Bow_Narukami_Buff2": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -3994,22 +3994,22 @@
                 "NormalAttack_05",
                 "NormalAttack_06"
               ],
-              "JIICGJODDDM": "Rate2"
+              "damagePercentageRatio": "Rate2"
             }
           ],
           "onAdded": [
             {
               "$type": "AttachEffect",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Weapon_NarukamiBuff_Bow_2",
+              "doOffStage": true,
+              "effectPattern": "Eff_Weapon_NarukamiBuff_Bow_2",
               "effectTempleteID": -1.0
             }
           ],
@@ -4018,7 +4018,7 @@
         "UNIQUE_Weapon_Bow_Narukami_Buff3": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -4030,22 +4030,22 @@
                 "NormalAttack_05",
                 "NormalAttack_06"
               ],
-              "JIICGJODDDM": "Rate3"
+              "damagePercentageRatio": "Rate3"
             }
           ],
           "onAdded": [
             {
               "$type": "AttachEffect",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Weapon_NarukamiBuff_Bow_3",
+              "doOffStage": true,
+              "effectPattern": "Eff_Weapon_NarukamiBuff_Bow_3",
               "effectTempleteID": -1.0
             }
           ],
@@ -4059,7 +4059,7 @@
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Bow_Narukami_BuffLevel",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -4068,7 +4068,7 @@
       "onRemoved": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Bow_Narukami_BuffLevel",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -4090,12 +4090,12 @@
             "Elemental_Art_Extra",
             "Elemental_Burst"
           ],
-          "JIICGJODDDM": "Passive_Rate"
+          "damagePercentageRatio": "Passive_Rate"
         },
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Weapon_Bow_Worldbane",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -10.0,
             0.5,
@@ -4126,20 +4126,20 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 5.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 1.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Weapon_Bow_Worldbane_Effect_Init"
             }
           ],
@@ -4147,14 +4147,14 @@
             {
               "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Weapon_Bow_Worldbane_Effect_Init"
             }
           ]
@@ -4162,12 +4162,12 @@
         "UNIQUE_Weapon_Bow_Worldbane_Effect_Init": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Weapon_Worldbane",
+              "doOffStage": true,
+              "effectPattern": "Eff_Weapon_Worldbane",
               "effectTempleteID": -1.0
             }
           ]
@@ -4175,14 +4175,14 @@
         "UNIQUE_Bow_Worldbane_Check": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "NormalAttack_01",
                     "NormalAttack_02",
@@ -4193,16 +4193,16 @@
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -4217,7 +4217,7 @@
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art",
                     "Elemental_Art_Hold",
@@ -4225,16 +4225,16 @@
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -4249,22 +4249,22 @@
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "ExtraAttack"
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -4279,22 +4279,22 @@
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Burst"
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -4310,11 +4310,11 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Time",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Weapon_Bow_Worldbane",
               "useLimitRange": true,
               "maxValue": 4.0,
@@ -4324,8 +4324,8 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "value": -1.0,
               "key": "_ABILITY_Weapon_Bow_Worldbane",
               "useLimitRange": true,
               "maxValue": 4.0,
@@ -4337,11 +4337,11 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Time",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Weapon_Bow_Worldbane",
               "useLimitRange": true,
               "maxValue": 4.0,
@@ -4351,8 +4351,8 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "value": -1.0,
               "key": "_ABILITY_Weapon_Bow_Worldbane",
               "useLimitRange": true,
               "maxValue": 4.0,
@@ -4364,11 +4364,11 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Time",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Weapon_Bow_Worldbane",
               "useLimitRange": true,
               "maxValue": 4.0,
@@ -4378,8 +4378,8 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "value": -1.0,
               "key": "_ABILITY_Weapon_Bow_Worldbane",
               "useLimitRange": true,
               "maxValue": 4.0,
@@ -4391,11 +4391,11 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Time",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Weapon_Bow_Worldbane",
               "useLimitRange": true,
               "maxValue": 4.0,
@@ -4405,8 +4405,8 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "value": -1.0,
               "key": "_ABILITY_Weapon_Bow_Worldbane",
               "useLimitRange": true,
               "maxValue": 4.0,
@@ -4417,45 +4417,45 @@
         "UNIQUE_Bow_Worldbane_Buff0": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Level",
               "attachPoint": "",
               "type": "Int",
-              "shieldHP": "Eff_Weapon_Worldbane"
+              "effectPattern": "Eff_Weapon_Worldbane"
             },
             {
               "$type": "SendEffectTrigger",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Change",
               "attachPoint": "",
-              "shieldHP": "Eff_Weapon_Worldbane"
+              "effectPattern": "Eff_Weapon_Worldbane"
             }
           ]
         },
         "UNIQUE_Bow_Worldbane_Buff1": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "Rate1"
           },
@@ -4463,34 +4463,34 @@
             {
               "$type": "SendEffectTrigger",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Level",
               "attachPoint": "",
               "type": "Int",
-              "value": 1,
-              "shieldHP": "Eff_Weapon_Worldbane"
+              "ratio": 1,
+              "effectPattern": "Eff_Weapon_Worldbane"
             },
             {
               "$type": "SendEffectTrigger",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Change",
               "attachPoint": "",
-              "shieldHP": "Eff_Weapon_Worldbane"
+              "effectPattern": "Eff_Weapon_Worldbane"
             }
           ],
           "isLimitedProperties": true
@@ -4498,7 +4498,7 @@
         "UNIQUE_Bow_Worldbane_Buff2": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "Rate2"
           },
@@ -4506,34 +4506,34 @@
             {
               "$type": "SendEffectTrigger",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Level",
               "attachPoint": "",
               "type": "Int",
-              "value": 2,
-              "shieldHP": "Eff_Weapon_Worldbane"
+              "ratio": 2,
+              "effectPattern": "Eff_Weapon_Worldbane"
             },
             {
               "$type": "SendEffectTrigger",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Change",
               "attachPoint": "",
-              "shieldHP": "Eff_Weapon_Worldbane"
+              "effectPattern": "Eff_Weapon_Worldbane"
             }
           ],
           "isLimitedProperties": true
@@ -4541,7 +4541,7 @@
         "UNIQUE_Bow_Worldbane_Buff3": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "Rate3"
           },
@@ -4549,34 +4549,34 @@
             {
               "$type": "SendEffectTrigger",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Level",
               "attachPoint": "",
               "type": "Int",
-              "value": 3,
-              "shieldHP": "Eff_Weapon_Worldbane"
+              "ratio": 3,
+              "effectPattern": "Eff_Weapon_Worldbane"
             },
             {
               "$type": "SendEffectTrigger",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Change",
               "attachPoint": "",
-              "shieldHP": "Eff_Weapon_Worldbane"
+              "effectPattern": "Eff_Weapon_Worldbane"
             }
           ],
           "isLimitedProperties": true
@@ -4584,7 +4584,7 @@
         "UNIQUE_Bow_Worldbane_Buff4": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "Rate4"
           },
@@ -4592,34 +4592,34 @@
             {
               "$type": "SendEffectTrigger",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Level",
               "attachPoint": "",
               "type": "Int",
-              "value": 4,
-              "shieldHP": "Eff_Weapon_Worldbane"
+              "ratio": 4,
+              "effectPattern": "Eff_Weapon_Worldbane"
             },
             {
               "$type": "SendEffectTrigger",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Change",
               "attachPoint": "",
-              "shieldHP": "Eff_Weapon_Worldbane"
+              "effectPattern": "Eff_Weapon_Worldbane"
             }
           ],
           "isLimitedProperties": true
@@ -4628,7 +4628,7 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Weapon_Bow_Worldbane",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -4645,7 +4645,7 @@
       "onRemoved": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Weapon_Bow_Worldbane",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -4664,14 +4664,14 @@
           "actions": [
             {
               "$type": "GetTeamTotalMaxEnergyToOverridemap",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "teamType": "BigTeam",
               "overrideMapKey": "Bow_Maria_TeamEnergy"
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": [
+              "doOffStage": true,
+              "value": [
                 "Bow_Maria_TeamEnergy",
                 "Ratio",
                 "MUL",
@@ -4685,7 +4685,7 @@
             },
             {
               "$type": "SetGlobalValueToOverrideMap",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "globalValueKey": "_ABILITY_Bow_Maria_BuffValue",
               "overrideMapKey": "Bow_Maria_BuffValue"
             }
@@ -4699,7 +4699,7 @@
           "attackTags": [
             "Elemental_Burst"
           ],
-          "JIICGJODDDM": "Bow_Maria_BuffValue"
+          "damagePercentageRatio": "Bow_Maria_BuffValue"
         }
       ],
       "abilitySpecials": {
@@ -4711,7 +4711,7 @@
       "onRemoved": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Bow_Maria_BuffValue",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -4733,39 +4733,39 @@
         "UNIQUE_Bow_Kirin_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Interval",
           "onThinkInterval": [
             {
               "$type": "Predicated",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "topLimit": 1,
                 "sortType": "Nearest",
                 "shapeName": "CircleR8",
                 "HICPDDPCFNO": "Team",
                 "campTargetType": "Enemy",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "AttachModifier",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Bow_Kirin_Buff"
                 }
               ]
@@ -4777,27 +4777,27 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Dura",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "ignoreEventInfo": true,
-              "JIICGJODDDM": "Percentage"
+              "damagePercentageRatio": "Percentage"
             }
           ],
           "onAdded": [
             {
               "$type": "AttachEffect",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Weapon_Kirin",
+              "doOffStage": true,
+              "effectPattern": "Eff_Weapon_Kirin",
               "effectTempleteID": -1.0
             }
           ]
@@ -4820,7 +4820,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Weapon_Bow_FallenSun",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             0.5,
             1.5,
@@ -4836,7 +4836,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Weapon_Bow_FallenSun_Check",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -1.5,
             -0.5,
@@ -4858,19 +4858,19 @@
         "UNIQUE_Bow_FallenSun_Buff1": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "ignoreEventInfo": true,
-              "JIICGJODDDM": "Buff1"
+              "damagePercentageRatio": "Buff1"
             }
           ],
           "state": "AttackUp",
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Weapon_FallenSun1",
+              "effectPattern": "Eff_Weapon_FallenSun1",
               "effectTempleteID": -1.0
             }
           ]
@@ -4878,19 +4878,19 @@
         "UNIQUE_Bow_FallenSun_Buff2": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "ignoreEventInfo": true,
-              "JIICGJODDDM": "Buff2"
+              "damagePercentageRatio": "Buff2"
             }
           ],
           "state": "AttackUp",
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Weapon_FallenSun2",
+              "effectPattern": "Eff_Weapon_FallenSun2",
               "effectTempleteID": -1.0
             }
           ]
@@ -4898,19 +4898,19 @@
         "UNIQUE_Bow_FallenSun_Buff3": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "ignoreEventInfo": true,
-              "JIICGJODDDM": "Buff3"
+              "damagePercentageRatio": "Buff3"
             }
           ],
           "state": "AttackUp",
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Weapon_FallenSun3",
+              "effectPattern": "Eff_Weapon_FallenSun3",
               "effectTempleteID": -1.0
             }
           ]
@@ -4918,31 +4918,31 @@
         "UNIQUE_Bow_FallenSun_Check": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "PositionDampTime": true,
-                  "ratio": -1.0,
+                  "doOffStage": true,
+                  "value": -1.0,
                   "key": "_ABILITY_Weapon_Bow_FallenSun_Check",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -4955,27 +4955,27 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Dura",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Weapon_Bow_FallenSun",
               "maxValue": 4.0,
               "minValue": 1.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Weapon_Bow_FallenSun",
-                  "ratio": 4.0
+                  "value": 4.0
                 }
               ],
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Weapon_Bow_FallenSun",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -4984,8 +4984,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Weapon_Bow_FallenSun_Check",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -4996,7 +4996,7 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 1.0,
+          "value": 1.0,
           "key": "_ABILITY_Weapon_Bow_FallenSun",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -5005,8 +5005,8 @@
       "onRemoved": [
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 1.0,
+          "doOffStage": true,
+          "value": 1.0,
           "key": "_ABILITY_Weapon_Bow_FallenSun",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -5027,11 +5027,11 @@
               "$type": "AttachModifier",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Bow_Arakalari_CD_Mark",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "modifierName": "UNIQUE_Bow_Arakalari_Mastery_Up"
@@ -5040,11 +5040,11 @@
               "$type": "ApplyModifier",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Bow_Arakalari_CD_Mark",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "modifierName": "Bow_Arakalari_CD_Set"
@@ -5055,11 +5055,11 @@
               "$type": "AttachModifier",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Bow_Arakalari_CD_Mark",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "modifierName": "UNIQUE_Bow_Arakalari_Mastery_Up"
@@ -5068,11 +5068,11 @@
               "$type": "ApplyModifier",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Bow_Arakalari_CD_Mark",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "modifierName": "Bow_Arakalari_CD_Set"
@@ -5092,12 +5092,12 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": "BuffColdDown",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Bow_Arakalari_CD_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -5106,8 +5106,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Bow_Arakalari_CD_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -5122,7 +5122,7 @@
             4.0,
             "ADD"
           ],
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Buff_Time",
           "properties": {
             "Actor_ElemMasteryDelta": "MasteryDelta"
@@ -5131,21 +5131,21 @@
           "onThinkInterval": [
             {
               "$type": "SetGlobalPos",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "key": "_BOW_ARAKALARI_ATTACK_POS",
               "born": {
-                "$type": "AJCFIBNMGKO",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.20000000298023224,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": 0.20000000298023224,
+                  "z": 0.0
                 }
               }
             },
             {
               "$type": "Predicated",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "topLimit": 1,
                 "entityTypePriority": [
                   "Monster"
@@ -5153,35 +5153,35 @@
                 "sortType": "Nearest",
                 "shapeName": "CircleR15H10",
                 "campTargetType": "Enemy",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "SetGlobalPos",
                   "target": "Target",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "key": "_BOW_ARAKALARI_ATTACK_FIXPOS",
                   "born": {
-                    "$type": "ILHMMCNMNEG",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": 0.0,
-                      "MLOLIKEJCKB": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "attachPointName": "RootNode"
                   },
@@ -5189,7 +5189,7 @@
                 },
                 {
                   "$type": "CopyGlobalValue",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "srcTarget": "Self",
                   "dstTarget": "Self",
                   "srcKey": "_BOW_ARAKALARI_ATTACK_FIXPOS_0",
@@ -5197,7 +5197,7 @@
                 },
                 {
                   "$type": "CopyGlobalValue",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "srcTarget": "Self",
                   "dstTarget": "Self",
                   "srcKey": "_BOW_ARAKALARI_ATTACK_FIXPOS_1",
@@ -5205,7 +5205,7 @@
                 },
                 {
                   "$type": "CopyGlobalValue",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "srcTarget": "Self",
                   "dstTarget": "Self",
                   "srcKey": "_BOW_ARAKALARI_ATTACK_FIXPOS_2",
@@ -5215,27 +5215,27 @@
             },
             {
               "$type": "TriggerAttackEvent",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPJICLLGBLO",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "NNOMECHMEBA",
+                    "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_BOW_ARAKALARI_ATTACK_POS",
                     "directionKey": ""
                   },
                   "height": 1.5,
-                  "DLFACKMBPCH": 1.600000023841858
+                  "radius": 1.600000023841858
                 },
                 "attackInfo": {
                   "attackTag": "WeaponSkill",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Damage_Rate",
-                    "JIICGJODDDM": 0.0,
-                    "bonusCriticalHurt": 0.0,
+                    "damagePercentage": "Damage_Rate",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 0.0,
                     "enBreak": 20.0,
                     "damagePercentage": 0.0
                   },
@@ -5251,10 +5251,10 @@
             },
             {
               "$type": "FireEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Weapon_Blast_R15",
+              "doOffStage": true,
+              "effectPattern": "Eff_Weapon_Blast_R15",
               "born": {
-                "$type": "NNOMECHMEBA",
+                "$type": "ConfigBornByGlobalValue",
                 "positionKey": "_BOW_ARAKALARI_ATTACK_POS",
                 "directionKey": ""
               },
@@ -5262,35 +5262,35 @@
             },
             {
               "$type": "RemoveModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Bow_Arakalari_Mastery_Up"
             }
           ],
           "onKill": [
             {
               "$type": "RemoveModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Bow_Arakalari_Mastery_Up"
             }
           ],
           "onAvatarOut": [
             {
               "$type": "SetGlobalPos",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "key": "_BOW_ARAKALARI_ATTACK_POS",
               "born": {
-                "$type": "AJCFIBNMGKO",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.20000000298023224,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": 0.20000000298023224,
+                  "z": 0.0
                 }
               }
             },
             {
               "$type": "Predicated",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "topLimit": 1,
                 "entityTypePriority": [
                   "Monster"
@@ -5298,35 +5298,35 @@
                 "sortType": "Nearest",
                 "shapeName": "CircleR15H10",
                 "campTargetType": "Enemy",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "SetGlobalPos",
                   "target": "Target",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "key": "_BOW_ARAKALARI_ATTACK_FIXPOS",
                   "born": {
-                    "$type": "ILHMMCNMNEG",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": 0.0,
-                      "MLOLIKEJCKB": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "attachPointName": "RootNode"
                   },
@@ -5334,7 +5334,7 @@
                 },
                 {
                   "$type": "CopyGlobalValue",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "srcTarget": "Self",
                   "dstTarget": "Self",
                   "srcKey": "_BOW_ARAKALARI_ATTACK_FIXPOS_0",
@@ -5342,7 +5342,7 @@
                 },
                 {
                   "$type": "CopyGlobalValue",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "srcTarget": "Self",
                   "dstTarget": "Self",
                   "srcKey": "_BOW_ARAKALARI_ATTACK_FIXPOS_1",
@@ -5350,7 +5350,7 @@
                 },
                 {
                   "$type": "CopyGlobalValue",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "srcTarget": "Self",
                   "dstTarget": "Self",
                   "srcKey": "_BOW_ARAKALARI_ATTACK_FIXPOS_2",
@@ -5360,27 +5360,27 @@
             },
             {
               "$type": "TriggerAttackEvent",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPJICLLGBLO",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "NNOMECHMEBA",
+                    "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_BOW_ARAKALARI_ATTACK_POS",
                     "directionKey": ""
                   },
                   "height": 1.5,
-                  "DLFACKMBPCH": 1.600000023841858
+                  "radius": 1.600000023841858
                 },
                 "attackInfo": {
                   "attackTag": "WeaponSkill",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Damage_Rate",
-                    "JIICGJODDDM": 0.0,
-                    "bonusCriticalHurt": 0.0,
+                    "damagePercentage": "Damage_Rate",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 0.0,
                     "enBreak": 20.0,
                     "damagePercentage": 0.0
                   },
@@ -5396,10 +5396,10 @@
             },
             {
               "$type": "FireEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Weapon_Blast_R15",
+              "doOffStage": true,
+              "effectPattern": "Eff_Weapon_Blast_R15",
               "born": {
-                "$type": "NNOMECHMEBA",
+                "$type": "ConfigBornByGlobalValue",
                 "positionKey": "_BOW_ARAKALARI_ATTACK_POS",
                 "directionKey": ""
               },
@@ -5407,7 +5407,7 @@
             },
             {
               "$type": "RemoveModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Bow_Arakalari_Mastery_Up"
             }
           ]
@@ -5416,8 +5416,8 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Bow_Arakalari_CD_Mark",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -5434,7 +5434,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Bow_Ayus",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -1.5,
             -0.5,
@@ -5457,7 +5457,7 @@
         "UNIQUE_Bow_Ayus_WeaponBaseBuff": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_ElecAddHurtDelta": "BaseBuff",
             "Actor_FireAddHurtDelta": "BaseBuff",
@@ -5472,32 +5472,32 @@
         "UNIQUE_Bow_Ayus_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "ExtraAttack"
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "MJACFLGGFHL",
+                  "$type": "ByEquipAffixReady",
                   "target": "Self",
                   "equipAffixDataID": 115511
                 }
@@ -5513,7 +5513,7 @@
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": -1.0,
+                  "value": -1.0,
                   "key": "_ABILITY_Bow_Ayus",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -5526,14 +5526,14 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Dura",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageCountMixin",
               "attackTags": [
                 "ExtraAttack"
               ],
-              "JIICGJODDDM": 0.0,
+              "damagePercentageRatio": 0.0,
               "damageExtra": [
                 "Ratio",
                 "FIGHT_PROP_ELEMENT_MASTERY",
@@ -5541,30 +5541,30 @@
               ],
               "predicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Bow_Ayus_BuffZero",
-                  "ratio": "FIGHT_PROP_ELEMENT_MASTERY",
-                  "PODFMDAEAGL": "LessAndEqual"
+                  "value": "FIGHT_PROP_ELEMENT_MASTERY",
+                  "compareType": "LessAndEqual"
                 }
               ],
               "maxModifyCount": "MaxCount",
               "maxCountActions": [
                 {
                   "$type": "AttachModifier",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Bow_Ayus_Buff_Remover"
                 }
               ]
@@ -5574,15 +5574,15 @@
             {
               "$type": "AttachEffect",
               "otherTargets": {
-                "$type": "LHDLMLKCBME",
-                "MFHFKEPJJOD": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
                 ]
               },
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Weapon_Bow_Ayus",
+              "doOffStage": true,
+              "effectPattern": "Eff_Weapon_Bow_Ayus",
               "effectTempleteID": -1.0
             }
           ]
@@ -5591,11 +5591,11 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "RemoveUniqueModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Bow_Ayus_Buff"
             }
           ]
@@ -5604,11 +5604,11 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "CDTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "EquipAffixStart",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "CD": "CDTime",
               "equipAffixDataID": 115511
             }
@@ -5616,8 +5616,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Bow_Ayus",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -5628,14 +5628,14 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Bow_Ayus",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Bow_Ayus_BuffZero",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -5648,7 +5648,7 @@
       "onRemoved": [
         {
           "$type": "RemoveUniqueModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_Bow_Ayus_Buff"
         }
       ],
@@ -5663,7 +5663,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Bow_Fin",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -1.5,
             -0.5,
@@ -5686,14 +5686,14 @@
         "UNIQUE_Bow_Fin_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "OnAvatarUseSkillMixin",
               "onTriggerSkill": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": -1.0,
+                  "value": -1.0,
                   "key": "_ABILITY_Bow_Fin",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -5707,7 +5707,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "WeaponSkill_CD",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -5715,14 +5715,14 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": "Cishu",
+              "value": "Cishu",
               "key": "_ABILITY_Bow_Fin_Cishu",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Bow_Fin_CanTriggerDamage",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -5731,8 +5731,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Bow_Fin",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -5743,7 +5743,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Time",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "state": "AttackUp",
           "onAttackLanded": [
             {
@@ -5751,36 +5751,36 @@
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Bow_Fin_CanTriggerDamage",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "MoreThan"
+                  "value": 0.0,
+                  "compareType": "MoreThan"
                 }
               ],
               "successActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "value": 0.0,
                   "key": "_ABILITY_Bow_Fin_CanTriggerDamage",
                   "maxValue": 0.0,
                   "minValue": 0.0
                 },
                 {
                   "$type": "AddGlobalValue",
-                  "ratio": -1.0,
+                  "value": -1.0,
                   "key": "_ABILITY_Bow_Fin_Cishu",
                   "useLimitRange": true,
                   "maxValue": "Cishu",
@@ -5789,20 +5789,20 @@
                 {
                   "$type": "FireEffect",
                   "target": "Target",
-                  "shieldHP": "Eff_Weapon_Bow_Fin",
+                  "effectPattern": "Eff_Weapon_Bow_Fin",
                   "born": {
-                    "$type": "AKFBENAJCLO",
+                    "$type": "ConfigBornByHitPoint",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": 0.0,
-                      "MLOLIKEJCKB": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "NLICIODEGDO": {
-                      "$type": "BMAMOFPPNBD",
-                      "JOEDEGAHBHC": {
-                        "EMBMLEBGFOI": 0.0,
-                        "NABPJFNICAE": 0.0,
-                        "MLOLIKEJCKB": 0.0
+                    "direction": {
+                      "$type": "ConfigDirectionByEntity",
+                      "angleOffset": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
                     }
                   },
@@ -5812,34 +5812,34 @@
                   "$type": "TriggerAttackEvent",
                   "attackEvent": {
                     "attackPattern": {
-                      "$type": "FPJICLLGBLO",
+                      "$type": "ConfigAttackCircle",
                       "triggerType": "TriggerNoRepeat",
                       "born": {
-                        "$type": "AKFBENAJCLO",
+                        "$type": "ConfigBornByHitPoint",
                         "offset": {
-                          "EMBMLEBGFOI": 0.0,
-                          "NABPJFNICAE": -0.5,
-                          "MLOLIKEJCKB": 0.0
+                          "x": 0.0,
+                          "y": -0.5,
+                          "z": 0.0
                         },
-                        "NLICIODEGDO": {
-                          "$type": "BMAMOFPPNBD",
-                          "JOEDEGAHBHC": {
-                            "EMBMLEBGFOI": 0.0,
-                            "NABPJFNICAE": 0.0,
-                            "MLOLIKEJCKB": 0.0
+                        "direction": {
+                          "$type": "ConfigDirectionByEntity",
+                          "angleOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
                           }
                         }
                       },
-                      "DLFACKMBPCH": 2.5
+                      "radius": 2.5
                     },
                     "attackInfo": {
                       "attackTag": "WeaponSkill",
                       "attenuationTag": "",
                       "attenuationGroup": "default",
                       "attackProperty": {
-                        "ACKCDHKEGCK": "Rate",
-                        "JIICGJODDDM": 0.0,
-                        "bonusCriticalHurt": 100.0,
+                        "damagePercentage": "Rate",
+                        "damagePercentageRatio": 0.0,
+                        "elementDurability": 100.0,
                         "strikeType": "Default",
                         "enBreak": 20.0,
                         "damagePercentage": 0.0
@@ -5866,17 +5866,17 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Attack_CDTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "RemoveUniqueModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Bow_Fin_Cishu",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "LessAndEqual"
+                  "value": 0.0,
+                  "compareType": "LessAndEqual"
                 }
               ],
               "modifierName": "UNIQUE_Bow_Fin_ExtraDamage"
@@ -5885,17 +5885,17 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Bow_Fin_Cishu",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "MoreThan"
+                  "value": 0.0,
+                  "compareType": "MoreThan"
                 }
               ],
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Bow_Fin_CanTriggerDamage",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -5906,7 +5906,7 @@
       "onRemoved": [
         {
           "$type": "RemoveUniqueModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_Bow_Fin_ExtraDamage"
         }
       ],
@@ -5927,29 +5927,29 @@
         "UNIQUE_Bow_Ibis_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "ExtraAttack"
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -5966,7 +5966,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -5982,7 +5982,7 @@
           },
           "modifierName": "",
           "duration": "Dura",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_ElemMasteryDelta": "Mastery"
           },
@@ -6015,12 +6015,12 @@
           "attackTags": [
             "ExtraAttack"
           ],
-          "JIICGJODDDM": "DamageUpRatio",
+          "damagePercentageRatio": "DamageUpRatio",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Weapon_Bow_Gurabad_Debuff_Mark",
-              "ratio": 1.0
+              "value": 1.0
             }
           ]
         }
@@ -6035,62 +6035,62 @@
         "UNIQUE_Weapon_Bow_Gurabad_Driver": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onHittingOther": [
             {
               "$type": "Predicated",
               "target": "Other",
               "targetPredicates": [
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "ExtraAttack"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Weapon_Bow_Gurabad_CD_Mark",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "AttachModifier",
                   "target": "Caster",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "Weapon_Bow_Gurabad_CD"
                 },
                 {
                   "$type": "SetGlobalPos",
                   "target": "Other",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "key": "_ABILITY_Weapon_Bow_Gurabad_POS",
                   "born": {
-                    "$type": "ALJGHOOKOAP",
-                    "CMLNNDEJCEF": true,
-                    "EFKJEGODJCO": 5.0,
-                    "NLBFCDKCPAH": true
+                    "$type": "ConfigBornByTarget",
+                    "onGround": true,
+                    "onGroundRaycastUpDist": 5.0,
+                    "useRotation": true
                   },
                   "setTarget": false
                 },
                 {
                   "$type": "ApplyModifier",
                   "target": "Caster",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "Weapon_Bow_Gurabad_Star_Fall"
                 }
               ]
@@ -6101,12 +6101,12 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": "CDTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Weapon_Bow_Gurabad_CD_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -6115,8 +6115,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Weapon_Bow_Gurabad_CD_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -6127,17 +6127,17 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 2.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Weapon_Bow_Gurabad_StarFall",
+              "effectPattern": "Eff_Weapon_Bow_Gurabad_StarFall",
               "born": {
-                "$type": "NNOMECHMEBA",
+                "$type": "ConfigBornByGlobalValue",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.0,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
                 "positionKey": "_ABILITY_Weapon_Bow_Gurabad_POS",
                 "directionKey": ""
@@ -6154,38 +6154,38 @@
             {
               "$type": "Predicated",
               "target": "Other",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "WeaponSkill"
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "RemoveUniqueModifier",
                   "target": "Other",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Weapon_Bow_Gurabad_Debuff_Mark"
                 },
                 {
                   "$type": "ApplyModifier",
                   "target": "Other",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Weapon_Bow_Gurabad_Debuff_Mark"
                 }
               ]
@@ -6196,35 +6196,35 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.25,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "TriggerAttackEvent",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPJICLLGBLO",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "NNOMECHMEBA",
+                    "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_ABILITY_Weapon_Bow_Gurabad_POS",
                     "directionKey": ""
                   },
-                  "DLFACKMBPCH": 3.5
+                  "radius": 3.5
                 },
                 "attackInfo": {
                   "attackTag": "WeaponSkill",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "AtkRate",
-                    "JIICGJODDDM": 0.0,
-                    "bonusCriticalHurt": 100.0,
+                    "damagePercentage": "AtkRate",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 100.0,
                     "strikeType": "Pierce",
                     "enBreak": 20.0,
                     "attackType": "Range",
                     "bonusCritical": 0.0,
-                    "CBNLJFOGCDH": 0.0,
+                    "bonusCriticalHurt": 0.0,
                     "damagePercentage": 0.0
                   },
                   "hitPattern": {
@@ -6242,13 +6242,13 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "DebuffDuration",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "state": "DefenseDown",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Weapon_Bow_Gurabad_Debuff_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -6257,8 +6257,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Weapon_Bow_Gurabad_Debuff_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -6269,8 +6269,8 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Weapon_Bow_Gurabad_CD_Mark",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -6284,25 +6284,25 @@
         {
           "$type": "RemoveModifier",
           "otherTargets": {
-            "$type": "DBCDEKOJIJJ",
+            "$type": "SelectTargetsByShape",
             "sortType": "Random",
             "shapeName": "CircleR40",
             "campTargetType": "Enemy",
-            "BGEBJHNLDLA": 1.0
+            "sizeRatio": 1.0
           },
-          "PositionDampTime": true,
+          "doOffStage": true,
           "predicates": [
             {
-              "$type": "CACJBJLHLDL",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Monster"
               ]
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ANIMAL_ENTITY_TYPE",
-              "ratio": 0.0,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             }
           ],
           "modifierName": "UNIQUE_Weapon_Bow_Gurabad_Debuff_Mark",
@@ -6313,25 +6313,25 @@
         {
           "$type": "RemoveModifier",
           "otherTargets": {
-            "$type": "DBCDEKOJIJJ",
+            "$type": "SelectTargetsByShape",
             "sortType": "Random",
             "shapeName": "CircleR40",
             "campTargetType": "Enemy",
-            "BGEBJHNLDLA": 1.0
+            "sizeRatio": 1.0
           },
-          "PositionDampTime": true,
+          "doOffStage": true,
           "predicates": [
             {
-              "$type": "CACJBJLHLDL",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Monster"
               ]
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ANIMAL_ENTITY_TYPE",
-              "ratio": 0.0,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             }
           ],
           "modifierName": "UNIQUE_Weapon_Bow_Gurabad_Debuff_Mark",
@@ -6353,11 +6353,11 @@
         "UNIQUE_Weapon_Bow_Vorpal_Checker": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onBeingHealed": [
             {
               "$type": "AttachModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Weapon_Bow_Vorpal_Buff"
             }
           ]
@@ -6366,7 +6366,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Time",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddHurtDelta": "Rate"
           },
@@ -6399,7 +6399,7 @@
         "UNIQUE_Bow_Mechanic_Handler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "OnAvatarUseSkillMixin",
@@ -6408,10 +6408,10 @@
                   "$type": "AttachModifier",
                   "predicates": [
                     {
-                      "$type": "BMLGBKCIOIN",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Bow_Mechanic_Mark",
-                      "ratio": 1.0,
-                      "PODFMDAEAGL": "MoreThanAndEqual"
+                      "value": 1.0,
+                      "compareType": "MoreThanAndEqual"
                     }
                   ],
                   "modifierName": "UNIQUE_Bow_Mechanic_CD"
@@ -6422,10 +6422,10 @@
                   "$type": "AttachModifier",
                   "predicates": [
                     {
-                      "$type": "BMLGBKCIOIN",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Bow_Mechanic_Mark",
-                      "ratio": 1.0,
-                      "PODFMDAEAGL": "MoreThanAndEqual"
+                      "value": 1.0,
+                      "compareType": "MoreThanAndEqual"
                     }
                   ],
                   "modifierName": "UNIQUE_Bow_Mechanic_CD"
@@ -6452,8 +6452,8 @@
           "onHeal": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Bow_Mechanic_Mark",
               "useLimitRange": true,
               "maxValue": 3.0,
@@ -6461,15 +6461,15 @@
             },
             {
               "$type": "AttachModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Bow_Mechanic_MarkTimer"
             }
           ],
           "onBeingHealed": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Bow_Mechanic_Mark",
               "useLimitRange": true,
               "maxValue": 3.0,
@@ -6477,7 +6477,7 @@
             },
             {
               "$type": "AttachModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Bow_Mechanic_MarkTimer"
             }
           ]
@@ -6486,12 +6486,12 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "MarkDuration",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Bow_Mechanic_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -6503,7 +6503,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "BuffCD",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -6520,7 +6520,7 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Bow_Mechanic_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -6531,7 +6531,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "BuffDuration",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_ElecAddHurtDelta": [
               "ElementalUp",
@@ -6580,85 +6580,85 @@
         "UNIQUE_Bow_Mechanic_Buff_Eff": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Predicated",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Bow_Mechanic_Mark",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "AttachEffect",
                   "otherTargets": {
-                    "$type": "LHDLMLKCBME",
-                    "MFHFKEPJJOD": [
+                    "$type": "SelectTargetsByEquipParts",
+                    "equipPartNames": [
                       "equip01",
                       "equip02",
                       "sheathPoint"
                     ]
                   },
-                  "PositionDampTime": true,
-                  "shieldHP": "Eff_Weapon_Bow_Mechanic_Buff_1",
+                  "doOffStage": true,
+                  "effectPattern": "Eff_Weapon_Bow_Mechanic_Buff_1",
                   "effectTempleteID": -1.0
                 }
               ]
             },
             {
               "$type": "Predicated",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Bow_Mechanic_Mark",
-                  "ratio": 2.0
+                  "value": 2.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "AttachEffect",
                   "otherTargets": {
-                    "$type": "LHDLMLKCBME",
-                    "MFHFKEPJJOD": [
+                    "$type": "SelectTargetsByEquipParts",
+                    "equipPartNames": [
                       "equip01",
                       "equip02",
                       "sheathPoint"
                     ]
                   },
-                  "PositionDampTime": true,
-                  "shieldHP": "Eff_Weapon_Bow_Mechanic_Buff_2",
+                  "doOffStage": true,
+                  "effectPattern": "Eff_Weapon_Bow_Mechanic_Buff_2",
                   "effectTempleteID": -1.0
                 }
               ]
             },
             {
               "$type": "Predicated",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Bow_Mechanic_Mark",
-                  "ratio": 3.0
+                  "value": 3.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "AttachEffect",
                   "otherTargets": {
-                    "$type": "LHDLMLKCBME",
-                    "MFHFKEPJJOD": [
+                    "$type": "SelectTargetsByEquipParts",
+                    "equipPartNames": [
                       "equip01",
                       "equip02",
                       "sheathPoint"
                     ]
                   },
-                  "PositionDampTime": true,
-                  "shieldHP": "Eff_Weapon_Bow_Mechanic_Buff_3",
+                  "doOffStage": true,
+                  "effectPattern": "Eff_Weapon_Bow_Mechanic_Buff_3",
                   "effectTempleteID": -1.0
                 }
               ]
@@ -6669,23 +6669,23 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Bow_Mechanic_Mark",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "AttachModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_Bow_Mechanic_Handler"
         }
       ],
       "onRemoved": [
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Bow_Mechanic_Mark",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -6704,21 +6704,21 @@
           "attackTags": [
             "ExtraAttack"
           ],
-          "JIICGJODDDM": "DamageUp"
+          "damagePercentageRatio": "DamageUp"
         },
         {
           "$type": "DoActionByTeamStatusMixin",
           "actions": [
             {
               "$type": "SetSameElementCountToGlobalValue",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "checkSameElement": true,
               "globalValueKey": "_ABILITY_Bow_Pledge_Same_Number",
               "teamBaseOn": "AllTeams"
             },
             {
               "$type": "SetSameElementCountToGlobalValue",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "globalValueKey": "_ABILITY_Bow_Pledge_Diff_Number",
               "teamBaseOn": "AllTeams"
             }
@@ -6772,12 +6772,12 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 15.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 1.0,
           "onThinkInterval": [
             {
               "$type": "TriggerAbility",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "abilityName": "Weapon_Bow_Pledge"
             }
           ]
@@ -6785,19 +6785,19 @@
         "UNIQUE_Bow_Pledge_Buff_Interval": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 10.0,
           "onThinkInterval": [
             {
               "$type": "SetSameElementCountToGlobalValue",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "checkSameElement": true,
               "globalValueKey": "_ABILITY_Bow_Pledge_Same_Number",
               "teamBaseOn": "AllTeams"
             },
             {
               "$type": "SetSameElementCountToGlobalValue",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "globalValueKey": "_ABILITY_Bow_Pledge_Diff_Number",
               "teamBaseOn": "AllTeams"
             }
@@ -6806,7 +6806,7 @@
         "UNIQUE_Bow_Pledgee_SameBuff_1": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "SameBuff1"
           }
@@ -6814,7 +6814,7 @@
         "UNIQUE_Bow_Pledgee_SameBuff_2": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "SameBuff2"
           }
@@ -6822,7 +6822,7 @@
         "UNIQUE_Bow_Pledgee_SameBuff_3": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "SameBuff3"
           }
@@ -6830,7 +6830,7 @@
         "UNIQUE_Bow_Pledgee_DiffBuff_1": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Animator_MoveSpeedRatio": "DiffBuff1"
           },
@@ -6839,7 +6839,7 @@
         "UNIQUE_Bow_Pledgee_DiffBuff_2": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Animator_MoveSpeedRatio": "DiffBuff2"
           },
@@ -6848,7 +6848,7 @@
         "UNIQUE_Bow_Pledgee_DiffBuff_3": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Animator_MoveSpeedRatio": "DiffBuff3"
           },
@@ -6857,7 +6857,7 @@
         "UNIQUE_Bow_Pledge_Eff_Handler_OnWeapon": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToGlobalValueMixin",
@@ -6876,7 +6876,7 @@
             {
               "$type": "RemoveUniqueModifier",
               "target": "Caster",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Bow_Pledge_Eff_Init"
             }
           ]
@@ -6884,12 +6884,12 @@
         "UNIQUE_Bow_Pledgee_Eff": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Weapon_Bow_Pledge",
+              "doOffStage": true,
+              "effectPattern": "Eff_Weapon_Bow_Pledge",
               "effectTempleteID": -1.0
             }
           ]
@@ -6909,14 +6909,14 @@
         {
           "$type": "AttachModifier",
           "otherTargets": {
-            "$type": "LHDLMLKCBME",
-            "MFHFKEPJJOD": [
+            "$type": "SelectTargetsByEquipParts",
+            "equipPartNames": [
               "equip01",
               "equip02",
               "sheathPoint"
             ]
           },
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_Bow_Pledge_Eff_Handler_OnWeapon"
         }
       ],

@@ -9,7 +9,7 @@
           "skillID": 10921,
           "chargeTime": 0.25,
           "secondChargeTime": "Max_Dura",
-          "OnBeginUncharged": [
+          "onBeginUncharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "DoSkill"
@@ -17,7 +17,7 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1.0
             },
             {
               "$type": "ResetAnimatorTrigger",
@@ -28,7 +28,7 @@
               "modifierName": "SetTrigger"
             }
           ],
-          "OnBeginCharged": [
+          "onBeginCharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "DoSkill"
@@ -36,10 +36,10 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 6.0
+              "value": 6.0
             }
           ],
-          "OnReleaseCharged": [
+          "onReleaseCharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "EndHoldTrigger"
@@ -49,7 +49,7 @@
               "modifierName": "SetTrigger"
             }
           ],
-          "OnBeginSecondCharged": [
+          "onBeginSecondCharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "EndHoldTrigger"
@@ -97,7 +97,7 @@
         "SetTrigger": {
           "modifierName": "",
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SetAnimatorTrigger",
@@ -107,27 +107,27 @@
         },
         "Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ],
           "onAvatarOut": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ]
         },
         "Cost": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "CostStaminaMixin",
-              "costStaminaRatio": "StaminaCost",
+              "costStaminaDelta": "StaminaCost",
               "onStaminaEmpty": [
                 {
                   "$type": "SetAnimatorTrigger",
@@ -147,7 +147,7 @@
       "abilityMixins": [
         {
           "$type": "AttachToMultiNormalizedTimeMixin",
-          "ANCNKEPIBBL": [
+          "normalizedStateIDList": [
             {
               "stateID": "Attack03"
             },
@@ -246,7 +246,7 @@
         },
         {
           "$type": "AttachToMultiNormalizedTimeMixin",
-          "ANCNKEPIBBL": [
+          "normalizedStateIDList": [
             {
               "stateID": "Attack03",
               "normalizeStart": 0.23999999463558197
@@ -298,26 +298,26 @@
       "modifiers": {
         "LionHead": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead",
               "born": {
-                "$type": "AJCFIBNMGKO",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.0,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               },
               "effectTempleteID": -1.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Gaming_LionHead_Dissolved",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -328,24 +328,24 @@
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Gaming_OutFit_Flag",
-                  "ratio": 1.0,
-                  "CHDEOOKOFDK": true,
-                  "PODFMDAEAGL": "LessAndEqual"
+                  "value": 1.0,
+                  "forceByCaster": true,
+                  "compareType": "LessAndEqual"
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Gaming_LionHead_Dissolved",
-                  "ratio": 0.0,
-                  "CHDEOOKOFDK": true,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "forceByCaster": true,
+                  "compareType": "NoneOrEqual"
                 }
               ],
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead_Dissolve",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead_Dissolve",
               "born": {
-                "$type": "ILHMMCNMNEG",
-                "NLBFCDKCPAH": true,
+                "$type": "ConfigBornByAttachPoint",
+                "useRotation": true,
                 "attachPointName": "CatalystL"
               },
               "effectTempleteID": -1.0
@@ -354,23 +354,23 @@
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Gaming_OutFit_Flag",
-                  "ratio": 2.0,
-                  "CHDEOOKOFDK": true
+                  "value": 2.0,
+                  "forceByCaster": true
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Gaming_LionHead_Dissolved",
-                  "ratio": 0.0,
-                  "CHDEOOKOFDK": true,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "forceByCaster": true,
+                  "compareType": "NoneOrEqual"
                 }
               ],
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead_Dissolve_Neon",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead_Dissolve_Neon",
               "born": {
-                "$type": "ILHMMCNMNEG",
-                "NLBFCDKCPAH": true,
+                "$type": "ConfigBornByAttachPoint",
+                "useRotation": true,
                 "attachPointName": "CatalystL"
               },
               "effectTempleteID": -1.0
@@ -379,41 +379,41 @@
         },
         "LionHead_Dissolve": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Gaming_OutFit_Flag",
-                  "ratio": 1.0,
-                  "CHDEOOKOFDK": true,
-                  "PODFMDAEAGL": "LessAndEqual"
+                  "value": 1.0,
+                  "forceByCaster": true,
+                  "compareType": "LessAndEqual"
                 }
               ],
               "parameter": "LionHead_Eff_Dissolve",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
             },
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Gaming_OutFit_Flag",
-                  "ratio": 2.0,
-                  "CHDEOOKOFDK": true
+                  "value": 2.0,
+                  "forceByCaster": true
                 }
               ],
               "parameter": "LionHead_Eff_Dissolve_Neon",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Gaming_LionHead_Dissolved",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -422,107 +422,107 @@
         },
         "LionHead_Leap": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "LionHead_Leap",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
             },
             {
               "$type": "SendEffectTrigger",
               "parameter": "LionHead_Eff_Leap",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
             }
           ]
         },
         "LionHead_Jump": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "LionHead_Jump",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
             },
             {
               "$type": "SendEffectTrigger",
               "parameter": "LionHead_Eff_Jump",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
             }
           ]
         },
         "LionHead_FallingAnthem_BS": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "LionHead_FallingAttack_BS",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
             }
           ]
         },
         "LionHead_FallingAnthem_Loop": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "LionHead_FallingAttack_Loop",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
             }
           ]
         },
         "LionHead_FallingAnthem_Strike": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "LionHead_FallingAttack_Strike",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
             }
           ]
         },
         "LionHead_Attack03": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "LionHead_Attack03",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
             },
             {
               "$type": "SendEffectTrigger",
               "parameter": "LionHead_Eff_Appear",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
             }
           ]
         },
         "LionHead_Pile": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_Pile",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_Pile",
               "effectTempleteID": -1.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Gaming_Pile_Dissolved",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -533,32 +533,32 @@
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Gaming_Pile_Dissolved",
-                  "ratio": 0.0,
-                  "CHDEOOKOFDK": true,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "forceByCaster": true,
+                  "compareType": "NoneOrEqual"
                 }
               ],
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_Pile_Dissolve",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_Pile_Dissolve",
               "effectTempleteID": -1.0
             }
           ]
         },
         "LionHead_Pile_Dissolve": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Pile_Dissolve",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_Pile"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_Pile"
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Gaming_Pile_Dissolved",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -567,25 +567,25 @@
         },
         "LionHead_Attack04": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "LionHead_Attack04",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
             },
             {
               "$type": "SendEffectTrigger",
               "parameter": "LionHead_Eff_Loop",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
             }
           ]
         },
         "LionHead_StandbyShow_01": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Randomed",
@@ -595,18 +595,18 @@
                   "$type": "SendEffectTrigger",
                   "parameter": "LionHead_Show",
                   "attachPoint": "",
-                  "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+                  "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
                 },
                 {
                   "$type": "SendEffectTrigger",
                   "parameter": "LionHead_Eff_Show_Neon",
                   "attachPoint": "",
-                  "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+                  "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "PositionDampTime": true,
-                  "ratio": 2.0,
+                  "doOffStage": true,
+                  "value": 2.0,
                   "key": "_ABILITY_Gaming_OutFit_Flag",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -617,18 +617,18 @@
                   "$type": "SendEffectTrigger",
                   "parameter": "LionHead_Show",
                   "attachPoint": "",
-                  "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+                  "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
                 },
                 {
                   "$type": "SendEffectTrigger",
                   "parameter": "LionHead_Eff_Show",
                   "attachPoint": "",
-                  "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+                  "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "PositionDampTime": true,
-                  "ratio": 1.0,
+                  "doOffStage": true,
+                  "value": 1.0,
                   "key": "_ABILITY_Gaming_OutFit_Flag",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -641,16 +641,16 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Gaming_LionHead_Dissolved",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Gaming_Pile_Dissolved",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -665,7 +665,7 @@
       "abilityMixins": [
         {
           "$type": "AttachToMultiNormalizedTimeMixin",
-          "ANCNKEPIBBL": [
+          "normalizedStateIDList": [
             {
               "stateID": "StandbyShow_02"
             },
@@ -700,27 +700,27 @@
       "modifiers": {
         "LionPet": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Gaming_LionPet_Dissolved",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionPet",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionPet",
               "born": {
-                "$type": "AJCFIBNMGKO",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.0,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               },
               "effectTempleteID": -1.0
             }
@@ -730,32 +730,32 @@
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Gaming_LionPet_Dissolved",
-                  "ratio": 0.0,
-                  "CHDEOOKOFDK": true,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "forceByCaster": true,
+                  "compareType": "NoneOrEqual"
                 }
               ],
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionPet_Dissolve",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionPet_Dissolve",
               "effectTempleteID": -1.0
             }
           ]
         },
         "LionPet_Dissolve": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "LionPet_Eff_Dissolve",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionPet"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionPet"
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Gaming_LionPet_Dissolved",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -764,31 +764,31 @@
         },
         "LionPet_ElementalBurst": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "LionPet_ElementalBurst",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionPet"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionPet"
             },
             {
               "$type": "SendEffectTrigger",
               "parameter": "LionPet_Eff_ElementalBurst",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionPet"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionPet"
             }
           ]
         },
         "LionPet_StandbyShow_02": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "LionPet_Show02",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionPet"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionPet"
             }
           ]
         }
@@ -796,8 +796,8 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Gaming_LionPet_Dissolved",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -808,9 +808,9 @@
           "$type": "Predicated",
           "targetPredicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Gaming_ElementalBurst_Mark",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "successActions": [
@@ -818,9 +818,9 @@
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Gaming_Lion_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 },
                 {
                   "$type": "KIMKKBGAGAN",
@@ -841,18 +841,18 @@
                       "$type": "TriggerBullet",
                       "bulletID": 41092002,
                       "born": {
-                        "$type": "NNOMECHMEBA",
+                        "$type": "ConfigBornByGlobalValue",
                         "offset": {
-                          "EMBMLEBGFOI": 0.0,
-                          "NABPJFNICAE": 0.5,
-                          "MLOLIKEJCKB": 0.0
+                          "x": 0.0,
+                          "y": 0.5,
+                          "z": 0.0
                         },
-                        "NLICIODEGDO": {
-                          "$type": "JEMIKCPCEHA",
-                          "JOEDEGAHBHC": {
-                            "EMBMLEBGFOI": 0.0,
-                            "NABPJFNICAE": 75.0,
-                            "MLOLIKEJCKB": 0.0
+                        "direction": {
+                          "$type": "ConfigDirectionByDefault",
+                          "angleOffset": {
+                            "x": 0.0,
+                            "y": 75.0,
+                            "z": 0.0
                           }
                         },
                         "positionKey": "_ABILITY_Gaming_LionPet_Pos",
@@ -865,18 +865,18 @@
                       "$type": "TriggerBullet",
                       "bulletID": 41092002,
                       "born": {
-                        "$type": "NNOMECHMEBA",
+                        "$type": "ConfigBornByGlobalValue",
                         "offset": {
-                          "EMBMLEBGFOI": 0.0,
-                          "NABPJFNICAE": 0.5,
-                          "MLOLIKEJCKB": 0.0
+                          "x": 0.0,
+                          "y": 0.5,
+                          "z": 0.0
                         },
-                        "NLICIODEGDO": {
-                          "$type": "JEMIKCPCEHA",
-                          "JOEDEGAHBHC": {
-                            "EMBMLEBGFOI": 0.0,
-                            "NABPJFNICAE": -75.0,
-                            "MLOLIKEJCKB": 0.0
+                        "direction": {
+                          "$type": "ConfigDirectionByDefault",
+                          "angleOffset": {
+                            "x": 0.0,
+                            "y": -75.0,
+                            "z": 0.0
                           }
                         },
                         "positionKey": "_ABILITY_Gaming_LionPet_Pos",
@@ -893,13 +893,13 @@
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Gaming_Lion_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 },
                 {
-                  "$type": "HLLFAEKLJGA",
-                  "HCODJCODFCI": 0.5
+                  "$type": "ByTargetHPRatio",
+                  "HPRatio": 0.5
                 },
                 {
                   "$type": "KIMKKBGAGAN",
@@ -920,18 +920,18 @@
                       "$type": "TriggerBullet",
                       "bulletID": 41092002,
                       "born": {
-                        "$type": "NNOMECHMEBA",
+                        "$type": "ConfigBornByGlobalValue",
                         "offset": {
-                          "EMBMLEBGFOI": 0.0,
-                          "NABPJFNICAE": 0.5,
-                          "MLOLIKEJCKB": 0.0
+                          "x": 0.0,
+                          "y": 0.5,
+                          "z": 0.0
                         },
-                        "NLICIODEGDO": {
-                          "$type": "JEMIKCPCEHA",
-                          "JOEDEGAHBHC": {
-                            "EMBMLEBGFOI": 0.0,
-                            "NABPJFNICAE": 75.0,
-                            "MLOLIKEJCKB": 0.0
+                        "direction": {
+                          "$type": "ConfigDirectionByDefault",
+                          "angleOffset": {
+                            "x": 0.0,
+                            "y": 75.0,
+                            "z": 0.0
                           }
                         },
                         "positionKey": "_ABILITY_Gaming_LionPet_Pos",
@@ -944,18 +944,18 @@
                       "$type": "TriggerBullet",
                       "bulletID": 41092002,
                       "born": {
-                        "$type": "NNOMECHMEBA",
+                        "$type": "ConfigBornByGlobalValue",
                         "offset": {
-                          "EMBMLEBGFOI": 0.0,
-                          "NABPJFNICAE": 0.5,
-                          "MLOLIKEJCKB": 0.0
+                          "x": 0.0,
+                          "y": 0.5,
+                          "z": 0.0
                         },
-                        "NLICIODEGDO": {
-                          "$type": "JEMIKCPCEHA",
-                          "JOEDEGAHBHC": {
-                            "EMBMLEBGFOI": 0.0,
-                            "NABPJFNICAE": -75.0,
-                            "MLOLIKEJCKB": 0.0
+                        "direction": {
+                          "$type": "ConfigDirectionByDefault",
+                          "angleOffset": {
+                            "x": 0.0,
+                            "y": -75.0,
+                            "z": 0.0
                           }
                         },
                         "positionKey": "_ABILITY_Gaming_LionPet_Pos",
@@ -991,7 +991,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Gaming_OutFit_Flag",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -0.5,
             0.5,
@@ -1006,7 +1006,7 @@
         },
         {
           "$type": "AttachToMultiNormalizedTimeMixin",
-          "ANCNKEPIBBL": [
+          "normalizedStateIDList": [
             {
               "stateID": "SwimIdle"
             },
@@ -1160,7 +1160,7 @@
       "modifiers": {
         "Gaming_Emotion_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ControlEmotion",
@@ -1172,19 +1172,19 @@
           "onRemoved": [
             {
               "$type": "ControlEmotion",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ]
         },
         "Gaming_OutFit_Swim_Handler": {
           "stacking": "Unique",
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Gaming_OutFit_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1193,15 +1193,15 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Gaming_ElementalBurst_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Gaming_OutFit_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1210,11 +1210,11 @@
         },
         "Gaming_OutFit_Off": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Hat01"
@@ -1222,7 +1222,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Hat02"
@@ -1231,7 +1231,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Avatar_Boy_Claymore_Gaming_Eff_Model"
@@ -1239,17 +1239,17 @@
             },
             {
               "$type": "SetAnimatorInt",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "intID": "SkinControl",
-              "ratio": 0.0,
+              "value": 0.0,
               "persistent": true
             }
           ],
           "onAvatarIn": [
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Hat01"
@@ -1257,7 +1257,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Hat02"
@@ -1266,7 +1266,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Avatar_Boy_Claymore_Gaming_Eff_Model"
@@ -1276,15 +1276,15 @@
           "onReconnect": [
             {
               "$type": "SetAnimatorInt",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "intID": "SkinControl",
-              "ratio": 0.0,
+              "value": 0.0,
               "persistent": true
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Hat01"
@@ -1292,7 +1292,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Hat02"
@@ -1301,7 +1301,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Avatar_Boy_Claymore_Gaming_Eff_Model"
@@ -1311,23 +1311,23 @@
         },
         "Gaming_Outfit_Initialize": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "Gaming_OutFit_On": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "intID": "SkinControl",
-              "ratio": 1.0,
+              "value": 1.0,
               "persistent": true
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Hat01"
@@ -1336,7 +1336,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Hat02"
@@ -1344,7 +1344,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Avatar_Boy_Claymore_Gaming_Eff_Model"
@@ -1355,13 +1355,13 @@
           "onRemoved": [
             {
               "$type": "SetAnimatorInt",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "intID": "SkinControl",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Hat01"
@@ -1369,7 +1369,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Hat02"
@@ -1378,7 +1378,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Avatar_Boy_Claymore_Gaming_Eff_Model"
@@ -1388,15 +1388,15 @@
           "onReconnect": [
             {
               "$type": "SetAnimatorInt",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "intID": "SkinControl",
-              "ratio": 1.0,
+              "value": 1.0,
               "persistent": true
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Hat01"
@@ -1405,7 +1405,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Hat02"
@@ -1413,7 +1413,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Avatar_Boy_Claymore_Gaming_Eff_Model"
@@ -1424,19 +1424,19 @@
         },
         "Gaming_OutFit_Neon_On": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "intID": "SkinControl",
-              "ratio": 2.0,
+              "value": 2.0,
               "persistent": true
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Hat01"
@@ -1445,7 +1445,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Hat02"
@@ -1453,7 +1453,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Avatar_Boy_Claymore_Gaming_Eff_Model"
@@ -1464,13 +1464,13 @@
           "onRemoved": [
             {
               "$type": "SetAnimatorInt",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "intID": "SkinControl",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Hat01"
@@ -1478,7 +1478,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Hat02"
@@ -1487,7 +1487,7 @@
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "renderNames": [
                 "Avatar_Boy_Claymore_Gaming_Eff_Model"
@@ -1497,7 +1497,7 @@
         },
         "Gaming_StandbyShow_01": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "TriggerWeatherMixin",
@@ -1509,8 +1509,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Gaming_OutFit_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1519,14 +1519,14 @@
         },
         "Gaming_StandbyShow_02": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         }
       },
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Gaming_OutFit_Flag",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -1591,7 +1591,7 @@
         },
         {
           "$type": "AttachToMultiNormalizedTimeMixin",
-          "ANCNKEPIBBL": [
+          "normalizedStateIDList": [
             {
               "stateID": "FallingAnthem_BS_1_Special",
               "normalizeStart": 0.3499999940395355
@@ -1632,7 +1632,7 @@
       "modifiers": {
         "ClearVelocity": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -1.0
           },
@@ -1657,32 +1657,32 @@
         },
         "Gaming_ElementalArt_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onHittingOther": [
             {
               "$type": "Predicated",
               "target": "Other",
               "targetPredicates": [
                 {
-                  "$type": "BEAICMDDNON",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "FallingAttack"
                   ]
                 },
                 {
-                  "$type": "CACJBJLHLDL",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "PODFMDAEAGL": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "MOMNDKCBAEK",
+                  "$type": "ByAttackType",
                   "attackType": "Range"
                 }
               ],
@@ -1695,8 +1695,8 @@
                   "$type": "ApplyModifier",
                   "predicates": [
                     {
-                      "$type": "ICMKMNNHKNB",
-                      "FABCANIFKGH": "Gaming_PermanentSkill_1"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "Gaming_PermanentSkill_1"
                     }
                   ],
                   "modifierName": "Gaming_SpecialFallingAttack_HP_Handler"
@@ -1705,8 +1705,8 @@
                   "$type": "ApplyModifier",
                   "predicates": [
                     {
-                      "$type": "ICMKMNNHKNB",
-                      "FABCANIFKGH": "Gaming_Constellation_4"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "Gaming_Constellation_4"
                     }
                   ],
                   "modifierName": "Gaming_SpecialFallingAttack_Energy_Handler"
@@ -1721,12 +1721,12 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": "Gaming_PermanentSkill_1_Heal_Duration",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.20000000298023224,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Gaming_PermanentSkill_1_Heal_Count",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1735,8 +1735,8 @@
           "onThinkInterval": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Gaming_PermanentSkill_1_Heal_Count",
               "useLimitRange": true,
               "maxValue": 5.0,
@@ -1744,54 +1744,54 @@
             },
             {
               "$type": "HealHP",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Gaming_PermanentSkill_1_Heal_Count",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
-              "amountByTargetCurrentHPRatio": "Gaming_PermanentSkill_1_Heal_HP",
+              "amountByCasterMaxHPRatio": "Gaming_PermanentSkill_1_Heal_HP",
               "cdRatio": ""
             },
             {
               "$type": "HealHP",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Gaming_PermanentSkill_1_Heal_Count",
-                  "ratio": 2.0
+                  "value": 2.0
                 }
               ],
-              "amountByTargetCurrentHPRatio": "Gaming_PermanentSkill_1_Heal_HP",
+              "amountByCasterMaxHPRatio": "Gaming_PermanentSkill_1_Heal_HP",
               "cdRatio": ""
             },
             {
               "$type": "HealHP",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Gaming_PermanentSkill_1_Heal_Count",
-                  "ratio": 3.0
+                  "value": 3.0
                 }
               ],
-              "amountByTargetCurrentHPRatio": "Gaming_PermanentSkill_1_Heal_HP",
+              "amountByCasterMaxHPRatio": "Gaming_PermanentSkill_1_Heal_HP",
               "cdRatio": ""
             },
             {
               "$type": "HealHP",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Gaming_PermanentSkill_1_Heal_Count",
-                  "ratio": 4.0
+                  "value": 4.0
                 }
               ],
-              "amountByTargetCurrentHPRatio": "Gaming_PermanentSkill_1_Heal_HP",
+              "amountByCasterMaxHPRatio": "Gaming_PermanentSkill_1_Heal_HP",
               "cdRatio": ""
             }
           ],
@@ -1800,12 +1800,12 @@
         "Gaming_SpecialFallingAttack_Energy_Handler": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ReviveElemEnergy",
-              "PositionDampTime": true,
-              "ratio": "Gaming_Constellation_4_ReviveEnergy"
+              "doOffStage": true,
+              "value": "Gaming_Constellation_4_ReviveEnergy"
             }
           ]
         },
@@ -1813,36 +1813,36 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 3.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "GenerateElemBall",
               "configID": 2017,
               "born": {
-                "$type": "ALJGHOOKOAP",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.0,
-                  "MLOLIKEJCKB": 1.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 1.0
                 }
               },
-              "value": 1.0,
+              "ratio": 1.0,
               "baseEnergy": 6.0
             }
           ]
         },
         "LionPet": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "BMLGBKCIOIN",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Gaming_Lion_Flag",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "successActions": [
@@ -1850,8 +1850,8 @@
                   "$type": "SetGlobalPos",
                   "key": "_ABILITY_Gaming_LionPet_Pos",
                   "born": {
-                    "$type": "AJCFIBNMGKO",
-                    "NLBFCDKCPAH": true
+                    "$type": "ConfigBornBySelf",
+                    "useRotation": true
                   }
                 },
                 {
@@ -1864,47 +1864,47 @@
         },
         "Leap_VFX": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_ElementalArt_Leap_Touch",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_ElementalArt_Leap_Touch",
               "effectTempleteID": -1.0
             }
           ]
         },
         "AS_VFX": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "LionHead_AS",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionHead"
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_ElementalArt_Leap_AS",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_ElementalArt_Leap_AS",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Roll_VFX": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_ElementalArt_Roll",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_ElementalArt_Roll",
               "born": {
-                "$type": "AJCFIBNMGKO",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.0,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               },
               "effectTempleteID": -1.0
             }
@@ -1912,32 +1912,32 @@
         },
         "CloseCollider": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerSetPassThrough",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "passThrough": true
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerSetPassThrough",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true
             }
           ]
         },
         "Collision": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerBullet",
               "bulletID": 41092001,
               "born": {
-                "$type": "ILHMMCNMNEG",
-                "NLBFCDKCPAH": true,
+                "$type": "ConfigBornByAttachPoint",
+                "useRotation": true,
                 "attachPointName": "RootNode"
               }
             }
@@ -1945,7 +1945,7 @@
           "onRemoved": [
             {
               "$type": "KillGadget",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "gadgetInfo": {
                 "configID": 41092001
               }
@@ -1954,32 +1954,32 @@
         },
         "Collision_2": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "CJJOADBCAEH",
+                  "$type": "BySkillReady",
                   "skillID": 10922
                 }
               ],
               "skillID": 10922,
-              "amountByCasterMaxHPRatio": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             },
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_ElementalArt_Leap",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_ElementalArt_Leap",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerBullet",
               "bulletID": 41092005,
               "born": {
-                "$type": "ILHMMCNMNEG",
-                "NLBFCDKCPAH": true,
+                "$type": "ConfigBornByAttachPoint",
+                "useRotation": true,
                 "attachPointName": "RootNode"
               }
             }
@@ -1987,7 +1987,7 @@
           "onRemoved": [
             {
               "$type": "KillGadget",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "gadgetInfo": {
                 "configID": 41092005
               }
@@ -2006,32 +2006,32 @@
           "$type": "ModifyAvatarSkillCD",
           "predicates": [
             {
-              "$type": "ECAAGMBEMJE",
+              "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "CJJOADBCAEH",
+                  "$type": "BySkillReady",
                   "skillID": 10922
                 }
               ]
             }
           ],
           "skillID": 10922,
-          "amountByCasterMaxHPRatio": -1.0
+          "cdRatio": -1.0
         },
         {
           "$type": "HealHP",
           "predicates": [
             {
-              "$type": "ICMKMNNHKNB",
-              "FABCANIFKGH": "Gaming_Constellation_1"
+              "$type": "ByUnlockTalentParam",
+              "talentParam": "Gaming_Constellation_1"
             }
           ],
-          "amountByTargetCurrentHPRatio": "Gaming_Constellation_1_Heal_HP",
+          "amountByCasterMaxHPRatio": "Gaming_Constellation_1_Heal_HP",
           "cdRatio": ""
         },
         {
           "$type": "FireEffect",
-          "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionPet_Mark",
+          "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionPet_Mark",
           "effectTempleteID": -1.0
         }
       ]
@@ -2073,7 +2073,7 @@
         },
         {
           "$type": "AttachToMultiNormalizedTimeMixin",
-          "ANCNKEPIBBL": [
+          "normalizedStateIDList": [
             {
               "stateID": "Gaming_ElementalArt_Leap"
             },
@@ -2117,14 +2117,14 @@
       "modifiers": {
         "Weapon_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachActionToModifierMixin",
               "onAdded": [
                 {
                   "$type": "TriggerHideWeapon",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "canBeHandledOnRecover": true,
                   "partNames": [
                     "equip01",
@@ -2137,7 +2137,7 @@
               "onRemoved": [
                 {
                   "$type": "TriggerHideWeapon",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "canBeHandledOnRecover": true,
                   "visible": true,
                   "partNames": [
@@ -2153,18 +2153,18 @@
         },
         "Gaming_ElementalArt_Jump": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FixedAvatarRushMove",
               "toPos": {
-                "$type": "AJCFIBNMGKO",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 1.5,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": 1.5,
+                  "z": 0.0
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               },
               "timeRange": 0.10000000149011612,
               "maxRange": 3.0,
@@ -2177,7 +2177,7 @@
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsElementalArt",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "RemoveVelocityForce",
@@ -2203,11 +2203,11 @@
         },
         "Gaming_FallingAttack_Mark": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Gaming_SpecialFallingAttack_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2216,8 +2216,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Gaming_SpecialFallingAttack_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2226,8 +2226,8 @@
           "onReconnect": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Gaming_SpecialFallingAttack_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2271,7 +2271,7 @@
       "modifiers": {
         "Invincible": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
@@ -2280,20 +2280,20 @@
             },
             {
               "$type": "AvatarSkillStart",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "CJJOADBCAEH",
+                  "$type": "BySkillReady",
                   "skillID": 10925
                 }
               ],
               "skillID": 10925,
-              "amountByCasterMaxHPRatio": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_ElementalBurst_Launch",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_ElementalBurst_Launch",
               "effectTempleteID": -1.0
             },
             {
@@ -2302,7 +2302,7 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Gaming_ElementalBurst_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2311,8 +2311,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Gaming_ElementalBurst_Mark",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2323,11 +2323,11 @@
           "modifierName": "",
           "duration": 0.20000000298023224,
           "elementType": "Fire",
-          "bonusCriticalHurt": 25.0
+          "elementDurability": 25.0
         },
         "Pre_Weather": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "TriggerWeatherMixin",
@@ -2341,22 +2341,22 @@
         "Avatar_Gaming_ElementalBurst_HasTarget": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalPos",
               "target": "SelfAttackTarget",
               "key": "_ABILITY_Gaming_ElementalBurst_Pos",
               "born": {
-                "$type": "ALJGHOOKOAP"
+                "$type": "ConfigBornByTarget"
               },
               "setTarget": false
             },
             {
               "$type": "CreateGadget",
               "born": {
-                "$type": "NNOMECHMEBA",
-                "CMLNNDEJCEF": true,
+                "$type": "ConfigBornByGlobalValue",
+                "onGround": true,
                 "positionKey": "_ABILITY_Gaming_ElementalBurst_Pos",
                 "directionKey": ""
               },
@@ -2369,19 +2369,19 @@
         "Avatar_Gaming_ElementalBurst_NoTarget": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "CreateGadget",
               "born": {
-                "$type": "AJCFIBNMGKO",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.0,
-                  "MLOLIKEJCKB": 5.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 5.0
                 },
-                "CMLNNDEJCEF": true,
-                "NLBFCDKCPAH": true
+                "onGround": true,
+                "useRotation": true
               },
               "gadgetID": 41092004,
               "campID": 1001,
@@ -2394,7 +2394,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Gaming_ElementalBurst_Duration",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "TriggerWeatherMixin",
@@ -2421,24 +2421,24 @@
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Gaming_Lion_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Gaming_OutFit_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Gaming_ElementalBurst_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2448,28 +2448,28 @@
             {
               "$type": "SetAnimatorBool",
               "boolID": "CanSpecialPerform",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Gaming_Lion_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Gaming_OutFit_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Gaming_ElementalBurst_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2478,7 +2478,7 @@
           "onKill": [
             {
               "$type": "RemoveUniqueModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Avatar_Gaming_ElementalBurst_Handler"
             }
           ],
@@ -2486,69 +2486,69 @@
             {
               "$type": "SetAnimatorBool",
               "boolID": "CanSpecialPerform",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Gaming_Lion_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Gaming_OutFit_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Gaming_ElementalBurst_Flag",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "RemoveUniqueModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Avatar_Gaming_ElementalBurst_Handler"
             }
           ]
         },
         "Gaming_ElementalBurst_Alert": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "Blank": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         }
       },
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Gaming_Lion_Flag",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Gaming_ElementalBurst_Flag",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Gaming_ElementalBurst_Mark",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -2559,7 +2559,7 @@
           "$type": "Predicated",
           "targetPredicates": [
             {
-              "$type": "COLGELOAONM"
+              "$type": "ByHasAttackTarget"
             }
           ],
           "successActions": [
@@ -2585,7 +2585,7 @@
         },
         {
           "$type": "HealHP",
-          "amountByTargetCurrentHPRatio": "Gaming_ElementalBurst_HealHP",
+          "amountByCasterMaxHPRatio": "Gaming_ElementalBurst_HealHP",
           "cdRatio": ""
         }
       ]
@@ -2598,7 +2598,7 @@
       "modifiers": {
         "Bullet_Fx": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.20000000298023224,
           "onAdded": [
             {
@@ -2616,14 +2616,14 @@
             {
               "$type": "Predicated",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR1H3",
                 "campTargetType": "Alliance",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "JOHLCNIOCHC"
+                  "$type": "ByIsLocalAvatar"
                 }
               ],
               "successActions": [
@@ -2653,7 +2653,7 @@
           "target": "Target",
           "targetPredicates": [
             {
-              "$type": "CACJBJLHLDL",
+              "$type": "ByEntityTypes",
               "entityTypes": [
                 "Avatar"
               ]
@@ -2686,18 +2686,18 @@
               "target": "CurLocalAvatar",
               "bulletID": 41092003,
               "born": {
-                "$type": "AJCFIBNMGKO",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.5,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 0.0
                 },
-                "NLICIODEGDO": {
-                  "$type": "LMJLBCAMMCF",
+                "direction": {
+                  "$type": "ConfigDirectionByAttackTarget",
                   "JLMEMKFIJOO": true,
                   "LFBEIDHIMIL": ""
                 },
-                "NLBFCDKCPAH": true
+                "useRotation": true
               },
               "ownerIs": "OriginOwner",
               "trackTarget": "CurLocalAvatar",
@@ -2715,7 +2715,7 @@
       "modifiers": {
         "Bullet_Fx": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.20000000298023224,
           "onAdded": [
             {
@@ -2733,14 +2733,14 @@
             {
               "$type": "Predicated",
               "otherTargets": {
-                "$type": "DBCDEKOJIJJ",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR1H3",
                 "campTargetType": "Alliance",
-                "BGEBJHNLDLA": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "JOHLCNIOCHC"
+                  "$type": "ByIsLocalAvatar"
                 }
               ],
               "successActions": [
@@ -2770,7 +2770,7 @@
         },
         {
           "$type": "FireEffect",
-          "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_LionPet_Dissolve",
+          "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_LionPet_Dissolve",
           "effectTempleteID": -1.0
         },
         {
@@ -2787,7 +2787,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_Gaming_ElementalBurst_Count",
-          "GVInTalk": 0.0,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [
             -0.5,
             3.5,
@@ -2807,13 +2807,13 @@
         "Count": {
           "modifierName": "",
           "duration": 1.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.10000000149011612,
           "onThinkInterval": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Gaming_ElementalBurst_Count",
               "useLimitRange": true,
               "maxValue": 5.0,
@@ -2824,7 +2824,7 @@
         },
         "Alert": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
@@ -2840,19 +2840,19 @@
         },
         "Attack": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_ElementalBurst_Attack",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_ElementalBurst_Attack",
               "born": {
-                "$type": "NNOMECHMEBA",
+                "$type": "ConfigBornByGlobalValue",
                 "offset": {
-                  "EMBMLEBGFOI": 0.0,
-                  "NABPJFNICAE": 0.0,
-                  "MLOLIKEJCKB": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
-                "CMLNNDEJCEF": true,
+                "onGround": true,
                 "positionKey": "_ABILITY_Gaming_ElementalBurst_Pos",
                 "directionKey": ""
               },
@@ -2862,30 +2862,30 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPJICLLGBLO",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "AJCFIBNMGKO",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": -0.5,
-                      "MLOLIKEJCKB": 0.0
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.0
                     },
-                    "NLBFCDKCPAH": true
+                    "useRotation": true
                   },
                   "height": 4.0,
-                  "DLFACKMBPCH": 5.0
+                  "radius": 5.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "Elemental_Burst",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Gaming_ElementalBurst_Damage",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Gaming_ElementalBurst_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Fire",
                     "elementRank": 1.5,
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 200.0,
                     "attackType": "Range",
@@ -2896,7 +2896,7 @@
                     "hitImpulseType": "LV7",
                     "overrideHitImpulse": {
                       "hitLevel": "Air",
-                      "LPIJAJONFHC": 0.0,
+                      "hitImpulseX": 0.0,
                       "hitImpulseY": 600.0
                     }
                   },
@@ -2934,8 +2934,8 @@
           "target": "Owner",
           "key": "_ABILITY_Gaming_LionPet_Pos",
           "born": {
-            "$type": "AJCFIBNMGKO",
-            "NLBFCDKCPAH": true
+            "$type": "ConfigBornBySelf",
+            "useRotation": true
           }
         }
       ]
@@ -2952,28 +2952,28 @@
       "modifiers": {
         "Gaming_Constellation_2_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onBeingHealed": [
             {
               "$type": "Predicated",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
                   "$type": "MGBEOHBKPCD",
                   "logic": "Equal",
-                  "ratio": 0.0
+                  "value": 0.0
                 },
                 {
-                  "$type": "HLLFAEKLJGA",
+                  "$type": "ByTargetHPRatio",
                   "target": "Self",
                   "logic": "Equal",
-                  "HCODJCODFCI": 1.0
+                  "HPRatio": 1.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "Avatar_Gaming_Constellation_2_Buff"
                 }
               ]
@@ -2983,7 +2983,7 @@
         "Avatar_Gaming_Constellation_2_Buff": {
           "modifierName": "",
           "duration": "Gaming_Constellation_2_Buff_Duration",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "Gaming_Constellation_2_Buff_AttackRatio"
           },
@@ -3012,15 +3012,15 @@
       "modifiers": {
         "Gaming_PermanentSkill_2_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToPredicateMixin",
               "predicates": [
                 {
-                  "$type": "HLLFAEKLJGA",
+                  "$type": "ByTargetHPRatio",
                   "logic": "GreaterOrEqual",
-                  "HCODJCODFCI": "Gaming_PermanentSkill_2_HP_Threshold"
+                  "HPRatio": "Gaming_PermanentSkill_2_HP_Threshold"
                 }
               ],
               "modifierName": "Gaming_PermanentSkill_2_Buff_HighHP_Handler"
@@ -3029,9 +3029,9 @@
               "$type": "AttachModifierToPredicateMixin",
               "predicates": [
                 {
-                  "$type": "HLLFAEKLJGA",
+                  "$type": "ByTargetHPRatio",
                   "logic": "Lesser",
-                  "HCODJCODFCI": "Gaming_PermanentSkill_2_HP_Threshold"
+                  "HPRatio": "Gaming_PermanentSkill_2_HP_Threshold"
                 }
               ],
               "modifierName": "Gaming_PermanentSkill_2_Buff_LowHP_Handler"
@@ -3040,7 +3040,7 @@
         },
         "Gaming_PermanentSkill_2_Buff_LowHP_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_HealedAddDelta": "Gaming_PermanentSkill_2_HealedAddDelta"
           },
@@ -3048,17 +3048,17 @@
         },
         "Gaming_PermanentSkill_2_Buff_HighHP_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "attackTags": [
                 "FallingAttack"
               ],
-              "JIICGJODDDM": "Gaming_ElementalArt_Damage_Ratio",
+              "damagePercentageRatio": "Gaming_ElementalArt_Damage_Ratio",
               "predicates": [
                 {
-                  "$type": "MOMNDKCBAEK",
+                  "$type": "ByAttackType",
                   "attackType": "Range"
                 }
               ]
@@ -3084,7 +3084,7 @@
         "UNIQUE_Avatar_Gaming_Talent_RunningInTheSun_Mixin": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachToDayNightMixin",
@@ -3095,12 +3095,12 @@
         "UNIQUE_Avatar_Gaming_Talent_RunningInTheSun_Predicate": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 5.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
                   "$type": "AKDLANJOKFK",
@@ -3116,7 +3116,7 @@
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
                   "$type": "AKDLANJOKFK",
@@ -3132,13 +3132,13 @@
         },
         "Avatar_Gaming_Talent_RunningInTheSun_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 5.0,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
               "target": "CurTeamAvatars",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Avatar_Gaming_Talent_RunningInTheSun_Mixin"
             }
           ]
@@ -3146,7 +3146,7 @@
         "UNIQUE_Avatar_Dehya_Talent_RunningInTheSun": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Animator_MoveSpeedRatio": 0.10000000149011612
           },
@@ -3157,12 +3157,12 @@
         {
           "$type": "AttachModifier",
           "target": "CurTeamAvatars",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_Avatar_Gaming_Talent_RunningInTheSun_Mixin"
         },
         {
           "$type": "AttachModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "Avatar_Gaming_Talent_RunningInTheSun_Handler"
         }
       ],
@@ -3179,48 +3179,48 @@
           "animEventNames": [
             "ATK01"
           ],
-          "ACKCDHKEGCK": "Gaming_NormalAttack_01_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Gaming_NormalAttack_01_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK02"
           ],
-          "ACKCDHKEGCK": "Gaming_NormalAttack_02_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Gaming_NormalAttack_02_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK03"
           ],
-          "ACKCDHKEGCK": "Gaming_NormalAttack_03_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Gaming_NormalAttack_03_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK04"
           ],
-          "ACKCDHKEGCK": "Gaming_NormalAttack_04_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Gaming_NormalAttack_04_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ExtraAttack1"
           ],
-          "ACKCDHKEGCK": "Gaming_ExtraAttack_01_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Gaming_ExtraAttack_01_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ExtraAttack2"
           ],
-          "ACKCDHKEGCK": "Gaming_ExtraAttack_02_Damage_AtkRatio",
-          "JIICGJODDDM": 0.0
+          "damagePercentage": "Gaming_ExtraAttack_02_Damage_AtkRatio",
+          "damagePercentageRatio": 0.0
         }
       ],
       "abilitySpecials": {
@@ -3363,33 +3363,33 @@
         "Gaming_FallingAttack_1": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPJICLLGBLO",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "ALJGHOOKOAP",
+                    "$type": "ConfigBornByTarget",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": -0.5,
-                      "MLOLIKEJCKB": 1.0
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 1.0
                     }
                   },
                   "height": 2.0,
-                  "DLFACKMBPCH": 3.0
+                  "radius": 3.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "FallingAnthem_Normal_Rank_1_Damage",
-                    "JIICGJODDDM": 0.0,
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "FallingAnthem_Normal_Rank_1_Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 25.0,
                     "overrideByWeapon": true,
                     "strikeType": "Blunt",
                     "enBreak": 150.0,
@@ -3425,33 +3425,33 @@
         "Gaming_FallingAttack_2": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPJICLLGBLO",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "ALJGHOOKOAP",
+                    "$type": "ConfigBornByTarget",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": -0.5,
-                      "MLOLIKEJCKB": 1.0
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 1.0
                     }
                   },
                   "height": 2.0,
-                  "DLFACKMBPCH": 5.0
+                  "radius": 5.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "FallingAnthem_Normal_Rank_2_Damage",
-                    "JIICGJODDDM": 0.0,
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "FallingAnthem_Normal_Rank_2_Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 25.0,
                     "overrideByWeapon": true,
                     "strikeType": "Blunt",
                     "enBreak": 200.0,
@@ -3488,34 +3488,34 @@
         "Gaming_FallingAttack_Special": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPJICLLGBLO",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "ALJGHOOKOAP",
+                    "$type": "ConfigBornByTarget",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": -0.5,
-                      "MLOLIKEJCKB": 0.0
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.0
                     }
                   },
                   "height": 2.0,
-                  "DLFACKMBPCH": 4.0
+                  "radius": 4.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Gaming_SpecialFallingAttack_Damage",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Gaming_SpecialFallingAttack_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Fire",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 150.0,
                     "attackType": "Range",
@@ -3551,39 +3551,39 @@
         "Gaming_FallingAttack_Special_Constellation_6": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPJICLLGBLO",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "ALJGHOOKOAP",
+                    "$type": "ConfigBornByTarget",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": -0.5,
-                      "MLOLIKEJCKB": 0.0
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.0
                     }
                   },
                   "height": 2.0,
-                  "DLFACKMBPCH": 6.0
+                  "radius": 6.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "Gaming_SpecialFallingAttack_Damage",
-                    "JIICGJODDDM": 0.0,
+                    "damagePercentage": "Gaming_SpecialFallingAttack_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Fire",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 150.0,
                     "attackType": "Range",
                     "bonusCritical": "Gaming_SpecialFallingAttack_BonusCritical",
-                    "CBNLJFOGCDH": "Gaming_SpecialFallingAttack_BonusCriticalHurt",
+                    "bonusCriticalHurt": "Gaming_SpecialFallingAttack_BonusCriticalHurt",
                     "damagePercentage": 0.0
                   },
                   "hitPattern": {
@@ -3615,38 +3615,38 @@
         },
         "Blank": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "Avatar_Kaveh_FallingAttackVFX_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Self_02",
+              "effectPattern": "Eff_Avatar_Claymore_FallAnthem_Self_02",
               "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_BS_Material": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Self",
+              "effectPattern": "Eff_Avatar_Claymore_FallAnthem_Self",
               "effectTempleteID": -1.0
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Claymore_FallAnthem_BS",
+              "effectPattern": "Eff_Avatar_Claymore_FallAnthem_BS",
               "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_BS_VelocityForce_Initialize": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -2.0
           },
@@ -3661,34 +3661,34 @@
         },
         "FallingAnthem_LoopDamage": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "AHDHJOAODLF",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "AJCFIBNMGKO",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EMBMLEBGFOI": 0.0,
-                      "NABPJFNICAE": 0.0,
-                      "MLOLIKEJCKB": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     },
-                    "NLBFCDKCPAH": true
+                    "useRotation": true
                   },
-                  "DLFACKMBPCH": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "ACKCDHKEGCK": "FallingAnthem_Normal_Loop_Damage",
-                    "JIICGJODDDM": 0.0,
-                    "bonusCriticalHurt": 0.0,
+                    "damagePercentage": "FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 0.0,
                     "overrideByWeapon": true,
                     "strikeType": "Slash",
                     "enBreak": 35.0,
@@ -3708,7 +3708,7 @@
         },
         "FallingAnthem_FallingDamageImmune_01": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ClearGlobalValue",
@@ -3718,12 +3718,12 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv0",
+              "value": "FallingAnthem_FallingDamageRatio_Lv0",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
@@ -3733,16 +3733,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "value": "FallingAnthem_Altitude_Lv1"
                 },
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv1",
+              "value": "FallingAnthem_FallingDamageRatio_Lv1",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
@@ -3752,16 +3752,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "value": "FallingAnthem_Altitude_Lv2"
                 },
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv1"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv2",
+              "value": "FallingAnthem_FallingDamageRatio_Lv2",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
@@ -3771,16 +3771,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "value": "FallingAnthem_Altitude_Lv3"
                 },
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv2"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv3",
+              "value": "FallingAnthem_FallingDamageRatio_Lv3",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
@@ -3790,11 +3790,11 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv3"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv4",
+              "value": "FallingAnthem_FallingDamageRatio_Lv4",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
@@ -3808,7 +3808,7 @@
         },
         "FallingAnthem_FallingDamageImmune_02": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -3823,33 +3823,33 @@
         },
         "FallingAnthem_FallingDamageImmune_03": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
           }
         },
         "FallingAnthem_Loop_Normal": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Self_02",
+              "effectPattern": "Eff_Avatar_Claymore_FallAnthem_Self_02",
               "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_Loop_Normal_Rank_1": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "FallingAnthem_Loop_Normal_Rank_2": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "Inertia": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ApplyInertiaVelocityMixin",
@@ -3860,18 +3860,18 @@
         },
         "FallingAnthem_Height_Detect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -3881,11 +3881,11 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
-              "ratio": 5.0,
+              "value": 5.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -3895,35 +3895,35 @@
               "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "CLGKFPPLPMB",
-                  "ratio": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -3933,15 +3933,15 @@
         },
         "FallingAnthem_OverHead_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "HLKAIMGJOLH",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -3955,25 +3955,25 @@
         },
         "FallingAnthem_OverHead_Camera_Remover": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ]
         },
         "FallingAnthem_Landed_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "HLKAIMGJOLH",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -3987,7 +3987,7 @@
         },
         "FallingAnthem_ClearVelocityForce": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "RemoveVelocityForce",
@@ -4002,24 +4002,24 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Gaming_SpecialFallingAttack_Flag",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_FallingAnthem_UseCamera",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValue",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_FallingAttack_Altitude",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -4030,17 +4030,17 @@
           "$type": "ApplyModifier",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "CHDEOOKOFDK": true,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Gaming_SpecialFallingAttack_Flag",
-              "ratio": 0.0,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             }
           ],
           "modifierName": "Gaming_FallingAttack_1"
@@ -4049,16 +4049,16 @@
           "$type": "ApplyModifier",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "CHDEOOKOFDK": true
+              "value": 1.0,
+              "forceByCaster": true
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Gaming_SpecialFallingAttack_Flag",
-              "ratio": 0.0,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             }
           ],
           "modifierName": "Gaming_FallingAttack_2"
@@ -4067,16 +4067,16 @@
           "$type": "ApplyModifier",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Gaming_SpecialFallingAttack_Flag",
-              "ratio": 1.0
+              "value": 1.0
             },
             {
-              "$type": "ECAAGMBEMJE",
+              "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "Gaming_Constellation_6"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Gaming_Constellation_6"
                 }
               ]
             }
@@ -4087,13 +4087,13 @@
           "$type": "ApplyModifier",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Gaming_SpecialFallingAttack_Flag",
-              "ratio": 1.0
+              "value": 1.0
             },
             {
-              "$type": "ICMKMNNHKNB",
-              "FABCANIFKGH": "Gaming_Constellation_6"
+              "$type": "ByUnlockTalentParam",
+              "talentParam": "Gaming_Constellation_6"
             }
           ],
           "modifierName": "Gaming_FallingAttack_Special_Constellation_6"
@@ -4102,154 +4102,154 @@
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "CHDEOOKOFDK": true,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Gaming_SpecialFallingAttack_Flag",
-              "ratio": 0.0,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             }
           ],
-          "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Strike_01",
+          "effectPattern": "Eff_Avatar_Claymore_FallAnthem_Strike_01",
           "effectTempleteID": -1.0
         },
         {
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "CHDEOOKOFDK": true
+              "value": 1.0,
+              "forceByCaster": true
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Gaming_SpecialFallingAttack_Flag",
-              "ratio": 0.0,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             }
           ],
-          "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Strike_02",
+          "effectPattern": "Eff_Avatar_Claymore_FallAnthem_Strike_02",
           "effectTempleteID": -1.0
         },
         {
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "CHDEOOKOFDK": true,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Gaming_SpecialFallingAttack_Flag",
-              "ratio": 1.0
+              "value": 1.0
             },
             {
-              "$type": "ECAAGMBEMJE",
+              "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "Gaming_Constellation_6"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Gaming_Constellation_6"
                 }
               ]
             }
           ],
-          "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_FallingAttack_Strike",
+          "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_FallingAttack_Strike",
           "effectTempleteID": -1.0
         },
         {
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "CHDEOOKOFDK": true
+              "value": 1.0,
+              "forceByCaster": true
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Gaming_SpecialFallingAttack_Flag",
-              "ratio": 1.0
+              "value": 1.0
             },
             {
-              "$type": "ECAAGMBEMJE",
+              "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "ICMKMNNHKNB",
-                  "FABCANIFKGH": "Gaming_Constellation_6"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Gaming_Constellation_6"
                 }
               ]
             }
           ],
-          "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_FallingAttack_Strike",
+          "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_FallingAttack_Strike",
           "effectTempleteID": -1.0
         },
         {
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "CHDEOOKOFDK": true,
-              "PODFMDAEAGL": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Gaming_SpecialFallingAttack_Flag",
-              "ratio": 1.0
+              "value": 1.0
             },
             {
-              "$type": "ICMKMNNHKNB",
-              "FABCANIFKGH": "Gaming_Constellation_6"
+              "$type": "ByUnlockTalentParam",
+              "talentParam": "Gaming_Constellation_6"
             }
           ],
-          "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_FallingAttack_Strike_Enhanced",
+          "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_FallingAttack_Strike_Enhanced",
           "effectTempleteID": -1.0
         },
         {
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "CHDEOOKOFDK": true
+              "value": 1.0,
+              "forceByCaster": true
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Gaming_SpecialFallingAttack_Flag",
-              "ratio": 1.0
+              "value": 1.0
             },
             {
-              "$type": "ICMKMNNHKNB",
-              "FABCANIFKGH": "Gaming_Constellation_6"
+              "$type": "ByUnlockTalentParam",
+              "talentParam": "Gaming_Constellation_6"
             }
           ],
-          "shieldHP": "Eff_Avatar_Boy_Claymore_Gaming_FallingAttack_Strike_Enhanced",
+          "effectPattern": "Eff_Avatar_Boy_Claymore_Gaming_FallingAttack_Strike_Enhanced",
           "effectTempleteID": -1.0
         },
         {
           "$type": "Predicated",
           "targetPredicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Gaming_SpecialFallingAttack_Flag",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "successActions": [
             {
               "$type": "LoseHP",
-              "LBNLJFPDOGO": "Gaming_SpecialFallingAttack_LoseHP",
+              "amountByTargetMaxHPRatio": "Gaming_SpecialFallingAttack_LoseHP",
               "limboByTargetMaxHPRatio": 0.10000000149011612,
               "lethal": false,
               "amount": ""
@@ -4260,15 +4260,15 @@
           "$type": "Predicated",
           "targetPredicates": [
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "target": "Self",
               "key": "_ABILITY_Gaming_Lion_Flag",
-              "ratio": 1.0
+              "value": 1.0
             },
             {
-              "$type": "BMLGBKCIOIN",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Gaming_SpecialFallingAttack_Flag",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "successActions": [
@@ -4276,8 +4276,8 @@
               "$type": "SetGlobalPos",
               "key": "_ABILITY_Gaming_LionPet_Pos",
               "born": {
-                "$type": "AJCFIBNMGKO",
-                "NLBFCDKCPAH": true
+                "$type": "ConfigBornBySelf",
+                "useRotation": true
               }
             },
             {

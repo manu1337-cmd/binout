@@ -9,14 +9,14 @@
           "skillID": 10881,
           "chargeTime": 0.10000000149011612,
           "secondChargeTime": 0.10000000149011612,
-          "OnBeginUncharged": [
+          "onBeginUncharged": [
             {
               "$type": "SetAnimatorTrigger",
               "predicates": [
                 {
-                  "$type": "NEGFJPNFCFN",
+                  "$type": "ByAnimatorInt",
                   "logic": "Equal",
-                  "ratio": 0,
+                  "value": 0,
                   "parameter": "ComboCount"
                 }
               ],
@@ -26,21 +26,21 @@
               "$type": "SetAnimatorInt",
               "predicates": [
                 {
-                  "$type": "NEGFJPNFCFN",
+                  "$type": "ByAnimatorInt",
                   "logic": "Equal",
-                  "ratio": 0,
+                  "value": 0,
                   "parameter": "ComboCount"
                 }
               ],
               "intID": "SkillID",
-              "ratio": 99.0
+              "value": 99.0
             },
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
             }
           ],
-          "OnReleaseUncharged": [
+          "onReleaseUncharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "DoSkill"
@@ -48,17 +48,17 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
-          "OnBeginCharged": [
+          "onBeginCharged": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging",
-              "ratio": true
+              "value": true
             }
           ],
-          "OnReleaseCharged": [
+          "onReleaseCharged": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging"
@@ -70,10 +70,10 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
-          "OnBeginSecondCharged": [
+          "onBeginSecondCharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "DoSkill"
@@ -82,21 +82,21 @@
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "NNBKBBILDGO",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "HJCCDFHBLJH",
+                      "$type": "ByLocalAvatarStamina",
                       "logic": "GreaterOrEqual",
-                      "DGJADIEFBMC": [
+                      "stamina": [
                         "ExtraAttack_Catalyst_Stamina_Cost",
                         "Charlotte_ExtraAttack_StaminaCost",
                         "MUL"
                       ]
                     },
                     {
-                      "$type": "NGNODMLFFCB",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Charlotte_Extra_Attack",
-                      "ratio": 1.0
+                      "value": 1.0
                     }
                   ]
                 }
@@ -105,14 +105,14 @@
                 {
                   "$type": "SetAnimatorInt",
                   "intID": "SkillID",
-                  "ratio": 6.0
+                  "value": 6.0
                 }
               ],
               "failActions": [
                 {
                   "$type": "SetAnimatorInt",
                   "intID": "SkillID",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ]
             },
@@ -145,13 +145,13 @@
       "modifiers": {
         "ExtraAttack_StaminaCost": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 10003,
-              "amountByCasterMaxHPRatio": 1.0,
-              "costStaminaDelta": [
+              "cdRatio": 1.0,
+              "costStaminaRatio": [
                 "Charlotte_ExtraAttack_StaminaCost",
                 "ExtraAttack_Catalyst_Stamina_Cost",
                 "MUL"
@@ -194,16 +194,16 @@
         "Avatar_Charlotte_Attack01_onMonster": {
           "modifierName": "",
           "duration": 0.05999999865889549,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_NormalAttack_Hit_01",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_NormalAttack_Hit_01",
               "born": {
-                "$type": "JAPFKIFCLPF",
-                "COAICNDKEMA": true,
+                "$type": "ConfigBornByAttachPoint",
+                "useRotation": true,
                 "attachPointName": "Fx_ChestNode",
-                "OINJEIEFIBB": "Self"
+                "attachPointTargetType": "Self"
               },
               "effectTempleteID": -1.0
             }
@@ -212,28 +212,28 @@
             {
               "$type": "TriggerAttackEvent",
               "target": "Caster",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "DALACABODFA",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "JAPFKIFCLPF",
-                    "COAICNDKEMA": true,
+                    "$type": "ConfigBornByAttachPoint",
+                    "useRotation": true,
                     "attachPointName": "Fx_ChestNode",
-                    "OINJEIEFIBB": "Self"
+                    "attachPointTargetType": "Self"
                   },
-                  "EBADGGHGLKN": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "NormalAttack_01",
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "LIMFCEKGALF": "NormalAttack_01_Damage",
-                    "JJGGAPONHOE": 0.0,
+                    "damagePercentage": "NormalAttack_01_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 9.345999717712402,
                     "damagePercentage": 0.0
@@ -252,21 +252,21 @@
         "Avatar_Charlotte_Attack01_onGadget": {
           "modifierName": "",
           "duration": 0.05999999865889549,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_NormalAttack_Hit_01",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_NormalAttack_Hit_01",
               "born": {
-                "$type": "JAPFKIFCLPF",
+                "$type": "ConfigBornByAttachPoint",
                 "offset": {
-                  "LOGNGLEIFML": 0.0,
-                  "JKDAHJILGBJ": 0.699999988079071,
-                  "MJHHBAFNOEG": 0.0
+                  "x": 0.0,
+                  "y": 0.699999988079071,
+                  "z": 0.0
                 },
-                "COAICNDKEMA": true,
+                "useRotation": true,
                 "attachPointName": "RootNode",
-                "OINJEIEFIBB": "Self"
+                "attachPointTargetType": "Self"
               },
               "effectTempleteID": -1.0
             }
@@ -275,33 +275,33 @@
             {
               "$type": "TriggerAttackEvent",
               "target": "Caster",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "DALACABODFA",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "JAPFKIFCLPF",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": 0.699999988079071,
-                      "MJHHBAFNOEG": 0.0
+                      "x": 0.0,
+                      "y": 0.699999988079071,
+                      "z": 0.0
                     },
-                    "COAICNDKEMA": true,
+                    "useRotation": true,
                     "attachPointName": "RootNode",
-                    "OINJEIEFIBB": "Self"
+                    "attachPointTargetType": "Self"
                   },
-                  "EBADGGHGLKN": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "NormalAttack_01",
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "LIMFCEKGALF": "NormalAttack_01_Damage",
-                    "JJGGAPONHOE": 0.0,
+                    "damagePercentage": "NormalAttack_01_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 9.345999717712402,
                     "damagePercentage": 0.0
@@ -320,19 +320,19 @@
         "Avatar_Charlotte_Attack01_None": {
           "modifierName": "",
           "duration": 0.05999999865889549,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_NormalAttack_Hit_01",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_NormalAttack_Hit_01",
               "born": {
-                "$type": "PBDNLGHAMHE",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "LOGNGLEIFML": 0.0,
-                  "JKDAHJILGBJ": 1.0,
-                  "MJHHBAFNOEG": 4.5
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 4.5
                 },
-                "COAICNDKEMA": true
+                "useRotation": true
               },
               "effectTempleteID": -1.0
             }
@@ -341,32 +341,32 @@
             {
               "$type": "TriggerAttackEvent",
               "target": "Caster",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "DALACABODFA",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "PBDNLGHAMHE",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": 1.0,
-                      "MJHHBAFNOEG": 4.5
+                      "x": 0.0,
+                      "y": 1.0,
+                      "z": 4.5
                     },
-                    "AMCAIHBNPDK": true,
-                    "COAICNDKEMA": true
+                    "onGround": true,
+                    "useRotation": true
                   },
-                  "EBADGGHGLKN": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "NormalAttack_01",
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "LIMFCEKGALF": "NormalAttack_01_Damage",
-                    "JJGGAPONHOE": 0.0,
+                    "damagePercentage": "NormalAttack_01_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 9.345999717712402,
                     "damagePercentage": 0.0
@@ -384,16 +384,16 @@
         },
         "Charlotte_NormalAttack_AttachCamera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_NormalAttack_AttachCamera",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_NormalAttack_AttachCamera",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "renderNames": [
                 "Camera"
               ]
@@ -402,7 +402,7 @@
           "onRemoved": [
             {
               "$type": "TriggerSetRenderersEnableV2",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "renderNames": [
                 "Camera"
               ],
@@ -416,17 +416,17 @@
           "$type": "Predicated",
           "targetPredicates": [
             {
-              "$type": "PKCCKMFHFEL"
+              "$type": "ByHasAttackTarget"
             }
           ],
           "successActions": [
             {
               "$type": "ApplyModifier",
               "target": "SelfAttackTarget",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "GOIBMIJJIFC",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
@@ -437,13 +437,13 @@
             {
               "$type": "ApplyModifier",
               "target": "SelfAttackTarget",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BAMBPOIJFPG",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "GOIBMIJJIFC",
+                      "$type": "ByEntityTypes",
                       "entityTypes": [
                         "Monster"
                       ]
@@ -457,7 +457,7 @@
           "failActions": [
             {
               "$type": "ApplyModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "Avatar_Charlotte_Attack01_None"
             }
           ]
@@ -476,16 +476,16 @@
         "Avatar_Charlotte_Attack02_onMonster": {
           "modifierName": "",
           "duration": 0.05999999865889549,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_NormalAttack_Hit_02",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_NormalAttack_Hit_02",
               "born": {
-                "$type": "JAPFKIFCLPF",
-                "COAICNDKEMA": true,
+                "$type": "ConfigBornByAttachPoint",
+                "useRotation": true,
                 "attachPointName": "Fx_ChestNode",
-                "OINJEIEFIBB": "Self"
+                "attachPointTargetType": "Self"
               },
               "effectTempleteID": -1.0
             }
@@ -494,28 +494,28 @@
             {
               "$type": "TriggerAttackEvent",
               "target": "Caster",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "DALACABODFA",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "JAPFKIFCLPF",
-                    "COAICNDKEMA": true,
+                    "$type": "ConfigBornByAttachPoint",
+                    "useRotation": true,
                     "attachPointName": "Fx_ChestNode",
-                    "OINJEIEFIBB": "Self"
+                    "attachPointTargetType": "Self"
                   },
-                  "EBADGGHGLKN": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "NormalAttack_02",
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "LIMFCEKGALF": "NormalAttack_02_Damage",
-                    "JJGGAPONHOE": 0.0,
+                    "damagePercentage": "NormalAttack_02_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 8.133000373840332,
                     "damagePercentage": 0.0
@@ -534,21 +534,21 @@
         "Avatar_Charlotte_Attack02_onGadget": {
           "modifierName": "",
           "duration": 0.05999999865889549,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_NormalAttack_Hit_02",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_NormalAttack_Hit_02",
               "born": {
-                "$type": "JAPFKIFCLPF",
+                "$type": "ConfigBornByAttachPoint",
                 "offset": {
-                  "LOGNGLEIFML": 0.0,
-                  "JKDAHJILGBJ": 0.699999988079071,
-                  "MJHHBAFNOEG": 0.0
+                  "x": 0.0,
+                  "y": 0.699999988079071,
+                  "z": 0.0
                 },
-                "COAICNDKEMA": true,
+                "useRotation": true,
                 "attachPointName": "RootNode",
-                "OINJEIEFIBB": "Self"
+                "attachPointTargetType": "Self"
               },
               "effectTempleteID": -1.0
             }
@@ -557,33 +557,33 @@
             {
               "$type": "TriggerAttackEvent",
               "target": "Caster",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "DALACABODFA",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "JAPFKIFCLPF",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": 0.699999988079071,
-                      "MJHHBAFNOEG": 0.0
+                      "x": 0.0,
+                      "y": 0.699999988079071,
+                      "z": 0.0
                     },
-                    "COAICNDKEMA": true,
+                    "useRotation": true,
                     "attachPointName": "RootNode",
-                    "OINJEIEFIBB": "Self"
+                    "attachPointTargetType": "Self"
                   },
-                  "EBADGGHGLKN": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "NormalAttack_02",
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "LIMFCEKGALF": "NormalAttack_02_Damage",
-                    "JJGGAPONHOE": 0.0,
+                    "damagePercentage": "NormalAttack_02_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 8.133000373840332,
                     "damagePercentage": 0.0
@@ -602,19 +602,19 @@
         "Avatar_Charlotte_Attack02_None": {
           "modifierName": "",
           "duration": 0.05999999865889549,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_NormalAttack_Hit_02",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_NormalAttack_Hit_02",
               "born": {
-                "$type": "PBDNLGHAMHE",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "LOGNGLEIFML": 0.0,
-                  "JKDAHJILGBJ": 1.0,
-                  "MJHHBAFNOEG": 4.5
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 4.5
                 },
-                "COAICNDKEMA": true
+                "useRotation": true
               },
               "effectTempleteID": -1.0
             }
@@ -623,32 +623,32 @@
             {
               "$type": "TriggerAttackEvent",
               "target": "Caster",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "DALACABODFA",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "PBDNLGHAMHE",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": 1.0,
-                      "MJHHBAFNOEG": 4.5
+                      "x": 0.0,
+                      "y": 1.0,
+                      "z": 4.5
                     },
-                    "AMCAIHBNPDK": true,
-                    "COAICNDKEMA": true
+                    "onGround": true,
+                    "useRotation": true
                   },
-                  "EBADGGHGLKN": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "NormalAttack_02",
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "LIMFCEKGALF": "NormalAttack_02_Damage",
-                    "JJGGAPONHOE": 0.0,
+                    "damagePercentage": "NormalAttack_02_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 8.133000373840332,
                     "damagePercentage": 0.0
@@ -670,17 +670,17 @@
           "$type": "Predicated",
           "targetPredicates": [
             {
-              "$type": "PKCCKMFHFEL"
+              "$type": "ByHasAttackTarget"
             }
           ],
           "successActions": [
             {
               "$type": "ApplyModifier",
               "target": "SelfAttackTarget",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "GOIBMIJJIFC",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
@@ -691,13 +691,13 @@
             {
               "$type": "ApplyModifier",
               "target": "SelfAttackTarget",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BAMBPOIJFPG",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "GOIBMIJJIFC",
+                      "$type": "ByEntityTypes",
                       "entityTypes": [
                         "Monster"
                       ]
@@ -711,7 +711,7 @@
           "failActions": [
             {
               "$type": "ApplyModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "Avatar_Charlotte_Attack02_None"
             }
           ]
@@ -728,7 +728,7 @@
           "$type": "Predicated",
           "targetPredicates": [
             {
-              "$type": "PKCCKMFHFEL"
+              "$type": "ByHasAttackTarget"
             }
           ],
           "successActions": [
@@ -737,7 +737,7 @@
               "target": "SelfAttackTarget",
               "predicates": [
                 {
-                  "$type": "GOIBMIJJIFC",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
@@ -745,8 +745,8 @@
               ],
               "key": "_ABILITY_Charlotte_NormalAttack03_Pos",
               "born": {
-                "$type": "JAPFKIFCLPF",
-                "COAICNDKEMA": true,
+                "$type": "ConfigBornByAttachPoint",
+                "useRotation": true,
                 "attachPointName": "Fx_ChestNode"
               },
               "setTarget": false
@@ -756,10 +756,10 @@
               "target": "SelfAttackTarget",
               "predicates": [
                 {
-                  "$type": "BAMBPOIJFPG",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "GOIBMIJJIFC",
+                      "$type": "ByEntityTypes",
                       "entityTypes": [
                         "Monster"
                       ]
@@ -769,13 +769,13 @@
               ],
               "key": "_ABILITY_Charlotte_NormalAttack03_Pos",
               "born": {
-                "$type": "JAPFKIFCLPF",
+                "$type": "ConfigBornByAttachPoint",
                 "offset": {
-                  "LOGNGLEIFML": 0.0,
-                  "JKDAHJILGBJ": 0.6000000238418579,
-                  "MJHHBAFNOEG": 0.0
+                  "x": 0.0,
+                  "y": 0.6000000238418579,
+                  "z": 0.0
                 },
-                "COAICNDKEMA": true,
+                "useRotation": true,
                 "attachPointName": "RootNode"
               },
               "setTarget": false
@@ -786,13 +786,13 @@
               "$type": "SetGlobalPos",
               "key": "_ABILITY_Charlotte_NormalAttack03_Pos",
               "born": {
-                "$type": "PBDNLGHAMHE",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "LOGNGLEIFML": 0.0,
-                  "JKDAHJILGBJ": 0.800000011920929,
-                  "MJHHBAFNOEG": 4.5
+                  "x": 0.0,
+                  "y": 0.800000011920929,
+                  "z": 4.5
                 },
-                "COAICNDKEMA": true
+                "useRotation": true
               }
             }
           ]
@@ -807,13 +807,13 @@
         {
           "$type": "CreateGadget",
           "born": {
-            "$type": "DAPJIKNDLLN",
+            "$type": "ConfigBornByGlobalValue",
             "offset": {
-              "LOGNGLEIFML": 0.0,
-              "JKDAHJILGBJ": 0.0,
-              "MJHHBAFNOEG": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
-            "COAICNDKEMA": true,
+            "useRotation": true,
             "positionKey": "_ABILITY_Charlotte_NormalAttack03_Pos",
             "directionKey": ""
           },
@@ -835,35 +835,35 @@
         "Attack03_Timer": {
           "modifierName": "",
           "duration": 0.3799999952316284,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "TriggerAttackEvent",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "DALACABODFA",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "PBDNLGHAMHE",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": 0.0,
-                      "MJHHBAFNOEG": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "COAICNDKEMA": true
+                    "useRotation": true
                   },
-                  "EBADGGHGLKN": 2.0
+                  "radius": 2.0
                 },
                 "attackInfo": {
                   "attackTag": "NormalAttack_03",
                   "attenuationTag": "NormalAttack",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "LIMFCEKGALF": "NormalAttack_03_Damage",
-                    "JJGGAPONHOE": 0.0,
+                    "damagePercentage": "NormalAttack_03_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 12.11299991607666,
                     "damagePercentage": 0.0
@@ -894,7 +894,7 @@
         },
         {
           "$type": "FireEffect",
-          "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_NormalAttack_Hit_03",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_NormalAttack_Hit_03",
           "effectTempleteID": -1.0
         }
       ]
@@ -915,13 +915,13 @@
       "modifiers": {
         "Charlotte_ExtraAttack_Pos": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "PKCCKMFHFEL"
+                  "$type": "ByHasAttackTarget"
                 }
               ],
               "successActions": [
@@ -930,14 +930,14 @@
                   "target": "SelfAttackTarget",
                   "key": "_ABILITY_Charlotte_ExtraAttack_Pos",
                   "born": {
-                    "$type": "HEHOFJMHGFN",
+                    "$type": "ConfigBornBySelectedPoint",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": 0.0,
-                      "MJHHBAFNOEG": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "AMCAIHBNPDK": true,
-                    "COAICNDKEMA": true
+                    "onGround": true,
+                    "useRotation": true
                   },
                   "setTarget": false
                 }
@@ -947,14 +947,14 @@
                   "$type": "SetGlobalPos",
                   "key": "_ABILITY_Charlotte_ExtraAttack_Pos",
                   "born": {
-                    "$type": "PBDNLGHAMHE",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": 0.0,
-                      "MJHHBAFNOEG": 4.5
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 4.5
                     },
-                    "AMCAIHBNPDK": true,
-                    "COAICNDKEMA": true
+                    "onGround": true,
+                    "useRotation": true
                   }
                 }
               ]
@@ -968,13 +968,13 @@
             {
               "$type": "CreateGadget",
               "born": {
-                "$type": "DAPJIKNDLLN",
+                "$type": "ConfigBornByGlobalValue",
                 "offset": {
-                  "LOGNGLEIFML": 0.0,
-                  "JKDAHJILGBJ": 1.0,
-                  "MJHHBAFNOEG": 0.0
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 0.0
                 },
-                "AMCAIHBNPDK": true,
+                "onGround": true,
                 "positionKey": "_ABILITY_Charlotte_ExtraAttack_Pos",
                 "directionKey": ""
               },
@@ -999,11 +999,11 @@
       "modifiers": {
         "Avatar_Charlotte_ExtraAttack_GadgetEffect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_Attack_Pre",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_Attack_Pre",
               "effectTempleteID": -1.0
             }
           ]
@@ -1011,41 +1011,41 @@
         "Avatar_Charlotte_ExtraAttack_Damage": {
           "modifierName": "",
           "duration": 0.7300000190734863,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "TriggerAttackEvent",
               "target": "Caster",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPEIAHONPIH",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "DAPJIKNDLLN",
+                    "$type": "ConfigBornByGlobalValue",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": -1.0,
-                      "MJHHBAFNOEG": 0.0
+                      "x": 0.0,
+                      "y": -1.0,
+                      "z": 0.0
                     },
-                    "AMCAIHBNPDK": true,
-                    "PEJBIAJDKKF": 4.0,
-                    "COAICNDKEMA": true,
+                    "onGround": true,
+                    "onGroundRaycastUpDist": 4.0,
+                    "useRotation": true,
                     "positionKey": "_ABILITY_Charlotte_ExtraAttack_Pos",
                     "directionKey": ""
                   },
                   "height": 4.0,
-                  "EBADGGHGLKN": 2.5
+                  "radius": 2.5
                 },
                 "attackInfo": {
                   "attackTag": "ExtraAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "LIMFCEKGALF": "ExtraAttack_Damage",
-                    "JJGGAPONHOE": 0.0,
+                    "damagePercentage": "ExtraAttack_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 80.0,
                     "attackType": "Range",
@@ -1075,11 +1075,11 @@
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "target": "OriginOwner",
                   "key": "_ABILITY_ArkheGrade_Attack_CD",
-                  "ratio": 0.0,
-                  "ACJBNJNEBOC": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -1094,14 +1094,14 @@
         "Avatar_Charlotte_ExtraAttack_Arkhe_Strike": {
           "modifierName": "",
           "duration": 0.46000000834465027,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_ExtraAttack_Arkhe_Hit",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_ExtraAttack_Arkhe_Hit",
               "born": {
-                "$type": "PBDNLGHAMHE",
-                "COAICNDKEMA": true
+                "$type": "ConfigBornBySelf",
+                "useRotation": true
               },
               "effectTempleteID": -1.0
             }
@@ -1116,33 +1116,33 @@
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPEIAHONPIH",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "DAPJIKNDLLN",
+                    "$type": "ConfigBornByGlobalValue",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": -1.0,
-                      "MJHHBAFNOEG": 0.0
+                      "x": 0.0,
+                      "y": -1.0,
+                      "z": 0.0
                     },
-                    "AMCAIHBNPDK": true,
-                    "PEJBIAJDKKF": 4.0,
-                    "COAICNDKEMA": true,
+                    "onGround": true,
+                    "onGroundRaycastUpDist": 4.0,
+                    "useRotation": true,
                     "positionKey": "_ABILITY_Charlotte_ExtraAttack_Pos",
                     "directionKey": ""
                   },
                   "height": 4.0,
-                  "EBADGGHGLKN": 2.5
+                  "radius": 2.5
                 },
                 "attackInfo": {
                   "attackTag": "ExtraAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "LIMFCEKGALF": "ExtraAttack_Arkhe_Ratio",
-                    "JJGGAPONHOE": 0.0,
+                    "damagePercentage": "ExtraAttack_Arkhe_Ratio",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 0.0,
+                    "elementDurability": 0.0,
                     "strikeType": "Pierce",
                     "enBreak": 20.0,
                     "damagePercentage": 1.0
@@ -1162,12 +1162,12 @@
         "Avatar_Charlotte_ExtraAttack_Arkhe_CDTimer": {
           "modifierName": "",
           "duration": "ExtraAttack_Arkhe_CD",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_ArkheGrade_Attack_CD",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1176,8 +1176,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_ArkheGrade_Attack_CD",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1188,7 +1188,7 @@
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "Avatar_Charlotte_ExtraAttack_GadgetEffect"
         },
         {
@@ -1242,61 +1242,61 @@
       "modifiers": {
         "Charlotte_ElementalArt_Loop_AttachCamera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_AttachCamera",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_AttachCamera",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Charlotte_ElementalArt_Loop_AttachCamera02": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_AttachCamera",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_AttachCamera",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Avatar_Charlotte_ElementalArt_DropBall_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "GLBJFGGNGGD",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "BGDFODHGEKL",
+                  "$type": "ByAttackType",
                   "attackType": "Default"
                 },
                 {
-                  "$type": "GOIBMIJJIFC",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "ACJBNJNEBOC": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_DropBall_Click"
                 }
               ]
@@ -1306,32 +1306,32 @@
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "GLBJFGGNGGD",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "BGDFODHGEKL",
+                  "$type": "ByAttackType",
                   "attackType": "Range"
                 },
                 {
-                  "$type": "GOIBMIJJIFC",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "ACJBNJNEBOC": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_DropBall_Hold"
                 }
               ]
@@ -1343,22 +1343,22 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "GenerateElemBall",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "configID": 2022,
               "born": {
-                "$type": "PBDNLGHAMHE",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "LOGNGLEIFML": 0.0,
-                  "JKDAHJILGBJ": 0.5,
-                  "MJHHBAFNOEG": 1.0
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 1.0
                 },
-                "COAICNDKEMA": true
+                "useRotation": true
               },
-              "value": 1.0,
+              "ratio": 1.0,
               "baseEnergy": 9.0
             }
           ]
@@ -1368,51 +1368,51 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Predicated",
               "target": "Caster",
               "targetPredicates": [
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Charlotte_ElementalArt_HoldFullTime",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "GenerateElemBall",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "configID": 2022,
                   "born": {
-                    "$type": "PBDNLGHAMHE",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": 0.5,
-                      "MJHHBAFNOEG": 1.0
+                      "x": 0.0,
+                      "y": 0.5,
+                      "z": 1.0
                     },
-                    "COAICNDKEMA": true
+                    "useRotation": true
                   },
-                  "value": 1.0,
+                  "ratio": 1.0,
                   "baseEnergy": 15.0
                 }
               ],
               "failActions": [
                 {
                   "$type": "GenerateElemBall",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "configID": 2022,
                   "born": {
-                    "$type": "PBDNLGHAMHE",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": 0.5,
-                      "MJHHBAFNOEG": 1.0
+                      "x": 0.0,
+                      "y": 0.5,
+                      "z": 1.0
                     },
-                    "COAICNDKEMA": true
+                    "useRotation": true
                   },
-                  "value": 1.0,
+                  "ratio": 1.0,
                   "baseEnergy": 9.0
                 }
               ]
@@ -1452,33 +1452,33 @@
       "modifiers": {
         "Avatar_Charlotte_ElementalArt_Click_Strike": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 10882,
-              "amountByCasterMaxHPRatio": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             },
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "PONOPJHLOMA",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "PBDNLGHAMHE",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": 1.0,
-                      "MJHHBAFNOEG": 0.0
+                      "x": 0.0,
+                      "y": 1.0,
+                      "z": 0.0
                     },
-                    "COAICNDKEMA": true
+                    "useRotation": true
                   },
                   "size": {
-                    "LOGNGLEIFML": 4.0,
-                    "JKDAHJILGBJ": 2.200000047683716,
-                    "MJHHBAFNOEG": 8.0
+                    "x": 4.0,
+                    "y": 2.200000047683716,
+                    "z": 8.0
                   }
                 },
                 "attackInfo": {
@@ -1486,10 +1486,10 @@
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "LIMFCEKGALF": "Click_Damage",
-                    "JJGGAPONHOE": 0.0,
+                    "damagePercentage": "Click_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 50.0,
                     "damagePercentage": 0.0
@@ -1508,11 +1508,11 @@
         },
         "Avatar_Charlotte_ElementalArt_Click_CameraReborn": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_CameraReborn",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_CameraReborn",
               "effectTempleteID": -1.0
             }
           ]
@@ -1598,11 +1598,11 @@
       "modifiers": {
         "Avatar_Charlotte_RayCast_InAim_SetGV": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueV2",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Charlotte_ElementalArt_HoldSuccess",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1611,7 +1611,7 @@
         },
         "Avatar_Charlotte_RayCast_CloseFx_Detect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachToNormalizedTimeMixin",
@@ -1622,17 +1622,17 @@
         },
         "Avatar_Charlotte_RayCast_InterruptFx": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "Predicated",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Charlotte_ElementalArt_HoldSuccess",
-                  "ratio": 0.0,
-                  "ACJBNJNEBOC": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
@@ -1648,7 +1648,7 @@
         },
         "Avatar_Charlotte_RayCast_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "DoActionByAimMixin",
@@ -1661,7 +1661,7 @@
                 {
                   "$type": "AddGlobalValueV2",
                   "target": "Caster",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "key": "_ABILITY_Charlotte_ElementalArt_AimNum",
                   "useLimitRange": true,
                   "maxValue": 5.0,
@@ -1672,11 +1672,11 @@
                   "target": "Target",
                   "predicates": [
                     {
-                      "$type": "NGNODMLFFCB",
+                      "$type": "ByTargetGlobalValue",
                       "target": "Caster",
                       "key": "_ABILITY_Charlotte_ElementalArt_HoldFullTime",
-                      "ratio": 0.0,
-                      "ACJBNJNEBOC": "NoneOrEqual"
+                      "value": 0.0,
+                      "compareType": "NoneOrEqual"
                     }
                   ],
                   "modifierName": "UNIQUE_Avatar_Charlotte_RayCast_Bomb_OnMonster_CountLayerHandler"
@@ -1686,10 +1686,10 @@
                   "target": "Target",
                   "predicates": [
                     {
-                      "$type": "NGNODMLFFCB",
+                      "$type": "ByTargetGlobalValue",
                       "target": "Caster",
                       "key": "_ABILITY_Charlotte_ElementalArt_HoldFullTime",
-                      "ratio": 1.0
+                      "value": 1.0
                     }
                   ],
                   "modifierName": "UNIQUE_Avatar_Charlotte_RayCast_Bomb_OnMonster_CountLayerHandler02"
@@ -1699,7 +1699,7 @@
                 {
                   "$type": "AddGlobalValueV2",
                   "target": "Caster",
-                  "ratio": -1.0,
+                  "value": -1.0,
                   "key": "_ABILITY_Charlotte_ElementalArt_AimNum",
                   "useLimitRange": true,
                   "maxValue": 5.0,
@@ -1720,15 +1720,15 @@
                 {
                   "$type": "DamageByAttackValue",
                   "target": "Target",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "born": {
-                    "$type": "JAPFKIFCLPF",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": 0.30000001192092896,
-                      "MJHHBAFNOEG": 0.0
+                      "x": 0.0,
+                      "y": 0.30000001192092896,
+                      "z": 0.0
                     },
-                    "COAICNDKEMA": true,
+                    "useRotation": true,
                     "attachPointName": "RootNode"
                   },
                   "attackInfo": {
@@ -1736,10 +1736,10 @@
                     "attenuationTag": "Elemental_Art",
                     "attenuationGroup": "default",
                     "attackProperty": {
-                      "LIMFCEKGALF": "QuitHold_Damage",
-                      "JJGGAPONHOE": 0.0,
+                      "damagePercentage": "QuitHold_Damage",
+                      "damagePercentageRatio": 0.0,
                       "elementType": "Ice",
-                      "bonusCriticalHurt": 25.0,
+                      "elementDurability": 25.0,
                       "strikeType": "Default",
                       "enBreak": 50.0,
                       "attackType": "Range",
@@ -1755,23 +1755,23 @@
               ],
               "predicates": [
                 {
-                  "$type": "GOIBMIJJIFC",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "ACJBNJNEBOC": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Charlotte_ElementalArt_AimNum",
-                  "ratio": 4.0,
-                  "ACJBNJNEBOC": "LessAndEqual"
+                  "value": 4.0,
+                  "compareType": "LessAndEqual"
                 }
               ],
               "LKDPFAFGKPA": "AllInScope"
@@ -1785,7 +1785,7 @@
           "onAdded": [
             {
               "$type": "SetGlobalValueV2",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Charlotte_ElementalArt_AimNum",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1794,46 +1794,46 @@
           "onRemoved": [
             {
               "$type": "AvatarSkillStart",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Charlotte_ElementalArt_HoldFullTime",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "skillID": 10882,
-              "amountByCasterMaxHPRatio": 1.5,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1.5,
+              "costStaminaRatio": 1.0
             },
             {
               "$type": "AvatarSkillStart",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Charlotte_ElementalArt_HoldFullTime",
-                  "ratio": 0.0
+                  "value": 0.0
                 }
               ],
               "skillID": 10882,
-              "amountByCasterMaxHPRatio": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             }
           ]
         },
         "Avatar_Charlotte_MaxHoldTime_TriggerDot": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 1.4500000476837158,
           "onAdded": [
             {
               "$type": "SetGlobalValueV2",
               "target": "Caster",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Charlotte_ElementalArt_HoldFullTime",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1843,8 +1843,8 @@
             {
               "$type": "SetGlobalValueV2",
               "target": "Caster",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Charlotte_ElementalArt_HoldFullTime",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1855,7 +1855,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "UNIQUE_Avatar_Charlotte_RayCast_Bomb_OnMonster_Effect_Weak": {
           "modifierName": "",
@@ -1865,29 +1865,29 @@
             0.800000011920929,
             "ADD"
           ],
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 1.5,
           "onAdded": [
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Charlotte_InDot",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "AttachEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_Dot_Tag",
+              "doOffStage": true,
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_Dot_Tag",
               "effectTempleteID": -1.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Charlotte_InDot",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1896,15 +1896,15 @@
           "onThinkInterval": [
             {
               "$type": "DamageByAttackValue",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "born": {
-                "$type": "JAPFKIFCLPF",
+                "$type": "ConfigBornByAttachPoint",
                 "offset": {
-                  "LOGNGLEIFML": 0.0,
-                  "JKDAHJILGBJ": 0.30000001192092896,
-                  "MJHHBAFNOEG": 0.0
+                  "x": 0.0,
+                  "y": 0.30000001192092896,
+                  "z": 0.0
                 },
-                "COAICNDKEMA": true,
+                "useRotation": true,
                 "attachPointName": "RootNode"
               },
               "attackInfo": {
@@ -1912,10 +1912,10 @@
                 "attenuationTag": "Charlotte_ArtDot",
                 "attenuationGroup": "Charlotte_ArtDot",
                 "attackProperty": {
-                  "LIMFCEKGALF": "ElementalArt_Dot_Weak_Damage",
-                  "JJGGAPONHOE": 0.0,
+                  "damagePercentage": "ElementalArt_Dot_Weak_Damage",
+                  "damagePercentageRatio": 0.0,
                   "elementType": "Ice",
-                  "bonusCriticalHurt": 25.0,
+                  "elementDurability": 25.0,
                   "strikeType": "Default",
                   "enBreak": 20.0,
                   "attackType": "Range",
@@ -1932,7 +1932,7 @@
           "onKill": [
             {
               "$type": "RemoveUniqueModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Avatar_Charlotte_RayCast_Bomb_OnMonster_Effect_Weak"
             }
           ]
@@ -1945,33 +1945,33 @@
             0.8999999761581421,
             "ADD"
           ],
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 1.5,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_Dot_Tag_Big_Kacha",
+              "doOffStage": true,
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_Dot_Tag_Big_Kacha",
               "effectTempleteID": -1.0
             },
             {
               "$type": "AttachEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_Dot_Tag_Big",
+              "doOffStage": true,
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_Dot_Tag_Big",
               "effectTempleteID": -1.0
             },
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Charlotte_InDot",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Charlotte_InStrongDot",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1980,16 +1980,16 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Charlotte_InDot",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Charlotte_InStrongDot",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -1998,28 +1998,28 @@
           "onBeingHit": [
             {
               "$type": "Predicated",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "GOIBMIJJIFC",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "ACJBNJNEBOC": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "OMMNCGCCJEK",
+                  "$type": "ByTargetPositionToSelfPosition",
                   "logic": "LesserOrEqual",
-                  "ACJBNJNEBOC": "XYZ",
-                  "ratio": 30.0
+                  "compareType": "XYZ",
+                  "value": 30.0
                 },
                 {
-                  "$type": "GLBJFGGNGGD",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "NormalAttack_01",
                     "NormalAttack_02",
@@ -2031,21 +2031,21 @@
                   ]
                 },
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Charlotte_Constellation_ExtraCameraAttack_InCd",
-                  "ratio": 0.0
+                  "value": 0.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
                   "target": "Caster",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "predicates": [
                     {
-                      "$type": "GMADPHKDMCK",
-                      "LBFNAOBLLJL": "Avatar_Charlotte_Constellation_6"
+                      "$type": "ByUnlockTalentParam",
+                      "talentParam": "Avatar_Charlotte_Constellation_6"
                     }
                   ],
                   "modifierName": "UNIQUE_Charlotte_Constellation_ExtraCameraAttack_Trigger"
@@ -2056,15 +2056,15 @@
           "onThinkInterval": [
             {
               "$type": "DamageByAttackValue",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "born": {
-                "$type": "JAPFKIFCLPF",
+                "$type": "ConfigBornByAttachPoint",
                 "offset": {
-                  "LOGNGLEIFML": 0.0,
-                  "JKDAHJILGBJ": 0.30000001192092896,
-                  "MJHHBAFNOEG": 0.0
+                  "x": 0.0,
+                  "y": 0.30000001192092896,
+                  "z": 0.0
                 },
-                "COAICNDKEMA": true,
+                "useRotation": true,
                 "attachPointName": "RootNode"
               },
               "attackInfo": {
@@ -2072,10 +2072,10 @@
                 "attenuationTag": "Charlotte_ArtDot",
                 "attenuationGroup": "Charlotte_ArtDot",
                 "attackProperty": {
-                  "LIMFCEKGALF": "ElementalArt_Dot_Strong_Damage",
-                  "JJGGAPONHOE": 0.0,
+                  "damagePercentage": "ElementalArt_Dot_Strong_Damage",
+                  "damagePercentageRatio": 0.0,
                   "elementType": "Ice",
-                  "bonusCriticalHurt": 25.0,
+                  "elementDurability": 25.0,
                   "strikeType": "Default",
                   "enBreak": 20.0,
                   "attackType": "Range",
@@ -2090,24 +2090,24 @@
             },
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Behit",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_Dot_Tag_Big_Kacha"
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_Dot_Tag_Big_Kacha"
             }
           ],
           "onKill": [
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Charlotte_ElementalArt_Dot_Strong",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "RemoveUniqueModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Avatar_Charlotte_RayCast_Bomb_OnMonster_Effect_Strong"
             }
           ]
@@ -2117,12 +2117,12 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Trigger_CD",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "value": -1.0,
               "key": "_ABILITY_Charlotte_Constellation_ExtraCameraAttack_InCd",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2130,27 +2130,27 @@
             {
               "$type": "SetSelfAttackTarget",
               "target": "Applier",
-              "PositionDampTime": true
+              "doOffStage": true
             },
             {
               "$type": "SetGlobalPos",
               "target": "SelfAttackTarget",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "key": "_ABILITY_Charlotte_Constellation_Pos",
               "born": {
-                "$type": "HEHOFJMHGFN",
-                "COAICNDKEMA": true
+                "$type": "ConfigBornBySelectedPoint",
+                "useRotation": true
               },
               "setTarget": false
             },
             {
               "$type": "CreateGadget",
               "target": "Caster",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "ownerIs": "Caster",
               "propOwnerIs": "Caster",
               "born": {
-                "$type": "DAPJIKNDLLN",
+                "$type": "ConfigBornByGlobalValue",
                 "positionKey": "_ABILITY_Charlotte_Constellation_Pos",
                 "directionKey": ""
               },
@@ -2162,8 +2162,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Charlotte_Constellation_ExtraCameraAttack_InCd",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2173,7 +2173,7 @@
         "UNIQUE_Avatar_Charlotte_RayCast_Bomb_OnMonster_CountLayerHandler": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToGlobalValueMixin",
@@ -2206,8 +2206,8 @@
           "onAdded": [
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_Charlotte_RayCast_Bomb_Layer",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2217,12 +2217,12 @@
         "UNIQUE_Avatar_Charlotte_RayCast_Bomb_OnMonster_CountLayerHandler02": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 2.0,
+              "doOffStage": true,
+              "value": 2.0,
               "key": "_Charlotte_RayCast_Bomb_Layer",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2232,15 +2232,15 @@
               "actionList": [
                 {
                   "$type": "AttachEffect",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "canBeHandledOnRecover": true,
                   "predicates": [
                     {
-                      "$type": "HHIIIOCKDGN",
+                      "$type": "ByIsLocalAvatar",
                       "target": "Caster"
                     }
                   ],
-                  "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_AimTime_Layer02",
+                  "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_AimTime_Layer02",
                   "effectTempleteID": -1.0
                 }
               ]
@@ -2249,12 +2249,12 @@
         },
         "Avatar_Charlotte_RayCast_Bomb_OnMonster_ToFullLayer": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 2.0,
+              "doOffStage": true,
+              "value": 2.0,
               "key": "_Charlotte_RayCast_Bomb_Layer",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2263,22 +2263,22 @@
         },
         "Avatar_Charlotte_RayCast_Bomb_OnMonster_Weak": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "DoActionsLocal",
               "actionList": [
                 {
                   "$type": "AttachEffect",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "canBeHandledOnRecover": true,
                   "predicates": [
                     {
-                      "$type": "HHIIIOCKDGN",
+                      "$type": "ByIsLocalAvatar",
                       "target": "Caster"
                     }
                   ],
-                  "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_AimTime_Layer01",
+                  "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_AimTime_Layer01",
                   "effectTempleteID": -1.0
                 }
               ]
@@ -2287,22 +2287,22 @@
         },
         "Avatar_Charlotte_RayCast_Bomb_OnMonster_Strong": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "DoActionsLocal",
               "actionList": [
                 {
                   "$type": "AttachEffect",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "canBeHandledOnRecover": true,
                   "predicates": [
                     {
-                      "$type": "HHIIIOCKDGN",
+                      "$type": "ByIsLocalAvatar",
                       "target": "Caster"
                     }
                   ],
-                  "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_AimTime_Layer02",
+                  "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_AimTime_Layer02",
                   "effectTempleteID": -1.0
                 }
               ]
@@ -2312,11 +2312,11 @@
         "Avatar_Charlotte_RayCast_Bomb_OnMonster_Damage": {
           "modifierName": "",
           "duration": 0.5,
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "Focus": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "DisableMotionBlurMixin"
@@ -2354,7 +2354,7 @@
           "onRemoved": [
             {
               "$type": "AvatarExitFocus",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "keepRotation": true,
               "PLDMFJJMHGB": 4.800000190734863
             }
@@ -2362,11 +2362,11 @@
         },
         "Avatar_Charlotte_RayCast_Trigger": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "RemoveModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "Avatar_Charlotte_RayCast_Handler"
             },
             {
@@ -2377,7 +2377,7 @@
         },
         "Avatar_Charlotte_RayCast_Camera_Fx": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
@@ -2398,7 +2398,7 @@
         },
         "Avatar_Charlotte_RayCast_Camera_Fx_OnTeam": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachActionToModifierMixin",
@@ -2413,7 +2413,7 @@
                 },
                 {
                   "$type": "TriggerHideWeapon",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "partNames": [
                     "equip01",
                     "equip02",
@@ -2424,7 +2424,7 @@
               "onRemoved": [
                 {
                   "$type": "DungeonFogEffects",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "muteRemoteAction": true,
                   "cameraFogEffectName": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_Camera_Aim",
                   "playerFogEffectName": "",
@@ -2432,7 +2432,7 @@
                 },
                 {
                   "$type": "TriggerHideWeapon",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "visible": true,
                   "partNames": [
                     "equip01",
@@ -2446,12 +2446,12 @@
         },
         "Avatar_Charlotte_RayCast_CloseFx": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Charlotte_ElementalArt_HoldSuccess",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2460,9 +2460,9 @@
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Charlotte_ElementalArt_HoldFullTime",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "successActions": [
@@ -2483,8 +2483,8 @@
                 {
                   "$type": "SetGlobalValueV2",
                   "target": "Caster",
-                  "PositionDampTime": true,
-                  "ratio": 0.0,
+                  "doOffStage": true,
+                  "value": 0.0,
                   "key": "_ABILITY_Charlotte_ElementalArt_HoldFullTime",
                   "maxValue": 0.0,
                   "minValue": 0.0
@@ -2496,7 +2496,7 @@
         "Camera_Effect": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "CameraBlurMixin",
@@ -2509,7 +2509,7 @@
         },
         "Avatar_Charlotte_HoldTimeChangeRayCast": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -2520,7 +2520,7 @@
         "Avatar_Charlotte_HoldTimeChangeRayCast_Trigger": {
           "modifierName": "",
           "duration": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
@@ -2531,17 +2531,17 @@
         "Avatar_Charlotte_InHoldTime": {
           "modifierName": "",
           "duration": 15.0,
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         },
         "Avatar_Charlotte_ElementalArt_TagNum_Clear": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Charlotte_ElementalArt_TagNum",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2549,8 +2549,8 @@
             {
               "$type": "SetGlobalValueV2",
               "target": "Caster",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Charlotte_ElementalArt_HoldFullTime",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2563,66 +2563,66 @@
         },
         "Avatar_Charlotte_ElementalArt_Click_AddDotHandler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "GLBJFGGNGGD",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "BGDFODHGEKL",
+                  "$type": "ByAttackType",
                   "attackType": "Default"
                 },
                 {
-                  "$type": "GOIBMIJJIFC",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "ACJBNJNEBOC": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Charlotte_ElementalArt_TagNum",
-                  "ratio": 4.0,
-                  "ACJBNJNEBOC": "LessAndEqual"
+                  "value": 4.0,
+                  "compareType": "LessAndEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "RemoveUniqueModifier",
                   "target": "Target",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Avatar_Charlotte_RayCast_Bomb_OnMonster_Effect_Weak"
                 },
                 {
                   "$type": "RemoveUniqueModifier",
                   "target": "Target",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Avatar_Charlotte_RayCast_Bomb_OnMonster_Effect_Strong"
                 },
                 {
                   "$type": "AttachModifier",
                   "target": "Target",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Avatar_Charlotte_RayCast_Bomb_OnMonster_Effect_Weak"
                 },
                 {
                   "$type": "AddGlobalValueV2",
                   "target": "Caster",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "key": "_ABILITY_Charlotte_ElementalArt_TagNum",
                   "useLimitRange": true,
                   "maxValue": 5.0,
@@ -2631,7 +2631,7 @@
                 {
                   "$type": "ApplyModifier",
                   "target": "Caster",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "Avatar_Charlotte_ElementalArt_TagNum_Clear"
                 }
               ]
@@ -2640,53 +2640,53 @@
         },
         "Avatar_Charlotte_ElementalArt_Hold_AddDotHandler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "GLBJFGGNGGD",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "BGDFODHGEKL",
+                  "$type": "ByAttackType",
                   "attackType": "Range"
                 },
                 {
-                  "$type": "GOIBMIJJIFC",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "ACJBNJNEBOC": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Charlotte_ElementalArt_TagNum",
-                  "ratio": 4.0,
-                  "ACJBNJNEBOC": "LessAndEqual"
+                  "value": 4.0,
+                  "compareType": "LessAndEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "RemoveUniqueModifier",
                   "target": "Target",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Avatar_Charlotte_RayCast_Bomb_OnMonster_Effect_Weak"
                 },
                 {
                   "$type": "RemoveUniqueModifier",
                   "target": "Target",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Avatar_Charlotte_RayCast_Bomb_OnMonster_Effect_Strong"
                 },
                 {
@@ -2694,10 +2694,10 @@
                   "target": "Target",
                   "predicates": [
                     {
-                      "$type": "NGNODMLFFCB",
+                      "$type": "ByTargetGlobalValue",
                       "target": "Caster",
                       "key": "_ABILITY_Charlotte_ElementalArt_HoldFullTime",
-                      "ratio": 1.0
+                      "value": 1.0
                     }
                   ],
                   "modifierName": "UNIQUE_Avatar_Charlotte_RayCast_Bomb_OnMonster_Effect_Strong"
@@ -2707,10 +2707,10 @@
                   "target": "Target",
                   "predicates": [
                     {
-                      "$type": "NGNODMLFFCB",
+                      "$type": "ByTargetGlobalValue",
                       "target": "Caster",
                       "key": "_ABILITY_Charlotte_ElementalArt_HoldFullTime",
-                      "ratio": 0.0
+                      "value": 0.0
                     }
                   ],
                   "modifierName": "UNIQUE_Avatar_Charlotte_RayCast_Bomb_OnMonster_Effect_Weak"
@@ -2718,7 +2718,7 @@
                 {
                   "$type": "AddGlobalValueV2",
                   "target": "Caster",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "key": "_ABILITY_Charlotte_ElementalArt_TagNum",
                   "useLimitRange": true,
                   "maxValue": 5.0,
@@ -2727,7 +2727,7 @@
                 {
                   "$type": "ApplyModifier",
                   "target": "Caster",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "Avatar_Charlotte_ElementalArt_TagNum_Clear"
                 }
               ]
@@ -2738,44 +2738,44 @@
       "onAdded": [
         {
           "$type": "SetGlobalValueV2",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Charlotte_ElementalArt_HoldSuccess",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValueV2",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Charlotte_ElementalArt_TagNum",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValueV2",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Charlotte_ElementalArt_HoldFullTime",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "AttachModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "Avatar_Charlotte_RayCast_CloseFx_Detect"
         },
         {
           "$type": "AttachModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "Avatar_Charlotte_ElementalArt_Click_AddDotHandler"
         },
         {
           "$type": "AttachModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "Avatar_Charlotte_ElementalArt_Hold_AddDotHandler"
         },
         {
           "$type": "SetGlobalValueV2",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Charlotte_Constellation_ExtraCameraAttack_InCd",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -2811,42 +2811,42 @@
       "modifiers": {
         "Avatar_Charlotte_ElementalArt_WidgetMode_Check": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Team",
                   "key": "_Widget_ZoomLens_Active",
-                  "ratio": 0.0,
-                  "ACJBNJNEBOC": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "intID": "Art_WidgetMode",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "SetAnimatorInt",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Team",
                   "key": "_Widget_ZoomLens_Active",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "intID": "Art_WidgetMode",
-              "ratio": 1.0
+              "value": 1.0
             }
           ]
         },
         "Avatar_Charlotte_ElementalArt_Loop_WidgetMode": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachToContextMixin",
@@ -2876,7 +2876,7 @@
           "onRemoved": [
             {
               "$type": "AvatarExitFocus",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "keepRotation": true
             },
             {
@@ -2887,11 +2887,11 @@
         },
         "Charlotte_ElementalArt_Loop_WidgetMode_AttachCamera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_AttachCamera",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalArt_AttachCamera",
               "effectTempleteID": -1.0
             }
           ]
@@ -2957,13 +2957,13 @@
       "modifiers": {
         "ElementalBurst_SkillStart": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 10885,
-              "amountByCasterMaxHPRatio": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             },
             {
               "$type": "KillGadget",
@@ -2976,7 +2976,7 @@
         },
         "Charlotte_ElementalBurst_Invincible": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
@@ -2990,7 +2990,7 @@
         },
         "Charlotte_ElementalBurst_Invincible02": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
@@ -3001,26 +3001,26 @@
         },
         "Charlotte_ElementalBurst_FireEffect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalBurst_Cast",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalBurst_Cast",
               "effectTempleteID": -1.0
             }
           ]
         },
         "ElementalBurst_Camera_Remover_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             },
             {
               "$type": "AvatarCameraParam",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "cameraParam": {
                 "forceRadius": 6.0,
                 "forceRadiusDuration": 0.10000000149011612,
@@ -3031,11 +3031,11 @@
           "onAvatarOut": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             },
             {
               "$type": "AvatarCameraParam",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "cameraParam": {
                 "forceRadius": 6.0,
                 "forceRadiusDuration": 0.10000000149011612,
@@ -3046,7 +3046,7 @@
         },
         "ElementalBurst_Headcontrol_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "EnableHeadControl",
@@ -3056,21 +3056,21 @@
           "onRemoved": [
             {
               "$type": "EnableHeadControl",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "enable": true
             }
           ],
           "onAvatarOut": [
             {
               "$type": "EnableHeadControl",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "enable": true
             }
           ]
         },
         "Charlotte_ElementalBurst_Weather": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "TriggerWeatherMixin",
@@ -3086,14 +3086,14 @@
         {
           "$type": "CreateGadget",
           "born": {
-            "$type": "PBDNLGHAMHE",
+            "$type": "ConfigBornBySelf",
             "offset": {
-              "LOGNGLEIFML": 0.0,
-              "JKDAHJILGBJ": 0.0,
-              "MJHHBAFNOEG": 4.5
+              "x": 0.0,
+              "y": 0.0,
+              "z": 4.5
             },
-            "AMCAIHBNPDK": true,
-            "COAICNDKEMA": true
+            "onGround": true,
+            "useRotation": true
           },
           "gadgetID": 41088004,
           "campID": 1001,
@@ -3123,12 +3123,12 @@
             0.5,
             "ADD"
           ],
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Constellation_AddExtraHot_InterVal",
           "onThinkInterval": [
             {
               "$type": "HealHP",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "amountByCasterAttackRatio": "Constellation_ExtraHot_HealRatio",
               "cdRatio": ""
             }
@@ -3140,15 +3140,15 @@
         {
           "$type": "HealHP",
           "target": "AllPlayerAvatars",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "predicates": [
             {
-              "$type": "OMMNCGCCJEK",
+              "$type": "ByTargetPositionToSelfPosition",
               "logic": "LesserOrEqual",
-              "ratio": 40.0
+              "value": 40.0
             }
           ],
-          "JPKNCEBHPHF": "Heal_Const_Once",
+          "amount": "Heal_Const_Once",
           "amountByCasterAttackRatio": "Heal_Ratio_Once",
           "cdRatio": "Charlotte_ElementalBurst_Heal"
         }
@@ -3172,17 +3172,17 @@
         "Charlotte_ElementalBurst_CameraAttackEffect": {
           "modifierName": "",
           "duration": 0.6000000238418579,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "PPLMMMCGGKC",
+                  "$type": "ByEntityIsAlive",
                   "target": "Self"
                 }
               ],
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalBurst_Attack01",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalBurst_Attack01",
               "effectTempleteID": -1.0
             }
           ]
@@ -3190,17 +3190,17 @@
         "Charlotte_ElementalBurst_Stage_Effect_Delay": {
           "modifierName": "",
           "duration": 0.7200000286102295,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "PPLMMMCGGKC",
+                  "$type": "ByEntityIsAlive",
                   "target": "Self"
                 }
               ],
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalBurst_Stage",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_ElementalBurst_Stage",
               "effectTempleteID": -1.0
             }
           ]
@@ -3208,36 +3208,36 @@
         "Charlotte_ElementalBurst_Stage_DamageOnce": {
           "modifierName": "",
           "duration": 0.800000011920929,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "TriggerAttackEvent",
               "target": "Caster",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPEIAHONPIH",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "PBDNLGHAMHE",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": -0.5,
-                      "MJHHBAFNOEG": 0.0
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.0
                     },
-                    "COAICNDKEMA": true
+                    "useRotation": true
                   },
                   "height": 4.5,
-                  "EBADGGHGLKN": 6.0
+                  "radius": 6.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "LIMFCEKGALF": "ElementalBurst_DamOnceRatio",
-                    "JJGGAPONHOE": 0.0,
+                    "damagePercentage": "ElementalBurst_DamOnceRatio",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 50.0,
+                    "elementDurability": 50.0,
                     "strikeType": "Default",
                     "enBreak": 200.0,
                     "damagePercentage": 0.0
@@ -3257,13 +3257,13 @@
         "Charlotte_ElementalBurst_Stage_DamageLoop_Delay1": {
           "modifierName": "",
           "duration": 1.5,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "ApplyModifier",
               "predicates": [
                 {
-                  "$type": "PPLMMMCGGKC",
+                  "$type": "ByEntityIsAlive",
                   "target": "Self"
                 }
               ],
@@ -3274,13 +3274,13 @@
         "Charlotte_ElementalBurst_Stage_DamageLoop_Delay2": {
           "modifierName": "",
           "duration": 2.9000000953674316,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "ApplyModifier",
               "predicates": [
                 {
-                  "$type": "PPLMMMCGGKC",
+                  "$type": "ByEntityIsAlive",
                   "target": "Self"
                 }
               ],
@@ -3291,7 +3291,7 @@
         "Charlotte_ElementalBurst_Stage_DamageLoop1": {
           "modifierName": "",
           "duration": 1.2999999523162842,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.4000000059604645,
           "onAdded": [
             {
@@ -3310,7 +3310,7 @@
         "Charlotte_ElementalBurst_Stage_DamageLoop2": {
           "modifierName": "",
           "duration": 1.2999999523162842,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.4000000059604645,
           "onAdded": [
             {
@@ -3330,36 +3330,36 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "target": "Caster",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPEIAHONPIH",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "PBDNLGHAMHE",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": -0.5,
-                      "MJHHBAFNOEG": 0.0
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.0
                     },
-                    "COAICNDKEMA": true
+                    "useRotation": true
                   },
                   "height": 4.5,
-                  "EBADGGHGLKN": 6.0
+                  "radius": 6.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "Charlotte_BurstCamera",
                   "attenuationGroup": "Charlotte_BurstCamera",
                   "attackProperty": {
-                    "LIMFCEKGALF": "Stage_DamRatio",
-                    "JJGGAPONHOE": 0.0,
+                    "damagePercentage": "Stage_DamRatio",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 25.0,
                     "damagePercentage": 0.0
@@ -3377,20 +3377,20 @@
             {
               "$type": "HealHP",
               "otherTargets": {
-                "$type": "JGOEKECMJLH",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR7",
                 "campTargetType": "Alliance",
-                "OHJFACHECDC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "GOIBMIJJIFC",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
                 }
               ],
-              "JPKNCEBHPHF": "Stage_HealConst",
+              "amount": "Stage_HealConst",
               "amountByCasterAttackRatio": "Stage_HealRatio",
               "cdRatio": "Charlotte_ElementalBurst_Heal"
             }
@@ -3553,11 +3553,11 @@
       "modifiers": {
         "HideWeapon": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerHideWeapon",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "partNames": [
                 "equip01",
                 "equip02",
@@ -3568,7 +3568,7 @@
           "onRemoved": [
             {
               "$type": "TriggerHideWeapon",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "visible": true,
               "partNames": [
                 "equip01",
@@ -3580,28 +3580,28 @@
         },
         "FallingAnthem_SetVisible": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerSetVisible",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerSetVisible",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "visible": true
             }
           ]
         },
         "FallingAnthem_BS_Material": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Catalyst_FallAnthem_BS_Ice",
+              "effectPattern": "Eff_Avatar_Catalyst_FallAnthem_BS_Ice",
               "effectTempleteID": -1.0
             },
             {
@@ -3612,7 +3612,7 @@
         },
         "FallingAnthem_BS_VelocityForce_Initialize": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -2.0
           },
@@ -3627,35 +3627,35 @@
         },
         "FallingAnthem_LoopDamage": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "DALACABODFA",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "PBDNLGHAMHE",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": 0.0,
-                      "MJHHBAFNOEG": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "COAICNDKEMA": true
+                    "useRotation": true
                   },
-                  "EBADGGHGLKN": 1.5
+                  "radius": 1.5
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "LIMFCEKGALF": "FallingAnthem_Normal_Loop_Damage",
-                    "JJGGAPONHOE": 0.0,
+                    "damagePercentage": "FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 0.0,
+                    "elementDurability": 0.0,
                     "strikeType": "Default",
                     "enBreak": 5.0,
                     "damagePercentage": 0.0
@@ -3673,7 +3673,7 @@
         },
         "FallingAnthem_FallingDamageImmune_01": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ClearGlobalValue",
@@ -3683,12 +3683,12 @@
               "$type": "AddGlobalValueV2",
               "predicates": [
                 {
-                  "$type": "HJCILPNMECC",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv0",
+              "value": "FallingAnthem_FallingDamageRatio_Lv0",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
@@ -3698,16 +3698,16 @@
               "$type": "AddGlobalValueV2",
               "predicates": [
                 {
-                  "$type": "HJCILPNMECC",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "value": "FallingAnthem_Altitude_Lv1"
                 },
                 {
-                  "$type": "HJCILPNMECC",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv1",
+              "value": "FallingAnthem_FallingDamageRatio_Lv1",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
@@ -3717,16 +3717,16 @@
               "$type": "AddGlobalValueV2",
               "predicates": [
                 {
-                  "$type": "HJCILPNMECC",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "value": "FallingAnthem_Altitude_Lv2"
                 },
                 {
-                  "$type": "HJCILPNMECC",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv1"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv2",
+              "value": "FallingAnthem_FallingDamageRatio_Lv2",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
@@ -3736,16 +3736,16 @@
               "$type": "AddGlobalValueV2",
               "predicates": [
                 {
-                  "$type": "HJCILPNMECC",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "value": "FallingAnthem_Altitude_Lv3"
                 },
                 {
-                  "$type": "HJCILPNMECC",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv2"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv3",
+              "value": "FallingAnthem_FallingDamageRatio_Lv3",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
@@ -3755,11 +3755,11 @@
               "$type": "AddGlobalValueV2",
               "predicates": [
                 {
-                  "$type": "HJCILPNMECC",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv3"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv4",
+              "value": "FallingAnthem_FallingDamageRatio_Lv4",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
@@ -3773,7 +3773,7 @@
         },
         "FallingAnthem_FallingDamageImmune_02": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -3788,14 +3788,14 @@
         },
         "FallingAnthem_FallingDamageImmune_03": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
           }
         },
         "Inertia": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ApplyInertiaVelocityMixin",
@@ -3806,18 +3806,18 @@
         },
         "FallingAnthem_Height_Detect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValueV2",
               "predicates": [
                 {
-                  "$type": "HJCILPNMECC",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -3827,11 +3827,11 @@
               "$type": "AddGlobalValueV2",
               "predicates": [
                 {
-                  "$type": "HJCILPNMECC",
-                  "ratio": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
-              "ratio": 5.0,
+              "value": 5.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -3841,35 +3841,35 @@
               "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "HJCILPNMECC",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "HJCILPNMECC",
-                  "ratio": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "AddGlobalValueV2",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -3879,15 +3879,15 @@
         },
         "FallingAnthem_OverHead_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "PCGFCGPFNLE",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -3901,25 +3901,25 @@
         },
         "FallingAnthem_OverHead_Camera_Remover": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ]
         },
         "FallingAnthem_Landed_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "PCGFCGPFNLE",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -3933,7 +3933,7 @@
         },
         "FallingAnthem_ClearVelocityForce": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "RemoveVelocityForce",
@@ -3946,11 +3946,11 @@
         },
         "FallingAnthem_Attach_SelfEffect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Catalyst_FallAnthem_Self_Ice",
+              "effectPattern": "Eff_Avatar_Catalyst_FallAnthem_Self_Ice",
               "effectTempleteID": -1.0
             }
           ]
@@ -3958,7 +3958,7 @@
         "FallingAnthem_Remove_SelfEffect": {
           "modifierName": "",
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "RemoveModifier",
@@ -3969,7 +3969,7 @@
         "FallingAnthem_BSCameraRadialBlur": {
           "modifierName": "",
           "duration": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "CameraBlurMixin",
@@ -3986,37 +3986,37 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "NGNODMLFFCB",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "PLDDAFOIEGE": true,
-              "ACJBNJNEBOC": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "FPEIAHONPIH",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "EOJBLPNGNCN",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "LOGNGLEIFML": 0.0,
-                  "JKDAHJILGBJ": -0.5,
-                  "MJHHBAFNOEG": 0.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 0.0
                 }
               },
               "height": 2.0,
-              "EBADGGHGLKN": 3.0
+              "radius": 3.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "LIMFCEKGALF": "FallingAnthem_Normal_Rank_1_Damage",
-                "JJGGAPONHOE": 0.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_1_Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Ice",
-                "bonusCriticalHurt": 25.0,
+                "elementDurability": 25.0,
                 "strikeType": "Default",
                 "enBreak": 50.0,
                 "damagePercentage": 0.0
@@ -4049,36 +4049,36 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "NGNODMLFFCB",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "PLDDAFOIEGE": true
+              "value": 1.0,
+              "forceByCaster": true
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "FPEIAHONPIH",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "EOJBLPNGNCN",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "LOGNGLEIFML": 0.0,
-                  "JKDAHJILGBJ": -0.5,
-                  "MJHHBAFNOEG": 0.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 0.0
                 }
               },
               "height": 2.0,
-              "EBADGGHGLKN": 3.5
+              "radius": 3.5
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "LIMFCEKGALF": "FallingAnthem_Normal_Rank_2_Damage",
-                "JJGGAPONHOE": 0.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_2_Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Ice",
-                "bonusCriticalHurt": 25.0,
+                "elementDurability": 25.0,
                 "strikeType": "Default",
                 "enBreak": 100.0,
                 "damagePercentage": 0.0
@@ -4112,27 +4112,27 @@
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "NGNODMLFFCB",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "PLDDAFOIEGE": true,
-              "ACJBNJNEBOC": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             }
           ],
-          "shieldHP": "Eff_Avatar_Catalyst_FallAnthem_Strike_01_Ice",
+          "effectPattern": "Eff_Avatar_Catalyst_FallAnthem_Strike_01_Ice",
           "effectTempleteID": -1.0
         },
         {
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "NGNODMLFFCB",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "PLDDAFOIEGE": true
+              "value": 1.0,
+              "forceByCaster": true
             }
           ],
-          "shieldHP": "Eff_Avatar_Catalyst_FallAnthem_Strike_02_Ice",
+          "effectPattern": "Eff_Avatar_Catalyst_FallAnthem_Strike_02_Ice",
           "effectTempleteID": -1.0
         }
       ]
@@ -4176,7 +4176,7 @@
       "modifiers": {
         "WaistCamera_ReAppear_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SetAnimatorTrigger",
@@ -4211,7 +4211,7 @@
       "modifiers": {
         "WaistCamera_ReAppear_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "elementDurability": 100.0
         }
       }
     }
@@ -4228,24 +4228,24 @@
       "modifiers": {
         "Avatar_Charlotte_PermanentSkill_1_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "DoActionByEntityKillMixin",
               "predicates": [
                 {
-                  "$type": "GOIBMIJJIFC",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "NNBKBBILDGO",
+                  "$type": "ByAny",
                   "predicates": [
                     {
-                      "$type": "NGNODMLFFCB",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Charlotte_ElementalArt_Dot_Strong",
-                      "ratio": 1.0
+                      "value": 1.0
                     },
                     {
                       "$type": "GHCGPIKJOGA",
@@ -4254,21 +4254,21 @@
                   ]
                 },
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Charlotte_Permanent_ReduceCD_Count",
-                  "ratio": [
+                  "value": [
                     "Count",
                     1.0,
                     "SUB"
                   ],
-                  "ACJBNJNEBOC": "LessAndEqual"
+                  "compareType": "LessAndEqual"
                 },
                 {
-                  "$type": "BAMBPOIJFPG",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "HLKINEFIJDF",
+                      "$type": "BySkillReady",
                       "skillID": 10882
                     }
                   ]
@@ -4278,13 +4278,13 @@
                 {
                   "$type": "ApplyModifier",
                   "target": "Caster",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "Charlotte_Permanent_ReduceCD"
                 },
                 {
                   "$type": "ApplyModifier",
                   "target": "Caster",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Charlotte_Permanent_ReduceCD_TimeLimit"
                 }
               ]
@@ -4296,13 +4296,13 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ModifyAvatarSkillCD",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "skillID": 10882,
-              "cdMin": [
+              "cdDelta": [
                 0.0,
                 "Art_CD",
                 "SUB"
@@ -4310,8 +4310,8 @@
             },
             {
               "$type": "AddGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Charlotte_Permanent_ReduceCD_Count",
               "useLimitRange": true,
               "maxValue": 6.0,
@@ -4324,11 +4324,11 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "TimeLimit",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SetGlobalValueV2",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_Charlotte_Permanent_ReduceCD_Count",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -4343,7 +4343,7 @@
         },
         {
           "$type": "SetGlobalValueV2",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Charlotte_Permanent_ReduceCD_Count",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -4361,16 +4361,16 @@
           "actions": [
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Charlotte_Fengdan_Num_ExceptSelf",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Charlotte_NotFengdan_Num_ExceptSelf",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -4378,10 +4378,10 @@
             {
               "$type": "Predicated",
               "target": "AllPlayerAvatars",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "EEJMHENNFEO",
+                  "$type": "ByHasFeatureTag",
                   "featureTagIDs": [
                     1005
                   ]
@@ -4391,8 +4391,8 @@
                 {
                   "$type": "AddGlobalValueV2",
                   "target": "Caster",
-                  "PositionDampTime": true,
-                  "ratio": 1.0,
+                  "doOffStage": true,
+                  "value": 1.0,
                   "key": "_ABILITY_Charlotte_Fengdan_Num_ExceptSelf",
                   "useLimitRange": true,
                   "maxValue": 4.0,
@@ -4403,8 +4403,8 @@
                 {
                   "$type": "AddGlobalValueV2",
                   "target": "Caster",
-                  "PositionDampTime": true,
-                  "ratio": 1.0,
+                  "doOffStage": true,
+                  "value": 1.0,
                   "key": "_ABILITY_Charlotte_NotFengdan_Num_ExceptSelf",
                   "useLimitRange": true,
                   "maxValue": 4.0,
@@ -4415,8 +4415,8 @@
             {
               "$type": "AddGlobalValueV2",
               "target": "Caster",
-              "PositionDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "value": -1.0,
               "key": "_ABILITY_Charlotte_Fengdan_Num_ExceptSelf",
               "useLimitRange": true,
               "maxValue": 4.0,
@@ -4424,34 +4424,34 @@
             },
             {
               "$type": "SetGlobalValueToOverrideMap",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "globalValueKey": "_ABILITY_Charlotte_Fengdan_Num_ExceptSelf",
               "overrideMapKey": "Charlotte_PermanentSkill_Fengdan_Num"
             },
             {
               "$type": "SetGlobalValueToOverrideMap",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "globalValueKey": "_ABILITY_Charlotte_NotFengdan_Num_ExceptSelf",
               "overrideMapKey": "Charlotte_PermanentSkill_NotFengdan_Num"
             },
             {
               "$type": "RemoveUniqueModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Charlotte_PermanentSkill_FengdanBuff"
             },
             {
               "$type": "AttachModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Charlotte_PermanentSkill_FengdanBuff"
             },
             {
               "$type": "RemoveUniqueModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Charlotte_PermanentSkill_NotFengdanBuff"
             },
             {
               "$type": "AttachModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Charlotte_PermanentSkill_NotFengdanBuff"
             }
           ],
@@ -4470,7 +4470,7 @@
         "UNIQUE_Charlotte_PermanentSkill_FengdanBuff": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_HealAddDelta": [
               "HealAddDelta_P1",
@@ -4483,7 +4483,7 @@
         "UNIQUE_Charlotte_PermanentSkill_NotFengdanBuff": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_IceAddHurtDelta": [
               "IceAddHurtDelta_P2",
@@ -4496,18 +4496,18 @@
         "Avatar_Charlotte_PermanentSkill_2_IsNotFengdan": {
           "modifierName": "",
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValueV2",
               "target": "Caster",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "BAMBPOIJFPG",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "EEJMHENNFEO",
+                      "$type": "ByHasFeatureTag",
                       "target": "Self",
                       "featureTagIDs": [
                         1005
@@ -4516,7 +4516,7 @@
                   ]
                 }
               ],
-              "ratio": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Charlotte_NotFengdan_Num_ExceptSelf",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -4527,12 +4527,12 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Charlotte_NotFengdan_Num_ExceptSelf",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -4543,14 +4543,14 @@
       "onAdded": [
         {
           "$type": "SetGlobalValueV2",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Charlotte_Fengdan_Num_ExceptSelf",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValueV2",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Charlotte_NotFengdan_Num_ExceptSelf",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -4570,12 +4570,12 @@
       "modifiers": {
         "Avatar_Charlotte_Constellation_Extra_Hot_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onHeal": [
             {
               "$type": "AttachModifier",
               "target": "Target",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
                   "$type": "PGCINIHINOL",
@@ -4596,29 +4596,29 @@
             0.10000000149011612,
             "ADD"
           ],
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "Avatar_Charlotte_Constellation_Extra_Hot_Tick"
             },
             {
               "$type": "AttachEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_Constellation_ExtraHot",
+              "doOffStage": true,
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_Constellation_ExtraHot",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Avatar_Charlotte_Constellation_Extra_Hot_Tick": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Constellation_AddExtraHot_InterVal",
           "onThinkInterval": [
             {
               "$type": "HealHP",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "amountByCasterAttackRatio": "Constellation_ExtraHot_HealRatio",
               "cdRatio": ""
             }
@@ -4628,7 +4628,7 @@
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "Avatar_Charlotte_Constellation_Extra_Hot_Handler"
         }
       ],
@@ -4658,36 +4658,36 @@
       "modifiers": {
         "Charlotte_Constellation_ElementalArt_AddAtk_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onHittingOther": [
             {
               "$type": "Predicated",
               "target": "Other",
               "targetPredicates": [
                 {
-                  "$type": "GLBJFGGNGGD",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "GOIBMIJJIFC",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "ACJBNJNEBOC": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "AddGlobalValueV2",
                   "target": "Caster",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "key": "_ABILITY_Charlotte_Constellation_AddAtk_Count",
                   "useLimitRange": true,
                   "maxValue": 3.0,
@@ -4696,13 +4696,13 @@
                 {
                   "$type": "RemoveModifier",
                   "target": "Caster",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "Charlotte_Constellation_ElementalArt_AddAtk_NumController"
                 },
                 {
                   "$type": "AttachModifier",
                   "target": "Caster",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "Charlotte_Constellation_ElementalArt_AddAtk_NumController"
                 }
               ]
@@ -4712,25 +4712,25 @@
         "Charlotte_Constellation_ElementalArt_AddAtk_NumController": {
           "modifierName": "",
           "duration": "Dura",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "state": "AttackUp",
           "onAdded": [
             {
               "$type": "Predicated",
               "target": "Caster",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Charlotte_Constellation_AddAtk_Count",
-                  "ratio": 1.0,
-                  "PLDDAFOIEGE": true
+                  "value": 1.0,
+                  "forceByCaster": true
                 }
               ],
               "successActions": [
                 {
                   "$type": "AttachModifier",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "Charlotte_Constellation_ElementalArt_AddAtk_Lv01"
                 }
               ],
@@ -4738,32 +4738,32 @@
                 {
                   "$type": "Predicated",
                   "target": "Caster",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "targetPredicates": [
                     {
-                      "$type": "NGNODMLFFCB",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Charlotte_Constellation_AddAtk_Count",
-                      "ratio": 2.0,
-                      "PLDDAFOIEGE": true
+                      "value": 2.0,
+                      "forceByCaster": true
                     }
                   ],
                   "successActions": [
                     {
                       "$type": "AttachModifier",
-                      "PositionDampTime": true,
+                      "doOffStage": true,
                       "modifierName": "Charlotte_Constellation_ElementalArt_AddAtk_Lv02"
                     }
                   ],
                   "failActions": [
                     {
                       "$type": "AttachModifier",
-                      "PositionDampTime": true,
+                      "doOffStage": true,
                       "predicates": [
                         {
-                          "$type": "NGNODMLFFCB",
+                          "$type": "ByTargetGlobalValue",
                           "key": "_ABILITY_Charlotte_Constellation_AddAtk_Count",
-                          "ratio": 3.0,
-                          "PLDDAFOIEGE": true
+                          "value": 3.0,
+                          "forceByCaster": true
                         }
                       ],
                       "modifierName": "Charlotte_Constellation_ElementalArt_AddAtk_Lv03"
@@ -4776,33 +4776,33 @@
         },
         "Charlotte_Constellation_ElementalArt_AddAtk_Lv01": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "Ratio_Lv1"
           }
         },
         "Charlotte_Constellation_ElementalArt_AddAtk_Lv02": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "Ratio_Lv2"
           }
         },
         "Charlotte_Constellation_ElementalArt_AddAtk_Lv03": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "Ratio_Lv3"
           }
         },
         "Avatar_Charlotte_Constellation_ElementalArt_AddAtk_ClearCount": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Charlotte_Constellation_AddAtk_Count",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -4813,13 +4813,13 @@
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "Charlotte_Constellation_ElementalArt_AddAtk_Handler"
         },
         {
           "$type": "SetGlobalValueV2",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Charlotte_Constellation_AddAtk_Count",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -4840,19 +4840,19 @@
       "modifiers": {
         "Charlotte_Constellation_ReviveElemEnergy_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "attackTags": [
                 "Elemental_Burst"
               ],
-              "JJGGAPONHOE": "Burst_DamageUp",
+              "damagePercentageRatio": "Burst_DamageUp",
               "predicates": [
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Charlotte_InDot",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ]
             }
@@ -4861,53 +4861,53 @@
             {
               "$type": "Predicated",
               "target": "Target",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "GLBJFGGNGGD",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Burst"
                   ]
                 },
                 {
-                  "$type": "GOIBMIJJIFC",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "ACJBNJNEBOC": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Charlotte_InDot",
-                  "ratio": 1.0
+                  "value": 1.0
                 },
                 {
-                  "$type": "NGNODMLFFCB",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Charlotte_Constellation_ReviveElemEnergy_Count",
-                  "ratio": [
+                  "value": [
                     "MaxCount",
                     1.0,
                     "SUB"
                   ],
-                  "ACJBNJNEBOC": "LessAndEqual"
+                  "compareType": "LessAndEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Charlotte_Constellation_ReviveElemEnergy_IntoCD"
                 },
                 {
                   "$type": "ApplyModifier",
                   "target": "Caster",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "ReviveElemEnergy_Trigger"
                 }
               ]
@@ -4918,18 +4918,18 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ReviveElemEnergy",
-              "PositionDampTime": true,
-              "ratio": 2.0
+              "doOffStage": true,
+              "value": 2.0
             },
             {
               "$type": "AddGlobalValueV2",
               "target": "Caster",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Charlotte_Constellation_ReviveElemEnergy_Count",
               "useLimitRange": true,
               "maxValue": "MaxCount",
@@ -4941,12 +4941,12 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "CDTime",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SetGlobalValueV2",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Charlotte_Constellation_ReviveElemEnergy_Count",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -4957,13 +4957,13 @@
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "Charlotte_Constellation_ReviveElemEnergy_Handler"
         },
         {
           "$type": "SetGlobalValueV2",
-          "PositionDampTime": true,
-          "ratio": 0.0,
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Charlotte_Constellation_ReviveElemEnergy_Count",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -4987,46 +4987,46 @@
         "Avatar_Charlotte_Constellation_ExtraCamera_Effect": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Avatar_Girl_Catalyst_Charlotte_Constellation_AttackCamera",
+              "doOffStage": true,
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Charlotte_Constellation_AttackCamera",
               "effectTempleteID": -1.0
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerAttackEvent",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FPEIAHONPIH",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "DAPJIKNDLLN",
+                    "$type": "ConfigBornByGlobalValue",
                     "offset": {
-                      "LOGNGLEIFML": 0.0,
-                      "JKDAHJILGBJ": 0.0,
-                      "MJHHBAFNOEG": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
-                    "COAICNDKEMA": true,
+                    "useRotation": true,
                     "positionKey": "_ABILITY_Charlotte_ExtraAttack_Pos",
                     "directionKey": ""
                   },
                   "height": 3.5,
-                  "EBADGGHGLKN": 3.5
+                  "radius": 3.5
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "LIMFCEKGALF": "Constellation_ExtraCameraDamage",
-                    "JJGGAPONHOE": 0.0,
+                    "damagePercentage": "Constellation_ExtraCameraDamage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 100.0,
                     "damagePercentage": 0.0
@@ -5045,14 +5045,14 @@
             {
               "$type": "HealHP",
               "otherTargets": {
-                "$type": "JGOEKECMJLH",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR5H10",
                 "campTargetType": "Alliance",
-                "OHJFACHECDC": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "GOIBMIJJIFC",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
@@ -5071,12 +5071,12 @@
             0.5,
             "ADD"
           ],
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Constellation_AddExtraHot_InterVal",
           "onThinkInterval": [
             {
               "$type": "HealHP",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "amountByCasterAttackRatio": "Constellation_ExtraHot_HealRatio",
               "cdRatio": ""
             }

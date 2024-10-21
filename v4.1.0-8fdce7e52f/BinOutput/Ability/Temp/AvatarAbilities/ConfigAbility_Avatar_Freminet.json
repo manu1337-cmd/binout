@@ -9,7 +9,7 @@
           "skillID": 10851,
           "chargeTime": 0.25,
           "secondChargeTime": "Max_Dura",
-          "OnBeginUncharged": [
+          "onBeginUncharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "DoSkill"
@@ -17,7 +17,7 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1.0
             },
             {
               "$type": "ResetAnimatorTrigger",
@@ -28,7 +28,7 @@
               "modifierName": "SetTrigger"
             }
           ],
-          "OnBeginCharged": [
+          "onBeginCharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "DoSkill"
@@ -36,16 +36,16 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 6.0
+              "value": 6.0
             }
           ],
-          "OnReleaseCharged": [
+          "onReleaseCharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "EndHoldTrigger"
             }
           ],
-          "OnBeginSecondCharged": [
+          "onBeginSecondCharged": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "EndHoldTrigger"
@@ -93,7 +93,7 @@
         "SetTrigger": {
           "modifierName": "",
           "duration": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SetAnimatorTrigger",
@@ -103,27 +103,27 @@
         },
         "Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ],
           "onAvatarOut": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ]
         },
         "Cost": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "CostStaminaMixin",
-              "costStaminaRatio": "StaminaCost",
+              "costStaminaDelta": "StaminaCost",
               "onStaminaEmpty": [
                 {
                   "$type": "SetAnimatorTrigger",
@@ -159,39 +159,39 @@
       "modifiers": {
         "Avatar_Freminet_Attack04_HideEff": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "LessAndEqual"
+                  "value": 0.0,
+                  "compareType": "LessAndEqual"
                 }
               ],
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Attack_04_Blink_In",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Attack_04_Blink_In",
               "effectTempleteID": -1.0
             },
             {
               "$type": "AttachEffect",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "MoreThan"
+                  "value": 0.0,
+                  "compareType": "MoreThan"
                 }
               ],
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Attack_04_Blink_InBuff",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Attack_04_Blink_InBuff",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Avatar_Freminet_Attack04_Hide": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "EntityInVisibleMixin",
@@ -202,95 +202,95 @@
           "onAdded": [
             {
               "$type": "TriggerSetPassThrough",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "passThrough": true
             },
             {
               "$type": "EnableHDMesh",
-              "CJNEAAJEPIK": "Default"
+              "hdMeshKey": "Default"
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerSetPassThrough",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true
             },
             {
               "$type": "EnableHDMesh",
               "canBeHandledOnRecover": true,
               "enable": true,
-              "CJNEAAJEPIK": "Default"
+              "hdMeshKey": "Default"
             }
           ]
         },
         "Freminet_ElementalArt_DropBall": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Other",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "MAOJMGFBDKD",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "PCNDFOGECKL",
-                  "KPBJHGOLKAJ": 71.0
+                  "$type": "ByHitEnBreak",
+                  "enBreak": 71.0
                 },
                 {
-                  "$type": "PCNDFOGECKL",
+                  "$type": "ByHitEnBreak",
                   "logic": "Lesser",
-                  "KPBJHGOLKAJ": 80.0
+                  "enBreak": 80.0
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_Freminet_CanDropBall",
-                  "ratio": 1.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 1.0,
+                  "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "Predicated",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "targetPredicates": [
                     {
-                      "$type": "HDDHHAGMLJK",
+                      "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "_ABILITY_Freminet_ElementalBurst_GV",
-                      "ratio": 0.0,
-                      "NHIKJLNOOBG": "NoneOrEqual"
+                      "value": 0.0,
+                      "compareType": "NoneOrEqual"
                     }
                   ],
                   "successActions": [
                     {
                       "$type": "ApplyModifier",
-                      "PositionDampTime": true,
+                      "doOffStage": true,
                       "modifierName": "Ball1"
                     },
                     {
                       "$type": "SetGlobalValue",
-                      "PositionDampTime": true,
-                      "ratio": 0.0,
+                      "doOffStage": true,
+                      "value": 0.0,
                       "key": "_ABILITY_Freminet_CanDropBall",
                       "maxValue": 0.0,
                       "minValue": 0.0
@@ -299,13 +299,13 @@
                   "failActions": [
                     {
                       "$type": "ApplyModifier",
-                      "PositionDampTime": true,
+                      "doOffStage": true,
                       "modifierName": "Ball1_Burst"
                     },
                     {
                       "$type": "SetGlobalValue",
-                      "PositionDampTime": true,
-                      "ratio": 0.0,
+                      "doOffStage": true,
+                      "value": 0.0,
                       "key": "_ABILITY_Freminet_CanDropBall",
                       "maxValue": 0.0,
                       "minValue": 0.0
@@ -317,38 +317,38 @@
             {
               "$type": "Predicated",
               "target": "Other",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "MAOJMGFBDKD",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "OCBHACLGALE",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "BONKGFHMOED"
+                  "$type": "ByHitElement"
                 },
                 {
-                  "$type": "PCNDFOGECKL",
-                  "KPBJHGOLKAJ": 130.0
+                  "$type": "ByHitEnBreak",
+                  "enBreak": 130.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "PositionDampTime": true,
+                  "doOffStage": true,
                   "modifierName": "Ball2"
                 }
               ]
@@ -359,22 +359,22 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "GenerateElemBall",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "configID": 2022,
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 1.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 1.0
                 },
-                "IEDBIKLIONM": true
+                "useRotation": true
               },
-              "value": 1.0,
+              "ratio": 1.0,
               "baseEnergy": 6.0
             }
           ]
@@ -383,22 +383,22 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "GenerateElemBall",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "configID": 2022,
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 1.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 1.0
                 },
-                "IEDBIKLIONM": true
+                "useRotation": true
               },
-              "value": 1.0,
+              "ratio": 1.0,
               "baseEnergy": 3.0
             }
           ]
@@ -407,22 +407,22 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "GenerateElemBall",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "configID": 2022,
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 1.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 1.0
                 },
-                "IEDBIKLIONM": true
+                "useRotation": true
               },
-              "value": 1.0,
+              "ratio": 1.0,
               "baseEnergy": 3.0
             }
           ]
@@ -431,7 +431,7 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Freminet_CanDropBall",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -462,7 +462,7 @@
           "modifierName": "",
           "isUnique": true,
           "duration": "Dura",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 1.0,
           "modifierMixins": [
             {
@@ -474,7 +474,7 @@
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_Freminet_ElementalArt_GV",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -0.5,
                 0.5,
@@ -523,30 +523,30 @@
             },
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count",
               "effectTempleteID": -1.0
             },
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Penguin",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Penguin",
               "effectTempleteID": -1.0
             },
             {
               "$type": "SetAnimatorInt",
               "intID": "Art_Type",
-              "ratio": 0.0,
+              "value": 0.0,
               "persistent": true
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": -1.0,
+              "value": -1.0,
               "key": "_ABILITY_Freminet_ElementalArt_GV",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 4.0,
+              "value": 4.0,
               "key": "_ABILITY_Freminet_ElementalArt_GV",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -554,8 +554,8 @@
             {
               "$type": "AttachModifier",
               "otherTargets": {
-                "$type": "OAEICAJLFMH",
-                "EANHHCBHJLM": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
@@ -567,8 +567,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "value": -1.0,
               "key": "_ABILITY_Freminet_ElementalArt_GV",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -578,8 +578,8 @@
             {
               "$type": "AttachModifier",
               "otherTargets": {
-                "$type": "OAEICAJLFMH",
-                "EANHHCBHJLM": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
@@ -587,11 +587,11 @@
               },
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Freminet_ElementalArt_GV",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "MoreThan"
+                  "value": 0.0,
+                  "compareType": "MoreThan"
                 }
               ],
               "modifierName": "Avatar_Freminet_SkillBuff_WeaponEff"
@@ -600,113 +600,113 @@
           "onKill": [
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Off",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             },
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Die",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Penguin"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Penguin"
             }
           ],
           "onAvatarIn": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count_AvatarIn",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count_AvatarIn",
               "effectTempleteID": -1.0
             },
             {
               "$type": "ApplyModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "Freminet_ElementalArt_VFX_Enable"
             },
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Freminet_ElementalArt_GV",
-                  "ratio": 0.0
+                  "value": 0.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
               "type": "Int",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             },
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Freminet_ElementalArt_GV",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
               "type": "Int",
-              "value": 1,
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "ratio": 1,
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             },
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Freminet_ElementalArt_GV",
-                  "ratio": 2.0
+                  "value": 2.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
               "type": "Int",
-              "value": 2,
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "ratio": 2,
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             },
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Freminet_ElementalArt_GV",
-                  "ratio": 3.0
+                  "value": 3.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
               "type": "Int",
-              "value": 3,
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "ratio": 3,
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             },
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Caster",
                   "key": "_ABILITY_Freminet_ElementalArt_GV",
-                  "ratio": 4.0
+                  "value": 4.0
                 }
               ],
               "parameter": "Level",
               "attachPoint": "",
               "type": "Int",
-              "value": 4,
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "ratio": 4,
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             }
           ]
         },
@@ -717,58 +717,58 @@
             0.5,
             "SUB"
           ],
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "ApplyModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "Freminet_ElementalArt_VFX_Disable"
             }
           ]
         },
         "Avatar_Freminet_SkillBuff_WeaponEff": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_ElementalArt_Weapon",
+              "doOffStage": true,
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_ElementalArt_Weapon",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Freminet_ElementalArt_VFX_F1": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Off",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             }
           ]
         },
         "Freminet_ElementalArt_VFX_0": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "intID": "Art_Type",
-              "ratio": 1.0,
+              "value": 1.0,
               "persistent": true
             },
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Level",
               "attachPoint": "",
               "type": "Int",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             },
             {
               "$type": "AttachModifier",
@@ -777,8 +777,8 @@
             {
               "$type": "RemoveModifier",
               "otherTargets": {
-                "$type": "OAEICAJLFMH",
-                "EANHHCBHJLM": [
+                "$type": "SelectTargetsByEquipParts",
+                "equipPartNames": [
                   "equip01",
                   "equip02",
                   "sheathPoint"
@@ -790,7 +790,7 @@
         },
         "SwitchSkill": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "SwitchSkillIDMixin",
@@ -807,64 +807,64 @@
         },
         "Freminet_ElementalArt_VFX_1": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Level",
               "attachPoint": "",
               "type": "Int",
-              "value": 1,
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "ratio": 1,
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             }
           ]
         },
         "Freminet_ElementalArt_VFX_2": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Level",
               "attachPoint": "",
               "type": "Int",
-              "value": 2,
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "ratio": 2,
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             }
           ]
         },
         "Freminet_ElementalArt_VFX_3": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Level",
               "attachPoint": "",
               "type": "Int",
-              "value": 3,
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "ratio": 3,
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             }
           ]
         },
         "Freminet_ElementalArt_VFX_4": {
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Level",
               "attachPoint": "",
               "type": "Int",
-              "value": 4,
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "ratio": 4,
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             }
           ]
         },
@@ -872,21 +872,21 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Off",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             },
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Die",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Penguin"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Penguin"
             }
           ]
         },
@@ -894,29 +894,29 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "On",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             }
           ]
         },
         "Avatar_Freminet_Attack01_Ice": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "MoreThan"
+                  "value": 0.0,
+                  "compareType": "MoreThan"
                 }
               ],
               "successActions": [
@@ -924,10 +924,10 @@
                   "$type": "Predicated",
                   "targetPredicates": [
                     {
-                      "$type": "HDDHHAGMLJK",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Freminet_ElementalBurst_GV",
-                      "ratio": 1.0,
-                      "NHIKJLNOOBG": "NoneOrEqual"
+                      "value": 1.0,
+                      "compareType": "NoneOrEqual"
                     }
                   ],
                   "successActions": [
@@ -937,7 +937,7 @@
                     },
                     {
                       "$type": "AddGlobalValue",
-                      "ratio": -2.0,
+                      "value": -2.0,
                       "key": "_ABILITY_Freminet_ElementalArt_GV",
                       "useLimitRange": true,
                       "maxValue": 4.0,
@@ -951,7 +951,7 @@
                     },
                     {
                       "$type": "AddGlobalValue",
-                      "ratio": -1.0,
+                      "value": -1.0,
                       "key": "_ABILITY_Freminet_ElementalArt_GV",
                       "useLimitRange": true,
                       "maxValue": 4.0,
@@ -965,16 +965,16 @@
         },
         "Avatar_Freminet_Attack02_Ice": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "MoreThan"
+                  "value": 0.0,
+                  "compareType": "MoreThan"
                 }
               ],
               "successActions": [
@@ -982,10 +982,10 @@
                   "$type": "Predicated",
                   "targetPredicates": [
                     {
-                      "$type": "HDDHHAGMLJK",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Freminet_ElementalBurst_GV",
-                      "ratio": 1.0,
-                      "NHIKJLNOOBG": "NoneOrEqual"
+                      "value": 1.0,
+                      "compareType": "NoneOrEqual"
                     }
                   ],
                   "successActions": [
@@ -995,7 +995,7 @@
                     },
                     {
                       "$type": "AddGlobalValue",
-                      "ratio": -2.0,
+                      "value": -2.0,
                       "key": "_ABILITY_Freminet_ElementalArt_GV",
                       "useLimitRange": true,
                       "maxValue": 4.0,
@@ -1009,7 +1009,7 @@
                     },
                     {
                       "$type": "AddGlobalValue",
-                      "ratio": -1.0,
+                      "value": -1.0,
                       "key": "_ABILITY_Freminet_ElementalArt_GV",
                       "useLimitRange": true,
                       "maxValue": 4.0,
@@ -1023,16 +1023,16 @@
         },
         "Avatar_Freminet_Attack03_Ice": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "MoreThan"
+                  "value": 0.0,
+                  "compareType": "MoreThan"
                 }
               ],
               "successActions": [
@@ -1040,10 +1040,10 @@
                   "$type": "Predicated",
                   "targetPredicates": [
                     {
-                      "$type": "HDDHHAGMLJK",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Freminet_ElementalBurst_GV",
-                      "ratio": 1.0,
-                      "NHIKJLNOOBG": "NoneOrEqual"
+                      "value": 1.0,
+                      "compareType": "NoneOrEqual"
                     }
                   ],
                   "successActions": [
@@ -1053,7 +1053,7 @@
                     },
                     {
                       "$type": "AddGlobalValue",
-                      "ratio": -2.0,
+                      "value": -2.0,
                       "key": "_ABILITY_Freminet_ElementalArt_GV",
                       "useLimitRange": true,
                       "maxValue": 4.0,
@@ -1067,7 +1067,7 @@
                     },
                     {
                       "$type": "AddGlobalValue",
-                      "ratio": -1.0,
+                      "value": -1.0,
                       "key": "_ABILITY_Freminet_ElementalArt_GV",
                       "useLimitRange": true,
                       "maxValue": 4.0,
@@ -1081,16 +1081,16 @@
         },
         "Avatar_Freminet_Attack04_Ice": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "MoreThan"
+                  "value": 0.0,
+                  "compareType": "MoreThan"
                 }
               ],
               "successActions": [
@@ -1098,10 +1098,10 @@
                   "$type": "Predicated",
                   "targetPredicates": [
                     {
-                      "$type": "HDDHHAGMLJK",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Freminet_ElementalBurst_GV",
-                      "ratio": 1.0,
-                      "NHIKJLNOOBG": "NoneOrEqual"
+                      "value": 1.0,
+                      "compareType": "NoneOrEqual"
                     }
                   ],
                   "successActions": [
@@ -1111,7 +1111,7 @@
                     },
                     {
                       "$type": "AddGlobalValue",
-                      "ratio": -2.0,
+                      "value": -2.0,
                       "key": "_ABILITY_Freminet_ElementalArt_GV",
                       "useLimitRange": true,
                       "maxValue": 4.0,
@@ -1125,7 +1125,7 @@
                     },
                     {
                       "$type": "AddGlobalValue",
-                      "ratio": -1.0,
+                      "value": -1.0,
                       "key": "_ABILITY_Freminet_ElementalArt_GV",
                       "useLimitRange": true,
                       "maxValue": 4.0,
@@ -1141,21 +1141,21 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": -1.0,
+          "value": -1.0,
           "key": "_ABILITY_Freminet_ElementalArt_GV",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Freminet_ElementalArt_GV_Save",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Freminet_PermanentSkill_2_Rate",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -1166,38 +1166,38 @@
           "$type": "AvatarSkillStart",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Freminet_ElementalBurst_GV",
-              "ratio": 0.0,
-              "NHIKJLNOOBG": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             }
           ],
           "skillID": 10852,
-          "amount": 1.0,
-          "costStaminaDelta": 1.0
+          "cdRatio": 1.0,
+          "costStaminaRatio": 1.0
         },
         {
           "$type": "AvatarSkillStart",
           "predicates": [
             {
-              "$type": "DMKIHIEKBCM",
+              "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalBurst_GV",
-                  "ratio": 0.0,
-                  "NHIKJLNOOBG": "NoneOrEqual"
+                  "value": 0.0,
+                  "compareType": "NoneOrEqual"
                 }
               ]
             }
           ],
           "skillID": 10852,
-          "amount": 0.30000001192092896,
-          "costStaminaDelta": 1.0
+          "cdRatio": 0.30000001192092896,
+          "costStaminaRatio": 1.0
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 1.0,
+          "value": 1.0,
           "key": "_ABILITY_Freminet_CanDropBall",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -1225,29 +1225,29 @@
           "$type": "TriggerAttackEvent",
           "attackEvent": {
             "attackPattern": {
-              "$type": "MKKIHKBAOOD",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": -0.5,
-                  "CFFEIADEGNK": 2.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 2.0
                 },
-                "IEDBIKLIONM": true
+                "useRotation": true
               },
               "height": 2.5,
-              "HAJLEKLDOMG": 2.5
+              "radius": 2.5
             },
             "attackInfo": {
               "attackTag": "Elemental_Art",
               "attenuationTag": "Elemental_Art",
               "attenuationGroup": "default",
               "attackProperty": {
-                "GNBHKEABDNL": "Damage",
-                "JKNJLKBGFJK": 0.0,
+                "damagePercentage": "Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Ice",
-                "bonusCriticalHurt": 25.0,
+                "elementDurability": 25.0,
                 "strikeType": "Blunt",
                 "enBreak": 75.0,
                 "attackType": "Melee",
@@ -1293,12 +1293,12 @@
         "Avatar_Freminet_ArkheGrade_CD": {
           "modifierName": "",
           "duration": "Arkhe_CD",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Freminet_ArkheGrade_CD",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -1306,8 +1306,8 @@
             },
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_ArkheGrade_Attack_CD",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -1317,8 +1317,8 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "value": -1.0,
               "key": "_ABILITY_Freminet_ArkheGrade_CD",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -1326,8 +1326,8 @@
             },
             {
               "$type": "AddGlobalValue",
-              "PositionDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "value": -1.0,
               "key": "_ABILITY_ArkheGrade_Attack_CD",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -1338,14 +1338,14 @@
         "ArkheGrade_Timer": {
           "modifierName": "",
           "duration": 0.4300000071525574,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Ousia_Attack",
+              "doOffStage": true,
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Ousia_Attack",
               "born": {
-                "$type": "NHIAENEEFCC",
+                "$type": "ConfigBornByGlobalValue",
                 "positionKey": "Freminet_ArkheGrade_Pos",
                 "directionKey": "Freminet_ArkheGrade_Dir"
               },
@@ -1355,32 +1355,32 @@
           "onRemoved": [
             {
               "$type": "TriggerAttackEvent",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "NHIAENEEFCC",
+                    "$type": "ConfigBornByGlobalValue",
                     "offset": {
-                      "OIODIHMNJPJ": -0.5,
-                      "CFFEIADEGNK": -0.5
+                      "y": -0.5,
+                      "z": -0.5
                     },
                     "positionKey": "Freminet_ArkheGrade_Pos",
                     "directionKey": "Freminet_ArkheGrade_Dir"
                   },
                   "height": 2.5,
-                  "HAJLEKLDOMG": 2.5
+                  "radius": 2.5
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Arkhe_Damage",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "Arkhe_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 0.0,
+                    "elementDurability": 0.0,
                     "enBreak": 25.0,
                     "attackType": "Melee",
                     "damagePercentage": 1.0
@@ -1409,7 +1409,7 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Freminet_ArkheGrade_CD",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -1420,10 +1420,10 @@
           "$type": "Predicated",
           "targetPredicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Freminet_ArkheGrade_CD",
-              "ratio": 0.0,
-              "NHIKJLNOOBG": "NoneOrEqual"
+              "value": 0.0,
+              "compareType": "NoneOrEqual"
             }
           ],
           "successActions": [
@@ -1435,13 +1435,13 @@
               "$type": "SetGlobalPos",
               "key": "Freminet_ArkheGrade_Pos",
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": 0.0,
-                  "CFFEIADEGNK": 2.5
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 2.5
                 },
-                "IEDBIKLIONM": true
+                "useRotation": true
               },
               "setTarget": false
             },
@@ -1449,8 +1449,8 @@
               "$type": "SetGlobalDir",
               "key": "Freminet_ArkheGrade_Dir",
               "born": {
-                "$type": "CINPPKLNADH",
-                "IEDBIKLIONM": true
+                "$type": "ConfigBornBySelf",
+                "useRotation": true
               },
               "setTarget": false
             },
@@ -1510,7 +1510,7 @@
       "modifiers": {
         "Freminet_ElementalArt2_Start": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "CopyGlobalValue",
@@ -1526,190 +1526,190 @@
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-                  "ratio": 4.0
+                  "value": 4.0
                 }
               ],
               "parameter": "Die",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Penguin"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Penguin"
             },
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-                  "ratio": 3.0,
-                  "NHIKJLNOOBG": "LessAndEqual"
+                  "value": 3.0,
+                  "compareType": "LessAndEqual"
                 }
               ],
               "parameter": "DieE2E3",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Penguin"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Penguin"
             },
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-                  "ratio": 4.0
+                  "value": 4.0
                 }
               ],
               "parameter": "E1",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             },
             {
               "$type": "SendEffectTrigger",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-                  "ratio": 3.0,
-                  "NHIKJLNOOBG": "LessAndEqual"
+                  "value": 3.0,
+                  "compareType": "LessAndEqual"
                 }
               ],
               "parameter": "E2",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             },
             {
               "$type": "AttachEffect",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-                  "ratio": 3.0,
-                  "NHIKJLNOOBG": "LessAndEqual"
+                  "value": 3.0,
+                  "compareType": "LessAndEqual"
                 }
               ],
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Penguin_E2",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Penguin_E2",
               "effectTempleteID": -1.0
             },
             {
               "$type": "SetOverrideMapValue",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-                  "ratio": 4.0
+                  "value": 4.0
                 }
               ],
-              "ratio": "Ice4",
+              "value": "Ice4",
               "overrideMapKey": "Ice_Damage_Calculated"
             },
             {
               "$type": "SetOverrideMapValue",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-                  "ratio": 3.0
+                  "value": 3.0
                 }
               ],
-              "ratio": "Ice3",
+              "value": "Ice3",
               "overrideMapKey": "Ice_Damage_Calculated"
             },
             {
               "$type": "SetOverrideMapValue",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-                  "ratio": 2.0
+                  "value": 2.0
                 }
               ],
-              "ratio": "Ice2",
+              "value": "Ice2",
               "overrideMapKey": "Ice_Damage_Calculated"
             },
             {
               "$type": "SetOverrideMapValue",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-                  "ratio": 1.0
+                  "value": 1.0
                 }
               ],
-              "ratio": "Ice1",
+              "value": "Ice1",
               "overrideMapKey": "Ice_Damage_Calculated"
             }
           ]
         },
         "Freminet_ElementalArt2_Eff": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-                  "ratio": 4.0
+                  "value": 4.0
                 }
               ],
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_ElementalArt_Ice_01",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_ElementalArt_Ice_01",
               "effectTempleteID": -1.0
             },
             {
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-                  "ratio": 3.0,
-                  "NHIKJLNOOBG": "LessAndEqual"
+                  "value": 3.0,
+                  "compareType": "LessAndEqual"
                 }
               ],
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_ElementalArt_IceMix_01",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_ElementalArt_IceMix_01",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Freminet_Penguin_Recover": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "Idle",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Penguin"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Penguin"
             },
             {
               "$type": "SendEffectTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "parameter": "On",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             }
           ]
         },
         "Freminet_ElementalArt2_Modifier": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 10853,
-              "amount": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             },
             {
               "$type": "ModifyAvatarSkillCD",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "Freminet_ReduceCD"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Freminet_ReduceCD"
                 }
               ],
               "skillID": 10852,
-              "cdMin": [
+              "cdDelta": [
                 0.0,
                 "ReduceCD",
                 "SUB"
@@ -1719,35 +1719,35 @@
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-                  "ratio": 4.0
+                  "value": 4.0
                 }
               ],
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_ElementalArt_Ice_02",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_ElementalArt_Ice_02",
               "effectTempleteID": -1.0
             },
             {
               "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-                  "ratio": 3.0,
-                  "NHIKJLNOOBG": "LessAndEqual"
+                  "value": 3.0,
+                  "compareType": "LessAndEqual"
                 }
               ],
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_ElementalArt_IceMix_02",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_ElementalArt_IceMix_02",
               "effectTempleteID": -1.0
             },
             {
               "$type": "CreateGadget",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-                  "ratio": 3.0,
-                  "NHIKJLNOOBG": "LessAndEqual"
+                  "value": 3.0,
+                  "compareType": "LessAndEqual"
                 }
               ],
               "gadgetID": 41085011
@@ -1756,9 +1756,9 @@
               "$type": "AttachModifier",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-                  "ratio": 4.0
+                  "value": 4.0
                 }
               ],
               "modifierName": "Freminet_ElementalArt2_Modifier_Ice"
@@ -1767,10 +1767,10 @@
               "$type": "AttachModifier",
               "predicates": [
                 {
-                  "$type": "HDDHHAGMLJK",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-                  "ratio": 3.0,
-                  "NHIKJLNOOBG": "LessAndEqual"
+                  "value": 3.0,
+                  "compareType": "LessAndEqual"
                 }
               ],
               "modifierName": "Freminet_ElementalArt2_Modifier_IceMix"
@@ -1779,15 +1779,15 @@
               "$type": "ReviveElemEnergy",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "Freminet_ReviveEnergy"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Freminet_ReviveEnergy"
                 }
               ],
-              "ratio": "ReviveEnergy"
+              "value": "ReviveEnergy"
             },
             {
               "$type": "RemoveUniqueModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Avatar_Freminet_SkillBuff"
             }
           ]
@@ -1796,35 +1796,35 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -0.5,
-                      "CFFEIADEGNK": 2.0
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 2.0
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "height": 2.5,
-                  "HAJLEKLDOMG": 2.5
+                  "radius": 2.5
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Ice_Damage_Calculated",
-                    "JKNJLKBGFJK": "PermanentSkill_2_Rate",
+                    "damagePercentage": "Ice_Damage_Calculated",
+                    "damagePercentageRatio": "PermanentSkill_2_Rate",
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 150.0,
                     "attackType": "Melee",
@@ -1857,35 +1857,35 @@
           "stacking": "Multiple",
           "modifierName": "",
           "duration": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -0.5,
-                      "CFFEIADEGNK": 2.0
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 2.0
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "height": 2.5,
-                  "HAJLEKLDOMG": 2.5
+                  "radius": 2.5
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Ice_Damage_Calculated",
-                    "JKNJLKBGFJK": "PermanentSkill_2_Rate",
+                    "damagePercentage": "Ice_Damage_Calculated",
+                    "damagePercentageRatio": "PermanentSkill_2_Rate",
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 70.0,
                     "attackType": "Melee",
@@ -1934,35 +1934,35 @@
         "SkillObj_Freminet_Timer_Phy": {
           "modifierName": "",
           "duration": "Timer_Phy",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Timer_Phy",
           "onRemoved": [
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -0.5,
-                      "CFFEIADEGNK": 2.0
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 2.0
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "height": 2.5,
-                  "HAJLEKLDOMG": 2.5
+                  "radius": 2.5
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Phy_Damage_Calculated",
-                    "JKNJLKBGFJK": "PermanentSkill_2_Rate",
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "Phy_Damage_Calculated",
+                    "damagePercentageRatio": "PermanentSkill_2_Rate",
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 70.0,
                     "attackType": "Melee",
@@ -2019,53 +2019,53 @@
           "$type": "SetOverrideMapValue",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "target": "OriginOwner",
               "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-              "ratio": 3.0
+              "value": 3.0
             }
           ],
-          "ratio": "Phy3",
+          "value": "Phy3",
           "overrideMapKey": "Phy_Damage_Calculated"
         },
         {
           "$type": "SetOverrideMapValue",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "target": "OriginOwner",
               "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-              "ratio": 2.0
+              "value": 2.0
             }
           ],
-          "ratio": "Phy2",
+          "value": "Phy2",
           "overrideMapKey": "Phy_Damage_Calculated"
         },
         {
           "$type": "SetOverrideMapValue",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "target": "OriginOwner",
               "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
-          "ratio": "Phy1",
+          "value": "Phy1",
           "overrideMapKey": "Phy_Damage_Calculated"
         },
         {
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "target": "OriginOwner",
               "key": "_ABILITY_Freminet_ElementalArt_GV_Saved",
-              "ratio": 3.0,
-              "NHIKJLNOOBG": "LessAndEqual"
+              "value": 3.0,
+              "compareType": "LessAndEqual"
             }
           ],
-          "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_ElementalArt_PhyMix",
+          "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_ElementalArt_PhyMix",
           "effectTempleteID": -1.0
         }
       ]
@@ -2099,7 +2099,7 @@
       "modifiers": {
         "Freminet_ElementalArt3_Start": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -2110,54 +2110,54 @@
               "$type": "SendEffectTrigger",
               "parameter": "DieE2E3",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Penguin"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Penguin"
             },
             {
               "$type": "SendEffectTrigger",
               "parameter": "E3",
               "attachPoint": "",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Count"
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Count"
             },
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Penguin_E3",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Penguin_E3",
               "effectTempleteID": -1.0
             },
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_ElementalArt_Phy_01",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_ElementalArt_Phy_01",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Freminet_ElementalArt3_Modifier": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_ElementalArt_Phy_02",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_ElementalArt_Phy_02",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FEJLMILAGBF",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.5,
-                      "OIODIHMNJPJ": 1.5,
-                      "CFFEIADEGNK": 0.5
+                      "x": 0.5,
+                      "y": 1.5,
+                      "z": 0.5
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "size": {
-                    "EJNNCBMCPOB": 3.0,
-                    "OIODIHMNJPJ": 3.0,
-                    "CFFEIADEGNK": 7.0
+                    "x": 3.0,
+                    "y": 3.0,
+                    "z": 7.0
                   }
                 },
                 "attackInfo": {
@@ -2165,9 +2165,9 @@
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Phy0",
-                    "JKNJLKBGFJK": "PermanentSkill_2_Rate",
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "Phy0",
+                    "damagePercentageRatio": "PermanentSkill_2_Rate",
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 150.0,
                     "attackType": "Melee",
@@ -2200,15 +2200,15 @@
               "$type": "ReviveElemEnergy",
               "predicates": [
                 {
-                  "$type": "BAECCAACHHE",
-                  "DMDCKNEEKBN": "Freminet_ReviveEnergy"
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Freminet_ReviveEnergy"
                 }
               ],
-              "ratio": "ReviveEnergy"
+              "value": "ReviveEnergy"
             },
             {
               "$type": "RemoveUniqueModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Avatar_Freminet_SkillBuff"
             }
           ]
@@ -2234,36 +2234,36 @@
         },
         {
           "$type": "FireEffect",
-          "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_ElementalBurst_Strike",
+          "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_ElementalBurst_Strike",
           "effectTempleteID": -1.0
         },
         {
           "$type": "TriggerAttackEvent",
           "attackEvent": {
             "attackPattern": {
-              "$type": "MKKIHKBAOOD",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "CINPPKLNADH",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": -1.0,
-                  "CFFEIADEGNK": 0.0
+                  "x": 0.0,
+                  "y": -1.0,
+                  "z": 0.0
                 },
-                "IEDBIKLIONM": true
+                "useRotation": true
               },
               "height": 2.5,
-              "HAJLEKLDOMG": 5.0
+              "radius": 5.0
             },
             "attackInfo": {
               "attackTag": "Elemental_Burst",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "GNBHKEABDNL": "Damage",
-                "JKNJLKBGFJK": 0.0,
+                "damagePercentage": "Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Ice",
-                "bonusCriticalHurt": 25.0,
+                "elementDurability": 25.0,
                 "strikeType": "Blunt",
                 "enBreak": 200.0,
                 "damagePercentage": 0.0
@@ -2332,42 +2332,42 @@
       "modifiers": {
         "ElementalBurst_Start_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 10855,
-              "amount": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             },
             {
               "$type": "ModifyAvatarSkillCD",
               "skillID": 10852,
-              "amount": -1.0
+              "cdRatio": -1.0
             },
             {
               "$type": "ClearEndura"
             },
             {
               "$type": "RemoveUniqueModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Special_ShaderLerp"
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_ElementalBurst",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_ElementalBurst",
               "effectTempleteID": -1.0
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_ElementalBurst_Head",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_ElementalBurst_Head",
               "effectTempleteID": -1.0
             }
           ]
         },
         "ElementalBurst_Protection_Invincible": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
@@ -2378,7 +2378,7 @@
         },
         "ElementalBurst_Eff_Control": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "TriggerWeatherMixin",
@@ -2392,7 +2392,7 @@
         "Avatar_Freminet_Utral_Buff": {
           "modifierName": "",
           "duration": "Dura",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.5,
           "modifierMixins": [
             {
@@ -2409,7 +2409,7 @@
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_ElementalBurst_Buff",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_ElementalBurst_Buff",
               "effectTempleteID": -1.0
             },
             {
@@ -2428,12 +2428,12 @@
               "$type": "SetAnimatorInt",
               "canBeHandledOnRecover": true,
               "intID": "BurstMode_Keep",
-              "ratio": 1.0
+              "value": 1.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 1.0,
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Freminet_ElementalBurst_GV",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -2446,46 +2446,46 @@
           "onRemoved": [
             {
               "$type": "SetAnimatorInt",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true,
               "intID": "BurstMode_Keep",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "SetAnimatorTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "triggerID": "ElementalBurst_Disappear",
               "MPTriggerOnRemote": true
             },
             {
               "$type": "SetAnimatorTrigger",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "triggerID": "ElementalBurst_HideHairEnd",
               "MPTriggerOnRemote": true
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_ElementalBurst_Head_Off",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_ElementalBurst_Head_Off",
               "effectTempleteID": -1.0
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_ElementalBurst_Disappear",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_ElementalBurst_Disappear",
               "effectTempleteID": -1.0
             },
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Freminet_ElementalBurst_GV",
               "maxValue": 0.0,
               "minValue": 0.0
             },
             {
               "$type": "SetAnimatorBool",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "boolID": "CanSpecialPerform",
-              "ratio": true
+              "value": true
             }
           ],
           "onThinkInterval": [
@@ -2493,20 +2493,20 @@
               "$type": "SetAnimatorInt",
               "canBeHandledOnRecover": true,
               "intID": "BurstMode_Keep",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "onKill": [
             {
               "$type": "RemoveModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "Avatar_Freminet_Utral_Buff"
             }
           ],
           "onAvatarOut": [
             {
               "$type": "RemoveModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "Avatar_Freminet_Utral_Buff"
             }
           ],
@@ -2516,14 +2516,14 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "value": 0.0,
           "key": "_ABILITY_Freminet_ElementalBurst_GV",
           "maxValue": 0.0,
           "minValue": 0.0
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 1.0,
+          "value": 1.0,
           "key": "_AvartarInShaderChange_Special",
           "maxValue": 0.0,
           "minValue": 0.0
@@ -2553,42 +2553,42 @@
         "SkillObj_Freminet_Timer": {
           "modifierName": "",
           "duration": "Timer",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Timer",
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Attack_01_Ice",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Attack_01_Ice",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -0.20000000298023224,
-                      "CFFEIADEGNK": 0.5
+                      "x": 0.0,
+                      "y": -0.20000000298023224,
+                      "z": 0.5
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "height": 1.600000023841858,
-                  "HAJLEKLDOMG": 2.200000047683716,
-                  "DLNIJJJHGKL": "Counterclockwise"
+                  "radius": 2.200000047683716,
+                  "detectDirection": "Counterclockwise"
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Art_01",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "Art_01",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 25.0,
                     "attackType": "Melee",
@@ -2634,42 +2634,42 @@
         "SkillObj_Freminet_Timer": {
           "modifierName": "",
           "duration": "Timer",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Timer",
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Attack_02_Ice",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Attack_02_Ice",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -0.20000000298023224,
-                      "CFFEIADEGNK": 0.5
+                      "x": 0.0,
+                      "y": -0.20000000298023224,
+                      "z": 0.5
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "height": 1.600000023841858,
-                  "HAJLEKLDOMG": 2.200000047683716,
-                  "DLNIJJJHGKL": "Clockwise"
+                  "radius": 2.200000047683716,
+                  "detectDirection": "Clockwise"
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Art_02",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "Art_02",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 25.0,
                     "attackType": "Melee",
@@ -2715,33 +2715,33 @@
         "SkillObj_Freminet_Timer": {
           "modifierName": "",
           "duration": "Timer",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Timer",
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Attack_03_Ice",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Attack_03_Ice",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FEJLMILAGBF",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "OIONBKCKNFC",
+                    "$type": "ConfigBornByTarget",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 1.5,
-                      "CFFEIADEGNK": -0.5
+                      "x": 0.0,
+                      "y": 1.5,
+                      "z": -0.5
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "size": {
-                    "EJNNCBMCPOB": 2.0,
-                    "OIODIHMNJPJ": 3.0,
-                    "CFFEIADEGNK": 3.0
+                    "x": 2.0,
+                    "y": 3.0,
+                    "z": 3.0
                   }
                 },
                 "attackInfo": {
@@ -2749,10 +2749,10 @@
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Art_03",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "Art_03",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 25.0,
                     "attackType": "Melee",
@@ -2798,42 +2798,42 @@
         "SkillObj_Freminet_Timer": {
           "modifierName": "",
           "duration": "Timer",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Timer",
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Attack_04_Ice",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Attack_04_Ice",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -0.20000000298023224,
-                      "CFFEIADEGNK": 0.5
+                      "x": 0.0,
+                      "y": -0.20000000298023224,
+                      "z": 0.5
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "height": 1.600000023841858,
-                  "HAJLEKLDOMG": 2.4000000953674316,
-                  "DLNIJJJHGKL": "Clockwise"
+                  "radius": 2.4000000953674316,
+                  "detectDirection": "Clockwise"
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "Art_04",
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentage": "Art_04",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 25.0,
                     "attackType": "Melee",
@@ -2879,46 +2879,46 @@
         "SkillObj_Freminet_Timer": {
           "modifierName": "",
           "duration": "Timer",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Timer",
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Attack_01_Ice_Big",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Attack_01_Ice_Big",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -0.20000000298023224,
-                      "CFFEIADEGNK": 0.5
+                      "x": 0.0,
+                      "y": -0.20000000298023224,
+                      "z": 0.5
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "height": 1.600000023841858,
-                  "HAJLEKLDOMG": 2.200000047683716,
-                  "DLNIJJJHGKL": "Counterclockwise"
+                  "radius": 2.200000047683716,
+                  "detectDirection": "Counterclockwise"
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": [
+                    "damagePercentage": [
                       "Art_01_Big",
                       2.0,
                       "MUL"
                     ],
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 25.0,
                     "attackType": "Melee",
@@ -2964,46 +2964,46 @@
         "SkillObj_Freminet_Timer": {
           "modifierName": "",
           "duration": "Timer",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Timer",
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Attack_02_Ice_Big",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Attack_02_Ice_Big",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -0.20000000298023224,
-                      "CFFEIADEGNK": 0.5
+                      "x": 0.0,
+                      "y": -0.20000000298023224,
+                      "z": 0.5
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "height": 1.600000023841858,
-                  "HAJLEKLDOMG": 2.200000047683716,
-                  "DLNIJJJHGKL": "Clockwise"
+                  "radius": 2.200000047683716,
+                  "detectDirection": "Clockwise"
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": [
+                    "damagePercentage": [
                       "Art_02_Big",
                       2.0,
                       "MUL"
                     ],
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 25.0,
                     "attackType": "Melee",
@@ -3049,33 +3049,33 @@
         "SkillObj_Freminet_Timer": {
           "modifierName": "",
           "duration": "Timer",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Timer",
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Attack_03_Ice_Big",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Attack_03_Ice_Big",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "FEJLMILAGBF",
+                  "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "OIONBKCKNFC",
+                    "$type": "ConfigBornByTarget",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 1.5,
-                      "CFFEIADEGNK": -0.5
+                      "x": 0.0,
+                      "y": 1.5,
+                      "z": -0.5
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "size": {
-                    "EJNNCBMCPOB": 2.0,
-                    "OIODIHMNJPJ": 3.0,
-                    "CFFEIADEGNK": 3.0
+                    "x": 2.0,
+                    "y": 3.0,
+                    "z": 3.0
                   }
                 },
                 "attackInfo": {
@@ -3083,14 +3083,14 @@
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": [
+                    "damagePercentage": [
                       "Art_03_Big",
                       2.0,
                       "MUL"
                     ],
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 25.0,
                     "attackType": "Melee",
@@ -3136,46 +3136,46 @@
         "SkillObj_Freminet_Timer": {
           "modifierName": "",
           "duration": "Timer",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": "Timer",
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Attack_04_Ice_Big",
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Attack_04_Ice_Big",
               "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "MKKIHKBAOOD",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": -0.20000000298023224,
-                      "CFFEIADEGNK": 0.5
+                      "x": 0.0,
+                      "y": -0.20000000298023224,
+                      "z": 0.5
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
                   "height": 1.600000023841858,
-                  "HAJLEKLDOMG": 2.4000000953674316,
-                  "DLNIJJJHGKL": "Clockwise"
+                  "radius": 2.4000000953674316,
+                  "detectDirection": "Clockwise"
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "Elemental_Art",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": [
+                    "damagePercentage": [
                       "Art_04_Big",
                       2.0,
                       "MUL"
                     ],
-                    "JKNJLKBGFJK": 0.0,
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Blunt",
                     "enBreak": 25.0,
                     "attackType": "Melee",
@@ -3322,34 +3322,34 @@
       "modifiers": {
         "FallingAnthem_AttachSelfEffect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Self_02",
+              "effectPattern": "Eff_Avatar_Claymore_FallAnthem_Self_02",
               "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_BS_Material": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Self",
+              "effectPattern": "Eff_Avatar_Claymore_FallAnthem_Self",
               "effectTempleteID": -1.0
             },
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Claymore_FallAnthem_BS",
+              "effectPattern": "Eff_Avatar_Claymore_FallAnthem_BS",
               "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_BS_VelocityForce_Initialize": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -2.0
           },
@@ -3364,34 +3364,34 @@
         },
         "FallingAnthem_LoopDamage": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KOIKBLJAOOD",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "CINPPKLNADH",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EJNNCBMCPOB": 0.0,
-                      "OIODIHMNJPJ": 0.0,
-                      "CFFEIADEGNK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     },
-                    "IEDBIKLIONM": true
+                    "useRotation": true
                   },
-                  "HAJLEKLDOMG": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "GNBHKEABDNL": "FallingAnthem_Normal_Loop_Damage",
-                    "JKNJLKBGFJK": 0.0,
-                    "bonusCriticalHurt": 0.0,
+                    "damagePercentage": "FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 0.0,
                     "overrideByWeapon": true,
                     "strikeType": "Slash",
                     "enBreak": 35.0,
@@ -3411,7 +3411,7 @@
         },
         "FallingAnthem_FallingDamageImmune_01": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ClearGlobalValue",
@@ -3421,12 +3421,12 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv0",
+              "value": "FallingAnthem_FallingDamageRatio_Lv0",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
@@ -3436,16 +3436,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "value": "FallingAnthem_Altitude_Lv1"
                 },
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv1",
+              "value": "FallingAnthem_FallingDamageRatio_Lv1",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
@@ -3455,16 +3455,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "value": "FallingAnthem_Altitude_Lv2"
                 },
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv1"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv2",
+              "value": "FallingAnthem_FallingDamageRatio_Lv2",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
@@ -3474,16 +3474,16 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "value": "FallingAnthem_Altitude_Lv3"
                 },
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv2"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv3",
+              "value": "FallingAnthem_FallingDamageRatio_Lv3",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
@@ -3493,11 +3493,11 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv3"
                 }
               ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv4",
+              "value": "FallingAnthem_FallingDamageRatio_Lv4",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
               "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
@@ -3511,7 +3511,7 @@
         },
         "FallingAnthem_FallingDamageImmune_02": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -3526,19 +3526,19 @@
         },
         "FallingAnthem_FallingDamageImmune_03": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
           }
         },
         "FallingAnthem_Loop_Normal": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_FallingAnthem_UseCamera",
-              "GVInTalk": 0.0,
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [
                 -1.0,
                 0.5,
@@ -3553,29 +3553,29 @@
         },
         "FallingAnthem_Loop_Normal_Rank_1": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Loop_01",
+              "effectPattern": "Eff_Avatar_Claymore_FallAnthem_Loop_01",
               "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_Loop_Normal_Rank_2": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Loop_02",
+              "effectPattern": "Eff_Avatar_Claymore_FallAnthem_Loop_02",
               "effectTempleteID": -1.0
             }
           ]
         },
         "Inertia": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "ApplyInertiaVelocityMixin",
@@ -3586,18 +3586,18 @@
         },
         "FallingAnthem_Height_Detect": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -3607,11 +3607,11 @@
               "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
-              "ratio": 5.0,
+              "value": 5.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 1.0,
@@ -3621,35 +3621,35 @@
               "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "IBGJHLBMCMP",
-                  "ratio": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 1.0
+              "value": 1.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0.0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
               "maxValue": 0.0,
@@ -3659,15 +3659,15 @@
         },
         "FallingAnthem_OverHead_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "NOPHJIEDHCB",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -3681,25 +3681,25 @@
         },
         "FallingAnthem_OverHead_Camera_Remover": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarExitCameraShot",
-              "PositionDampTime": true
+              "doOffStage": true
             }
           ]
         },
         "FallingAnthem_Landed_Camera": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "NOPHJIEDHCB",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "ratio": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -3713,7 +3713,7 @@
         },
         "FallingAnthem_ClearVelocityForce": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "RemoveVelocityForce",
@@ -3730,36 +3730,36 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "DLFHFMCJICH": true,
-              "NHIKJLNOOBG": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MKKIHKBAOOD",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "OIONBKCKNFC",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": -0.5,
-                  "CFFEIADEGNK": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "HAJLEKLDOMG": 3.0
+              "radius": 3.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "GNBHKEABDNL": "FallingAnthem_Normal_Rank_1_Damage",
-                "JKNJLKBGFJK": 0.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_1_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "overrideByWeapon": true,
                 "strikeType": "Blunt",
                 "enBreak": 150.0,
@@ -3794,35 +3794,35 @@
           "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "DLFHFMCJICH": true
+              "value": 1.0,
+              "forceByCaster": true
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "MKKIHKBAOOD",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "OIONBKCKNFC",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EJNNCBMCPOB": 0.0,
-                  "OIODIHMNJPJ": -0.5,
-                  "CFFEIADEGNK": 1.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
                 }
               },
               "height": 2.0,
-              "HAJLEKLDOMG": 5.0
+              "radius": 5.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "GNBHKEABDNL": "FallingAnthem_Normal_Rank_2_Damage",
-                "JKNJLKBGFJK": 0.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_2_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "overrideByWeapon": true,
                 "strikeType": "Blunt",
                 "enBreak": 200.0,
@@ -3858,27 +3858,27 @@
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "DLFHFMCJICH": true,
-              "NHIKJLNOOBG": "NoneOrEqual"
+              "value": 0.0,
+              "forceByCaster": true,
+              "compareType": "NoneOrEqual"
             }
           ],
-          "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Strike_01",
+          "effectPattern": "Eff_Avatar_Claymore_FallAnthem_Strike_01",
           "effectTempleteID": -1.0
         },
         {
           "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "HDDHHAGMLJK",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "DLFHFMCJICH": true
+              "value": 1.0,
+              "forceByCaster": true
             }
           ],
-          "shieldHP": "Eff_Avatar_Claymore_FallAnthem_Strike_02",
+          "effectPattern": "Eff_Avatar_Claymore_FallAnthem_Strike_02",
           "effectTempleteID": -1.0
         }
       ]
@@ -3891,7 +3891,7 @@
       "abilityMixins": [
         {
           "$type": "AttachToMultiNormalizedTimeMixin",
-          "ODIGJEDDOHM": [
+          "normalizedStateIDList": [
             {
               "stateID": "StandbyShow_01_BS",
               "normalizeStart": 0.25
@@ -3910,12 +3910,12 @@
       "modifiers": {
         "Avatar_Freminet_Show01_Fx": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "PositionDampTime": true,
-              "shieldHP": "Eff_Avatar_Boy_Claymore_Freminet_Show01_Disappear",
+              "doOffStage": true,
+              "effectPattern": "Eff_Avatar_Boy_Claymore_Freminet_Show01_Disappear",
               "effectTempleteID": -1.0
             }
           ]
@@ -3933,48 +3933,48 @@
           "animEventNames": [
             "ATK01"
           ],
-          "GNBHKEABDNL": "Freminet_NormalAttack_01",
-          "JKNJLKBGFJK": 0.0
+          "damagePercentage": "Freminet_NormalAttack_01",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK02"
           ],
-          "GNBHKEABDNL": "Freminet_NormalAttack_02",
-          "JKNJLKBGFJK": 0.0
+          "damagePercentage": "Freminet_NormalAttack_02",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK03"
           ],
-          "GNBHKEABDNL": "Freminet_NormalAttack_03",
-          "JKNJLKBGFJK": 0.0
+          "damagePercentage": "Freminet_NormalAttack_03",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK04"
           ],
-          "GNBHKEABDNL": "Freminet_NormalAttack_04",
-          "JKNJLKBGFJK": 0.0
+          "damagePercentage": "Freminet_NormalAttack_04",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ExtraAttack1"
           ],
-          "GNBHKEABDNL": "Freminet_ExtraAttack_01",
-          "JKNJLKBGFJK": 0.0
+          "damagePercentage": "Freminet_ExtraAttack_01",
+          "damagePercentageRatio": 0.0
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ExtraAttack2"
           ],
-          "GNBHKEABDNL": "Freminet_ExtraAttack_02",
-          "JKNJLKBGFJK": 0.0
+          "damagePercentage": "Freminet_ExtraAttack_02",
+          "damagePercentageRatio": 0.0
         }
       ],
       "abilitySpecials": {
@@ -4016,13 +4016,13 @@
         "Freminet_PermanentSkill_2": {
           "modifierName": "",
           "duration": "Time",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "state": "AttackUp",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": "Rate",
+              "doOffStage": true,
+              "value": "Rate",
               "key": "_ABILITY_Freminet_PermanentSkill_2_Rate",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -4031,8 +4031,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "PositionDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "value": 0.0,
               "key": "_ABILITY_Freminet_PermanentSkill_2_Rate",
               "maxValue": 0.0,
               "minValue": 0.0
@@ -4061,7 +4061,7 @@
           "actions": [
             {
               "$type": "AttachModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "Freminet_Constellaton_4_CD"
             }
           ]
@@ -4078,7 +4078,7 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": "CD_Time",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -4094,7 +4094,7 @@
           },
           "modifierName": "",
           "duration": "Dura",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackRatio": "AttackUp"
           },
@@ -4104,7 +4104,7 @@
       "onRemoved": [
         {
           "$type": "RemoveModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "Freminet_Constellaton_4_AttackUp"
         }
       ],
@@ -4129,7 +4129,7 @@
           "actions": [
             {
               "$type": "AttachModifier",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "Freminet_Constellaton_6_CD"
             }
           ]
@@ -4146,7 +4146,7 @@
           "stacking": "Unique",
           "modifierName": "",
           "duration": "CD_Time",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -4162,7 +4162,7 @@
           },
           "modifierName": "",
           "duration": "Dura",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_CriticalHurtDelta": "Up"
           },
@@ -4172,7 +4172,7 @@
       "onRemoved": [
         {
           "$type": "RemoveModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "Freminet_Constellaton_6_Up"
         }
       ],
@@ -4186,13 +4186,13 @@
       "modifiers": {
         "Freminet_DivingStaminaReduction_Handler": {
           "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 5.0,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
               "target": "CurTeamAvatars",
-              "PositionDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_DivingStaminaReduction"
             }
           ]
@@ -4200,7 +4200,7 @@
         "UNIQUE_DivingStaminaReduction": {
           "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_CostDiveStaminaRatio": -0.3499999940395355
           }
@@ -4210,12 +4210,12 @@
         {
           "$type": "AttachModifier",
           "target": "CurTeamAvatars",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "UNIQUE_DivingStaminaReduction"
         },
         {
           "$type": "AttachModifier",
-          "PositionDampTime": true,
+          "doOffStage": true,
           "modifierName": "Freminet_DivingStaminaReduction_Handler"
         }
       ],

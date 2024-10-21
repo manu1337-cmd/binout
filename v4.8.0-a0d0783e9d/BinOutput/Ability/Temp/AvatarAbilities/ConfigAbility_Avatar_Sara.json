@@ -1,11 +1,11 @@
 [
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_Arrow_FX",
       "abilityMixins": [
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Aim",
             "FastAim"
@@ -17,13 +17,13 @@
       "modifiers": {
         "Sara_Arrow_FX": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_Arrow",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_Arrow",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         }
@@ -32,13 +32,13 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_Shoot_ShowWeapon",
       "onAbilityStart": [
         {
-          "$type": "ABGFEEKKHLI",
-          "shieldHP": true,
-          "CAKFGFNNNOJ": true,
+          "$type": "TriggerHideWeapon",
+          "doOffStage": true,
+          "visible": true,
           "partNames": [
             "equip01",
             "equip02",
@@ -50,23 +50,23 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_PressShoot",
       "abilityMixins": [
         {
-          "$type": "FGEGOMCIFMA",
+          "$type": "ButtonHoldChargeMixin",
           "skillID": 10561,
           "chargeTime": 0.20000000298023224,
-          "ANJJMLDEPDA": 999999.0,
+          "secondChargeTime": 999999.0,
           "onBeginUncharged": [
             {
-              "$type": "KEBEIINPIOE",
-              "OEMEMBJJJPH": "DoSkill"
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "DoSkill"
             },
             {
-              "$type": "ANEGGLOPIGK",
+              "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "repeatTimes": 100.0
+              "value": 100.0
             }
           ],
           "onReleaseUncharged": [
@@ -75,37 +75,37 @@
               "lockTime": 0.30000001192092896
             },
             {
-              "$type": "MHAEMGHCNDL",
+              "$type": "EntityDoSkill",
               "skillID": 10564,
               "isHold": true
             }
           ],
           "onBeginCharged": [
             {
-              "$type": "KEBEIINPIOE",
-              "OEMEMBJJJPH": "DoSkill"
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "DoSkill"
             },
             {
-              "$type": "ANEGGLOPIGK",
+              "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "repeatTimes": 101.0
+              "value": 101.0
             }
           ],
           "onReleaseCharged": [
             {
-              "$type": "JJJCJIKOMNL",
+              "$type": "AvatarSkillStart",
               "skillID": 10561,
-              "costStaminaRatio": 1.0,
-              "IOFCJNLJBLE": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             },
             {
-              "$type": "JJJCJIKOMNL",
+              "$type": "AvatarSkillStart",
               "skillID": 10563,
-              "costStaminaRatio": 1.0,
-              "IOFCJNLJBLE": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             },
             {
-              "$type": "MHAEMGHCNDL",
+              "$type": "EntityDoSkill",
               "skillID": 10564,
               "isHold": true
             }
@@ -118,7 +118,7 @@
           ]
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FastAim",
             "FastAimShoot"
@@ -127,7 +127,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FastAimShoot"
           ],
@@ -135,7 +135,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "ShootBS",
             "FastAim",
@@ -148,15 +148,15 @@
       "modifiers": {
         "KeepFastAiming": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "FastAiming",
-              "repeatTimes": true
+              "value": true
             },
             {
-              "$type": "ECFAHPDJHJP",
+              "$type": "AvatarEnterFocus",
               "cameraFollowLower": {
                 "x": 0.8999999761581421,
                 "y": 0.4000000059604645,
@@ -189,56 +189,56 @@
           ],
           "onRemoved": [
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "FastAiming"
             },
             {
-              "$type": "HMGCNPIBEKI",
+              "$type": "AvatarExitFocus",
               "keepRotation": true
             }
           ]
         },
         "SetFastAimShooting": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "FastAimShooting",
-              "repeatTimes": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "FastAimShooting"
             },
             {
-              "$type": "KEBEIINPIOE",
+              "$type": "SetAnimatorTrigger",
               "predicates": [
                 {
-                  "$type": "BGLFJCFFJNA",
-                  "repeatTimes": true,
+                  "$type": "ByAnimatorBool",
+                  "value": true,
                   "parameter": "FastAiming"
                 }
               ],
-              "OEMEMBJJJPH": "AimEnd"
+              "triggerID": "AimEnd"
             }
           ]
         },
         "SetNeedAimEndStates": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "InStatesNeedAimEnd",
-              "repeatTimes": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "InStatesNeedAimEnd"
             }
           ]
@@ -248,28 +248,28 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_AimPressShoot",
       "abilityMixins": [
         {
-          "$type": "FGEGOMCIFMA",
+          "$type": "ButtonHoldChargeMixin",
           "skillID": 10563,
-          "ANJJMLDEPDA": 999999.0,
+          "secondChargeTime": 999999.0,
           "onReleaseCharged": [
             {
-              "$type": "JJJCJIKOMNL",
+              "$type": "AvatarSkillStart",
               "skillID": 10561,
-              "costStaminaRatio": 1.0,
-              "IOFCJNLJBLE": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             },
             {
-              "$type": "JJJCJIKOMNL",
+              "$type": "AvatarSkillStart",
               "skillID": 10563,
-              "costStaminaRatio": 1.0,
-              "IOFCJNLJBLE": 1.0
+              "cdRatio": 1.0,
+              "costStaminaRatio": 1.0
             },
             {
-              "$type": "MHAEMGHCNDL",
+              "$type": "EntityDoSkill",
               "skillID": 10564,
               "isHold": true
             }
@@ -280,7 +280,7 @@
           ]
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Aim",
             "AimShoot"
@@ -289,7 +289,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "AimShoot"
           ],
@@ -297,7 +297,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Aim",
             "AimShoot"
@@ -309,15 +309,15 @@
       "modifiers": {
         "KeepAiming": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "Aiming",
-              "repeatTimes": true
+              "value": true
             },
             {
-              "$type": "ECFAHPDJHJP",
+              "$type": "AvatarEnterFocus",
               "cameraFollowLower": {
                 "x": 0.8999999761581421,
                 "y": 0.4000000059604645,
@@ -350,45 +350,45 @@
           ],
           "onRemoved": [
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "Aiming"
             },
             {
-              "$type": "HMGCNPIBEKI",
+              "$type": "AvatarExitFocus",
               "keepRotation": true
             }
           ]
         },
         "SetAimShooting": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "AimShooting",
-              "repeatTimes": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "AimShooting"
             }
           ]
         },
         "SetNeedAimEndStates": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "InStatesNeedAimEnd",
-              "repeatTimes": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
-              "$type": "AELJBEHKFGP",
+              "$type": "SetAnimatorBool",
               "boolID": "InStatesNeedAimEnd"
             }
           ]
@@ -398,11 +398,11 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_ShootAimingArrow_Charge",
       "abilityMixins": [
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Aim",
             "FastAim"
@@ -411,19 +411,19 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "KKKMAAMBHMO",
+          "$type": "AttachToNormalizedTimeMixin",
           "stateID": "AimLoop",
           "modifierName": "Aim_ChangeAlpha",
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "KKKMAAMBHMO",
+          "$type": "AttachToNormalizedTimeMixin",
           "stateID": "FastAimLoop",
           "modifierName": "FastAim_ChangeAlpha",
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Aim",
             "AimShoot"
@@ -432,7 +432,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FastAim",
             "FastAimShoot"
@@ -441,7 +441,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Aim",
             "FastAim",
@@ -459,18 +459,18 @@
       "modifiers": {
         "ShootAimingArrow_Charge_Handler": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onThinkInterval": [
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "modifierName": "AimChargeMark"
             }
           ]
         },
         "Aim_ChangeAlpha": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "APFDPBJJLHJ",
@@ -483,7 +483,7 @@
         },
         "FastAim_ChangeAlpha": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "APFDPBJJLHJ",
@@ -496,21 +496,21 @@
         },
         "ShootAimingArrow_Charge_Remove": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ACPEIOBJLKD",
-              "repeatTimes": -5.0,
+              "$type": "AddGlobalValue",
+              "value": -5.0,
               "key": "_Enchanted_Time",
               "useLimitRange": true,
-              "param2": 5.0,
-              "triggerID": 0.0
+              "maxValue": 5.0,
+              "minValue": 0.0
             }
           ],
           "onRemoved": [
             {
-              "$type": "IJMCEELGGIH",
-              "shieldHP": true,
+              "$type": "RemoveModifier",
+              "doOffStage": true,
               "modifierName": "AimChargeMark"
             }
           ]
@@ -522,48 +522,48 @@
             "maxModifierNumForMultipleType": 5.0
           },
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ACPEIOBJLKD",
-              "repeatTimes": 1.0,
+              "$type": "AddGlobalValue",
+              "value": 1.0,
               "key": "_Enchanted_Time",
               "useLimitRange": true,
-              "param2": 5.0,
-              "triggerID": 0.0
+              "maxValue": 5.0,
+              "minValue": 0.0
             }
           ]
         },
         "ShowAimingEffect": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.10000000149011612,
           "onAdded": [
             {
-              "$type": "GNLJNLOMNGD",
+              "$type": "AttachModifier",
               "modifierName": "Magic_Arrow_Glow_01"
             }
           ],
           "onThinkInterval": [
             {
-              "$type": "OIDAEPDOMEP",
+              "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Sara_ElementalArt_COUNT",
-                  "repeatTimes": 1.0,
+                  "value": 1.0,
                   "forceByCaster": true,
                   "compareType": "MoreThanAndEqual"
                 }
               ],
               "successActions": [
                 {
-                  "$type": "GNLJNLOMNGD",
+                  "$type": "AttachModifier",
                   "predicates": [
                     {
-                      "$type": "HBBHADONLIE",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_Enchanted_Time",
-                      "repeatTimes": [
+                      "value": [
                         "Enchanted_Time",
                         "Sara_AimShoot_Enchanted_Ratio",
                         "MUL"
@@ -577,16 +577,16 @@
               ],
               "failActions": [
                 {
-                  "$type": "IJMCEELGGIH",
+                  "$type": "RemoveModifier",
                   "modifierName": "Sara_KarasShoot_Glow"
                 },
                 {
-                  "$type": "GNLJNLOMNGD",
+                  "$type": "AttachModifier",
                   "predicates": [
                     {
-                      "$type": "HBBHADONLIE",
+                      "$type": "ByTargetGlobalValue",
                       "key": "_Enchanted_Time",
-                      "repeatTimes": 4.0,
+                      "value": 4.0,
                       "forceByCaster": true,
                       "compareType": "MoreThanAndEqual"
                     }
@@ -596,12 +596,12 @@
               ]
             },
             {
-              "$type": "GNLJNLOMNGD",
+              "$type": "AttachModifier",
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_Enchanted_Time",
-                  "repeatTimes": 1.0,
+                  "value": 1.0,
                   "forceByCaster": true
                 }
               ],
@@ -612,233 +612,233 @@
         "Magic_Arrow_Glow_02": {
           "stacking": "Unique",
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_ExtraAttack_Glow_Once_02",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_ExtraAttack_Glow_Once_02",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_ExtraAttack_Glow_Loop_02",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_ExtraAttack_Glow_Loop_02",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Magic_Arrow_Glow_01": {
           "stacking": "Unique",
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "HLHAODOBHPK",
-              "shieldHP": true,
+              "$type": "SetGlobalValue",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Sara_ElementalArt_COUNT",
-                  "repeatTimes": 1.0,
+                  "value": 1.0,
                   "forceByCaster": true,
                   "compareType": "MoreThanAndEqual"
                 }
               ],
-              "repeatTimes": "Sara_AimShoot_Enchanted_Ratio",
+              "value": "Sara_AimShoot_Enchanted_Ratio",
               "key": "_ABILITY_Sara_AimShoot_Enchanted_Ratio",
               "useLimitRange": true,
-              "param2": 1.0,
-              "triggerID": 0.0
+              "maxValue": 1.0,
+              "minValue": 0.0
             },
             {
-              "$type": "ENDHKAOAKJH",
+              "$type": "AttachEffect",
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Sara_AimShoot_Enchanted_Ratio",
-                  "repeatTimes": 1.0
+                  "value": 1.0
                 }
               ],
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_ExtraAttack_Glow_Once_01",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_ExtraAttack_Glow_Once_01",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "ENDHKAOAKJH",
+              "$type": "AttachEffect",
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Sara_AimShoot_Enchanted_Ratio",
-                  "repeatTimes": 1.0
+                  "value": 1.0
                 },
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Sara_ElementalArt_COUNT",
-                  "repeatTimes": 0.0,
+                  "value": 0.0,
                   "forceByCaster": true,
                   "compareType": "NoneOrEqual"
                 }
               ],
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_ExtraAttack_Glow_Loop_01",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_ExtraAttack_Glow_Loop_01",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "ENDHKAOAKJH",
+              "$type": "AttachEffect",
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Sara_AimShoot_Enchanted_Ratio",
-                  "repeatTimes": 1.0
+                  "value": 1.0
                 },
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Sara_ElementalArt_COUNT",
-                  "repeatTimes": 1.0,
+                  "value": 1.0,
                   "forceByCaster": true,
                   "compareType": "MoreThanAndEqual"
                 }
               ],
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_KarasShoot_Glow_Loop_01",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_KarasShoot_Glow_Loop_01",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "ENDHKAOAKJH",
+              "$type": "AttachEffect",
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Sara_AimShoot_Enchanted_Ratio",
-                  "repeatTimes": 0.8999999761581421,
+                  "value": 0.8999999761581421,
                   "compareType": "LessAndEqual"
                 }
               ],
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_ExtraAttack_Glow_Once_01_Talent",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_ExtraAttack_Glow_Once_01_Talent",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "ENDHKAOAKJH",
+              "$type": "AttachEffect",
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Sara_AimShoot_Enchanted_Ratio",
-                  "repeatTimes": 0.8999999761581421,
+                  "value": 0.8999999761581421,
                   "compareType": "LessAndEqual"
                 }
               ],
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_ExtraAttack_Glow_Loop_01_Talent",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_ExtraAttack_Glow_Loop_01_Talent",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ],
           "onRemoved": [
             {
-              "$type": "HLHAODOBHPK",
-              "shieldHP": true,
-              "repeatTimes": 1.0,
+              "$type": "SetGlobalValue",
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Sara_AimShoot_Enchanted_Ratio",
               "useLimitRange": true,
-              "param2": 1.0,
-              "triggerID": 0.0
+              "maxValue": 1.0,
+              "minValue": 0.0
             }
           ]
         },
         "Sara_KarasShoot_Glow": {
           "stacking": "Unique",
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_KarasShoot_Glow_Burst",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_KarasShoot_Glow_Burst",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_KarasShoot_Glow_Loop",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_KarasShoot_Glow_Loop",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Avatar_Sara_ShootArrow_ResetGlobalValue": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ACPEIOBJLKD",
-              "shieldHP": true,
+              "$type": "AddGlobalValue",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Sara_ElementalArt_COUNT",
-                  "repeatTimes": 0.0,
+                  "value": 0.0,
                   "forceByCaster": true,
                   "compareType": "NoneOrEqual"
                 }
               ],
-              "repeatTimes": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Sara_AimShoot_Enchanted_Ratio",
               "useLimitRange": true,
-              "param2": 1.0,
-              "triggerID": 0.0
+              "maxValue": 1.0,
+              "minValue": 0.0
             }
           ],
           "onReconnect": [
             {
-              "$type": "HLHAODOBHPK",
-              "shieldHP": true,
+              "$type": "SetGlobalValue",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Sara_ElementalArt_COUNT",
-                  "repeatTimes": 0.0,
+                  "value": 0.0,
                   "forceByCaster": true,
                   "compareType": "NoneOrEqual"
                 }
               ],
-              "repeatTimes": 1.0,
+              "value": 1.0,
               "key": "_ABILITY_Sara_AimShoot_Enchanted_Ratio",
               "useLimitRange": true,
-              "param2": 1.0,
-              "triggerID": 0.0
+              "maxValue": 1.0,
+              "minValue": 0.0
             }
           ]
         }
       },
       "onAdded": [
         {
-          "$type": "AHHAGLJGKDD",
-          "shieldHP": true,
+          "$type": "ApplyModifier",
+          "doOffStage": true,
           "modifierName": "Avatar_Sara_ShootArrow_ResetGlobalValue"
         }
       ],
       "onAbilityStart": [
         {
-          "$type": "ACPEIOBJLKD",
-          "repeatTimes": -5.0,
+          "$type": "AddGlobalValue",
+          "value": -5.0,
           "key": "_Enchanted_Time",
           "useLimitRange": true,
-          "param2": 5.0,
-          "triggerID": 0.0
+          "maxValue": 5.0,
+          "minValue": 0.0
         },
         {
-          "$type": "IJMCEELGGIH",
+          "$type": "RemoveModifier",
           "modifierName": "AimChargeMark"
         },
         {
-          "$type": "IJMCEELGGIH",
+          "$type": "RemoveModifier",
           "modifierName": "Magic_Arrow_Glow_01"
         },
         {
-          "$type": "IJMCEELGGIH",
+          "$type": "RemoveModifier",
           "modifierName": "Magic_Arrow_Glow_02"
         },
         {
-          "$type": "IJMCEELGGIH",
+          "$type": "RemoveModifier",
           "modifierName": "Sara_KarasShoot_Glow"
         }
       ]
@@ -846,7 +846,7 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_ShootArrow_Aiming",
       "abilitySpecials": {
         "Enchanted_Time": 4.0,
@@ -854,24 +854,24 @@
       },
       "onAbilityStart": [
         {
-          "$type": "OIDAEPDOMEP",
+          "$type": "Predicated",
           "targetPredicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Sara_ElementalArt_COUNT",
-              "repeatTimes": 1.0,
+              "value": 1.0,
               "forceByCaster": true,
               "compareType": "MoreThanAndEqual"
             }
           ],
           "successActions": [
             {
-              "$type": "OIDAEPDOMEP",
+              "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_Enchanted_Time",
-                  "repeatTimes": [
+                  "value": [
                     "Enchanted_Time",
                     "Sara_AimShoot_Enchanted_Ratio",
                     "MUL"
@@ -882,17 +882,17 @@
               ],
               "successActions": [
                 {
-                  "$type": "PDGILBJBOOA",
+                  "$type": "TriggerBullet",
                   "bulletID": 41056009,
                   "born": {
-                    "$type": "EIIDFNOJEFD",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "direction": {
-                      "$type": "CAADGNJLHKN",
+                      "$type": "ConfigDirectionByAttachPoint",
                       "attachPointName": "FocusAnchor",
                       "attachPointTargetType": "Self"
                     },
@@ -900,48 +900,48 @@
                   }
                 },
                 {
-                  "$type": "EHPLOGLPPAC",
-                  "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_Arrow_OnShooting",
+                  "$type": "FireEffect",
+                  "effectPattern": "Eff_Avatar_Lady_Bow_Sara_Arrow_OnShooting",
                   "born": {
-                    "$type": "EIIDFNOJEFD",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.8999999761581421
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.8999999761581421
                     },
                     "attachPointName": "WeaponR"
                   },
-                  "FKNFFAHLCHH": 1.0,
-                  "GDNGPLIHABI": -1.0
+                  "scale": 1.0,
+                  "effectTempleteID": -1.0
                 },
                 {
-                  "$type": "FKNNJLHBIOD",
-                  "shieldHP": true,
+                  "$type": "RemoveUniqueModifier",
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Sara_ElementalArt_Mark"
                 },
                 {
-                  "$type": "ACPEIOBJLKD",
-                  "shieldHP": true,
-                  "repeatTimes": -1.0,
+                  "$type": "AddGlobalValue",
+                  "doOffStage": true,
+                  "value": -1.0,
                   "key": "_ABILITY_Sara_ElementalArt_COUNT",
                   "useLimitRange": true,
-                  "param2": 1.0,
-                  "triggerID": 0.0
+                  "maxValue": 1.0,
+                  "minValue": 0.0
                 }
               ],
               "failActions": [
                 {
-                  "$type": "PDGILBJBOOA",
+                  "$type": "TriggerBullet",
                   "bulletID": 41056006,
                   "born": {
-                    "$type": "EIIDFNOJEFD",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "direction": {
-                      "$type": "CAADGNJLHKN",
+                      "$type": "ConfigDirectionByAttachPoint",
                       "attachPointName": "FocusAnchor",
                       "attachPointTargetType": "Self"
                     },
@@ -949,48 +949,48 @@
                   }
                 },
                 {
-                  "$type": "EHPLOGLPPAC",
-                  "rotationDampTime": "Eff_ElectricMagic_ShootArrow",
+                  "$type": "FireEffect",
+                  "effectPattern": "Eff_ElectricMagic_ShootArrow",
                   "born": {
-                    "$type": "EIIDFNOJEFD",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.8999999761581421
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.8999999761581421
                     },
                     "attachPointName": "WeaponR"
                   },
-                  "FKNFFAHLCHH": 1.0,
-                  "GDNGPLIHABI": -1.0
+                  "scale": 1.0,
+                  "effectTempleteID": -1.0
                 }
               ]
             }
           ],
           "failActions": [
             {
-              "$type": "OIDAEPDOMEP",
+              "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_Enchanted_Time",
-                  "repeatTimes": 4.0,
+                  "value": 4.0,
                   "forceByCaster": true,
                   "compareType": "MoreThanAndEqual"
                 }
               ],
               "successActions": [
                 {
-                  "$type": "PDGILBJBOOA",
+                  "$type": "TriggerBullet",
                   "bulletID": 41056007,
                   "born": {
-                    "$type": "EIIDFNOJEFD",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "direction": {
-                      "$type": "CAADGNJLHKN",
+                      "$type": "ConfigDirectionByAttachPoint",
                       "attachPointName": "FocusAnchor",
                       "attachPointTargetType": "Self"
                     },
@@ -998,34 +998,34 @@
                   }
                 },
                 {
-                  "$type": "EHPLOGLPPAC",
-                  "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_Arrow_OnShooting",
+                  "$type": "FireEffect",
+                  "effectPattern": "Eff_Avatar_Lady_Bow_Sara_Arrow_OnShooting",
                   "born": {
-                    "$type": "EIIDFNOJEFD",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.8999999761581421
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.8999999761581421
                     },
                     "attachPointName": "WeaponR"
                   },
-                  "FKNFFAHLCHH": 1.0,
-                  "GDNGPLIHABI": -1.0
+                  "scale": 1.0,
+                  "effectTempleteID": -1.0
                 }
               ],
               "failActions": [
                 {
-                  "$type": "PDGILBJBOOA",
+                  "$type": "TriggerBullet",
                   "bulletID": 41056006,
                   "born": {
-                    "$type": "EIIDFNOJEFD",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "direction": {
-                      "$type": "CAADGNJLHKN",
+                      "$type": "ConfigDirectionByAttachPoint",
                       "attachPointName": "FocusAnchor",
                       "attachPointTargetType": "Self"
                     },
@@ -1033,19 +1033,19 @@
                   }
                 },
                 {
-                  "$type": "EHPLOGLPPAC",
-                  "rotationDampTime": "Eff_ElectricMagic_ShootArrow",
+                  "$type": "FireEffect",
+                  "effectPattern": "Eff_ElectricMagic_ShootArrow",
                   "born": {
-                    "$type": "EIIDFNOJEFD",
+                    "$type": "ConfigBornByAttachPoint",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.8999999761581421
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.8999999761581421
                     },
                     "attachPointName": "WeaponR"
                   },
-                  "FKNFFAHLCHH": 1.0,
-                  "GDNGPLIHABI": -1.0
+                  "scale": 1.0,
+                  "effectTempleteID": -1.0
                 }
               ]
             }
@@ -1055,9 +1055,9 @@
           "$type": "DFKBABGIPEH",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "_Enchanted_Time",
-              "repeatTimes": 4.0,
+              "value": 4.0,
               "forceByCaster": true,
               "compareType": "MoreThanAndEqual"
             }
@@ -1076,21 +1076,21 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_ShootArrow_01",
       "onAbilityStart": [
         {
-          "$type": "PDGILBJBOOA",
+          "$type": "TriggerBullet",
           "bulletID": 41056001,
           "born": {
-            "$type": "EIIDFNOJEFD",
+            "$type": "ConfigBornByAttachPoint",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "direction": {
-              "$type": "CAADGNJLHKN",
+              "$type": "ConfigDirectionByAttachPoint",
               "maxAngle": 30.0,
               "attachPointName": "FocusAnchor",
               "attachPointTargetType": "Self"
@@ -1099,40 +1099,40 @@
           }
         },
         {
-          "$type": "EHPLOGLPPAC",
-          "rotationDampTime": "Eff_Venti_ShootArrow_Small",
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Venti_ShootArrow_Small",
           "born": {
-            "$type": "EIIDFNOJEFD",
+            "$type": "ConfigBornByAttachPoint",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "attachPointName": "WeaponL"
           },
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         }
       ]
     }
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_ShootArrow_02",
       "onAbilityStart": [
         {
-          "$type": "PDGILBJBOOA",
+          "$type": "TriggerBullet",
           "bulletID": 41056002,
           "born": {
-            "$type": "EIIDFNOJEFD",
+            "$type": "ConfigBornByAttachPoint",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "direction": {
-              "$type": "CAADGNJLHKN",
+              "$type": "ConfigDirectionByAttachPoint",
               "maxAngle": 30.0,
               "attachPointName": "FocusAnchor",
               "attachPointTargetType": "Self"
@@ -1141,40 +1141,40 @@
           }
         },
         {
-          "$type": "EHPLOGLPPAC",
-          "rotationDampTime": "Eff_Venti_ShootArrow_Small",
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Venti_ShootArrow_Small",
           "born": {
-            "$type": "EIIDFNOJEFD",
+            "$type": "ConfigBornByAttachPoint",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "attachPointName": "WeaponL"
           },
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         }
       ]
     }
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_ShootArrow_03",
       "onAbilityStart": [
         {
-          "$type": "PDGILBJBOOA",
+          "$type": "TriggerBullet",
           "bulletID": 41056003,
           "born": {
-            "$type": "EIIDFNOJEFD",
+            "$type": "ConfigBornByAttachPoint",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "direction": {
-              "$type": "CAADGNJLHKN",
+              "$type": "ConfigDirectionByAttachPoint",
               "maxAngle": 30.0,
               "attachPointName": "FocusAnchor",
               "attachPointTargetType": "Self"
@@ -1183,30 +1183,30 @@
           }
         },
         {
-          "$type": "EHPLOGLPPAC",
-          "rotationDampTime": "Eff_Venti_ShootArrow_Big",
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Venti_ShootArrow_Big",
           "born": {
-            "$type": "EIIDFNOJEFD",
+            "$type": "ConfigBornByAttachPoint",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "attachPointName": "WeaponL"
           },
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         }
       ]
     }
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_ShootArrow_04",
       "abilityMixins": [
         {
-          "$type": "KKKMAAMBHMO",
+          "$type": "AttachToNormalizedTimeMixin",
           "stateID": "Attack04",
           "modifierName": "Avatar_Sara_Hide_Fx",
           "normalizeStart": 0.03200000151991844,
@@ -1217,30 +1217,30 @@
       "modifiers": {
         "Avatar_Sara_Hide_Fx": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "EHPLOGLPPAC",
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_NormalAttack04_HideSpark",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_NormalAttack04_HideSpark",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         }
       },
       "onAbilityStart": [
         {
-          "$type": "PDGILBJBOOA",
+          "$type": "TriggerBullet",
           "bulletID": 41056004,
           "born": {
-            "$type": "EIIDFNOJEFD",
+            "$type": "ConfigBornByAttachPoint",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "direction": {
-              "$type": "CAADGNJLHKN",
+              "$type": "ConfigDirectionByAttachPoint",
               "maxAngle": 30.0,
               "attachPointName": "FocusAnchor",
               "attachPointTargetType": "Self"
@@ -1249,40 +1249,40 @@
           }
         },
         {
-          "$type": "EHPLOGLPPAC",
-          "rotationDampTime": "Eff_Venti_ShootArrow_Small",
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Venti_ShootArrow_Small",
           "born": {
-            "$type": "EIIDFNOJEFD",
+            "$type": "ConfigBornByAttachPoint",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "attachPointName": "WeaponL"
           },
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         }
       ]
     }
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_ShootArrow_05",
       "onAbilityStart": [
         {
-          "$type": "PDGILBJBOOA",
+          "$type": "TriggerBullet",
           "bulletID": 41056005,
           "born": {
-            "$type": "EIIDFNOJEFD",
+            "$type": "ConfigBornByAttachPoint",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "direction": {
-              "$type": "CAADGNJLHKN",
+              "$type": "ConfigDirectionByAttachPoint",
               "maxAngle": 30.0,
               "attachPointName": "FocusAnchor",
               "attachPointTargetType": "Self"
@@ -1291,24 +1291,24 @@
           }
         },
         {
-          "$type": "EHPLOGLPPAC",
-          "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_ShootArrow_Big_Attack05_Burst",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Lady_Bow_Sara_ShootArrow_Big_Attack05_Burst",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         }
       ]
     }
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_ShootArrow_Light_Material",
       "onAdded": [
         {
-          "$type": "ENDHKAOAKJH",
-          "rotationDampTime": "Eff_Venti_Arrow_Fly_Small",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_Venti_Arrow_Fly_Small",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         }
       ],
       "onAbilityStart": [
@@ -1327,14 +1327,14 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_ShootArrow_Heavy_Material",
       "onAdded": [
         {
-          "$type": "ENDHKAOAKJH",
-          "rotationDampTime": "Eff_Venti_Arrow_Fly_Big",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_Venti_Arrow_Fly_Big",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         }
       ],
       "onAbilityStart": [
@@ -1353,23 +1353,23 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Bullet_Sara_ShootArrow_WithElectric",
       "abilitySpecials": {
         "DamageWithElectric": 0.0
       },
       "onAdded": [
         {
-          "$type": "ENDHKAOAKJH",
-          "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_Arrow_Fly_Trail",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_Avatar_Lady_Bow_Sara_Arrow_Fly_Trail",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         },
         {
-          "$type": "ENDHKAOAKJH",
-          "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_Arrow_Fly_Particle",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_Avatar_Lady_Bow_Sara_Arrow_Fly_Particle",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         }
       ],
       "onAbilityStart": [
@@ -1384,24 +1384,24 @@
           }
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "attackEvent": {
             "attackPattern": {
-              "$type": "MFBGHKHFOPA",
+              "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
               "checkHitLayerType": "Both",
               "born": {
-                "$type": "LPEJICOBGCF",
+                "$type": "ConfigBornByCollisionPoint",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 0.0,
-                  "MEJNCDENBNH": -0.5
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": -0.5
                 }
               },
               "size": {
-                "EPAKBMBAOKK": 0.10000000149011612,
-                "LNOGCFLGIJI": 0.10000000149011612,
-                "MEJNCDENBNH": 1.0
+                "x": 0.10000000149011612,
+                "y": 0.10000000149011612,
+                "z": 1.0
               }
             },
             "attackInfo": {
@@ -1409,10 +1409,10 @@
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": "DamageWithElectric",
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentage": "DamageWithElectric",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Electric",
-                "MCCELHKGPOP": 25.0,
+                "elementDurability": 25.0,
                 "strikeType": "Pierce",
                 "enBreak": 20.0,
                 "enHeadBreak": 60.0,
@@ -1453,17 +1453,17 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Bullet_Sara_AimingArrow_WithoutElectric",
       "abilitySpecials": {
         "DamageWithoutElectric": 0.0
       },
       "onAdded": [
         {
-          "$type": "ENDHKAOAKJH",
-          "rotationDampTime": "Eff_Venti_Arrow_Fly_Big",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_Venti_Arrow_Fly_Big",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         }
       ],
       "onAbilityStart": [
@@ -1478,24 +1478,24 @@
           }
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "attackEvent": {
             "attackPattern": {
-              "$type": "MFBGHKHFOPA",
+              "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
               "checkHitLayerType": "Both",
               "born": {
-                "$type": "LPEJICOBGCF",
+                "$type": "ConfigBornByCollisionPoint",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 0.0,
-                  "MEJNCDENBNH": -0.5
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": -0.5
                 }
               },
               "size": {
-                "EPAKBMBAOKK": 0.10000000149011612,
-                "LNOGCFLGIJI": 0.10000000149011612,
-                "MEJNCDENBNH": 1.0
+                "x": 0.10000000149011612,
+                "y": 0.10000000149011612,
+                "z": 1.0
               }
             },
             "attackInfo": {
@@ -1503,9 +1503,9 @@
               "attenuationTag": "ExtraAttack",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": "DamageWithoutElectric",
-                "actorWaterSubHurtDelta": 0.0,
-                "MCCELHKGPOP": 100.0,
+                "damagePercentage": "DamageWithoutElectric",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 100.0,
                 "strikeType": "Pierce",
                 "enBreak": 10.0,
                 "enHeadBreak": 30.0,
@@ -1546,7 +1546,7 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_Elemental_Art",
       "abilitySpecials": {
         "Damage": 2.0
@@ -1554,19 +1554,19 @@
       "modifiers": {
         "Blink": {
           "modifierName": "",
-          "elementDurability": 0.3499999940395355,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.3499999940395355,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "IPAMJEALJMN"
+              "$type": "TriggerSetVisible"
             },
             {
               "$type": "CNAMGJCNFBK",
-              "shieldHP": true,
+              "doOffStage": true,
               "passThrough": true
             },
             {
-              "$type": "HDCGKAJPLBH",
+              "$type": "EnableHDMesh",
               "hdMeshKey": "Default"
             }
           ],
@@ -1576,23 +1576,23 @@
               "turnMode": "OnlyTarget"
             },
             {
-              "$type": "IPAMJEALJMN",
-              "shieldHP": true,
-              "CAKFGFNNNOJ": true
+              "$type": "TriggerSetVisible",
+              "doOffStage": true,
+              "visible": true
             },
             {
               "$type": "CNAMGJCNFBK",
-              "shieldHP": true,
+              "doOffStage": true,
               "canBeHandledOnRecover": true
             },
             {
-              "$type": "EHPLOGLPPAC",
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_ElementalArt_ShowSpark",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_ElementalArt_ShowSpark",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "HDCGKAJPLBH",
+              "$type": "EnableHDMesh",
               "canBeHandledOnRecover": true,
               "enable": true,
               "hdMeshKey": "Default"
@@ -1601,86 +1601,86 @@
         },
         "UNIQUE_Sara_ElementalArt_Mark": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": 18.0,
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": 18.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "shieldHP": true,
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_KarasSgoot_Mark",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "doOffStage": true,
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_KarasSgoot_Mark",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "ACPEIOBJLKD",
-              "shieldHP": true,
-              "repeatTimes": 1.0,
+              "$type": "AddGlobalValue",
+              "doOffStage": true,
+              "value": 1.0,
               "key": "_ABILITY_Sara_ElementalArt_COUNT",
               "useLimitRange": true,
-              "param2": 1.0,
-              "triggerID": 0.0
+              "maxValue": 1.0,
+              "minValue": 0.0
             }
           ],
           "onRemoved": [
             {
-              "$type": "ACPEIOBJLKD",
-              "shieldHP": true,
-              "repeatTimes": -1.0,
+              "$type": "AddGlobalValue",
+              "doOffStage": true,
+              "value": -1.0,
               "key": "_ABILITY_Sara_ElementalArt_COUNT",
               "useLimitRange": true,
-              "param2": 1.0,
-              "triggerID": 0.0
+              "maxValue": 1.0,
+              "minValue": 0.0
             }
           ]
         }
       },
       "onAdded": [
         {
-          "$type": "HLHAODOBHPK",
-          "shieldHP": true,
-          "repeatTimes": 0.0,
+          "$type": "SetGlobalValue",
+          "doOffStage": true,
+          "value": 0.0,
           "key": "_ABILITY_Sara_ElementalArt_COUNT",
           "useLimitRange": true,
-          "param2": 1.0,
-          "triggerID": 0.0
+          "maxValue": 1.0,
+          "minValue": 0.0
         }
       ],
       "onAbilityStart": [
         {
-          "$type": "AHHAGLJGKDD",
+          "$type": "ApplyModifier",
           "modifierName": "Blink"
         },
         {
-          "$type": "JJJCJIKOMNL",
+          "$type": "AvatarSkillStart",
           "skillID": 10562,
-          "costStaminaRatio": 1.0,
-          "IOFCJNLJBLE": 1.0
+          "cdRatio": 1.0,
+          "costStaminaRatio": 1.0
         },
         {
-          "$type": "AHHAGLJGKDD",
+          "$type": "ApplyModifier",
           "modifierName": "UNIQUE_Sara_ElementalArt_Mark"
         },
         {
-          "$type": "EHPLOGLPPAC",
-          "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_ElementalArt_HideSpark",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Lady_Bow_Sara_ElementalArt_HideSpark",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         },
         {
-          "$type": "DIADBHNCPGO",
+          "$type": "CreateGadget",
           "predicates": [
             {
-              "$type": "FBDCPKHCLDA",
+              "$type": "ByUnlockTalentParam",
               "talentParam": "Sara_Constellation_2"
             }
           ],
           "born": {
-            "$type": "DCIDKNMJCLI",
+            "$type": "ConfigBornBySelf",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": -1.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": -1.0
             },
             "onGround": true
           },
@@ -1693,23 +1693,23 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_Aim_TrackBullet_Material",
       "abilitySpecials": {
         "Damage": 0.0
       },
       "onAdded": [
         {
-          "$type": "ENDHKAOAKJH",
-          "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_Arrow_Fly_Trail",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_Avatar_Lady_Bow_Sara_Arrow_Fly_Trail",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         },
         {
-          "$type": "ENDHKAOAKJH",
-          "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_Arrow_Fly_Particle",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_Avatar_Lady_Bow_Sara_Arrow_Fly_Particle",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         }
       ],
       "onAbilityStart": [
@@ -1724,24 +1724,24 @@
           }
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "attackEvent": {
             "attackPattern": {
-              "$type": "MFBGHKHFOPA",
+              "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
               "checkHitLayerType": "Both",
               "born": {
-                "$type": "LPEJICOBGCF",
+                "$type": "ConfigBornByCollisionPoint",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 0.0,
-                  "MEJNCDENBNH": -0.5
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": -0.5
                 }
               },
               "size": {
-                "EPAKBMBAOKK": 0.10000000149011612,
-                "LNOGCFLGIJI": 0.10000000149011612,
-                "MEJNCDENBNH": 1.0
+                "x": 0.10000000149011612,
+                "y": 0.10000000149011612,
+                "z": 1.0
               }
             },
             "attackInfo": {
@@ -1749,10 +1749,10 @@
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": "Damage",
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentage": "Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Electric",
-                "MCCELHKGPOP": 25.0,
+                "elementDurability": 25.0,
                 "strikeType": "Pierce",
                 "enBreak": 20.0,
                 "enHeadBreak": 60.0,
@@ -1789,13 +1789,13 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "DIADBHNCPGO",
+          "$type": "CreateGadget",
           "born": {
-            "$type": "LPEJICOBGCF",
+            "$type": "ConfigBornByCollisionPoint",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "onGround": true
           },
@@ -1808,7 +1808,7 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_KarasShoot_DelayAttack",
       "abilitySpecials": {
         "KarasShoot_Thunderfall_Damage": 0.0,
@@ -1817,58 +1817,58 @@
       "modifiers": {
         "Timer": {
           "modifierName": "",
-          "elementDurability": 1.5,
-          "MCCELHKGPOP": 100.0,
+          "duration": 1.5,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
-              "$type": "EHPLOGLPPAC",
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_ElementalArt_Thunderfall",
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_ElementalArt_Thunderfall",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "onGround": true
               },
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "OIDAEPDOMEP",
+              "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_ABILITY_SARA_IS_CONSTELLATION_GADGET",
-                  "repeatTimes": 0.0,
+                  "value": 0.0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
-                  "$type": "KIBGAKKBNCL",
+                  "$type": "TriggerAttackEvent",
                   "attackEvent": {
                     "attackPattern": {
-                      "$type": "DCBLBBGDIAN",
+                      "$type": "ConfigAttackCircle",
                       "triggerType": "TriggerNoRepeat",
                       "massiveAttackRatio": 0.5,
                       "born": {
-                        "$type": "DCIDKNMJCLI",
+                        "$type": "ConfigBornBySelf",
                         "offset": {
-                          "EPAKBMBAOKK": 0.0,
-                          "LNOGCFLGIJI": 0.0,
-                          "MEJNCDENBNH": 0.0
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": 0.0
                         }
                       },
                       "height": 3.0,
-                      "DCBIMHFGHEJ": 6.0
+                      "radius": 6.0
                     },
                     "attackInfo": {
                       "attackTag": "Elemental_Art",
                       "attenuationTag": "",
                       "attenuationGroup": "default",
                       "attackProperty": {
-                        "actorGrassSubHurtDelta": "KarasShoot_Thunderfall_Damage",
-                        "actorWaterSubHurtDelta": 0.0,
+                        "damagePercentage": "KarasShoot_Thunderfall_Damage",
+                        "damagePercentageRatio": 0.0,
                         "elementType": "Electric",
-                        "MCCELHKGPOP": 25.0,
+                        "elementDurability": 25.0,
                         "strikeType": "Default",
                         "enBreak": 100.0,
                         "KLIMCEGLPLG": 0.0
@@ -1887,36 +1887,36 @@
               ],
               "failActions": [
                 {
-                  "$type": "KIBGAKKBNCL",
+                  "$type": "TriggerAttackEvent",
                   "attackEvent": {
                     "attackPattern": {
-                      "$type": "DCBLBBGDIAN",
+                      "$type": "ConfigAttackCircle",
                       "triggerType": "TriggerNoRepeat",
                       "massiveAttackRatio": 0.5,
                       "born": {
-                        "$type": "DCIDKNMJCLI",
+                        "$type": "ConfigBornBySelf",
                         "offset": {
-                          "EPAKBMBAOKK": 0.0,
-                          "LNOGCFLGIJI": 0.0,
-                          "MEJNCDENBNH": 0.0
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": 0.0
                         }
                       },
                       "height": 3.0,
-                      "DCBIMHFGHEJ": 6.0
+                      "radius": 6.0
                     },
                     "attackInfo": {
                       "attackTag": "Elemental_Art",
                       "attenuationTag": "",
                       "attenuationGroup": "default",
                       "attackProperty": {
-                        "actorGrassSubHurtDelta": [
+                        "damagePercentage": [
                           "KarasShoot_Thunderfall_Damage",
                           "Constellation_2_Ratio",
                           "MUL"
                         ],
-                        "actorWaterSubHurtDelta": 0.0,
+                        "damagePercentageRatio": 0.0,
                         "elementType": "Electric",
-                        "MCCELHKGPOP": 25.0,
+                        "elementDurability": 25.0,
                         "strikeType": "Default",
                         "KLIMCEGLPLG": 0.0
                       },
@@ -1934,16 +1934,16 @@
               ]
             },
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "JLNICGPAKAA",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
                 "campTargetType": "Alliance",
-                "doOffStage": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "AEHBHLJCPJK",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
@@ -1952,27 +1952,27 @@
               "modifierName": "Sara_AttackUp_Detect"
             },
             {
-              "$type": "IJMCEELGGIH",
+              "$type": "RemoveModifier",
               "modifierName": "KarasShoot_DelayAttack_Mark_Fx"
             }
           ]
         },
         "Sara_AttackUp_Detect": {
           "modifierName": "",
-          "elementDurability": 0.10000000149011612,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.10000000149011612,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "KMOHOKINPPE",
+              "$type": "DamageByAttackValue",
               "attackInfo": {
                 "attackTag": "Sara_AttackUp_Detect",
                 "attenuationTag": "",
                 "attenuationGroup": "default",
                 "attackProperty": {
-                  "actorGrassSubHurtDelta": 0.0,
-                  "actorWaterSubHurtDelta": 0.0,
+                  "damagePercentage": 0.0,
+                  "damagePercentageRatio": 0.0,
                   "elementType": "AntiFire",
-                  "MCCELHKGPOP": 0.0,
+                  "elementDurability": 0.0,
                   "enBreak": 0.0,
                   "KLIMCEGLPLG": 0.0
                 },
@@ -1983,47 +1983,47 @@
         },
         "KarasShoot_DelayAttack_Mark_Fx": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_ElementalArt_Trap",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_ElementalArt_Trap",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "GenerateElemBall_Handler": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
-              "$type": "OIDAEPDOMEP",
+              "$type": "Predicated",
               "target": "Target",
               "targetPredicates": [
                 {
-                  "$type": "EBMBJLDAEDL",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "AEHBHLJCPJK",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "repeatTimes": 0.0,
+                  "value": 0.0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
-                  "$type": "AHHAGLJGKDD",
-                  "shieldHP": true,
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
                   "modifierName": "Sara_ElementalArt_GenerateElemBall"
                 }
               ]
@@ -2033,22 +2033,22 @@
         "Sara_ElementalArt_GenerateElemBall": {
           "stacking": "Unique",
           "modifierName": "",
-          "elementDurability": 0.10000000149011612,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.10000000149011612,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "PMKKKIKFPBE",
-              "shieldHP": true,
+              "$type": "GenerateElemBall",
+              "doOffStage": true,
               "configID": 2020,
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 0.0,
-                  "MEJNCDENBNH": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
               },
-              "hpRatio": 1.0,
+              "ratio": 1.0,
               "baseEnergy": 9.0
             }
           ]
@@ -2056,38 +2056,38 @@
       },
       "onAdded": [
         {
-          "$type": "ACPEIOBJLKD",
-          "shieldHP": true,
+          "$type": "AddGlobalValue",
+          "doOffStage": true,
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "target": "Owner",
               "key": "_ABILITY_SARA_IS_DUMMY",
-              "repeatTimes": 1.0
+              "value": 1.0
             }
           ],
-          "repeatTimes": 1.0,
+          "value": 1.0,
           "key": "_ABILITY_SARA_IS_CONSTELLATION_GADGET",
           "useLimitRange": true,
-          "param2": 1.0,
-          "triggerID": 0.0
+          "maxValue": 1.0,
+          "minValue": 0.0
         },
         {
-          "$type": "AHHAGLJGKDD",
+          "$type": "ApplyModifier",
           "modifierName": "Timer"
         },
         {
-          "$type": "GNLJNLOMNGD",
+          "$type": "AttachModifier",
           "modifierName": "KarasShoot_DelayAttack_Mark_Fx"
         },
         {
-          "$type": "AHHAGLJGKDD",
+          "$type": "ApplyModifier",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "target": "Owner",
               "key": "_ABILITY_SARA_IS_DUMMY",
-              "repeatTimes": 0.0,
+              "value": 0.0,
               "compareType": "NoneOrEqual"
             }
           ],
@@ -2098,26 +2098,26 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_KarasShoot_Constellation_Dummy",
       "onAdded": [
         {
-          "$type": "ACPEIOBJLKD",
-          "shieldHP": true,
-          "repeatTimes": 1.0,
+          "$type": "AddGlobalValue",
+          "doOffStage": true,
+          "value": 1.0,
           "key": "_ABILITY_SARA_IS_DUMMY",
           "useLimitRange": true,
-          "param2": 1.0,
-          "triggerID": 0.0
+          "maxValue": 1.0,
+          "minValue": 0.0
         },
         {
-          "$type": "DIADBHNCPGO",
+          "$type": "CreateGadget",
           "born": {
-            "$type": "DCIDKNMJCLI",
+            "$type": "ConfigBornBySelf",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "onGround": true
           },
@@ -2130,11 +2130,11 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_Elemental_Burst",
       "abilityMixins": [
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Sara_ElementalBurst",
             "Sara_ElementalBurst_AS"
@@ -2143,7 +2143,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Sara_ElementalBurst"
           ],
@@ -2151,7 +2151,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Sara_ElementalBurst"
           ],
@@ -2159,7 +2159,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Sara_ElementalBurst"
           ],
@@ -2167,7 +2167,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "Sara_ElementalBurst"
           ],
@@ -2181,102 +2181,102 @@
       "modifiers": {
         "Sara_ElementalBurst_ThunderfallAlert": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "INPLALHENKA",
+              "$type": "SetGlobalPos",
               "target": "SelfAttackTarget",
-              "shieldHP": true,
+              "doOffStage": true,
               "key": "_ABILITY_Sara_ElementalBurst",
               "born": {
-                "$type": "HFHKOCIBBPM",
+                "$type": "ConfigBornBySelectedPoint",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 0.0,
-                  "MEJNCDENBNH": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
               },
               "setTarget": false
             },
             {
-              "$type": "EHPLOGLPPAC",
+              "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "EIBKEGAFPIM"
+                  "$type": "ByHasAttackTarget"
                 }
               ],
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_ElementalBurst_ThunderfallAlert",
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_ElementalBurst_ThunderfallAlert",
               "born": {
-                "$type": "BGKKAEIIDIA",
+                "$type": "ConfigBornByGlobalValue",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 0.0,
-                  "MEJNCDENBNH": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
                 "onGround": true,
                 "positionKey": "_ABILITY_Sara_ElementalBurst",
                 "directionKey": ""
               },
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "EHPLOGLPPAC",
+              "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "IAMKIOEEDMI",
+                  "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "EIBKEGAFPIM"
+                      "$type": "ByHasAttackTarget"
                     }
                   ]
                 }
               ],
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_ElementalBurst_ThunderfallAlert",
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_ElementalBurst_ThunderfallAlert",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 0.0,
-                  "MEJNCDENBNH": 5.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 5.0
                 },
                 "onGround": true
               },
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Sara_Elemental_Burst_Uchiwa": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_ElementalBurst_Uchiwa",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_ElementalBurst_Uchiwa",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Sara_ElementalBurst_Invincible": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
-              "$type": "HCPCNNBJEMK",
+              "$type": "AttachAbilityStateResistance",
               "resistanceListID": 11002
             }
           ]
         },
         "Sara_ElementalBurst_Weather": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "IJNJMKGGOKJ",
-              "damageRatio": "Skill",
+              "$type": "TriggerWeatherMixin",
+              "type": "Skill",
               "weatherPattern": "Weather_Sara_ElementBurst",
               "duration": 1.2000000476837158
             }
@@ -2284,43 +2284,43 @@
         },
         "Stealth_Controller": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "KEBEIINPIOE",
-              "OEMEMBJJJPH": "StealthOn"
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "StealthOn"
             }
           ]
         }
       },
       "onAbilityStart": [
         {
-          "$type": "ACPEIOBJLKD",
-          "repeatTimes": 1.0,
+          "$type": "AddGlobalValue",
+          "value": 1.0,
           "key": "_ABILITY_Sara_BaseAttack",
           "useLimitRange": true,
-          "param2": "FIGHT_PROP_BASE_ATTACK",
-          "triggerID": "FIGHT_PROP_BASE_ATTACK"
+          "maxValue": "FIGHT_PROP_BASE_ATTACK",
+          "minValue": "FIGHT_PROP_BASE_ATTACK"
         },
         {
-          "$type": "JJJCJIKOMNL",
+          "$type": "AvatarSkillStart",
           "skillID": 10565,
-          "costStaminaRatio": 1.0,
-          "IOFCJNLJBLE": 1.0
+          "cdRatio": 1.0,
+          "costStaminaRatio": 1.0
         },
         {
-          "$type": "DIADBHNCPGO",
+          "$type": "CreateGadget",
           "predicates": [
             {
-              "$type": "EIBKEGAFPIM"
+              "$type": "ByHasAttackTarget"
             }
           ],
           "born": {
-            "$type": "BGKKAEIIDIA",
+            "$type": "ConfigBornByGlobalValue",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "onGround": true,
             "positionKey": "_ABILITY_Sara_ElementalBurst",
@@ -2331,23 +2331,23 @@
           "campTargetType": "All"
         },
         {
-          "$type": "DIADBHNCPGO",
+          "$type": "CreateGadget",
           "predicates": [
             {
-              "$type": "IAMKIOEEDMI",
+              "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "EIBKEGAFPIM"
+                  "$type": "ByHasAttackTarget"
                 }
               ]
             }
           ],
           "born": {
-            "$type": "DCIDKNMJCLI",
+            "$type": "ConfigBornBySelf",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 5.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 5.0
             },
             "onGround": true
           },
@@ -2360,7 +2360,7 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_Elemental_Burst_AttackWave_Trigger",
       "abilitySpecials": {
         "Elemental_Burst_Thunderfall_Damage": 0.0
@@ -2368,8 +2368,8 @@
       "modifiers": {
         "Elemental_Burst_ThunderFall_Attack": {
           "modifierName": "",
-          "elementDurability": 0.10000000149011612,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.10000000149011612,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "DFKBABGIPEH",
@@ -2387,31 +2387,31 @@
               }
             },
             {
-              "$type": "KIBGAKKBNCL",
+              "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "DCBLBBGDIAN",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
                   },
                   "height": 3.0,
-                  "DCBIMHFGHEJ": 6.0
+                  "radius": 6.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "actorGrassSubHurtDelta": "Elemental_Burst_Thunderfall_Damage",
-                    "actorWaterSubHurtDelta": 0.0,
+                    "damagePercentage": "Elemental_Burst_Thunderfall_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Electric",
-                    "MCCELHKGPOP": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 100.0,
                     "KLIMCEGLPLG": 0.0
@@ -2428,16 +2428,16 @@
               "targetType": "Enemy"
             },
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "JLNICGPAKAA",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
                 "campTargetType": "Alliance",
-                "doOffStage": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "AEHBHLJCPJK",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
@@ -2449,20 +2449,20 @@
         },
         "Sara_AttackUp_Detect": {
           "modifierName": "",
-          "elementDurability": 0.10000000149011612,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.10000000149011612,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "KMOHOKINPPE",
+              "$type": "DamageByAttackValue",
               "attackInfo": {
                 "attackTag": "Sara_AttackUp_Detect",
                 "attenuationTag": "",
                 "attenuationGroup": "default",
                 "attackProperty": {
-                  "actorGrassSubHurtDelta": 0.0,
-                  "actorWaterSubHurtDelta": 0.0,
+                  "damagePercentage": 0.0,
+                  "damagePercentageRatio": 0.0,
                   "elementType": "AntiFire",
-                  "MCCELHKGPOP": 0.0,
+                  "elementDurability": 0.0,
                   "enBreak": 0.0,
                   "KLIMCEGLPLG": 0.0
                 },
@@ -2473,50 +2473,50 @@
         },
         "AttackWave_Timer": {
           "modifierName": "",
-          "elementDurability": 0.5,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.5,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "EHPLOGLPPAC",
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_ElementalBurst_Thunderfall",
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_ElementalBurst_Thunderfall",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": 0.0,
-                  "MEJNCDENBNH": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
                 "onGround": true
               },
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "OIDAEPDOMEP",
+              "$type": "Predicated",
               "targetPredicates": [
                 {
-                  "$type": "FBDCPKHCLDA",
+                  "$type": "ByUnlockTalentParam",
                   "talentParam": "Sara_Constellation_4"
                 }
               ],
               "successActions": [
                 {
-                  "$type": "DIADBHNCPGO",
+                  "$type": "CreateGadget",
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "onGround": true,
                     "onGroundIgnoreWater": true,
                     "direction": {
-                      "$type": "JADFABLHBEO",
+                      "$type": "ConfigDirectionByEntity",
                       "angleOffset": {
-                        "EPAKBMBAOKK": 0.0,
-                        "LNOGCFLGIJI": 60.0,
-                        "MEJNCDENBNH": 0.0
+                        "x": 0.0,
+                        "y": 60.0,
+                        "z": 0.0
                       }
                     }
                   },
@@ -2525,22 +2525,22 @@
                   "campTargetType": "Enemy"
                 },
                 {
-                  "$type": "DIADBHNCPGO",
+                  "$type": "CreateGadget",
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "onGround": true,
                     "onGroundIgnoreWater": true,
                     "direction": {
-                      "$type": "JADFABLHBEO",
+                      "$type": "ConfigDirectionByEntity",
                       "angleOffset": {
-                        "EPAKBMBAOKK": 0.0,
-                        "LNOGCFLGIJI": 120.0,
-                        "MEJNCDENBNH": 0.0
+                        "x": 0.0,
+                        "y": 120.0,
+                        "z": 0.0
                       }
                     }
                   },
@@ -2549,22 +2549,22 @@
                   "campTargetType": "Enemy"
                 },
                 {
-                  "$type": "DIADBHNCPGO",
+                  "$type": "CreateGadget",
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "onGround": true,
                     "onGroundIgnoreWater": true,
                     "direction": {
-                      "$type": "JADFABLHBEO",
+                      "$type": "ConfigDirectionByEntity",
                       "angleOffset": {
-                        "EPAKBMBAOKK": 0.0,
-                        "LNOGCFLGIJI": 180.0,
-                        "MEJNCDENBNH": 0.0
+                        "x": 0.0,
+                        "y": 180.0,
+                        "z": 0.0
                       }
                     }
                   },
@@ -2573,22 +2573,22 @@
                   "campTargetType": "Enemy"
                 },
                 {
-                  "$type": "DIADBHNCPGO",
+                  "$type": "CreateGadget",
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "onGround": true,
                     "onGroundIgnoreWater": true,
                     "direction": {
-                      "$type": "JADFABLHBEO",
+                      "$type": "ConfigDirectionByEntity",
                       "angleOffset": {
-                        "EPAKBMBAOKK": 0.0,
-                        "LNOGCFLGIJI": 240.0,
-                        "MEJNCDENBNH": 0.0
+                        "x": 0.0,
+                        "y": 240.0,
+                        "z": 0.0
                       }
                     }
                   },
@@ -2597,22 +2597,22 @@
                   "campTargetType": "Enemy"
                 },
                 {
-                  "$type": "DIADBHNCPGO",
+                  "$type": "CreateGadget",
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "onGround": true,
                     "onGroundIgnoreWater": true,
                     "direction": {
-                      "$type": "JADFABLHBEO",
+                      "$type": "ConfigDirectionByEntity",
                       "angleOffset": {
-                        "EPAKBMBAOKK": 0.0,
-                        "LNOGCFLGIJI": 300.0,
-                        "MEJNCDENBNH": 0.0
+                        "x": 0.0,
+                        "y": 300.0,
+                        "z": 0.0
                       }
                     }
                   },
@@ -2621,22 +2621,22 @@
                   "campTargetType": "Enemy"
                 },
                 {
-                  "$type": "DIADBHNCPGO",
+                  "$type": "CreateGadget",
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "onGround": true,
                     "onGroundIgnoreWater": true,
                     "direction": {
-                      "$type": "JADFABLHBEO",
+                      "$type": "ConfigDirectionByEntity",
                       "angleOffset": {
-                        "EPAKBMBAOKK": 0.0,
-                        "LNOGCFLGIJI": 360.0,
-                        "MEJNCDENBNH": 0.0
+                        "x": 0.0,
+                        "y": 360.0,
+                        "z": 0.0
                       }
                     }
                   },
@@ -2647,22 +2647,22 @@
               ],
               "failActions": [
                 {
-                  "$type": "DIADBHNCPGO",
+                  "$type": "CreateGadget",
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "onGround": true,
                     "onGroundIgnoreWater": true,
                     "direction": {
-                      "$type": "JADFABLHBEO",
+                      "$type": "ConfigDirectionByEntity",
                       "angleOffset": {
-                        "EPAKBMBAOKK": 0.0,
-                        "LNOGCFLGIJI": 0.0,
-                        "MEJNCDENBNH": 0.0
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
                     }
                   },
@@ -2671,22 +2671,22 @@
                   "campTargetType": "Enemy"
                 },
                 {
-                  "$type": "DIADBHNCPGO",
+                  "$type": "CreateGadget",
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "onGround": true,
                     "onGroundIgnoreWater": true,
                     "direction": {
-                      "$type": "JADFABLHBEO",
+                      "$type": "ConfigDirectionByEntity",
                       "angleOffset": {
-                        "EPAKBMBAOKK": 0.0,
-                        "LNOGCFLGIJI": 90.0,
-                        "MEJNCDENBNH": 0.0
+                        "x": 0.0,
+                        "y": 90.0,
+                        "z": 0.0
                       }
                     }
                   },
@@ -2695,22 +2695,22 @@
                   "campTargetType": "Enemy"
                 },
                 {
-                  "$type": "DIADBHNCPGO",
+                  "$type": "CreateGadget",
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "onGround": true,
                     "onGroundIgnoreWater": true,
                     "direction": {
-                      "$type": "JADFABLHBEO",
+                      "$type": "ConfigDirectionByEntity",
                       "angleOffset": {
-                        "EPAKBMBAOKK": 0.0,
-                        "LNOGCFLGIJI": 180.0,
-                        "MEJNCDENBNH": 0.0
+                        "x": 0.0,
+                        "y": 180.0,
+                        "z": 0.0
                       }
                     }
                   },
@@ -2719,22 +2719,22 @@
                   "campTargetType": "Enemy"
                 },
                 {
-                  "$type": "DIADBHNCPGO",
+                  "$type": "CreateGadget",
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "onGround": true,
                     "onGroundIgnoreWater": true,
                     "direction": {
-                      "$type": "JADFABLHBEO",
+                      "$type": "ConfigDirectionByEntity",
                       "angleOffset": {
-                        "EPAKBMBAOKK": 0.0,
-                        "LNOGCFLGIJI": 270.0,
-                        "MEJNCDENBNH": 0.0
+                        "x": 0.0,
+                        "y": 270.0,
+                        "z": 0.0
                       }
                     }
                   },
@@ -2749,11 +2749,11 @@
       },
       "onAdded": [
         {
-          "$type": "AHHAGLJGKDD",
+          "$type": "ApplyModifier",
           "modifierName": "AttackWave_Timer"
         },
         {
-          "$type": "AHHAGLJGKDD",
+          "$type": "ApplyModifier",
           "modifierName": "Elemental_Burst_ThunderFall_Attack"
         }
       ]
@@ -2761,7 +2761,7 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_Elemental_Burst_AttackWave",
       "abilitySpecials": {
         "Elemental_Burst_AttackWave_Damage": 0.0
@@ -2769,26 +2769,26 @@
       "modifiers": {
         "AttackWave_Timer": {
           "modifierName": "",
-          "elementDurability": 0.800000011920929,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.800000011920929,
+          "elementDurability": 100.0,
           "onRemoved": [
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "modifierName": "Elemental_Burst_AttackWave_DamageHandler"
             }
           ]
         },
         "Elemental_Burst_AttackWave_DamageHandler": {
           "modifierName": "",
-          "elementDurability": 1.399999976158142,
-          "MCCELHKGPOP": 100.0,
+          "duration": 1.399999976158142,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onAdded": [
             {
-              "$type": "NLFNDLFMJHG",
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_AttackWave_Thunderfall",
+              "$type": "FireSubEmitterEffect",
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_AttackWave_Thunderfall",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "onGround": true
               }
             },
@@ -2802,16 +2802,16 @@
               }
             },
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "JLNICGPAKAA",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR3",
                 "campTargetType": "Alliance",
-                "doOffStage": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "AEHBHLJCPJK",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
@@ -2820,32 +2820,32 @@
               "modifierName": "Sara_AttackUp_Detect"
             },
             {
-              "$type": "KIBGAKKBNCL",
+              "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "DCBLBBGDIAN",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "massiveAttackRatio": 0.0,
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
                   },
                   "height": 3.0,
-                  "DCBIMHFGHEJ": 3.0
+                  "radius": 3.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "Elemental_Burst",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "actorGrassSubHurtDelta": "Elemental_Burst_AttackWave_Damage",
-                    "actorWaterSubHurtDelta": 0.0,
+                    "damagePercentage": "Elemental_Burst_AttackWave_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Electric",
-                    "MCCELHKGPOP": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 20.0,
                     "KLIMCEGLPLG": 0.0
@@ -2864,10 +2864,10 @@
           ],
           "onThinkInterval": [
             {
-              "$type": "NLFNDLFMJHG",
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_AttackWave_Thunderfall",
+              "$type": "FireSubEmitterEffect",
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_AttackWave_Thunderfall",
               "born": {
-                "$type": "DCIDKNMJCLI",
+                "$type": "ConfigBornBySelf",
                 "onGround": true
               }
             },
@@ -2881,54 +2881,54 @@
               }
             },
             {
-              "$type": "ACPEIOBJLKD",
-              "repeatTimes": 1.0,
+              "$type": "AddGlobalValue",
+              "value": 1.0,
               "key": "_AttackWave_AttackCount",
               "useLimitRange": true,
-              "param2": 5.0,
-              "triggerID": 0.0
+              "maxValue": 5.0,
+              "minValue": 0.0
             },
             {
-              "$type": "EHPLOGLPPAC",
+              "$type": "FireEffect",
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_AttackWave_AttackCount",
-                  "repeatTimes": 4.0,
+                  "value": 4.0,
                   "compareType": "MoreThanAndEqual"
                 }
               ],
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_AttackWave_Thunderfall_End",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_AttackWave_Thunderfall_End",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "KIBGAKKBNCL",
+              "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "DCBLBBGDIAN",
+                  "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
                   "massiveAttackRatio": 0.0,
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
                   },
                   "height": 3.0,
-                  "DCBIMHFGHEJ": 3.0
+                  "radius": 3.0
                 },
                 "attackInfo": {
                   "attackTag": "Elemental_Burst",
                   "attenuationTag": "Elemental_Burst",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "actorGrassSubHurtDelta": "Elemental_Burst_AttackWave_Damage",
-                    "actorWaterSubHurtDelta": 0.0,
+                    "damagePercentage": "Elemental_Burst_AttackWave_Damage",
+                    "damagePercentageRatio": 0.0,
                     "elementType": "Electric",
-                    "MCCELHKGPOP": 25.0,
+                    "elementDurability": 25.0,
                     "strikeType": "Default",
                     "enBreak": 20.0,
                     "KLIMCEGLPLG": 0.0
@@ -2945,16 +2945,16 @@
               "targetType": "Enemy"
             },
             {
-              "$type": "AHHAGLJGKDD",
+              "$type": "ApplyModifier",
               "otherTargets": {
-                "$type": "JLNICGPAKAA",
+                "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR3",
                 "campTargetType": "Alliance",
-                "doOffStage": 1.0
+                "sizeRatio": 1.0
               },
               "predicates": [
                 {
-                  "$type": "AEHBHLJCPJK",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
@@ -2966,20 +2966,20 @@
         },
         "Sara_AttackUp_Detect": {
           "modifierName": "",
-          "elementDurability": 0.10000000149011612,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.10000000149011612,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "KMOHOKINPPE",
+              "$type": "DamageByAttackValue",
               "attackInfo": {
                 "attackTag": "Sara_AttackUp_Detect",
                 "attenuationTag": "",
                 "attenuationGroup": "default",
                 "attackProperty": {
-                  "actorGrassSubHurtDelta": 0.0,
-                  "actorWaterSubHurtDelta": 0.0,
+                  "damagePercentage": 0.0,
+                  "damagePercentageRatio": 0.0,
                   "elementType": "AntiFire",
-                  "MCCELHKGPOP": 0.0,
+                  "elementDurability": 0.0,
                   "enBreak": 0.0,
                   "KLIMCEGLPLG": 0.0
                 },
@@ -2991,7 +2991,7 @@
       },
       "onAdded": [
         {
-          "$type": "AHHAGLJGKDD",
+          "$type": "ApplyModifier",
           "modifierName": "AttackWave_Timer"
         }
       ]
@@ -2999,13 +2999,13 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_ElementalBurst_PostEffect",
       "modifiers": {
         "CameraEffect": {
           "modifierName": "",
-          "elementDurability": 0.5,
-          "MCCELHKGPOP": 100.0,
+          "duration": 0.5,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "GEHHPGLKECC",
@@ -3017,7 +3017,7 @@
       },
       "onAbilityStart": [
         {
-          "$type": "AHHAGLJGKDD",
+          "$type": "ApplyModifier",
           "modifierName": "CameraEffect"
         }
       ]
@@ -3025,7 +3025,7 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_AttackUp",
       "abilitySpecials": {
         "Sara_AttackUp_Ratio": 0.0,
@@ -3036,21 +3036,21 @@
       "modifiers": {
         "Sara_AttackUp_Handler": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
-              "$type": "OIDAEPDOMEP",
+              "$type": "Predicated",
               "target": "Target",
-              "shieldHP": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "EBMBJLDAEDL",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Sara_AttackUp_Detect"
                   ]
                 },
                 {
-                  "$type": "AEHBHLJCPJK",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Avatar"
                   ]
@@ -3058,30 +3058,30 @@
               ],
               "successActions": [
                 {
-                  "$type": "ACPEIOBJLKD",
-                  "shieldHP": true,
-                  "repeatTimes": 1.0,
+                  "$type": "AddGlobalValue",
+                  "doOffStage": true,
+                  "value": 1.0,
                   "key": "_ABILITY_Sara_BaseAttack",
                   "useLimitRange": true,
-                  "param2": "FIGHT_PROP_BASE_ATTACK",
-                  "triggerID": "FIGHT_PROP_BASE_ATTACK"
+                  "maxValue": "FIGHT_PROP_BASE_ATTACK",
+                  "minValue": "FIGHT_PROP_BASE_ATTACK"
                 },
                 {
-                  "$type": "DBGFNDFDIBF",
-                  "shieldHP": true,
+                  "$type": "SetGlobalValueToOverrideMap",
+                  "doOffStage": true,
                   "globalValueKey": "_ABILITY_Sara_BaseAttack",
                   "overrideMapKey": "Avatar_Sara_BaseAttack"
                 },
                 {
-                  "$type": "FKNNJLHBIOD",
+                  "$type": "RemoveUniqueModifier",
                   "target": "Target",
-                  "shieldHP": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Sara_AttackUp"
                 },
                 {
-                  "$type": "GNLJNLOMNGD",
+                  "$type": "AttachModifier",
                   "target": "Target",
-                  "shieldHP": true,
+                  "doOffStage": true,
                   "modifierName": "UNIQUE_Sara_AttackUp"
                 }
               ]
@@ -3090,9 +3090,9 @@
         },
         "UNIQUE_Sara_AttackUp": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": "Sara_AttackUp_Duration",
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": "Sara_AttackUp_Duration",
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AttackExtraDelta": [
               "Avatar_Sara_BaseAttack",
@@ -3103,40 +3103,40 @@
           "state": "AttackUp",
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Lady_Bow_Sara_ElementalArt_ElecAddHurt",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Lady_Bow_Sara_ElementalArt_ElecAddHurt",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "FKNNJLHBIOD",
-              "shieldHP": true,
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "FBDCPKHCLDA",
+                  "$type": "ByUnlockTalentParam",
                   "talentParam": "Sara_Constellation_6"
                 }
               ],
               "modifierName": "UNIQUE_Sara_Constellation_6_CriticalHurt"
             },
             {
-              "$type": "GNLJNLOMNGD",
-              "shieldHP": true,
+              "$type": "AttachModifier",
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "FBDCPKHCLDA",
+                  "$type": "ByUnlockTalentParam",
                   "talentParam": "Sara_Constellation_6"
                 }
               ],
               "modifierName": "UNIQUE_Sara_Constellation_6_CriticalHurt"
             },
             {
-              "$type": "LMFHAOAPGKG",
+              "$type": "TriggerAbility",
               "target": "Caster",
-              "shieldHP": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "FBDCPKHCLDA",
+                  "$type": "ByUnlockTalentParam",
                   "talentParam": "Sara_PermanentSkill_1"
                 }
               ],
@@ -3147,18 +3147,18 @@
         },
         "UNIQUE_Sara_Constellation_6_CriticalHurt": {
           "modifierName": "",
-          "forceTriggerWhenChangeAuthority": true,
-          "elementDurability": "Sara_AttackUp_Duration",
-          "MCCELHKGPOP": 100.0,
+          "isUnique": true,
+          "duration": "Sara_AttackUp_Duration",
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
-              "$type": "JNBKKMJIOFE",
+              "$type": "ModifyDamageMixin",
               "ignoreEventInfo": true,
-              "actorWaterSubHurtDelta": 0.0,
-              "actorIceSubHurtDelta": "Sara_Constellation_6_CriticalHurt",
+              "damagePercentageRatio": 0.0,
+              "bonusCriticalHurt": "Sara_Constellation_6_CriticalHurt",
               "predicates": [
                 {
-                  "$type": "BCDFMFBKOJI",
+                  "$type": "ByHitElement",
                   "element": "Electric"
                 }
               ]
@@ -3168,8 +3168,8 @@
       },
       "onAdded": [
         {
-          "$type": "AHHAGLJGKDD",
-          "shieldHP": true,
+          "$type": "ApplyModifier",
+          "doOffStage": true,
           "modifierName": "Sara_AttackUp_Handler"
         }
       ]
@@ -3177,48 +3177,48 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_ShootArrow_Damage",
       "abilityMixins": [
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK01"
           ],
-          "actorGrassSubHurtDelta": "NormalAttack_01_DamagePercentage",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "NormalAttack_01_DamagePercentage",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK02"
           ],
-          "actorGrassSubHurtDelta": "NormalAttack_02_DamagePercentage",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "NormalAttack_02_DamagePercentage",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK03"
           ],
-          "actorGrassSubHurtDelta": "NormalAttack_03_DamagePercentage",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "NormalAttack_03_DamagePercentage",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK04"
           ],
-          "actorGrassSubHurtDelta": "NormalAttack_04_DamagePercentage",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "NormalAttack_04_DamagePercentage",
+          "damagePercentageRatio": 0.0
         },
         {
-          "$type": "JNBKKMJIOFE",
+          "$type": "ModifyDamageMixin",
           "animEventNames": [
             "ATK05"
           ],
-          "actorGrassSubHurtDelta": "NormalAttack_05_DamagePercentage",
-          "actorWaterSubHurtDelta": 0.0
+          "damagePercentage": "NormalAttack_05_DamagePercentage",
+          "damagePercentageRatio": 0.0
         }
       ],
       "abilitySpecials": {
@@ -3232,65 +3232,65 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_ElementalBurst_Bullet_Material",
       "abilitySpecials": {
         "ThunderFall_Damage": 1.0
       },
       "onAdded": [
         {
-          "$type": "ENDHKAOAKJH",
-          "rotationDampTime": "Eff_ElectricMagic_Arrow_Fly_Trail",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_ElectricMagic_Arrow_Fly_Trail",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         },
         {
-          "$type": "ENDHKAOAKJH",
-          "rotationDampTime": "Eff_ElectricMagic_Arrow_Fly_Particle",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_ElectricMagic_Arrow_Fly_Particle",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         }
       ],
       "onAbilityStart": [
         {
-          "$type": "EHPLOGLPPAC",
-          "rotationDampTime": "Eff_Monster_Invoker_Deacon_Electric_NormalAtk01_Damage",
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Invoker_Deacon_Electric_NormalAtk01_Damage",
           "born": {
-            "$type": "LPEJICOBGCF",
+            "$type": "ConfigBornByCollisionPoint",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "onGround": true
           },
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "attackEvent": {
             "attackPattern": {
-              "$type": "KHBCMELAIKO",
+              "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
               "ignoreMassive": true,
               "born": {
-                "$type": "EIIDFNOJEFD",
+                "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "RootNode",
                 "attachPointTargetType": "Self"
               },
-              "DCBIMHFGHEJ": 2.5
+              "radius": 2.5
             },
             "attackInfo": {
               "attackTag": "Elemental_Burst",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": "ThunderFall_Damage",
-                "actorWaterSubHurtDelta": 0.0,
+                "damagePercentage": "ThunderFall_Damage",
+                "damagePercentageRatio": 0.0,
                 "elementType": "Electric",
                 "elementRank": 1.5,
-                "MCCELHKGPOP": 50.0,
+                "elementDurability": 50.0,
                 "enBreak": 150.0,
                 "KLIMCEGLPLG": 0.0
               },
@@ -3305,13 +3305,13 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "DIADBHNCPGO",
+          "$type": "CreateGadget",
           "born": {
-            "$type": "LPEJICOBGCF",
+            "$type": "ConfigBornByCollisionPoint",
             "offset": {
-              "EPAKBMBAOKK": 0.0,
-              "LNOGCFLGIJI": 0.0,
-              "MEJNCDENBNH": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "onGround": true
           },
@@ -3324,7 +3324,7 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_PermanentSkill_1",
       "abilitySpecials": {
         "Sara_PermanentSkill_1_ReduceColdDown": 0.0,
@@ -3333,37 +3333,37 @@
       "modifiers": {
         "Sara_PermanentSkill_1_Attack_Handler": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
-              "$type": "OIDAEPDOMEP",
+              "$type": "Predicated",
               "target": "Target",
-              "shieldHP": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "EBMBJLDAEDL",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art",
                     "Elemental_Burst"
                   ]
                 },
                 {
-                  "$type": "AEHBHLJCPJK",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "repeatTimes": 0.0,
+                  "value": 0.0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
-                  "$type": "LMFHAOAPGKG",
-                  "shieldHP": true,
+                  "$type": "TriggerAbility",
+                  "doOffStage": true,
                   "abilityName": "Avatar_Sara_PermanentSkill_1"
                 }
               ]
@@ -3373,29 +3373,29 @@
         "Avatar_Sara_PermanentSkill_1_ReduceColdDown": {
           "stacking": "Unique",
           "modifierName": "",
-          "elementDurability": "ReduceColdDown_CD",
-          "MCCELHKGPOP": 100.0,
+          "duration": "ReduceColdDown_CD",
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "IMIOFAIILMH",
-              "shieldHP": true,
+              "$type": "ModifyAvatarSkillCD",
+              "doOffStage": true,
               "skillID": 10562,
-              "cdMin": "Sara_PermanentSkill_1_ReduceColdDown"
+              "cdDelta": "Sara_PermanentSkill_1_ReduceColdDown"
             }
           ]
         }
       },
       "onAdded": [
         {
-          "$type": "AHHAGLJGKDD",
-          "shieldHP": true,
+          "$type": "ApplyModifier",
+          "doOffStage": true,
           "modifierName": "Sara_PermanentSkill_1_Attack_Handler"
         }
       ],
       "onAbilityStart": [
         {
-          "$type": "AHHAGLJGKDD",
-          "shieldHP": true,
+          "$type": "ApplyModifier",
+          "doOffStage": true,
           "modifierName": "Avatar_Sara_PermanentSkill_1_ReduceColdDown"
         }
       ]
@@ -3403,7 +3403,7 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_PermanentSkill_2",
       "abilitySpecials": {
         "ReviveEnergy_CD": 0.0,
@@ -3412,36 +3412,36 @@
       "modifiers": {
         "Sara_PermanentSkill_2_Handler": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAttackLanded": [
             {
-              "$type": "OIDAEPDOMEP",
+              "$type": "Predicated",
               "target": "Target",
-              "shieldHP": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
-                  "$type": "EBMBJLDAEDL",
+                  "$type": "ByAttackTags",
                   "attackTags": [
                     "Elemental_Art"
                   ]
                 },
                 {
-                  "$type": "AEHBHLJCPJK",
+                  "$type": "ByEntityTypes",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "repeatTimes": 0.0,
+                  "value": 0.0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
-                  "$type": "AHHAGLJGKDD",
-                  "shieldHP": true,
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
                   "modifierName": "Sara_PermanentSkill_2_ReviveEnergy"
                 }
               ]
@@ -3451,22 +3451,22 @@
         "Sara_PermanentSkill_2_ReviveEnergy": {
           "stacking": "Unique",
           "modifierName": "",
-          "elementDurability": "ReviveEnergy_CD",
-          "MCCELHKGPOP": 100.0,
+          "duration": "ReviveEnergy_CD",
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "IDGCPDMDNEG",
+              "$type": "ReviveElemEnergy",
               "target": "AllPlayerAvatars",
-              "shieldHP": true,
+              "doOffStage": true,
               "predicates": [
                 {
-                  "$type": "JNGIOOCDJEA",
+                  "$type": "ByTargetPositionToSelfPosition",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": 40.0,
+                  "value": 40.0,
                   "BBKEGPFIAJL": ""
                 }
               ],
-              "repeatTimes": [
+              "value": [
                 "ReviveEnergy_Ratio",
                 "FIGHT_PROP_NONEXTRA_CHARGE_EFFICIENCY",
                 "MUL"
@@ -3477,8 +3477,8 @@
       },
       "onAdded": [
         {
-          "$type": "AHHAGLJGKDD",
-          "shieldHP": true,
+          "$type": "ApplyModifier",
+          "doOffStage": true,
           "modifierName": "Sara_PermanentSkill_2_Handler"
         }
       ]
@@ -3486,16 +3486,16 @@
   },
   {
     "Default": {
-      "$type": "ECIJFKLDIPB",
+      "$type": "ConfigAbility",
       "abilityName": "Avatar_Sara_FallingAnthem",
       "abilityMixins": [
         {
-          "$type": "IKPEFCGOOJO",
+          "$type": "AvatarChangeSkillMixin",
           "jumpSkillID": 5056010,
           "flySkillID": 5056010
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS"
           ],
@@ -3503,7 +3503,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_Loop"
           ],
@@ -3511,7 +3511,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BAEGHHFFMGP",
+          "$type": "AttachToAnimatorStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS_2",
             "FallingAnthem_Loop",
@@ -3521,7 +3521,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS"
           ],
@@ -3529,7 +3529,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop",
@@ -3540,7 +3540,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop",
@@ -3551,7 +3551,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop"
@@ -3560,7 +3560,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop",
@@ -3571,7 +3571,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS"
           ],
@@ -3579,7 +3579,7 @@
           "JGGNBGHKMJG": ""
         },
         {
-          "$type": "BCJDIOHHNHP",
+          "$type": "AttachToStateIDMixin",
           "stateIDs": [
             "FallingAnthem_BS",
             "FallingAnthem_Loop"
@@ -3607,25 +3607,25 @@
       "modifiers": {
         "FallingAnthem_AttachEffect_BS_01": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
-              "rotationDampTime": "Eff_Avatar_Bow_FallAnthem_BS_01",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Bow_FallAnthem_BS_01",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "FallingAnthem_BS_Material": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "EHPLOGLPPAC",
-              "rotationDampTime": "Eff_Avatar_Bow_FallAnthem_BS",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Bow_FallAnthem_BS",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ],
           "onRemoved": [
@@ -3641,7 +3641,7 @@
         },
         "FallingAnthem_BS_VelocityForce_Initialize": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_AddGravityScale": -2.0
           },
@@ -3656,33 +3656,33 @@
         },
         "FallingAnthem_LoopDamage": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "thinkInterval": 0.30000001192092896,
           "onThinkInterval": [
             {
-              "$type": "KIBGAKKBNCL",
+              "$type": "TriggerAttackEvent",
               "attackEvent": {
                 "attackPattern": {
-                  "$type": "KHBCMELAIKO",
+                  "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "DCIDKNMJCLI",
+                    "$type": "ConfigBornBySelf",
                     "offset": {
-                      "EPAKBMBAOKK": 0.0,
-                      "LNOGCFLGIJI": 0.0,
-                      "MEJNCDENBNH": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
                   },
-                  "DCBIMHFGHEJ": 1.0
+                  "radius": 1.0
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
                   "attenuationTag": "",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "actorGrassSubHurtDelta": "FallingAnthem_Normal_Loop_Damage",
-                    "actorWaterSubHurtDelta": 0.0,
-                    "MCCELHKGPOP": 0.0,
+                    "damagePercentage": "FallingAnthem_Normal_Loop_Damage",
+                    "damagePercentageRatio": 0.0,
+                    "elementDurability": 0.0,
                     "strikeType": "Pierce",
                     "enBreak": 10.0,
                     "attackType": "Melee",
@@ -3702,149 +3702,149 @@
         },
         "FallingAnthem_FallingDamageImmune_01": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "LENKODOFEAF",
+              "$type": "ClearGlobalValue",
               "key": "_ABILITY_FallingAttack_Altitude"
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv0"
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "repeatTimes": "FallingAnthem_FallingDamageRatio_Lv0",
+              "value": "FallingAnthem_FallingDamageRatio_Lv0",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv0",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv0"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv0"
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv1"
+                  "value": "FallingAnthem_Altitude_Lv1"
                 },
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv0"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv0"
                 }
               ],
-              "repeatTimes": "FallingAnthem_FallingDamageRatio_Lv1",
+              "value": "FallingAnthem_FallingDamageRatio_Lv1",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv1",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv1"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv1"
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv2"
+                  "value": "FallingAnthem_Altitude_Lv2"
                 },
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv1"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv1"
                 }
               ],
-              "repeatTimes": "FallingAnthem_FallingDamageRatio_Lv2",
+              "value": "FallingAnthem_FallingDamageRatio_Lv2",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv2",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv2"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv2"
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv3"
+                  "value": "FallingAnthem_Altitude_Lv3"
                 },
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv2"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv2"
                 }
               ],
-              "repeatTimes": "FallingAnthem_FallingDamageRatio_Lv3",
+              "value": "FallingAnthem_FallingDamageRatio_Lv3",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv3",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv3"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv3"
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": "FallingAnthem_Altitude_Lv3"
+                  "$type": "ByTargetAltitude",
+                  "value": "FallingAnthem_Altitude_Lv3"
                 }
               ],
-              "repeatTimes": "FallingAnthem_FallingDamageRatio_Lv4",
+              "value": "FallingAnthem_FallingDamageRatio_Lv4",
               "key": "_ABILITY_FallingAttack_Altitude",
               "useLimitRange": true,
-              "param2": "FallingAnthem_FallingDamageRatio_Lv4",
-              "triggerID": "FallingAnthem_FallingDamageRatio_Lv4"
+              "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
+              "minValue": "FallingAnthem_FallingDamageRatio_Lv4"
             },
             {
-              "$type": "GNLJNLOMNGD",
+              "$type": "AttachModifier",
               "modifierName": "FallingAnthem_FallingDamageImmune_02"
             }
           ]
         },
         "FallingAnthem_FallingDamageImmune_02": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "DBGFNDFDIBF",
+              "$type": "SetGlobalValueToOverrideMap",
               "globalValueKey": "_ABILITY_FallingAttack_Altitude",
               "overrideMapKey": "FallingAnthem_FallingDamageRatio"
             },
             {
-              "$type": "GNLJNLOMNGD",
+              "$type": "AttachModifier",
               "modifierName": "FallingAnthem_FallingDamageImmune_03"
             }
           ]
         },
         "FallingAnthem_FallingDamageImmune_03": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "properties": {
             "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
           }
         },
         "FallingAnthem_Loop_Normal": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ENDHKAOAKJH",
+              "$type": "AttachEffect",
               "predicates": [
                 {
-                  "$type": "HBBHADONLIE",
+                  "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_FallingAnthem_UseCamera",
-                  "repeatTimes": 1.0,
+                  "value": 1.0,
                   "forceByCaster": true
                 }
               ],
-              "rotationDampTime": "Eff_Avatar_Bow_FallAnthem_Loop_02",
-              "FKNFFAHLCHH": 1.0,
-              "GDNGPLIHABI": -1.0
+              "effectPattern": "Eff_Avatar_Bow_FallAnthem_Loop_02",
+              "scale": 1.0,
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Inertia": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "modifierMixins": [
             {
               "$type": "HFGABACOIMJ",
@@ -3855,88 +3855,88 @@
         },
         "FallingAnthem_Height_Detect": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
-              "repeatTimes": 0.0,
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
-              "$type": "ACPEIOBJLKD",
+              "$type": "AddGlobalValue",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
-              "repeatTimes": 5.0,
+              "value": 5.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
-              "param2": 1.0,
-              "triggerID": 0.0
+              "maxValue": 1.0,
+              "minValue": 0.0
             },
             {
-              "$type": "DBNHDNBHADP",
+              "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
+                  "$type": "ByTargetAltitude",
                   "logic": "LesserOrEqual",
-                  "repeatTimes": 2.4000000953674316
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "repeatTimes": 0.0
+              "value": 0.0
             },
             {
-              "$type": "DBNHDNBHADP",
+              "$type": "SetAnimatorFloat",
               "predicates": [
                 {
-                  "$type": "JOHGFFDPHBF",
-                  "repeatTimes": 2.4000000953674316
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4000000953674316
                 }
               ],
               "floatID": "FallingAnthem_UseCamera",
-              "repeatTimes": 1.0
+              "value": 1.0
             }
           ],
           "onRemoved": [
             {
-              "$type": "DBNHDNBHADP",
+              "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "repeatTimes": 0.0
+              "value": 0.0
             },
             {
-              "$type": "ACPEIOBJLKD",
-              "repeatTimes": 0.0,
+              "$type": "AddGlobalValue",
+              "value": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
               "useLimitRange": true,
-              "param2": 0.0,
-              "triggerID": 0.0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         },
         "FallingAnthem_OverHead_Camera": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "CFCENANLJGI",
+              "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "DGFIOEDKLLD",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "repeatTimes": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -3950,25 +3950,25 @@
         },
         "FallingAnthem_OverHead_Camera_Remover": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "KOEMHHFKCIL",
-              "shieldHP": true
+              "$type": "AvatarExitCameraShot",
+              "doOffStage": true
             }
           ]
         },
         "FallingAnthem_Landed_Camera": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
-              "$type": "CFCENANLJGI",
+              "$type": "AvatarCameraParam",
               "predicates": [
                 {
-                  "$type": "DGFIOEDKLLD",
+                  "$type": "ByAnimatorFloat",
                   "logic": "Equal",
-                  "repeatTimes": 1.0,
+                  "value": 1.0,
                   "parameter": "FallingAnthem_UseCamera"
                 }
               ],
@@ -3982,7 +3982,7 @@
         },
         "FallingAnthem_ClearVelocityForce": {
           "modifierName": "",
-          "MCCELHKGPOP": 100.0,
+          "elementDurability": 100.0,
           "onAdded": [
             {
               "$type": "MOEOJKHGNPK",
@@ -3996,39 +3996,39 @@
       },
       "onAbilityStart": [
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "repeatTimes": 0.0,
+              "value": 0.0,
               "forceByCaster": true,
               "compareType": "NoneOrEqual"
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "DCBLBBGDIAN",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "GNIAPFBHMIK",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": -0.5,
-                  "MEJNCDENBNH": 0.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 0.0
                 }
               },
               "height": 2.0,
-              "DCBIMHFGHEJ": 3.0
+              "radius": 3.0
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": "FallingAnthem_Normal_Rank_1_Damage",
-                "actorWaterSubHurtDelta": 0.0,
-                "MCCELHKGPOP": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_1_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "strikeType": "Pierce",
                 "enBreak": 50.0,
                 "attackType": "Melee",
@@ -4045,38 +4045,38 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "KIBGAKKBNCL",
+          "$type": "TriggerAttackEvent",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "repeatTimes": 1.0,
+              "value": 1.0,
               "forceByCaster": true
             }
           ],
           "attackEvent": {
             "attackPattern": {
-              "$type": "DCBLBBGDIAN",
+              "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
               "born": {
-                "$type": "GNIAPFBHMIK",
+                "$type": "ConfigBornByTarget",
                 "offset": {
-                  "EPAKBMBAOKK": 0.0,
-                  "LNOGCFLGIJI": -0.5,
-                  "MEJNCDENBNH": 0.0
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 0.0
                 }
               },
               "height": 2.0,
-              "DCBIMHFGHEJ": 3.5
+              "radius": 3.5
             },
             "attackInfo": {
               "attackTag": "FallingAttack",
               "attenuationTag": "",
               "attenuationGroup": "default",
               "attackProperty": {
-                "actorGrassSubHurtDelta": "FallingAnthem_Normal_Rank_2_Damage",
-                "actorWaterSubHurtDelta": 0.0,
-                "MCCELHKGPOP": 25.0,
+                "damagePercentage": "FallingAnthem_Normal_Rank_2_Damage",
+                "damagePercentageRatio": 0.0,
+                "elementDurability": 25.0,
                 "strikeType": "Pierce",
                 "enBreak": 100.0,
                 "attackType": "Melee",
@@ -4093,33 +4093,33 @@
           "targetType": "Enemy"
         },
         {
-          "$type": "EHPLOGLPPAC",
+          "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "repeatTimes": 0.0,
+              "value": 0.0,
               "forceByCaster": true,
               "compareType": "NoneOrEqual"
             }
           ],
-          "rotationDampTime": "Eff_Avatar_Bow_FallAnthem_Strike_01",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "effectPattern": "Eff_Avatar_Bow_FallAnthem_Strike_01",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         },
         {
-          "$type": "EHPLOGLPPAC",
+          "$type": "FireEffect",
           "predicates": [
             {
-              "$type": "HBBHADONLIE",
+              "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_FallingAnthem_UseCamera",
-              "repeatTimes": 1.0,
+              "value": 1.0,
               "forceByCaster": true
             }
           ],
-          "rotationDampTime": "Eff_Avatar_Bow_FallAnthem_Strike_02",
-          "FKNFFAHLCHH": 1.0,
-          "GDNGPLIHABI": -1.0
+          "effectPattern": "Eff_Avatar_Bow_FallAnthem_Strike_02",
+          "scale": 1.0,
+          "effectTempleteID": -1.0
         }
       ]
     }
