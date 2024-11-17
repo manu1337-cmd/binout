@@ -12,6 +12,10 @@ TRANSLATE_DM="$HOME/git/translate-dm"
 
 for dir in v*; do
 	[ -d "$dir" ] || continue
+	[ $# -eq 0 ] || case "$*" in
+		*${dir}*) ;;
+		*) continue ;;
+	esac
 
 	printf '%s\n' "$dir"
 	hash="$(git log -1 --pretty='format:%H' --grep "^Add ${dir}$")"

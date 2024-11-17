@@ -32,7 +32,7 @@ $(CHECKOUT):
 	git commit -m "Add $@" -- $@ || true
 
 translate:
-	./scripts/translate
+	./scripts/translate $(CHECKOUT)
 	git add v*
 	git commit -m "Translate fields" -- v* || true
 
