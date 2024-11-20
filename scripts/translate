@@ -4,7 +4,7 @@ set -eu
 
 [ -d ".git" ]
 
-TRANSLATE_DM="$HOME/git/translate-dm"
+: "${TRANSLATE_DM:=$HOME/git/translate-dm}"
 (
 	cd -- "$TRANSLATE_DM"
 	go build
@@ -34,9 +34,11 @@ for dir in v*; do
 		exit 1
 	fi
 
-	fdfind -g '*.json' "$dir" -x sed -i -f "$dir/translate.sed" --
+	printf '%s\n' "Replacing $dir files"
+	fd -g '*.json' "$dir" -x sed -i -f "$dir/translate.sed" --
 	rm -- "$dir/translate.sed"
 
+	printf '%s\n' "Updating git index"
 	git add -- "$dir/BinOutput"
 	if [ -z "$(git status --porcelain -- "$dir/BinOutput")" ]; then
 		git checkout master -- "$dir/info"

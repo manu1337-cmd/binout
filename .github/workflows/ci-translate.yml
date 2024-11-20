@@ -1,0 +1,60 @@
+name: ci-translate
+
+on:
+  push:
+  schedule:
+    - cron: '25 1 * * *'
+  workflow_dispatch:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@main
+        with:
+          fetch-depth: 0
+
+      - name: Checkout translate-dm
+        uses: actions/checkout@main
+        with:
+          ssh-key: ${{ secrets.SSH_KEY }}
+          repository: iam-akuzihs/translate-dm
+          path: git/translate-dm
+
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Setup go cache
+        uses: actions/cache@main
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Setup translate cache
+        uses: actions/cache@main
+        id: translate-cache
+        with:
+          path: ~/checksum
+          key: checksum-${{ hashFiles('checkout.mk', 'git/translate-dm/queries.yml') }}
+
+      - name: Run ci-translate
+        if: steps.translate-cache.outputs.cache-hit != 'true'
+        run: |
+          set -eu
+
+          mv git/translate-dm ..
+          git config user.name 'akuzihs'
+          git config user.email '<>'
+          rm -d git
+
+          [ ! -e checksum ] || sha256sum --check -- "$HOME/checksum"
+          sha256sum ../translate-dm/queries.yml > "$HOME/checksum"
+
+          nix develop -c make TRANSLATE_DM=../translate-dm translate 2>/dev/null
+          git push origin
