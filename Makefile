@@ -9,7 +9,7 @@ include checkout.mk
 all: $(CHECKOUT)
 $(CHECKOUT):
 	./scripts/checkout $@ $(lastword $(subst -, ,$@))
-	git commit -m "Add $@" -- $@ || true
+	git commit -m "Add $@" -- checkout.mk $@ || true
 
 translate:
 	./scripts/translate $(CHECKOUT)
